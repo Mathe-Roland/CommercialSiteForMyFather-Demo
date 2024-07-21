@@ -1,0 +1,46 @@
+.image-container {
+  position: relative;
+  width: 500px; 
+  height: 500px;
+}
+
+.hovered-image,
+.zoomed-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70%;
+}
+
+.zoomed-image {
+  overflow: visible;  
+  display: none;
+  margin-left: 450px;
+  width: 100%;
+}
+
+.image-container:hover .zoomed-image {
+  display: block;
+}
+
+.zoomedImageMaxWidth{
+
+  max-width: 400px;
+  max-height: 400px;
+}
+
+.image-container{
+
+  width:100%;
+}
+
+
+@media screen and (max-width: 400px) {
+
+  .zoomedImageMaxWidth {
+    width: 100%;
+    height: 100%;
+  }
+
+}

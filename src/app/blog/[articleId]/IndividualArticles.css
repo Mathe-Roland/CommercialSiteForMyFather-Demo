@@ -1,0 +1,57 @@
+.IndividualArticles-container {
+    margin: 10px auto;
+    width: 80%;
+}
+
+h1, p {
+    margin: 0 0 10px 0;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+}
+
+.images-container {
+    margin: 0 auto;
+    width: 50%;
+}
+
+@media screen and (min-width: 768px) {
+    .image {
+        width: 400px;
+        height: 400px;
+    }
+}
+
+.comment-box {
+    background-color: #fff; /* Alb pentru fundal */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.comment {
+    background-color: #f9f9f9; /* Gri deschis pentru individuale comentarii */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #e1e1e1;
+}
+
+@media screen and (min-width: 992px) {
+    /* Stiluri pentru ecrane mari */
+}
+
+@media screen and (min-width: 1200px) {
+    /* Stiluri pentru ecrane foarte mari */
+}
+
+@media screen and (min-width: 1440px) {
+    /* Stiluri pentru ecrane ultra-mari */
+}
+
+@media screen and (min-width: 1600px) {
+    /* Stiluri pentru ecrane extra-largi */
+}

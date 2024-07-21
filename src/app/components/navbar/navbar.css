@@ -1,0 +1,209 @@
+.navbar{
+
+    position: sticky;
+    top:0;
+    width: 100%;
+    z-index: 800;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.formControl{
+
+    width: 80%;
+    margin :0 auto;
+}
+
+.width100 {
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    height: 100%;
+  }
+
+.navbar-contents p{
+    margin:0;
+}
+
+.t-n-r{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+}
+
+.height-auto{
+    height: auto;
+}
+.heightvh{
+    height: 60vh;
+}
+
+.width25{
+    width:25%;
+}
+
+.nav{
+    background-color: blueviolet;
+    
+}
+.text-align-c{
+    text-align: center;
+}
+
+.width100{
+    width: 100%;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+}
+
+.j-c-c{
+    justify-content: center;
+}
+
+.j-c-b{
+    justify-content: space-between;
+}
+
+.border-radius-10{
+    border-radius: 10em;
+}
+
+.search-icon{
+    background-image: url("https://openclipart.org/image/2400px/svg_to_png/213239/Search-icon.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 1rem;
+    opacity: 50%;
+}
+.align-items-c{
+    align-items: center;
+}
+.width80{
+    width: 80%;
+}
+.width100{
+    width: 100%;
+}
+
+.margin-top{
+    margin-top: 2em;
+}
+.search-input {
+    padding: 0.5em 0.75em; 
+    border: 0.0625rem solid #ccc; 
+    width: 15rem; 
+    font-size: 1rem;
+    height: 1.5rem;
+  }
+
+
+.image-container {
+    position: relative;
+}
+
+.image-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0.5rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+
+
+.hidden{
+
+     display:none;
+}
+
+.z-index{
+    z-index: 2;
+}
+
+.absolute{
+    position: absolute;
+}
+
+.relative{
+    position: relative;
+}
+
+  a{
+    text-decoration: none;
+  }
+  a:hover{
+    text-decoration: underline;
+  }
+
+.children{
+    color:blueviolet;
+    background-color: black;
+
+}
+
+.vh{
+
+    height: 50vh;
+}
+
+.background{
+    background-color: blueviolet;
+}
+
+
+
+#whatever{
+    flex-wrap: wrap;
+
+}
+
+.navbar-title-and-searchbar{
+    display: flex;
+    justify-content: center;
+}
+
+
+.navbar-contents{
+
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    position: relative;
+    
+}
+
+.navbar-centered{
+    display: flex;
+    justify-content: center;
+}
+
+
+.navbar-contents{
+
+    display: none;
+}
+
+
+@media screen  and (min-width:690px){
+
+    .navbar-contents{
+
+        display: flex;
+    }
+    .formControl{
+        display: none;
+    }
+
+    }

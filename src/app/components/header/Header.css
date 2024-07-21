@@ -1,0 +1,213 @@
+.t-n-r{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+
+}
+
+.height-auto{
+    height: auto;
+}
+.heightvh{
+    height: 60vh;
+}
+
+.width25{
+    width:25%;
+}
+
+.nav{
+    background-color: blueviolet;
+    
+}
+.text-align-c{
+    text-align: center;
+}
+
+.width100{
+    width: 100%;
+}
+
+.row{
+    
+    display: flex;
+    flex-direction: row;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+}
+
+.j-c-c{
+    justify-content: center;
+}
+
+.j-c-b{
+    justify-content: space-between;
+}
+
+.border-radius-10{
+    border-radius: 10em;
+}
+
+.search-icon{
+    background-image: url("https://openclipart.org/image/2400px/svg_to_png/213239/Search-icon.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 1rem;
+    opacity: 50%;
+}
+.align-items-c{
+    align-items: center;
+}
+.width80{
+    width: 80%;
+}
+.width100{
+    width: 100%;
+}
+
+.margin-top{
+    margin-top: 2em;
+}
+.search-input {
+    padding: 0.5em 0.75em; /* Adjust padding as needed */
+    border: 0.0625rem solid #ccc; /* Add border styles as needed */
+    width: 8rem; /* Set the desired width of the input field */
+    font-size: 1rem; /* Set the desired font size */
+    height: 1.5rem;
+  }
+
+
+.image-container {
+    position: relative;
+}
+
+.image-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0.5rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+
+
+.hidden{
+
+     display:none;
+}
+
+.z-index{
+    z-index: 2;
+}
+
+.absolute{
+    position: absolute;
+}
+
+.relative{
+    position: relative;
+}
+
+  a{
+    text-decoration: none;
+  }
+  a:hover{
+    text-decoration: underline;
+  }
+
+.children{
+    color:blueviolet;
+    background-color: black;
+
+}
+
+.vh{
+
+    height: 50vh;
+}
+
+.background{
+    background-color: blueviolet;
+}
+
+
+
+#whatever{
+    flex-wrap: wrap;
+
+}
+
+.navbar-title-and-searchbar{
+    display: flex;
+    justify-content: center;
+}
+
+.headerCos{
+    text-decoration: none ;
+    color: inherit;
+}
+
+.navbar-dropdown{
+
+    background-color: #ccc;
+    position: absolute;
+    width:200px;
+    top:100%;
+    right: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hamburger-dropdown{
+
+    position: relative;
+}
+
+@media screen and (max-width:600px) {
+
+ .phoneviewHideDesktopContent{
+
+    display: none;   
+
+}   
+
+
+
+.hamburger-menu{
+
+    height:100px;
+    width:100px;
+ }
+
+}
+
+@media screen and (min-width:600px) {
+
+    .hamburger-menu{
+        display: none;
+    }
+
+    .phoneviewHideDesktopContent{
+        display: contents;
+    }
+
+    .navbar-dropdown{
+    
+        display: none;
+    }
+
+    .search-input {
+        padding: 0.5em 0.75em; /* Adjust padding as needed */
+        border: 0.0625rem solid #ccc; /* Add border styles as needed */
+        width: 15rem; /* Set the desired width of the input field */
+        font-size: 1rem; /* Set the desired font size */
+        height: 1.5rem;
+      }
+    
+}

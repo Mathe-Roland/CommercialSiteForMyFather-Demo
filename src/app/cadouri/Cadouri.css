@@ -1,0 +1,62 @@
+
+
+.Cadouri-box{
+
+    display: flex;
+    margin: 0 auto;
+    width:80%;
+    flex-direction: column;
+}
+
+.accordionplushd{
+
+    display: flex;
+
+}
+
+
+    
+.accordion-container{
+
+    display: none;
+
+}
+
+.header{
+
+    margin:12px 12px;
+
+}
+
+.headerplusdescription{
+
+    display:flex;
+    flex-direction: column;
+    margin: 12px 12px;
+
+}
+
+.cardList-container{
+
+    margin: 12px 12px;
+
+}
+
+
+
+@media screen and (min-width:600px) {
+    
+    .accordion-container{
+        display: block;
+        width:25%;
+    }
+}
+
+
+@media screen and (min-width:800px) {
+ 
+    .accordion-container{
+
+        width:15%;
+    }
+}

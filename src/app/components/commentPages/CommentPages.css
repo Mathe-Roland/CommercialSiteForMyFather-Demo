@@ -1,0 +1,10 @@
+.commentPages-Conatiner{
+    margin-top:25px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.LongComments{
+    display: flex;
+}

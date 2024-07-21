@@ -1,0 +1,46 @@
+
+.despre-noi-categoria-selectata{
+
+    width:80%;
+    padding:30px;
+}
+
+.despre-noi-container{
+
+    margin:10px auto;
+    width: 80%;
+}
+
+.despre-noi{
+
+    display:flex;
+    margin:28px 0;
+}
+
+
+.white-space{
+
+    white-space: pre-wrap;
+
+}
+
+.produs-card-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .produs-card-container > * {
+    flex: 0 0 33%; /* Set the width to one-third of the container */
+    box-sizing: border-box;
+    padding: 10px; /* Add padding between cards */
+  }
+  
+
+
+@media screen and (max-width:600px) {
+    
+    .produs-card-container {
+
+        display:block;
+    }
+}

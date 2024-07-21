@@ -1,0 +1,162 @@
+.cos-container {
+    margin: 0 auto;
+    width: 80%;
+    text-align: center;
+    min-height: 80vh;
+}
+
+.cos-trimite-comanda-background {
+    width: 100%;
+    height: auto;
+    margin: auto;
+    position: relative;
+}
+
+.cos-items {
+    display: none;
+}
+
+.form-check {
+    display: flex;
+    flex-direction: column;
+}
+
+.cos-trimite-comanda {
+    margin-top: 100px;
+}
+
+@media screen and (min-width: 768px) {
+    .form-check {
+        display: flex;
+    }
+
+    .cos-separare {
+        flex-direction: column;
+    }
+
+    .cos-container {
+        margin: 0 auto;
+        width: 80%;
+        text-align: center;
+    }
+
+    .cos-element {
+        margin-bottom: 10px;
+    }
+
+    .cos-produse-cumparate {
+        width: 100%;
+    }
+
+    .cos-trimite-comanda {
+        margin-top: 100px;
+        display: flex;
+    }
+
+    .cos-produs {
+        display: flex;
+        justify-content: flex-start;
+        font-weight: bold;
+        width: 100%;
+    }
+
+    .cos-items {
+        display: flex;
+        border-bottom: 1px solid black;
+        margin-bottom: 50px;
+    }
+
+    .cos-cantitate {
+        font-weight: bold;
+        width: 70%;
+    }
+
+    .cos-pret {
+        font-weight: bold;
+        width: 15%;
+    }
+
+    .cos-total {
+        font-weight: bold;
+    }
+
+    .cos-comanda {
+        font-weight: 700;
+    }
+
+    .cos-separare {
+        display: flex;
+        width: 100%;
+    }
+
+    .cos-trimite-comanda-background {
+        width: 100%;
+        height: auto;
+        margin: auto;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .cos-container {
+        margin: 0 auto;
+        width: 80%;
+        text-align: center;
+    }
+
+    .cos-element {
+        margin-bottom: 10px;
+    }
+
+    .cos-produse-cumparate {
+        width: 80%;
+    }
+
+    .cos-trimite-comanda {
+        margin: 0;
+        width: 20%;
+        display: flex;
+    }
+
+    .cos-produs {
+        display: flex;
+        justify-content: flex-start;
+        font-weight: bold;
+        width: 100%;
+    }
+
+    .cos-items {
+        display: flex;
+        border-bottom: 1px solid black;
+        margin-bottom: 50px;
+    }
+
+    .cos-cantitate {
+        font-weight: bold;
+        width: 70%;
+    }
+
+    .cos-pret {
+        font-weight: bold;
+        width: 15%;
+    }
+
+    .cos-total {
+        font-weight: bold;
+    }
+
+    .cos-comanda {
+        font-weight: 700;
+    }
+
+    .cos-separare {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+    }
+
+    .cos-trimite-comanda-background {
+        width: 100%;
+        height: auto;
+        margin: auto;
+    }
+}

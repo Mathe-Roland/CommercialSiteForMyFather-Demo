@@ -1,0 +1,54 @@
+.ImageGallery-container{
+    width:100%;
+    max-width: 701px;
+    height: auto;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.firstColumnImages{
+    margin-bottom: 12px;
+    height:50%;
+    width: 100%;
+}
+
+.ImageFirstColumn{
+    display: flex;
+    flex-direction: column;
+    margin-right:12px;
+    width:25%;
+}
+
+.ImagesSecondColumn{
+
+    display: flex;
+    flex-direction: column;
+    width:25%;
+    margin-right:12px;
+}
+
+.ImageSecondColumn{
+
+    width:100%;
+    height:33%;
+    margin-bottom: 12px;
+    min-height: 33%;
+}
+
+
+.imagesLastColumn{
+    width: 25%;
+
+}
+
+.lastColumnImage1{
+    height: 70%;
+    width: 100%;
+}
+
+
+.lastColumnImage2{
+
+    height:30%;
+    width:100%;
+}

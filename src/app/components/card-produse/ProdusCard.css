@@ -1,0 +1,88 @@
+.financing-programmes-card-container {
+  width: 320px;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: white;
+}
+
+.produscard-image {
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s;
+}
+
+.financing-programmes-card-container:hover .financing-programmes-card {
+  transform: scale(1.1);
+}
+
+.financing-programmes-card-content {
+  color: var(--darkBlue);
+  font-weight: 400;
+  font-size: 12px;
+  background-color: var(--white);
+  padding: 16px;
+}
+
+.title-financing-programmes {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 72px;
+  line-height: 24px;
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--darkBlue);
+}
+
+.financing-program-card-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 24px;
+  font-weight: 400;
+  font-size: 18px;
+  margin-bottom: 16px;
+  height: 72px;
+  color: var(--darkBlue);
+}
+
+.red-pret {
+  font-size: 18px;
+  color: red;
+}
+
+.ignore {
+  display: contents;
+}
+
+.financing-program-card-startDate {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--darkBlue);
+}
+
+@media (min-width: 768px) { 
+
+  .produscard-image {
+    height: 150px;
+  }
+
+  .financing-programmes-card-container {
+    width: calc(50% - 16px);
+  }
+}
+
+@media (min-width: 1024px) { 
+  .financing-programmes-card-container {
+    width: calc(33.33% - 32px);
+  }
+}

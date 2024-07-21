@@ -1,0 +1,13 @@
+/* Product.css */
+
+.normal-headers {
+  width: 80%;
+  margin: 100px auto;
+}
+
+.margin0Auto {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}

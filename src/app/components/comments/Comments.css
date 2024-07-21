@@ -1,0 +1,26 @@
+.commentarii {
+    position: relative;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+
+
+
+.commentUserName{
+
+    font-size: 20px;
+    font-weight: 700;
+    margin-left:5px;
+}
+
+
+.comment{
+
+    margin-left: 10px;
+}
+
+.id {
+  
+    display: none;
+}

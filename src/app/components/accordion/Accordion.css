@@ -1,0 +1,26 @@
+.accordion-categories-width{
+
+    display: none;    
+}
+
+.categoriesheader{
+
+    margin-bottom: 12px;
+}
+
+
+.custom-link {
+
+    text-decoration: none;
+    color: inherit;
+  }
+  
+@media screen and (min-width:600px) {
+
+    .accordion-categories-width{
+
+        width:100%;
+        display: block;
+    }
+    
+}

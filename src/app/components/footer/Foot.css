@@ -1,0 +1,106 @@
+
+
+
+.footer-third-part,.footer-second-part,.footer-first-part-container{
+    
+    width:32%;
+}
+
+.footer-second-part,.footer-first-part-container{
+    margin-right: 20px;
+}
+
+.footer-first-part-container{
+
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-container{
+
+    justify-content: flex-end;
+    display: flex;
+    width: 80%;
+    margin:0 auto;
+    /* margin-top:5vh; */
+
+}
+
+.footer-email,.footer-phone{
+    color: red;;
+}
+
+.black{
+    color:black;
+}
+
+.footer-first-part-column{
+
+display: flex;
+flex-direction: column;  
+flex: 1;
+
+
+}
+
+
+.footer-first-part-columns{
+
+    display:flex;
+}
+
+.footer-second-part-columns{
+    display: flex;
+    flex-direction: column;
+}
+
+p{
+    margin:10px 0;
+}
+
+
+@media screen and (min-width: 600px) {
+    
+    .none {
+        display: none;
+    }
+
+    .footer-container{
+
+        margin-top: 20vh;
+
+    }
+}
+
+
+
+
+@media screen  and (max-width:1000px){
+
+    
+
+    .footer-third-part,.footer-second-part,.footer-first-part-container{
+    
+        width:100%;
+    }
+    
+
+    .footer-container{
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    
+}
+
+
+
+@media screen and (min-width:900px){
+ 
+    .footer-container{
+
+        margin-top: 30vh;
+
+    }
+}

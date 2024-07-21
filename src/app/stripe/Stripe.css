@@ -1,0 +1,14 @@
+.products-container{
+
+    border: 1px solid #ccc;
+}
+
+.product-rows{
+
+    background-color: #f9f9f9;
+}
+
+.product-row{
+
+    color: black;
+}

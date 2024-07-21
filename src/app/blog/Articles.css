@@ -1,0 +1,56 @@
+.accordion-container{
+
+    width:15%;
+}
+
+
+.articles-container {
+    display: flex;
+    position: relative;
+    width: 80%;
+    margin:0 auto;
+}
+
+.footer-container{
+
+    margin-top: 70vh;
+}
+
+.articles-center {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+}
+
+@media screen and (min-width:768px) {
+    .articles-center {
+        left: 350px;
+    }
+}
+
+@media screen and (min-width:992px) {
+    
+    .articles-center {
+        left: 400px;
+    }
+}
+
+
+@media screen and (min-width:1200px) {
+    .articles-center {
+        left: 450px;
+    }
+}
+
+@media screen and (min-width:1440px) {
+    .articles-center {
+        left: 450px;
+    }
+}
+
+@media screen and (min-width:1600px) {
+    .articles-center {
+        left: 450px;
+    }
+}
