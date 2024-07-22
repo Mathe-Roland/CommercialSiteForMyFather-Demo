@@ -6,16 +6,19 @@ const DropdownMui = ({ onChange, render, actualPrice, price, vopsit }) => {
     const [selectedValue, setSelectedValue] = useState('option1');
     const [personalizare, setPersonalizare] = useState(false);
     const [textareaValue, setTextareaValue] = useState("Adauga o mesaj de personalizare si te vom contacta noi");
+    const [vopsea,setVopsea]=useState(false);
 
     const handleNevopsit = () => {
         vopsit(false);
-        const newPrice = calculatePrice(selectedValue, false);
+        setVopsea(true);
+        let newPrice = actualPrice - (actualPrice * 50) / 100;
         price(newPrice);
     };
 
     const handleVopsit = () => {
+        setVopsea(true);
         vopsit(true);
-        const newPrice = calculatePrice(selectedValue, true);
+        let newPrice = actualPrice + (actualPrice * 50) / 100;
         price(newPrice);
     };
 
@@ -26,31 +29,14 @@ const DropdownMui = ({ onChange, render, actualPrice, price, vopsit }) => {
     };
 
     useEffect(() => {
-        const newPrice = calculatePrice(selectedValue, personalizare);
-        price(newPrice);
-        onChange(selectedValue);
-    }, [selectedValue, personalizare, price, onChange]);
 
-    const calculatePrice = (sizeOption, isVopsit) => {
-        let basePrice = actualPrice;
-        switch (sizeOption) {
-            case 'option1':
-                basePrice *= 1;
-                break;
-            case 'option2':
-                basePrice *= 2;
-                break;
-            case 'option3':
-                basePrice *= 3;
-                break;
-            default:
-                break;
+        if(vopsea){
+
+            price(actualPrice*50/100+actualPrice);
         }
-        if (isVopsit) {
-            basePrice += basePrice * 0.5; // Adding 50% if vopsit
-        }
-        return basePrice;
-    };
+
+        onChange(selectedValue); 
+    }, [selectedValue]);
 
     return (
         <div>
