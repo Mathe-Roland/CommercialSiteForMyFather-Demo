@@ -20,6 +20,7 @@ export default function RootLayout({ children }) {
       <Head>
         <title>Panouri traforate</title>
         <meta name="description" content="Panorui traforate" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
         <Header/>
