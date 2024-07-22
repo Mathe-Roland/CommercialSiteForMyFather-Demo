@@ -4,10 +4,11 @@ import { usePathname } from "next/navigation";
 import { useState,useEffect } from "react";
 import { fetchCategory } from "../components/asyncOperations/fetchData"; 
 import CustomizedAccordions from "../components/accordion/Accordion";
-import "../cadouri/Cadouri.css";
 import ProdusCard from "../components/card-produse/ProdusCard";
+import "../cadouri/Cadouri.css";
 
-const Harti=()=>{
+
+const PanouriDecorative=()=>{
 
     const params=usePathname();
     let newParam=params.split("-");
@@ -70,4 +71,4 @@ const Harti=()=>{
 
 }
 
-export default Harti;
+export default PanouriDecorative;

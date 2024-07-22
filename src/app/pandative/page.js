@@ -8,7 +8,7 @@ import ProdusCard from "../components/card-produse/ProdusCard";
 import "../cadouri/Cadouri.css";
 
 
-const CadouriPersonalizate=()=>{
+const Pandative=()=>{
 
     const params=usePathname();
     let newParam=params.split("-");
@@ -71,4 +71,4 @@ const CadouriPersonalizate=()=>{
 
 }
 
-export default CadouriPersonalizate;
+export default Pandative;
