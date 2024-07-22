@@ -2,16 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import "./DropdownMarimi.css";
 
-const DropdownMui = ({ onChange, render, price }) => {
+const DropdownMui = ({ onChange, render, price,vopsit }) => {
     const [selectedValue, setSelectedValue] = useState('option1');
     const [personalizare, setPersonalizare] = useState(false);
     const [textareaValue, setTextareaValue] = useState("Adauga o mesaj de personalizare si te vom contacta noi");
 
     const handleNevopsit = (e) => {
+        vopsit(false);
         price(prev => prev - prev * 50 / 100);
     };
 
     const handleVopsit = (e) => {
+        vopsit(true);
         price(prev => prev + prev * 50 / 100);
     };
 
