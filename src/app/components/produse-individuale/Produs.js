@@ -193,7 +193,7 @@ const Produs=({img,description,title,price})=>{
     }
 
 
-    const hadlePrice=(selectedValue)=>{
+    const hadlePrice=()=>{
 
         if(renderPersonalizare===true){
 
@@ -249,6 +249,7 @@ const Produs=({img,description,title,price})=>{
             <div>
                 <DropdownMui
                 price={setPrices}
+                actualPrice={hadlePrice(selectedValues)}
                 vopist={setIfVopsit}
                  onChange={setSelectedValues}
                 render={setRenderPesonalizare}/>
