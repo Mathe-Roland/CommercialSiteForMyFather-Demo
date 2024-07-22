@@ -2,10 +2,23 @@ import React, { useState,useEffect } from 'react';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import "./DropdownMarimi.css";
 
-const DropdownMui = ({onChange,render}) => {
+const DropdownMui = ({onChange,render,price}) => {
     const [selectedValue, setSelectedValue] = useState('option1');
     const [personalizare, setPersonalizare] = useState(false);
     const [textareaValue, setTextareaValue] = useState("Adauga o mesaj de personalizare si te vom contacta noi");
+
+
+    const handleNevopsit=(e)=>{
+
+        price(e-e*50/100);
+    }
+
+    const handleVopsit=(e)=>{
+
+        price(e*50/100)
+
+
+    }
 
     const handleChange = (event) => {
         const newValue = event.target.value;
@@ -67,6 +80,16 @@ const DropdownMui = ({onChange,render}) => {
                 )
                 
             }
+            <FormControl fullWidth style={{ width: '25%' }}>
+                <InputLabel onClick={handleVopsit} id="demo-simple-select-label">Vopsit</InputLabel>
+                        
+            </FormControl>
+            <FormControl fullWidth style={{ width: '25%' }}>
+                <InputLabel onClick={handleNevopsit} id="demo-simple-select-label">Nevopsit</InputLabel>
+                        
+            </FormControl>
+
+
         </div>
     );
 };

@@ -24,6 +24,7 @@ const Produs=({img,description,title,price})=>{
     const [originalComments,setOriginalComments]=useState([]);
     const [selectedValues,setSelectedValues]=useState("");
     const [renderPersonalizare,setRenderPesonalizare]=useState(false);
+    const [price,setPrice]=useState(0);
 
     useEffect(() => {
         const fetchDataAndFilter = async () => {
@@ -196,22 +197,22 @@ const Produs=({img,description,title,price})=>{
 
         if(renderPersonalizare===true){
 
-            return (price*10)/100+price;
+            setPrice((price*10)/100+price);
         }
 
         if(selectedValues==="option1"){
 
-            return price*1;
+            setPrice(price*1);
         }
 
         if(selectedValues==="option2"){
 
-            return price*2;
+             setPrice(price*2);
         }
 
         if(selectedValues==="option3"){
 
-            return price*3;
+            setPrice(price*3);
         }
 
     }
@@ -246,7 +247,9 @@ const Produs=({img,description,title,price})=>{
             </div>
 
             <div>
-                <DropdownMui onChange={setSelectedValues}
+                <DropdownMui
+                price={setPrice}
+                 onChange={setSelectedValues}
                 render={setRenderPesonalizare}/>
             </div>
 
