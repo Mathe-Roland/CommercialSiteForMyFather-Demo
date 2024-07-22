@@ -15,7 +15,7 @@ const Produs = ({ img, description, title, price }) => {
     const [panouId, setPanouId] = useState("");
     const [numberOfPages, setNumberOfPages] = useState([]);
     const [originalComments, setOriginalComments] = useState([]);
-    const [selectedValues, setSelectedValues] = useState("");
+    const [selectedValues, setSelectedValues] = useState("option1");
     const [renderPersonalizare, setRenderPesonalizare] = useState(false);
     const [prices, setPrices] = useState(price);
     const [ifVopsit, setIfVopsit] = useState(false);
@@ -102,7 +102,6 @@ const Produs = ({ img, description, title, price }) => {
 
     const handlePrice = (selectedValue) => {
         if (renderPersonalizare === true) {
-            
             return (price * 10) / 100 + price;
         }
         if (selectedValue === "option1") {
