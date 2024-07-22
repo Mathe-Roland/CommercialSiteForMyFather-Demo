@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import "./DropdownMarimi.css";
 
-const DropdownMui = ({ onChange, render,actualPrice, price,vopsit }) => {
+const DropdownMui = ({ onChange, render, actualPrice, price, vopsit }) => {
     const [selectedValue, setSelectedValue] = useState('option1');
     const [personalizare, setPersonalizare] = useState(false);
     const [textareaValue, setTextareaValue] = useState("Adauga o mesaj de personalizare si te vom contacta noi");
 
-    const handleNevopsit = (e) => {
+    const handleNevopsit = () => {
         vopsit(false);
-        let newPrice=actualPrice-actual*50/100
+        let newPrice = actualPrice - (actualPrice * 50) / 100;
         price(newPrice);
     };
 
-    const handleVopsit = (e) => {
+    const handleVopsit = () => {
         vopsit(true);
-        let newPrice=actualPrice*50/100
+        let newPrice = actualPrice + (actualPrice * 50) / 100;
         price(newPrice);
     };
 
@@ -27,7 +27,7 @@ const DropdownMui = ({ onChange, render,actualPrice, price,vopsit }) => {
 
     useEffect(() => {
         onChange(selectedValue); 
-    }, [selectedValue]);
+    }, [selectedValue, onChange]);
 
     return (
         <div>
@@ -85,7 +85,7 @@ const DropdownMui = ({ onChange, render,actualPrice, price,vopsit }) => {
                     </FormControl>
                 </div>
             )}
-             <div className='personalizareSIOptiuniNormaleContainer'>
+            <div className='personalizareSIOptiuniNormaleContainer'>
                 <label htmlFor='Vopsit'>Vopsit</label>
                 <input 
                     onClick={handleVopsit} 
@@ -97,8 +97,8 @@ const DropdownMui = ({ onChange, render,actualPrice, price,vopsit }) => {
                 <label htmlFor='Nevopsit'>Nevopsit</label>
                 <input 
                     onClick={handleNevopsit}
-                    name="nevopsit" 
-                    type='radio' 
+                    name="vopsit" 
+                    type='radio'
                     id="Nevopsit" 
                 />
             </div>
