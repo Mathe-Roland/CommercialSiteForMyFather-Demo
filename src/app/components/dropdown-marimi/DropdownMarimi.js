@@ -81,10 +81,23 @@ const DropdownMui = ({ onChange, render, price }) => {
                     </FormControl>
                 </div>
             )}
-            <FormControl fullWidth style={{ width: '25%' }}>
-                <InputLabel onClick={handleVopsit} id="demo-simple-select-label">Vopsit</InputLabel>
-                <InputLabel onClick={handleNevopsit} id="demo-simple-select-label">Nevopsit</InputLabel>
-            </FormControl>
+             <div className='personalizareSIOptiuniNormaleContainer'>
+                <label htmlFor='Vopsit'>Vopsit</label>
+                <input 
+                    onClick={handleVopsit} 
+                    className='vopsit' 
+                    name="vopsit" 
+                    type='radio' 
+                    id="Vopsit" 
+                />
+                <label htmlFor='Nevopsit'>Nevopsit</label>
+                <input 
+                    onClick={handleNevopsit}
+                    name="nevopsit" 
+                    type='radio' 
+                    id="Nevopsit" 
+                />
+            </div>
         </div>
     );
 };
