@@ -3,10 +3,10 @@
 import "./IndividualArticles.css";
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from "react";
-import { userRelatedComments, fetchArticleId, fetchArticlesData, fetchPanouriArticlePerArticleId } from "@/app/components/asyncOperations/fetchData";
-import Comments from "@/app/components/comments/Comments";
-import CommentPages from "@/app/components/commentPages/CommentPages";
-import AddCommentModal from "@/app/components/coment-Modal/AddCommentModal";
+import { userRelatedComments, fetchArticleId, fetchArticlesData, fetchPanouriArtiWclePerArticleId } from "../../components/asyncOperations/fetchData";
+import Comments from "../../components/comments/Comments";
+import CommentPages from "../../components/commentPages/CommentPages"
+import AddCommentModal from "../../components/coment-Modal/AddCommentModal";
 
 
 const IndividualArticles = () => {
