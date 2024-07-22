@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { TextField } from '@mui/material';
-import Link from 'next/link'; // Use next/link instead of react-router-dom
+import Link from 'next/link'; 
 import Cookies from 'js-cookie';
 import { registerUser, userIds } from '../asyncOperations/fetchData';
 import './Modal.css';
