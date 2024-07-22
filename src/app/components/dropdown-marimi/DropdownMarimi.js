@@ -9,13 +9,13 @@ const DropdownMui = ({ onChange, render, actualPrice, price, vopsit }) => {
 
     const handleNevopsit = () => {
         vopsit(false);
-        let newPrice = actualPrice - (actualPrice * 50) / 100;
+        const newPrice = calculatePrice(selectedValue, false);
         price(newPrice);
     };
 
     const handleVopsit = () => {
         vopsit(true);
-        let newPrice = actualPrice + (actualPrice * 50) / 100;
+        const newPrice = calculatePrice(selectedValue, true);
         price(newPrice);
     };
 
@@ -26,8 +26,31 @@ const DropdownMui = ({ onChange, render, actualPrice, price, vopsit }) => {
     };
 
     useEffect(() => {
-        onChange(selectedValue); 
-    }, [selectedValue, onChange]);
+        const newPrice = calculatePrice(selectedValue, personalizare);
+        price(newPrice);
+        onChange(selectedValue);
+    }, [selectedValue, personalizare, price, onChange]);
+
+    const calculatePrice = (sizeOption, isVopsit) => {
+        let basePrice = actualPrice;
+        switch (sizeOption) {
+            case 'option1':
+                basePrice *= 1;
+                break;
+            case 'option2':
+                basePrice *= 2;
+                break;
+            case 'option3':
+                basePrice *= 3;
+                break;
+            default:
+                break;
+        }
+        if (isVopsit) {
+            basePrice += basePrice * 0.5; // Adding 50% if vopsit
+        }
+        return basePrice;
+    };
 
     return (
         <div>
