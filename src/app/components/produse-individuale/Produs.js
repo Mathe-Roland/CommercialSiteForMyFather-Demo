@@ -102,6 +102,7 @@ const Produs = ({ img, description, title, price }) => {
 
     const handlePrice = (selectedValue) => {
         if (renderPersonalizare === true) {
+            
             return (price * 10) / 100 + price;
         }
         if (selectedValue === "option1") {
@@ -137,7 +138,7 @@ const Produs = ({ img, description, title, price }) => {
                         <DropdownMui
                             onChange={setSelectedValues}
                             render={setRenderPesonalizare}
-                            actualPrice={price}
+                            actualPrice={handlePrice(selectedValues)}
                             price={setPrices}
                             vopsit={setIfVopsit}
                         />
