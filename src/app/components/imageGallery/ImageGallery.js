@@ -15,7 +15,7 @@ const ImageGallery = ({ images }) => {
              <img
              key={index}
              className="ImageSecondColumn"
-             src={`${image?.attributes?.url}`}
+             src={`${cloudinaryTransformation(image?.attributes?.url,250,250)}`}
              alt={`imageGallery-${index}`}
            />
           ))}
@@ -25,7 +25,7 @@ const ImageGallery = ({ images }) => {
             <img
               key={index}
               className="ImageSecondColumn"
-              src={`${image?.attributes?.url}`}
+              src={`${cloudinaryTransformation(image?.attributes?.url,250,250)}`}
               alt={`imageGallery-${index}`}
             />
           ))}
@@ -36,7 +36,7 @@ const ImageGallery = ({ images }) => {
              <img
              key={index}
              className="ImageSecondColumn"
-             src={`${image?.attributes?.url}`}
+             src={`${cloudinaryTransformation(image?.attributes?.url,250,250)}`}
              alt={`imageGallery-${index}`}
            />
           ))}

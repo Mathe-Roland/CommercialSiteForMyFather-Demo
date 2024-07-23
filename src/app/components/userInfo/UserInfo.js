@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import { imageFiles } from "../asyncOperations/fetchData";
 import Link from "next/link"; // Use next/link instead of react-router-dom
 import Cookies from 'js-cookie';
+import { cloudinaryTransformation } from "../functions/regexconversion";
 
 const UserInfo = ({ setLogin }) => {
     const [pictures, setPicture] = useState({
@@ -76,7 +77,7 @@ const UserInfo = ({ setLogin }) => {
                 <img
                     className="userInfo-img"
                     alt="login"
-                    src={`${pictures.anonPicture?.url}`}
+                    src={`${cloudinaryTransformation(pictures.anonPicture?.url,48,48)}`}
                 />
             </button>
             {showUserInfo ? (
@@ -87,7 +88,7 @@ const UserInfo = ({ setLogin }) => {
                                 <img
                                     className="setari-picture"
                                     alt="setings icon"
-                                    src={`${pictures.cosPicture?.url}`}
+                                    src={`${cloudinaryTransformation(pictures.cosPicture?.url,48,48)}`}
                                 />
                             </span>
                             Comenzi
@@ -99,7 +100,7 @@ const UserInfo = ({ setLogin }) => {
                                 <img
                                     className="setari-picture"
                                     alt="setings icon"
-                                    src={`${pictures.setariPicture?.url}`}
+                                    src={`${cloudinaryTransformation(pictures.setariPicture?.url,48,48)}`}
                                 />
                             </span>
                             Setari
@@ -111,7 +112,7 @@ const UserInfo = ({ setLogin }) => {
                                 <img
                                     className="setari-picture"
                                     alt="comenzi plasate"
-                                    src={`${pictures.comenziPlasate?.url}`}
+                                    src={`${cloudinaryTransformation(pictures.comenziPlasate?.url),48,48}`}
                                 />
                             </span>
                             Comenzi plasate
@@ -122,7 +123,7 @@ const UserInfo = ({ setLogin }) => {
                             <img
                                 className="setari-picture"
                                 alt="setings icon"
-                                src={`${pictures.loggoutPicture?.url}`}
+                                src={`${cloudinaryTransformation(pictures.loggoutPicture?.url,48,48)}`}
                             />
                         </span>
                         Sign out

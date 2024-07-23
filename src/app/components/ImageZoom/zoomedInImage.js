@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './ImageZoom.css';
+import { cloudinaryTransformation } from '../functions/regexconversion';
 
 const ImageZoom = ({ imageUrl }) => {
   const [hoveredImageStyle, setHoveredImageStyle] = useState({});
@@ -43,7 +44,7 @@ const ImageZoom = ({ imageUrl }) => {
     <div className="image-container" onMouseMove={handleImageHover} onMouseLeave={handleImageLeave}>
       <div className="hovered-image" style={hoveredImageStyle}></div>
       {isHovered && <div className="zoomed-image" style={zoomedStyle}></div>}
-      <img src={imageUrl} className='zoomedImageMaxWidth' alt="Image" />
+      <img src={cloudinaryTransformation(imageUrl,250,250)} className='zoomedImageMaxWidth' alt="Image"   loading="lazy"/>
     </div>
   );
 };

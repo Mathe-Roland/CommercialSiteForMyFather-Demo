@@ -2,6 +2,7 @@
 import "./CosCard.css";
 import { useState } from "react";
 import { deleteProductData } from "../asyncOperations/fetchData";
+import { cloudinaryTransformation } from "../functions/regexconversion";
 
 const CosCard = ({ id, image, title, price,quantityFromDatabase, addToCart }) => {
     const [counter, setCounter] = useState(quantityFromDatabase > 1 ? quantityFromDatabase : 1);
@@ -87,7 +88,7 @@ const CosCard = ({ id, image, title, price,quantityFromDatabase, addToCart }) =>
     return (
         <div className="coscard-container">
             <div className="coscard-image">
-            <img alt="produs-buyed" className="cos-image" src={`${image}`} />
+            <img alt="produs-buyed" className="cos-image" src={`${cloudinaryTransformation(image)}`} />
             </div>
             <div className="coscard-title">
                 <h3>{title}</h3>

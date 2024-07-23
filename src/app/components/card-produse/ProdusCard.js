@@ -2,6 +2,7 @@ import "./ProdusCard.css";
 import Button from '@mui/material/Button';
 import Link from "next/link";
 import Cookies from 'js-cookie';
+import { cloudinaryTransformation } from "../functions/regexconversion";
 
 
 const ProdusCard = ({ description, title, image, disponibil, price }) => {
@@ -15,7 +16,7 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
 
   return (
     <div className="financing-programmes-card-container" suppressHydrationWarning>
-      <img src={`${image}`} alt="Product" className="produscard-image" />
+      <img src={`${cloudinaryTransformation(image,250,250)}`} alt="Product" className="produscard-image" />
       <div className="financing-programmes-card-content">
         <h2 className="title-financing-programmes">{title}</h2>
         <div className="financing-program-card-description">{description}</div>
