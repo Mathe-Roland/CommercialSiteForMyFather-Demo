@@ -30,7 +30,7 @@ const Header = () => {
       <div className="row width80 j-c-b">
         <div>
           <h1 className="t-n-r">Decorcut</h1>
-          <h3 className="t-n-r">Monstrik Dreamland</h3>
+          <h2 className="t-n-r">Monstrik Dreamland</h2>
         </div>
         <div>
           <div onMouseLeave={handleHamburger} className="hamburger-dropdown">
