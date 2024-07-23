@@ -120,7 +120,7 @@ const Produs = ({ img, description, title, price }) => {
         <div className="produs">
             <div className="produs-container">
                 <div className="produs-images">
-                    <ImageZoom imageUrl={`${process.env.NEXT_PUBLIC_STRAPI_URL}${img}`} alt="failed-load" />
+                    <ImageZoom imageUrl={`${img}`} alt="failed-load" />
                 </div>
                 <div className="produs-text-container">
                     <div className="produs-upper-text">
@@ -128,7 +128,7 @@ const Produs = ({ img, description, title, price }) => {
                             <h2>{title}</h2>
                         </div>
                         <div className="produs-pret">
-                            <p className="produs-pret">{ifVopsit ? prices : handlePrice(selectedValues)}</p>
+                           <p className="produs-pret">{ifVopsit ? prices : handlePrice(selectedValues)} RON</p>
                         </div>
                     </div>
                     <div className="produs-lower-text">

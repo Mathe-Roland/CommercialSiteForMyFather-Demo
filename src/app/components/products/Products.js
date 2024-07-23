@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import "./Product.css";
 import ProdusCard from '../card-produse/ProdusCard';
-import fetchPanouriData from '../asyncOperations/fetchData';
+import {fetchPanouriData} from '../asyncOperations/fetchData';
 
 const Products = () => {
   const [cardList, setCardList] = useState([]);  

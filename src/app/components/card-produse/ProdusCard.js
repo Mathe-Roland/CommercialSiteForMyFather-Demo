@@ -15,13 +15,13 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
 
   return (
     <div className="financing-programmes-card-container" suppressHydrationWarning>
-      <img src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${image}`} alt="Product" className="produscard-image" />
+      <img src={`${image}`} alt="Product" className="produscard-image" />
       <div className="financing-programmes-card-content">
         <h2 className="title-financing-programmes">{title}</h2>
         <div className="financing-program-card-description">{description}</div>
         <div className="red-pret"><p>{price}</p></div>
         <div className="financing-program-card-startDate"><p>{disponibil}</p></div>
-        <Link className="ignore" href={`/produse/${title}`}>
+        <Link className="ignore" href={`/produse/${decodeURIComponent(title)}`}>
           <Button
             variant="contained"
             color="primary"

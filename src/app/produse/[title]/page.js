@@ -13,7 +13,9 @@ import { useEffect,useState } from "react";
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const data = await fetchId(title);
+            const decodedUrl = title;
+            const data = await fetchId(decodedUrl);
+
             setCardList(data);
           } catch (error) {
             console.error(error);

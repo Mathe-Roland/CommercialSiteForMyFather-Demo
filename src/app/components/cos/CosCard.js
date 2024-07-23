@@ -87,7 +87,7 @@ const CosCard = ({ id, image, title, price,quantityFromDatabase, addToCart }) =>
     return (
         <div className="coscard-container">
             <div className="coscard-image">
-            <img alt="produs-buyed" className="cos-image" src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${image}`} />
+            <img alt="produs-buyed" className="cos-image" src={`${image}`} />
             </div>
             <div className="coscard-title">
                 <h3>{title}</h3>

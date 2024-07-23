@@ -2,7 +2,8 @@ import axios from "axios";
 import Cookies from 'js-cookie';
 
 
-const fetchPanouriData= async()=>{
+
+export const fetchPanouriData= async()=>{
     try{
         const response=await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates?populate=*`)
 
@@ -14,9 +15,6 @@ const fetchPanouriData= async()=>{
     }
 
 }
-
-
-export default fetchPanouriData;
 
 
 export const fetchArticlesData= async()=>{

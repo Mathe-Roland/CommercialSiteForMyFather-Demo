@@ -76,7 +76,7 @@ const UserInfo = ({ setLogin }) => {
                 <img
                     className="userInfo-img"
                     alt="login"
-                    src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${pictures.anonPicture?.url}`}
+                    src={`${pictures.anonPicture?.url}`}
                 />
             </button>
             {showUserInfo ? (
@@ -87,7 +87,7 @@ const UserInfo = ({ setLogin }) => {
                                 <img
                                     className="setari-picture"
                                     alt="setings icon"
-                                    src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${pictures.cosPicture?.url}`}
+                                    src={`${pictures.cosPicture?.url}`}
                                 />
                             </span>
                             Comenzi
@@ -99,7 +99,7 @@ const UserInfo = ({ setLogin }) => {
                                 <img
                                     className="setari-picture"
                                     alt="setings icon"
-                                    src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${pictures.setariPicture?.url}`}
+                                    src={`${pictures.setariPicture?.url}`}
                                 />
                             </span>
                             Setari
@@ -111,7 +111,7 @@ const UserInfo = ({ setLogin }) => {
                                 <img
                                     className="setari-picture"
                                     alt="comenzi plasate"
-                                    src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${pictures.comenziPlasate?.url}`}
+                                    src={`${pictures.comenziPlasate?.url}`}
                                 />
                             </span>
                             Comenzi plasate
@@ -122,7 +122,7 @@ const UserInfo = ({ setLogin }) => {
                             <img
                                 className="setari-picture"
                                 alt="setings icon"
-                                src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${pictures.loggoutPicture?.url}`}
+                                src={`${pictures.loggoutPicture?.url}`}
                             />
                         </span>
                         Sign out
