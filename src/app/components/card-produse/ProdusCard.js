@@ -4,7 +4,6 @@ import Link from "next/link";
 import Cookies from 'js-cookie';
 import { cloudinaryTransformation } from "../functions/regexconversion";
 
-
 const ProdusCard = ({ description, title, image, disponibil, price }) => {
 
   const handleData = () => {
@@ -16,14 +15,16 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
 
   return (
     <div className="financing-programmes-card-container" suppressHydrationWarning>
-     <img
-      srcset={`
-        ${cloudinaryTransformation(image, 52, 52)} 52w,
-        ${cloudinaryTransformation(image, 250, 250)} 250w,
-        ${cloudinaryTransformation(image, 500, 500)} 500w`} 
-        sizes="(min-width: 600px) 250px, 150px"
-        alt="Product" 
-          className="produscard-image" />
+      <img
+        srcSet={`
+          ${cloudinaryTransformation(image, 352, 352)} 352w,
+          ${cloudinaryTransformation(image, 450, 450)} 450w,
+          ${cloudinaryTransformation(image, 500, 500)} 500w
+        `}
+        sizes="(min-width: 600px) 450px, 352px"
+        alt="Product"
+        className="produscard-image"
+      />
       <div className="financing-programmes-card-content">
         <h2 className="title-financing-programmes">{title}</h2>
         <div className="financing-program-card-description">{description}</div>
