@@ -10,8 +10,8 @@
 }
 
 .produscard-image {
-  width: 100%;
-  height: auto;
+  width: 52px;
+  height: 52px;
   transition: transform 0.5s;
 }
 
@@ -73,6 +73,8 @@
 @media (min-width: 768px) { 
 
   .produscard-image {
+    height: 250px;
+    width:250px;
     margin:auto;
   }
 
