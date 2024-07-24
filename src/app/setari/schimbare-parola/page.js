@@ -5,7 +5,7 @@ import "./SchimbareParola.css";
 import { TextField, Button, Grid, Typography, Container } from '@mui/material';
 import Link from "next/link";
 import { completeUserData, imageFiles } from '../../components/asyncOperations/fetchData';
-import { cloudinaryTransformation } from '../..regexconversion/components/functions/regexconversion';
+import { cloudinaryTransformation } from '../../components/functions/regexconversion';
 
 const SchimbareParola = () => {
     const [pictures, setPictures] = useState({
