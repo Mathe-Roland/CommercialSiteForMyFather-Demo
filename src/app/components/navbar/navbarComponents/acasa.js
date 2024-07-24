@@ -15,9 +15,9 @@ const Acasa=()=>{
                
                 </Link>
                 <div className="acasa">
-                <img className="acasa-ih" alt="failed to load" src={"https://gomagcdn.ro/domains2/krista.ro/files/category/300x300/46.jpg"}/>
-                <img className="acasa-ih" alt="failed to load" src={"https://gomagcdn.ro/domains2/krista.ro/files/category/300x300/46.jpg"}/>
-                <img className="acasa-ih" alt="failed to load" src={"https://gomagcdn.ro/domains2/krista.ro/files/category/300x300/46.jpg"}/>
+                <img className="acasa-ih" alt="failed to load" src={"https://gomagcdn.ro/domains2/krista.ro/files/category/300x300/46.jpg"} loading="lazy"/>
+                <img className="acasa-ih" alt="failed to load" src={"https://gomagcdn.ro/domains2/krista.ro/files/category/300x300/46.jpg"} loading="lazy"/>
+                <img className="acasa-ih" alt="failed to load" src={"https://gomagcdn.ro/domains2/krista.ro/files/category/300x300/46.jpg"} loading="lazy"/>
                 </div>
 
                 </div>

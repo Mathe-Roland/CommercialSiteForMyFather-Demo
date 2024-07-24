@@ -75,7 +75,6 @@ const UserInfo = ({ setLogin }) => {
         <div onMouseLeave={onLeave} className="userInfo-container">
             <button onClick={handleUserInfo} onMouseOver={handleMover}>
                 <img
-                    className="userInfo-img"
                     alt="login"
                     src={`${cloudinaryTransformation(pictures.anonPicture?.url,48,48)}`}
                 />
@@ -88,7 +87,7 @@ const UserInfo = ({ setLogin }) => {
                                 <img
                                     className="setari-picture"
                                     alt="setings icon"
-                                    src={`${cloudinaryTransformation(pictures.cosPicture?.url,48,48)}`}
+                                    src={`${cloudinaryTransformation(pictures.cosPicture?.url,16,16)}`}
                                 />
                             </span>
                             Comenzi
@@ -100,7 +99,7 @@ const UserInfo = ({ setLogin }) => {
                                 <img
                                     className="setari-picture"
                                     alt="setings icon"
-                                    src={`${cloudinaryTransformation(pictures.setariPicture?.url,48,48)}`}
+                                    src={`${cloudinaryTransformation(pictures.setariPicture?.url,16,16)}`}
                                 />
                             </span>
                             Setari
@@ -112,7 +111,7 @@ const UserInfo = ({ setLogin }) => {
                                 <img
                                     className="setari-picture"
                                     alt="comenzi plasate"
-                                    src={`${cloudinaryTransformation(pictures.comenziPlasate?.url),48,48}`}
+                                    src={`${cloudinaryTransformation(pictures.comenziPlasate?.url),16,16}`}
                                 />
                             </span>
                             Comenzi plasate
@@ -123,7 +122,7 @@ const UserInfo = ({ setLogin }) => {
                             <img
                                 className="setari-picture"
                                 alt="setings icon"
-                                src={`${cloudinaryTransformation(pictures.loggoutPicture?.url,48,48)}`}
+                                src={`${cloudinaryTransformation(pictures.loggoutPicture?.url,16,16)}`}
                             />
                         </span>
                         Sign out

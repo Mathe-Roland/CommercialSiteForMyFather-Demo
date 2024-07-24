@@ -109,15 +109,15 @@ const IndividualArticles = () => {
             <p>{articleData[0]?.attributes?.date}</p>
             <p>{descriptionBrokenInThree[0]}</p>
             <div className="images-container">
-                <img className="image" src={`${cloudinaryTransformation(articleData[0]?.attributes?.image?.data[0]?.attributes?.url,250,250)}`} />
+                <img className="image" src={`${cloudinaryTransformation(articleData[0]?.attributes?.image?.data[0]?.attributes?.url,250,250)}`}  loading="lazy"/>
             </div>
             <p>{descriptionBrokenInThree[1]}</p>
             <div className="images-container">
-                <img className="image" src={`${cloudinaryTransformation(articleData[0]?.attributes?.image?.data[1]?.attributes?.url,250,250)}`} />
+                <img className="image" src={`${cloudinaryTransformation(articleData[0]?.attributes?.image?.data[1]?.attributes?.url,250,250)}`} loading="lazy"/>
             </div>
             <p>{descriptionBrokenInThree[2]}</p>
             <div className="images-container">
-                <img className="image" src={`${cloudinaryTransformation(articleData[0]?.attributes?.image?.data[2]?.attributes?.url,250,250)}`} />
+                <img className="image" src={`${cloudinaryTransformation(articleData[0]?.attributes?.image?.data[2]?.attributes?.url,250,250)}`}  loading="lazy"/>
             </div>
             <p>{descriptionBrokenInThree[3]}</p>
             <div className="comment-header">

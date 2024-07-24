@@ -1,8 +1,3 @@
-.userInfo-img {
-    width: 48px;
-    height: 48px;
-}
-
 .userInfo-container {
     position: relative;
 }
@@ -25,20 +20,14 @@
 }
 
 .setari:hover{
-
     background-color: lightblue;
-
 }
 
 .setari{
-
     color: inherit;
     text-decoration: none;
 }
 
 .setari-picture{
-
-    width:16px;
-    height:16px;
     margin-right: 4px;
 }

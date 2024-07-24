@@ -88,7 +88,7 @@ const CosCard = ({ id, image, title, price,quantityFromDatabase, addToCart }) =>
     return (
         <div className="coscard-container">
             <div className="coscard-image">
-            <img alt="produs-buyed" className="cos-image" src={`${cloudinaryTransformation(image)}`} />
+            <img alt="produs-buyed" loading="lazy" className="cos-image" src={`${cloudinaryTransformation(image)}`} />
             </div>
             <div className="coscard-title">
                 <h3>{title}</h3>
@@ -103,8 +103,9 @@ const CosCard = ({ id, image, title, price,quantityFromDatabase, addToCart }) =>
                 <span className="prices"><span className="cantitate-pentru-increment-buttons">Pret</span> {price}</span>
             </div>
             <div className="cancel-icon">
-                <img src="/cancel.webp" className="cancel"
-                onClick={deleteItem}/>
+                <img  src="/cancel.webp" className="cancel"
+                onClick={deleteItem}
+                loading="lazy"/>
             </div>
         </div>
 

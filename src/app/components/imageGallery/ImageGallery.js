@@ -17,6 +17,7 @@ const ImageGallery = ({ images }) => {
              className="ImageSecondColumn"
              src={`${cloudinaryTransformation(image?.attributes?.url,250,250)}`}
              alt={`imageGallery-${index}`}
+             loading="lazy"
            />
           ))}
         </div>
@@ -27,6 +28,7 @@ const ImageGallery = ({ images }) => {
               className="ImageSecondColumn"
               src={`${cloudinaryTransformation(image?.attributes?.url,250,250)}`}
               alt={`imageGallery-${index}`}
+              loading="lazy"
             />
           ))}
 
@@ -38,6 +40,7 @@ const ImageGallery = ({ images }) => {
              className="ImageSecondColumn"
              src={`${cloudinaryTransformation(image?.attributes?.url,250,250)}`}
              alt={`imageGallery-${index}`}
+             loading="lazy"
            />
           ))}
         </div>

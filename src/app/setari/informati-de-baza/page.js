@@ -123,7 +123,7 @@ const Setari = () => {
                 <Link href="/setari/schimbare-parola">
                         <p className="setari">
                             <span>
-                                <img className="setari-picture"
+                                <img
                                     alt="settings icon"
                                     src={`${cloudinaryTransformation(pictures.schimbParolaPicture,24,24)}`} />
                             </span>Schimbare parolă
@@ -132,7 +132,7 @@ const Setari = () => {
                 <Link href="/setari/informati-de-baza">
                         <p className="setari">
                             <span>
-                                <img className="setari-picture"
+                                <img
                                     alt="settings icon"
                                     src={`${cloudinaryTransformation(pictures.facturaPicture,24,24)}`} />
                             </span>Date facturare
