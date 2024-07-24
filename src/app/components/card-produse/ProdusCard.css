@@ -73,8 +73,6 @@
 @media (min-width: 768px) { 
 
   .produscard-image {
-    height: 250px;
-    width:250px;
     margin:auto;
   }
 

@@ -16,7 +16,14 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
 
   return (
     <div className="financing-programmes-card-container" suppressHydrationWarning>
-      <img src={`${cloudinaryTransformation(image,250,250)}`} alt="Product" className="produscard-image" />
+     <img
+      srcset={`
+        ${cloudinaryTransformation(image, 52, 52)} 52w,
+        ${cloudinaryTransformation(image, 250, 250)} 250w,
+        ${cloudinaryTransformation(image, 500, 500)} 500w`} 
+        sizes="(min-width: 600px) 250px, 52px"
+        alt="Product" 
+          className="produscard-image" />
       <div className="financing-programmes-card-content">
         <h2 className="title-financing-programmes">{title}</h2>
         <div className="financing-program-card-description">{description}</div>
