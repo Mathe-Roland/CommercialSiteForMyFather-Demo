@@ -21,7 +21,7 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
         ${cloudinaryTransformation(image, 52, 52)} 52w,
         ${cloudinaryTransformation(image, 250, 250)} 250w,
         ${cloudinaryTransformation(image, 500, 500)} 500w`} 
-        sizes="(min-width: 600px) 250px, 52px"
+        sizes="(min-width: 600px) 250px, 150px"
         alt="Product" 
           className="produscard-image" />
       <div className="financing-programmes-card-content">
