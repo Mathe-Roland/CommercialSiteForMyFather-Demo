@@ -21,19 +21,28 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
   // Create URLs with different sizes for responsive images
   const imageUrl = cloudinaryTransformation(image, imageWidth, imageHeight);
 
-
   // Define the specific image URL that requires priority
   const specificImageUrl = "https://res.cloudinary.com/ddrkdrrre/image/upload/f_auto,w_500,h_500/evatai100_szobanatur_0d1839423a.png";
 
   // Determine if this image should be prioritized
   const isPriority = imageUrl === specificImageUrl;
 
-  console.log(specificImageUrl,isPriority);
-
+  const mobileLink=`https://res.cloudinary.com/ddrkdrrre/image/upload/f_auto,w_500,h_500/szobasfafeketer_adfc03d26d.png`;
 
   return (
     <div className="financing-programmes-card-container" suppressHydrationWarning>
+      {title==="Panou decorativ Mos138n" ? 
       <Image
+        src={mobileLink}
+        alt="first mobile product"
+        width={imageWidth}
+        height={imageHeight}
+        layout="responsive"
+        sizes="(min-width: 600px) 450px, 352px"
+        className="produscard-image"
+      />
+    :
+    <Image
         src={imageUrl}
         alt="Product"
         width={imageWidth}
@@ -41,8 +50,9 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
         layout="responsive"
         sizes="(min-width: 600px) 450px, 352px"
         className="produscard-image"
-        priority={isPriority} // Apply priority if the image matches the specific URL
+        priority={isPriority}
       />
+  }
       <div className="financing-programmes-card-content">
         <h2 className="title-financing-programmes">{title}</h2>
         <div className="financing-program-card-description">{description}</div>
