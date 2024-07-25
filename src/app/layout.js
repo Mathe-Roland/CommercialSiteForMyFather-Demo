@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
       <head>
         <title>Produse traforate personalizate</title>
         <meta name="description" content="Produse traforate vopsite sau nevopsite din lemn, personalizate" />
-        <link rel='preload' fetchPriority='high' href={`${cloudinaryTransformation(`https://res.cloudinary.com/ddrkdrrre/image/upload/v1721761368/szobasfafeketer_adfc03d26d.png`,352,352)}`} as="image"></link>
+        <link rel='preload' fetchPriority='high' href={`${cloudinaryTransformation(`https://res.cloudinary.com/ddrkdrrre/image/upload/f_auto,w_500,h_500/szobasfafeketer_adfc03d26d.png`)}`} as="image"></link>
       </head>
       <body className={`height ${inter.className}`}>
         <Header />
