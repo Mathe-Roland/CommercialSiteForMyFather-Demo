@@ -28,23 +28,13 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
   const isPriority = imageUrl === specificImageUrl;
 
   const mobileLink=`https://res.cloudinary.com/ddrkdrrre/image/upload/f_auto,w_500,h_500/szobasfafeketer_adfc03d26d.png`;
+  const publicForMobileLCP="/szobasfafeketer_adfc03d26d_Sharpened.png"
 
   return (
     <div className="financing-programmes-card-container" suppressHydrationWarning>
-      {title==="Panou decorativ Mos138n" ? 
       <Image
-        src={mobileLink}
-        alt="first mobile product"
-        width={imageWidth}
-        height={imageHeight}
-        layout="responsive"
-        sizes="(min-width: 600px) 450px, 352px"
-        className="produscard-image"
-      />
-    :
-    <Image
-        src={imageUrl}
-        alt="Product"
+        src={title==="Panou decorativ Mos138n"?publicForMobileLCP:imageUrl}
+        alt={title==="Panou decorativ Mos138n" ? "first product for mobile" :"product" }
         width={imageWidth}
         height={imageHeight}
         layout="responsive"
@@ -52,7 +42,6 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
         className="produscard-image"
         priority={isPriority}
       />
-  }
       <div className="financing-programmes-card-content">
         <h2 className="title-financing-programmes">{title}</h2>
         <div className="financing-program-card-description">{description}</div>
