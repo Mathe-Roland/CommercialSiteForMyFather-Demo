@@ -7,8 +7,8 @@ import { userRelatedComments, fetchArticleId, fetchArticlesData, fetchPanouriArt
 import Comments from "../../components/comments/Comments";
 import CommentPages from "../../components/commentPages/CommentPages"
 import AddCommentModal from "../../components/coment-Modal/AddCommentModal";
-import { cloudinaryTransformation } from "../../components/functions/regexconversion";
-import Image from 'next/image';
+import { } from "../../components/functions/regexconversion";
+import 'next/image';
 
 
 const IndividualArticles = () => {
@@ -113,19 +113,19 @@ const IndividualArticles = () => {
             <p>{articleData[0]?.attributes?.date}</p>
             <p>{descriptionBrokenInThree[0]}</p>
             <div className="images-container">
-                <Image className="image" src={`${cloudinaryTransformation(articleData[0]?.attributes?.image?.data[0]?.attributes?.url,250,250)}`}
+                <Image className="image" src={`${articleData[0]?.attributes?.image?.data[0]?.attributes?.url}`}
                 width={250}
                 height={250} />
             </div>
             <p>{descriptionBrokenInThree[1]}</p>
             <div className="images-container">
-                <Image className="image" src={`${cloudinaryTransformation(articleData[0]?.attributes?.image?.data[1]?.attributes?.url),250,250}`} 
+                <Image className="image" src={`${articleData[0]?.attributes?.image?.data[1]?.attributes?.url}`} 
                 width={250}
                 height={250}/>
             </div>
             <p>{descriptionBrokenInThree[2]}</p>
             <div className="images-container">
-                <Image className="image" src={`${cloudinaryTransformation(articleData[0]?.attributes?.image?.data[2]?.attributes?.url),250,250}`} 
+                <Image className="image" src={`${articleData[0]?.attributes?.image?.data[2]?.attributes?.url}`} 
                 width={250}
                 height={250}/>
             </div>

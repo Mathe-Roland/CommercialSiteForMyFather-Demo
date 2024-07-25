@@ -3,7 +3,6 @@ import Button from '@mui/material/Button';
 import Link from "next/link";
 import Cookies from 'js-cookie';
 import Image from 'next/image';
-import { cloudinaryTransformation } from "../functions/regexconversion";
 
 const ProdusCard = ({ description, title, image, disponibil, price }) => {
 
@@ -14,30 +13,24 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
     Cookies.set("price", price, { expires: 1 });
   };
 
-  // Define the image width and height for the responsive layout
-  const imageWidth = 500;
-  const imageHeight = 500;
+  
 
-  // Create URLs with different sizes for responsive images
-  const imageUrl = cloudinaryTransformation(image, imageWidth, imageHeight);
-
-  // Define the specific image URL that requires priority
   const specificImageUrl = "https://res.cloudinary.com/ddrkdrrre/image/upload/f_auto,w_500,h_500/evatai100_szobanatur_0d1839423a.png";
 
-  // Determine if this image should be prioritized
-  const isPriority = imageUrl === specificImageUrl;
+  const isPriority = image === specificImageUrl;
+
 
   return (
     <div className="financing-programmes-card-container" suppressHydrationWarning>
       <Image
-        src={imageUrl}
+        src={image}
         alt="Panou decorativ Mos138n"
-        width={imageWidth}
-        height={imageHeight}
+        width={500}
+        height={500}
         layout="responsive"
         sizes="(min-width: 600px) 450px, 252px"
         className="produscard-image"
-        priority={title==="Panou decorativ Mos138n"? true :isPriority }
+        priority={isPriority}
       />
       <div className="financing-programmes-card-content">
         <h2 className="title-financing-programmes">{title}</h2>

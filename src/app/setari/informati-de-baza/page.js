@@ -7,7 +7,6 @@ import Link from 'next/link'; // Corrected import for Next.js
 import { completeUserData, imageFiles } from '../../components/asyncOperations/fetchData';
 import "./Setari.css";
 import Cookies from 'js-cookie';
-import { cloudinaryTransformation } from '../../components/functions/regexconversion';
 import Image from 'next/image';
 
 const Setari = () => {
@@ -126,7 +125,7 @@ const Setari = () => {
                             <span>
                                 <Image
                                     alt="settings icon"
-                                    src={`${cloudinaryTransformation(pictures.schimbParolaPicture,24,24)}`} 
+                                    src={`${pictures ? pictures.schimbParolaPicture :"cancel.webp"}`} 
                                     width={24}
                                     height={24}/>
                             </span>Schimbare parolă
@@ -137,7 +136,7 @@ const Setari = () => {
                             <span>
                                 <Image
                                     alt="settings icon"
-                                    src={`${cloudinaryTransformation(pictures.facturaPicture,24,24)}`} 
+                                    src={`${pictures ? pictures.facturaPicture :"cancel.webp"}`} 
                                     width={24}
                                     height={24}/>
                             </span>Date facturare

@@ -93,7 +93,7 @@ const CosCard = ({ id, image, title, price,quantityFromDatabase, addToCart }) =>
             <Image alt="produs-buyed" 
             width={120}
             height={120}
-             className="cos-image" src={`${cloudinaryTransformation(image)}`} />
+             className="cos-image" src={`${image}`} />
             </div>
             <div className="coscard-title">
                 <h3>{title}</h3>

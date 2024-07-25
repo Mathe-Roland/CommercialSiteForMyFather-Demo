@@ -3,18 +3,17 @@
 import "./UserInfo.css";
 import React, { useState, useEffect } from "react";
 import { imageFiles } from "../asyncOperations/fetchData";
-import Link from "next/link"; // Use next/link instead of react-router-dom
+import Link from "next/link";
 import Cookies from 'js-cookie';
-import { cloudinaryTransformation } from "../functions/regexconversion";
 import Image from "next/image";
 
 const UserInfo = ({ setLogin }) => {
     const [pictures, setPicture] = useState({
-        anonPicture:"",
-        setariPicture:"",
-        cosPicture:"",
-        comenziPlasate:"",
-        loggoutPicture:"",
+        anonPicture: null,
+        setariPicture: null,
+        cosPicture: null,
+        comenziPlasate: null,
+        loggoutPicture: null,
     });
 
     const [showUserInfo, setShowUserInfo] = useState(false);
@@ -33,17 +32,12 @@ const UserInfo = ({ setLogin }) => {
         const getData = async () => {
             const result = await fetchData();
             const pictures = result || [];
-            const anonPicture = pictures.find((element) => element.name === "anonymous-person.png");
-            const settingsPicture = pictures.find((element) => element.name === "settings-icon.png");
-            const cosPicture = pictures.find((element) => element.name === "cos.png");
-            const loggoutPicture = pictures.find((element) => element.name === "out.png");
-            const comenziPlasate = pictures.find((element) => element.name === "comenzi plasate.png");
             setPicture({
-                anonPicture:anonPicture,
-                setariPicture:settingsPicture,
-                cosPicture:cosPicture,
-                comenziPlasate:comenziPlasate,
-                loggoutPicture:loggoutPicture,
+                anonPicture: pictures.find((element) => element.name === "anonymous-person.png") || null,
+                setariPicture: pictures.find((element) => element.name === "settings-icon.png") || null,
+                cosPicture: pictures.find((element) => element.name === "cos.png") || null,
+                comenziPlasate: pictures.find((element) => element.name === "comenzi plasate.png") || null,
+                loggoutPicture: pictures.find((element) => element.name === "out.png") || null,
             });
         };
 
@@ -56,28 +50,28 @@ const UserInfo = ({ setLogin }) => {
 
     const handleLoggout = () => {
         function deleteAllCookies() {
-            const allCookies = Cookies.get(); // Get all cookies as an object
-            Object.keys(allCookies).forEach(cookieName => Cookies.remove(cookieName)); // Remove each cookie by name
+            const allCookies = Cookies.get();
+            Object.keys(allCookies).forEach(cookieName => Cookies.remove(cookieName));
         }
 
         deleteAllCookies();
         setLogin(false);
-    }
+    };
 
     const onLeave = () => {
         setShowUserInfo(false);
-    }
+    };
 
     const handleMover = () => {
         setShowUserInfo(true);
-    }
+    };
 
     return (
         <div onMouseLeave={onLeave} className="userInfo-container">
             <button onClick={handleUserInfo} onMouseOver={handleMover}>
                 <Image
                     alt="login"
-                    src={`${cloudinaryTransformation(pictures.anonPicture?.url,48,48)}`}
+                    src={pictures.anonPicture ? pictures.anonPicture.url : '/cancel.webp'}
                     width={48}
                     height={48}
                 />
@@ -89,8 +83,8 @@ const UserInfo = ({ setLogin }) => {
                             <span>
                                 <Image
                                     className="setari-picture"
-                                    alt="setings icon"
-                                    src={`${cloudinaryTransformation(pictures.cosPicture?.url,16,16)}`}
+                                    alt="cos icon"
+                                    src={pictures.cosPicture ? pictures.cosPicture.url: "/cancel.webp"}
                                     width={16}
                                     height={16}
                                 />
@@ -103,8 +97,8 @@ const UserInfo = ({ setLogin }) => {
                             <span>
                                 <Image
                                     className="setari-picture"
-                                    alt="setings icon"
-                                    src={`${cloudinaryTransformation(pictures.setariPicture?.url,16,16)}`}
+                                    alt="settings icon"
+                                    src={pictures.setariPicture ? pictures.setariPicture.url: '/cancel.webp'}
                                     width={16}
                                     height={16}
                                 />
@@ -118,7 +112,7 @@ const UserInfo = ({ setLogin }) => {
                                 <Image
                                     className="setari-picture"
                                     alt="comenzi plasate"
-                                    src={`${cloudinaryTransformation(pictures.comenziPlasate?.url),16,16}`}
+                                    src={pictures.comenziPlasate ? pictures.comenziPlasate.url : '/cancel.webp'}
                                     width={16}
                                     height={16}
                                 />
@@ -130,8 +124,8 @@ const UserInfo = ({ setLogin }) => {
                         <span>
                             <Image
                                 className="setari-picture"
-                                alt="setings icon"
-                                src={`${cloudinaryTransformation(pictures.loggoutPicture?.url,16,16)}`}
+                                alt="logout icon"
+                                src={pictures.loggoutPicture ? pictures.loggoutPicture.ur : '/cancel.webp'}
                                 width={16}
                                 height={16}
                             />

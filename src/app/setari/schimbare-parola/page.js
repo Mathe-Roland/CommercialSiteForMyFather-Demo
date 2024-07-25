@@ -5,7 +5,6 @@ import "./SchimbareParola.css";
 import { TextField, Button, Grid, Typography, Container } from '@mui/material';
 import Link from "next/link";
 import { completeUserData, imageFiles } from '../../components/asyncOperations/fetchData';
-import { cloudinaryTransformation } from '../../components/functions/regexconversion';
 import Image from 'next/image';
 
 const SchimbareParola = () => {
@@ -92,7 +91,7 @@ const SchimbareParola = () => {
                 <Link href="/setari/schimbare-parola" className="setari">
                     <p className="setari">
                         <span>
-                            <Image className="setari-picture" alt="settings icon" src={`${cloudinaryTransformation(pictures.schimbParolaPicture?.url,24,24)}`}
+                            <Image className="setari-picture" alt="settings icon" src={`${pictures ? pictures.schimbParolaPicture?.url: "cancel.webp"}`}
                             height={24}
                             width={24} />
                         </span>
@@ -102,7 +101,7 @@ const SchimbareParola = () => {
                 <Link href="/setari/informati-de-baza" className="setari">
                     <p className="setari">
                         <span>
-                            <Image className="setari-picture" alt="settings icon" src={`${cloudinaryTransformation(pictures.facturaPicture?.url,24,24)}`} 
+                            <Image className="setari-picture" alt="settings icon" src={`${pictures ? pictures.facturaPicture?.url: "cancel.webp"}`} 
                             width={24}
                             height={24}/>
                         </span>
