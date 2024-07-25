@@ -8,6 +8,7 @@ import { completeUserData, imageFiles } from '../../components/asyncOperations/f
 import "./Setari.css";
 import Cookies from 'js-cookie';
 import { cloudinaryTransformation } from '../../components/functions/regexconversion';
+import Image from 'next/image';
 
 const Setari = () => {
     const [pictures, setPicture] = useState({
@@ -123,7 +124,7 @@ const Setari = () => {
                 <Link href="/setari/schimbare-parola">
                         <p className="setari">
                             <span>
-                                <img
+                                <Image
                                     alt="settings icon"
                                     src={`${cloudinaryTransformation(pictures.schimbParolaPicture,24,24)}`} />
                             </span>Schimbare parolă
@@ -132,7 +133,7 @@ const Setari = () => {
                 <Link href="/setari/informati-de-baza">
                         <p className="setari">
                             <span>
-                                <img
+                                <Image
                                     alt="settings icon"
                                     src={`${cloudinaryTransformation(pictures.facturaPicture,24,24)}`} />
                             </span>Date facturare

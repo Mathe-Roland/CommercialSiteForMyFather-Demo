@@ -6,6 +6,7 @@ import { TextField, Button, Grid, Typography, Container } from '@mui/material';
 import Link from "next/link";
 import { completeUserData, imageFiles } from '../../components/asyncOperations/fetchData';
 import { cloudinaryTransformation } from '../../components/functions/regexconversion';
+import Image from 'next/image';
 
 const SchimbareParola = () => {
     const [pictures, setPictures] = useState({
@@ -91,7 +92,7 @@ const SchimbareParola = () => {
                 <Link href="/setari/schimbare-parola" className="setari">
                     <p className="setari">
                         <span>
-                            <img className="setari-picture" alt="settings icon" src={`${cloudinaryTransformation(pictures.schimbParolaPicture?.url,24,24)}`} />
+                            <Image className="setari-picture" alt="settings icon" src={`${cloudinaryTransformation(pictures.schimbParolaPicture?.url,24,24)}`} />
                         </span>
                         Schimbare parolă
                     </p>
@@ -99,7 +100,7 @@ const SchimbareParola = () => {
                 <Link href="/setari/informati-de-baza" className="setari">
                     <p className="setari">
                         <span>
-                            <img className="setari-picture" alt="settings icon" src={`${cloudinaryTransformation(pictures.facturaPicture?.url,24,24)}`} />
+                            <Image className="setari-picture" alt="settings icon" src={`${cloudinaryTransformation(pictures.facturaPicture?.url,24,24)}`} />
                         </span>
                         Date facturare
                     </p>
