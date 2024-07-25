@@ -45,7 +45,7 @@ const ImageZoom = ({ imageUrl }) => {
     <div className="image-container" onMouseMove={handleImageHover} onMouseLeave={handleImageLeave}>
       <div className="hovered-image" style={hoveredImageStyle}></div>
       {isHovered && <div className="zoomed-image" style={zoomedStyle}></div>}
-      <Image src={cloudinaryTransformation(imageUrl,250,250)} className='zoomedImageMaxWidth' alt="Image"   loading="lazy"/>
+      <Image src={cloudinaryTransformation(imageUrl,250,250)} className='zoomedImageMaxWidth' alt="Image" width={250} height={250}/>
     </div>
   );
 };

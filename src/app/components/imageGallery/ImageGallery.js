@@ -18,7 +18,8 @@ const ImageGallery = ({ images }) => {
              className="ImageSecondColumn"
              src={`${cloudinaryTransformation(image?.attributes?.url,250,250)}`}
              alt={`imageGallery-${index}`}
-             loading="lazy"
+             width={250}
+             height={250}
            />
           ))}
         </div>
@@ -29,7 +30,8 @@ const ImageGallery = ({ images }) => {
               className="ImageSecondColumn"
               src={`${cloudinaryTransformation(image?.attributes?.url,250,250)}`}
               alt={`imageGallery-${index}`}
-              loading="lazy"
+              height={250}
+              width={250}
             />
           ))}
 
@@ -41,7 +43,8 @@ const ImageGallery = ({ images }) => {
              className="ImageSecondColumn"
              src={`${cloudinaryTransformation(image?.attributes?.url,250,250)}`}
              alt={`imageGallery-${index}`}
-             loading="lazy"
+             width={250}
+             height={250}
            />
           ))}
         </div>

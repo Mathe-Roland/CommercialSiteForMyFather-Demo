@@ -126,7 +126,9 @@ const Setari = () => {
                             <span>
                                 <Image
                                     alt="settings icon"
-                                    src={`${cloudinaryTransformation(pictures.schimbParolaPicture,24,24)}`} />
+                                    src={`${cloudinaryTransformation(pictures.schimbParolaPicture,24,24)}`} 
+                                    width={24}
+                                    height={24}/>
                             </span>Schimbare parolă
                         </p>
                 </Link>
@@ -135,7 +137,9 @@ const Setari = () => {
                             <span>
                                 <Image
                                     alt="settings icon"
-                                    src={`${cloudinaryTransformation(pictures.facturaPicture,24,24)}`} />
+                                    src={`${cloudinaryTransformation(pictures.facturaPicture,24,24)}`} 
+                                    width={24}
+                                    height={24}/>
                             </span>Date facturare
                         </p>
                 </Link>

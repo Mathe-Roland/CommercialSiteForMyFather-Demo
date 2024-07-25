@@ -37,7 +37,8 @@ const Header = () => {
           <div onMouseLeave={handleHamburger} className="hamburger-dropdown">
             <Image src="/hamburger_menu.png" onClick={handleShow} 
               className="hamburger-menu" alt="hamburger-menu"
-              loading="lazy"/>
+              width={25}
+              height={25}/>
             { show ?
               <div className="navbar-dropdown">
                 <input

@@ -78,6 +78,8 @@ const UserInfo = ({ setLogin }) => {
                 <Image
                     alt="login"
                     src={`${cloudinaryTransformation(pictures.anonPicture?.url,48,48)}`}
+                    width={48}
+                    height={48}
                 />
             </button>
             {showUserInfo ? (
@@ -89,6 +91,8 @@ const UserInfo = ({ setLogin }) => {
                                     className="setari-picture"
                                     alt="setings icon"
                                     src={`${cloudinaryTransformation(pictures.cosPicture?.url,16,16)}`}
+                                    width={16}
+                                    height={16}
                                 />
                             </span>
                             Comenzi
@@ -101,6 +105,8 @@ const UserInfo = ({ setLogin }) => {
                                     className="setari-picture"
                                     alt="setings icon"
                                     src={`${cloudinaryTransformation(pictures.setariPicture?.url,16,16)}`}
+                                    width={16}
+                                    height={16}
                                 />
                             </span>
                             Setari
@@ -113,6 +119,8 @@ const UserInfo = ({ setLogin }) => {
                                     className="setari-picture"
                                     alt="comenzi plasate"
                                     src={`${cloudinaryTransformation(pictures.comenziPlasate?.url),16,16}`}
+                                    width={16}
+                                    height={16}
                                 />
                             </span>
                             Comenzi plasate
@@ -124,6 +132,8 @@ const UserInfo = ({ setLogin }) => {
                                 className="setari-picture"
                                 alt="setings icon"
                                 src={`${cloudinaryTransformation(pictures.loggoutPicture?.url,16,16)}`}
+                                width={16}
+                                height={16}
                             />
                         </span>
                         Sign out
