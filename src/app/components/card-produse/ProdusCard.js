@@ -35,7 +35,7 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
         width={imageWidth}
         height={imageHeight}
         layout="responsive"
-        sizes="(min-width: 600px) 450px, 352px"
+        sizes="(min-width: 600px) 450px, 252px"
         className="produscard-image"
         priority={title==="Panou decorativ Mos138n"? true :isPriority }
       />
