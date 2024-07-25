@@ -29,6 +29,8 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
   const isPriority = imageUrl === specificImageUrl;
 
   console.log("Image URL:", imageUrl);
+  console.log("Is Priority:", isPriority);
+
 
 
   return (
