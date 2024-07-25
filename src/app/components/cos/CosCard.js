@@ -3,6 +3,8 @@ import "./CosCard.css";
 import { useState } from "react";
 import { deleteProductData } from "../asyncOperations/fetchData";
 import { cloudinaryTransformation } from "../functions/regexconversion";
+import Image from 'next/image';
+
 
 const CosCard = ({ id, image, title, price,quantityFromDatabase, addToCart }) => {
     const [counter, setCounter] = useState(quantityFromDatabase > 1 ? quantityFromDatabase : 1);
@@ -88,7 +90,7 @@ const CosCard = ({ id, image, title, price,quantityFromDatabase, addToCart }) =>
     return (
         <div className="coscard-container">
             <div className="coscard-image">
-            <img alt="produs-buyed" loading="lazy" className="cos-image" src={`${cloudinaryTransformation(image)}`} />
+            <Image alt="produs-buyed" loading="lazy" className="cos-image" src={`${cloudinaryTransformation(image)}`} />
             </div>
             <div className="coscard-title">
                 <h3>{title}</h3>
@@ -103,9 +105,8 @@ const CosCard = ({ id, image, title, price,quantityFromDatabase, addToCart }) =>
                 <span className="prices"><span className="cantitate-pentru-increment-buttons">Pret</span> {price}</span>
             </div>
             <div className="cancel-icon">
-                <img  src="/cancel.webp" className="cancel"
-                onClick={deleteItem}
-                loading="lazy"/>
+                <Image  src="/cancel.webp" className="cancel"
+                onClick={deleteItem}/>
             </div>
         </div>
 

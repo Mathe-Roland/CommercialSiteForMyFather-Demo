@@ -5,6 +5,7 @@ import Link from "next/link"; // Use next/link instead of react-router-dom
 import { useState, useEffect } from "react";
 import UserInfo from "../userInfo/UserInfo";
 import Cookies from 'js-cookie';
+import Image from "next/image";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -34,7 +35,7 @@ const Header = () => {
         </div>
         <div>
           <div onMouseLeave={handleHamburger} className="hamburger-dropdown">
-            <img src="/hamburger_menu.png" onClick={handleShow} 
+            <Image src="/hamburger_menu.png" onClick={handleShow} 
               className="hamburger-menu" alt="hamburger-menu"
               loading="lazy"/>
             { show ?

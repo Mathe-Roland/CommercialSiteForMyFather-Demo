@@ -6,6 +6,7 @@ import { imageFiles } from "../asyncOperations/fetchData";
 import Link from "next/link"; // Use next/link instead of react-router-dom
 import Cookies from 'js-cookie';
 import { cloudinaryTransformation } from "../functions/regexconversion";
+import Image from "next/image";
 
 const UserInfo = ({ setLogin }) => {
     const [pictures, setPicture] = useState({
@@ -74,7 +75,7 @@ const UserInfo = ({ setLogin }) => {
     return (
         <div onMouseLeave={onLeave} className="userInfo-container">
             <button onClick={handleUserInfo} onMouseOver={handleMover}>
-                <img
+                <Image
                     alt="login"
                     src={`${cloudinaryTransformation(pictures.anonPicture?.url,48,48)}`}
                 />
@@ -84,7 +85,7 @@ const UserInfo = ({ setLogin }) => {
                     <Link href="/cos" className="setari">
                         <p className="setari">
                             <span>
-                                <img
+                                <Image
                                     className="setari-picture"
                                     alt="setings icon"
                                     src={`${cloudinaryTransformation(pictures.cosPicture?.url,16,16)}`}
@@ -96,7 +97,7 @@ const UserInfo = ({ setLogin }) => {
                     <Link href="/setari/informati-de-baza" className="setari">
                         <p className="setari">
                             <span>
-                                <img
+                                <Image
                                     className="setari-picture"
                                     alt="setings icon"
                                     src={`${cloudinaryTransformation(pictures.setariPicture?.url,16,16)}`}
@@ -108,7 +109,7 @@ const UserInfo = ({ setLogin }) => {
                     <Link href="/comenzi-plasate" className="setari">
                         <p className="setari">
                             <span>
-                                <img
+                                <Image
                                     className="setari-picture"
                                     alt="comenzi plasate"
                                     src={`${cloudinaryTransformation(pictures.comenziPlasate?.url),16,16}`}
@@ -119,7 +120,7 @@ const UserInfo = ({ setLogin }) => {
                     </Link>
                     <p className="logout" onClick={handleLoggout}>
                         <span>
-                            <img
+                            <Image
                                 className="setari-picture"
                                 alt="setings icon"
                                 src={`${cloudinaryTransformation(pictures.loggoutPicture?.url,16,16)}`}
