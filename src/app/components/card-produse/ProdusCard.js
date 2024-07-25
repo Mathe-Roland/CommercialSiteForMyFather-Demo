@@ -20,6 +20,7 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
   const isPriority = image === specificImageUrl;
 
 
+
   return (
     <div className="financing-programmes-card-container" suppressHydrationWarning>
       <Image
@@ -30,7 +31,7 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
         layout="responsive"
         sizes="(min-width: 600px) 450px, 252px"
         className="produscard-image"
-        priority={isPriority}
+        priority={title==="Panou decorativ Mos138n"?true:isPriority}
       />
       <div className="financing-programmes-card-content">
         <h2 className="title-financing-programmes">{title}</h2>
