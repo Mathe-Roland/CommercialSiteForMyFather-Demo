@@ -23,14 +23,12 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
 
 
   // Define the specific image URL that requires priority
-  const specificImageUrl = "https://res.cloudinary.com/ddrkdrrre/image/upload/f_auto,w_500,h_500/szobasfafeketer_adfc03d26d.png";
+  const specificImageUrl = "https://res.cloudinary.com/ddrkdrrre/image/upload/f_auto,w_500,h_500/evatai100_szobanatur_0d1839423a.png";
 
   // Determine if this image should be prioritized
   const isPriority = imageUrl === specificImageUrl;
 
-  console.log("Image URL:", imageUrl);
-  console.log("Is Priority:", isPriority);
-
+  console.log(specificImageUrl,isPriority);
 
 
   return (
