@@ -15,10 +15,6 @@ const Products = () => {
       try {
         const data = await fetchPanouriData();
         // Assuming each card has a height of 150px plus additional space
-        const cardHeight = 150;
-        const spacing = 10;
-        const totalHeight = data.length * (cardHeight + spacing);
-        setContainerHeight(totalHeight);
         setCardList(data);
       } catch (error) {
         console.error(error);
@@ -31,7 +27,7 @@ const Products = () => {
   }, []);
 
   if (loading) {
-    return <div style={{height:`${containerHeight}px`}}>Loading...</div>;
+    return <div style={{height:`100vh`}}>Loading...</div>;
   }
 
   return (
