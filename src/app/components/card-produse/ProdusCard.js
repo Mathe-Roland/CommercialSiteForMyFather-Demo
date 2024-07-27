@@ -15,11 +15,6 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
 
   
 
-  const specificImageUrl = "https://res.cloudinary.com/ddrkdrrre/image/upload/f_auto,w_500,h_500/evatai100_szobanatur_0d1839423a.png";
-
-  const isPriority = image === specificImageUrl;
-
-
 
   return (
     <div className="financing-programmes-card-container" suppressHydrationWarning>
@@ -31,7 +26,6 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
         layout="responsive"
         sizes="(min-width: 600px) 450px, 352px"
         className="produscard-image"
-        priority={title==="Panou decorativ Mos138n"?true:isPriority}
       />
       <div className="financing-programmes-card-content">
         <h2 className="title-financing-programmes">{title}</h2>
