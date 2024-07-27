@@ -8,26 +8,36 @@ import { fetchPanouriData } from '../asyncOperations/fetchData';
 const Products = () => {
   const [cardList, setCardList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [containerHeight, setContainerHeight] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await fetchPanouriData();
-        // Assuming each card has a height of 150px plus additional space
         setCardList(data);
       } catch (error) {
         console.error(error);
+        // Optionally, handle errors or update state
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, []); // No need to include containerHeight
 
   if (loading) {
-    return <div style={{height:`100vh`}}>Loading...</div>;
+    return (
+      <div className='loader-container'>
+        <div className="sk-chase">
+          <div className="sk-chase-dot"></div>
+          <div className="sk-chase-dot"></div>
+          <div className="sk-chase-dot"></div>
+          <div className="sk-chase-dot"></div>
+          <div className="sk-chase-dot"></div>
+          <div className="sk-chase-dot"></div>
+        </div>
+      </div>
+    );
   }
 
   return (

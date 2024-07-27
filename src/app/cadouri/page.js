@@ -22,9 +22,6 @@ const Cadouri=()=>{
             const data=await fetchCategory(category);
             
             setCardList(data);
-            console.log(data);
-            // setCardList(data);
-
 
         }
 

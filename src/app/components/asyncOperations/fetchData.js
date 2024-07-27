@@ -11,7 +11,6 @@ export const fetchPanouriData= async()=>{
 
     }catch(error){
 
-        console.error(error)
     }
 
 }
@@ -25,7 +24,6 @@ export const fetchArticlesData= async()=>{
 
   }catch(error){
 
-      console.error(error)
   }
 
 }
@@ -39,7 +37,6 @@ export const fetchDataDespreNoiPage= async()=>{
 
   }catch(error){
 
-      console.error(error)
   }
 
 }
@@ -54,7 +51,6 @@ export const fetchPanouriCommentsPerPanouId= async(panouId)=>{
 
   }catch(error){
 
-      console.error(error)
   }
 
 }
@@ -67,7 +63,6 @@ export const fetchPanouriArticlePerArticleId= async(panouId)=>{
 
   }catch(error){
 
-      console.error(error)
   }
 
 }
@@ -79,7 +74,6 @@ export const fetchArticle = async () => {
  
     return response.data.data;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };
@@ -91,7 +85,6 @@ export const fetchArticleId = async (id) => {
  
     return response.data.data;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };
@@ -103,7 +96,6 @@ export const fetchId = async (title) => {
    
       return response.data.data;
     } catch (error) {
-      console.log(error);
       throw error;
     }
   };
@@ -114,7 +106,6 @@ export const fetchId = async (title) => {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates?populate=*&filters[category][$eq]=${category}`);
       return response.data.data;
     } catch (error) {
-      console.log(error);
       throw error;
     }
   };
@@ -238,7 +229,7 @@ export const fetchId = async (title) => {
   
     const headers = {
       "Content-type": "application/json; charset=UTF-8",
-      // "Authorization": `Bearer ${token}`,
+      "Authorization": `Bearer ${token}`,
     };
     
     axios
@@ -257,44 +248,12 @@ export const fetchId = async (title) => {
         { headers: headers }
     )
     .then((response) => {
-        console.log(response.data);
     })
     .catch((error) => {
-        console.error(error);
     });
 
   };
 
-
-  // export const userRelatedCommentsUpdate = async (message) => {
-  //   const token = localStorage.getItem("token");
-  //   const userId=localStorage.getItem("userId");
-
-  //   const url = "http://127.0.0.1:1337/api/comments/:id";
-  
-  //   const headers = {
-  //     "Content-type": "application/json; charset=UTF-8",
-  //     "Authorization": `Bearer ${token}`,
-  //   };
-    
-  //   axios
-  //     .put(
-  //       url,
-  //       {
-  //         data: {
-  //           users_permissions_user: userId,
-  //           commentMessage:message,
-  //         },
-  //       },
-  //       { headers: headers }
-  //     )
-  //     .then((response) => {
-  //       console.log(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // };
 
 
   
@@ -344,7 +303,6 @@ export const completeUserData=async ()=>{
   }
 })
 .then(response => {
-  console.log(response.data);
 })
 .catch(error => {
   console.error(error);

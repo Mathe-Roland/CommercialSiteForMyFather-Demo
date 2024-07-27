@@ -14,7 +14,6 @@ const ComenziPlasate=()=>{
     useEffect(()=>{
         const getData=async ()=>{
           const data =await comenziPlasateUserData();
-          console.log(data);
           if(data===null){
 
             return <div>Is Loading...</div>

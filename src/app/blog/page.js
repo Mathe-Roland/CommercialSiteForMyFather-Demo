@@ -28,7 +28,6 @@ const Articles = () => {
 
                 setNumberOfPages(numberOfPagesListed);
             } catch (error) {
-                console.error("Failed to fetch articles:", error);
             }
         };
 

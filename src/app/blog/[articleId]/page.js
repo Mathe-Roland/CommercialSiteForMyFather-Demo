@@ -26,7 +26,6 @@ const IndividualArticles = () => {
         const fetchDataAndFilter = async () => {
             try {
                 const getUserRelatedData = await fetchArticlesData();
-                console.log("userdata:",getUserRelatedData);
                 if (getUserRelatedData && getUserRelatedData.length > 0) {
                     const specificPanou = getUserRelatedData.find(item => item.id === Number(articleId));
                     if (specificPanou) {
@@ -36,12 +35,9 @@ const IndividualArticles = () => {
                             setCommentList(comments.data.slice(0, 12));
                             setOriginalComments(comments.data);
                         }
-                    } else {
-                        console.log('No matching items found');
                     }
                 }
             } catch (error) {
-                console.error('Error fetching data:', error);
             } finally {
                 setLoading(false);
             }
@@ -52,12 +48,9 @@ const IndividualArticles = () => {
     useEffect(() => {
         const fetchData = async () => {
             const data = await fetchArticleId(articleId);
-            console.log('Fetched Data:', data);
             if (data && data.length > 0) {
                 setDescriptionBrokenInThree(data[0].attributes.description.split('\n\n'));
                 setArticleData(data);
-            } else {
-                console.log('No data fetched');
             }
         }
         fetchData();
@@ -86,12 +79,9 @@ const IndividualArticles = () => {
                             setCommentList(comments.data.slice(currentPage, currentPage + 12));
                             setOriginalComments(comments.data);
                         }
-                    } else {
-                        console.log('No matching items found');
                     }
                 }
             } catch (error) {
-                console.error('Error fetching data:', error);
             }
         };
         fetchDataAndFilter();
