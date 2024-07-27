@@ -15,7 +15,9 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
 
   
 
+  const priorityImage="Panou decorativ Live Laugh Love";
 
+  const priority=priorityImage===title;
 
   return (
     <div className="financing-programmes-card-container" suppressHydrationWarning>
@@ -27,7 +29,7 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
         layout="responsive"
         sizes="(min-width: 600px) 450px, 352px"
         className="produscard-image"
-        priority={title==="Litere decorative Home"?true:false}
+        priority={title==="Litere decorative Home"?true:priority}
       />
       <div className="financing-programmes-card-content">
         <h2 className="title-financing-programmes">{title}</h2>
