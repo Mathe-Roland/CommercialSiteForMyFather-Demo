@@ -11,6 +11,14 @@
 
 }
 
+
+.loading-container{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .footer-container{
 
     margin-top:70vh

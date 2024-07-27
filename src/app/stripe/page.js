@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { userData } from "../components/asyncOperations/fetchData";
 import Cookies from 'js-cookie';
 import "./Stripe.css";
+import Loading from "../components/animations/loading";
 
 if (process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY === undefined) {
   throw new Error("NEXT_PUBLIC_STRIPE_PUBLIC_KEY is not defined");
@@ -43,9 +44,8 @@ export default function Home() {
     fetchData();
   }, []);
 
-  // Handle cases where userSpecificPanori.data is not yet available
   if (!Array.isArray(userSpecificPanori.data)) {
-    return <div>Loading...</div>; // Or any loading indicator you prefer
+    return <div className="loading-screen"><Loading/></div>; 
   }
 
   return (
@@ -73,7 +73,7 @@ export default function Home() {
         stripe={stripePromise}
         options={{
           mode: "payment",
-          amount: total * 100, // Convert to smallest currency unit
+          amount: total=== 0 ? 1 :total * 100,
           currency: "ron",
         }}
       >
@@ -81,7 +81,7 @@ export default function Home() {
           className="mb-5"
           options={{ mode: "billing" }}
         />
-        <Checkout amount={total} user={setMetadata}/>
+        <Checkout amount={total===0 ? 1 : total} user={setMetadata}/>
       </Elements>
     </main>
   );

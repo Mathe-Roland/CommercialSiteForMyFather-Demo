@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import "./Product.css";
 import ProdusCard from '../card-produse/ProdusCard';
 import { fetchPanouriData } from '../asyncOperations/fetchData';
+import Loading from '../animations/loading';
 
 const Products = () => {
   const [cardList, setCardList] = useState([]);
@@ -28,14 +29,7 @@ const Products = () => {
   if (loading) {
     return (
       <div className='loader-container'>
-        <div className="sk-chase">
-          <div className="sk-chase-dot"></div>
-          <div className="sk-chase-dot"></div>
-          <div className="sk-chase-dot"></div>
-          <div className="sk-chase-dot"></div>
-          <div className="sk-chase-dot"></div>
-          <div className="sk-chase-dot"></div>
-        </div>
+        <Loading/>
       </div>
     );
   }

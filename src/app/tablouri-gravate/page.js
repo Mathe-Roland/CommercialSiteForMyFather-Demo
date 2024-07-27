@@ -30,6 +30,7 @@ const TablouriGravate=()=>{
 
     },[])
 
+
     return (
         <div className="Cadouri-box">
                 <div className="accordionplushd">
