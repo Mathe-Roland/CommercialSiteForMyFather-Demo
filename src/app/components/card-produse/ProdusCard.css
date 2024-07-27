@@ -1,5 +1,5 @@
 .financing-programmes-card-container {
-  width: 320px;
+  min-height: 320px;
   height: auto;
   overflow: hidden;
   position: relative;

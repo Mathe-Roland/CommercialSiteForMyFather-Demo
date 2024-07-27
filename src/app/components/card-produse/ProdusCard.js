@@ -20,7 +20,7 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
     <div className="financing-programmes-card-container" suppressHydrationWarning>
       <Image
         src={image}
-        alt="Panou decorativ Mos138n"
+        alt={`${title}`}
         width={500}
         height={500}
         layout="responsive"

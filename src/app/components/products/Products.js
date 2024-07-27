@@ -28,6 +28,8 @@ const Products = () => {
     return <div>Loading...</div>;
   }
 
+  const noShift=cardList.length * 100;
+
 
   return (
     <div className='normal-headers' suppressHydrationWarning>
