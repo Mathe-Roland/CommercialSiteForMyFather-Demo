@@ -1,9 +1,8 @@
 import './layout.css';
 import './globals.css';
-import Foot from './components/footer/Foot';
+import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import Navbar from './components/navbar/navbar';
-
 
 export default function RootLayout({ children }) {
   return (
@@ -12,11 +11,13 @@ export default function RootLayout({ children }) {
         <title>Produse traforate personalizate</title>
         <meta name="description" content="Produse traforate vopsite sau nevopsite din lemn, personalizate" />
       </head>
-      <body className={`height`}>
+      <body className="root-layout">
         <Header />
         <Navbar />
-        <main>{children}</main>
-        <Foot />
+        <main className="content">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
