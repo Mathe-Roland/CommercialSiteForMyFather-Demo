@@ -31,7 +31,7 @@ const Products = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div style={{height:`${containerHeight}px`}}>Loading...</div>;
   }
 
   return (
