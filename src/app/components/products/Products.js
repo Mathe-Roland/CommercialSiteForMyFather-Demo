@@ -3,16 +3,22 @@
 import React, { useState, useEffect } from 'react';
 import "./Product.css";
 import ProdusCard from '../card-produse/ProdusCard';
-import {fetchPanouriData} from '../asyncOperations/fetchData';
+import { fetchPanouriData } from '../asyncOperations/fetchData';
 
 const Products = () => {
-  const [cardList, setCardList] = useState([]);  
+  const [cardList, setCardList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [containerHeight, setContainerHeight] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await fetchPanouriData();
+        // Assuming each card has a height of 150px plus additional space
+        const cardHeight = 150;
+        const spacing = 10;
+        const totalHeight = data.length * (cardHeight + spacing);
+        setContainerHeight(totalHeight);
         setCardList(data);
       } catch (error) {
         console.error(error);
@@ -28,13 +34,10 @@ const Products = () => {
     return <div>Loading...</div>;
   }
 
-  const noShift=cardList.length * 100;
-
-
   return (
     <div className='normal-headers' suppressHydrationWarning>
-      <div className='margin0Auto'>
-        {cardList ?cardList.map((data, index) => (
+      <div style={{ height: `${containerHeight}px` }} className='margin0Auto'>
+        {cardList.length > 0 ? cardList.map((data, index) => (
           <ProdusCard
             key={index}
             image={data.attributes?.image?.data?.attributes?.url}
@@ -44,7 +47,7 @@ const Products = () => {
             price={data.attributes?.price}
             index={index}
           />
-        )):null}
+        )) : null}
       </div>
     </div>
   );
