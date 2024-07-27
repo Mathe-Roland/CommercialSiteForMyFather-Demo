@@ -36,7 +36,7 @@ const Products = () => {
 
   return (
     <div className='normal-headers' suppressHydrationWarning>
-      <div style={{ height: `${containerHeight}px` }} className='margin0Auto'>
+      <div className='margin0Auto'>
         {cardList.length > 0 ? cardList.map((data, index) => (
           <ProdusCard
             key={index}
