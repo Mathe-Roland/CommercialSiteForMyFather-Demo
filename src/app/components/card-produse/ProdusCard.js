@@ -16,16 +16,18 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
   
 
 
+
   return (
     <div className="financing-programmes-card-container" suppressHydrationWarning>
       <Image
         src={image}
-        alt={`${title}`}
+        alt="Panou decorativ Mos138n"
         width={500}
         height={500}
         layout="responsive"
         sizes="(min-width: 600px) 450px, 352px"
         className="produscard-image"
+        priority={title==="Litere decorative Home"?true:false}
       />
       <div className="financing-programmes-card-content">
         <h2 className="title-financing-programmes">{title}</h2>
