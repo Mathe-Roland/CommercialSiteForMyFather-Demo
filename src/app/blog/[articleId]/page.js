@@ -7,8 +7,8 @@ import { userRelatedComments, fetchArticleId, fetchArticlesData, fetchPanouriArt
 import Comments from "../../components/comments/Comments";
 import CommentPages from "../../components/commentPages/CommentPages"
 import AddCommentModal from "../../components/coment-Modal/AddCommentModal";
-import { } from "../../components/functions/regexconversion";
 import 'next/image';
+import Cookies from "js-cookie";
 
 
 const IndividualArticles = () => {
@@ -85,7 +85,7 @@ const IndividualArticles = () => {
             }
         };
         fetchDataAndFilter();
-        setUserName(localStorage.getItem("user"));
+        setUserName(Cookies.get("user"));
     }
 
     const handleUserFilterCommet = (commentPage) => {

@@ -288,12 +288,10 @@ export const completeUserData=async ()=>{
 }
 
 
-
   
   export const getUserRelatedData = () => {
     const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouritraforates`;
   
-    // Retrieve the token from localStorage
     const token = Cookies.get("token");
     
   

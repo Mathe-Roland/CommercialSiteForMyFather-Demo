@@ -7,6 +7,8 @@ import CommentPages from "../commentPages/CommentPages";
 import AddCommentModal from "../coment-Modal/AddCommentModal";
 import { cloudinaryTransformation } from "../functions/regexconversion";
 import Image from "next/image";
+import Cookies from "js-cookie";
+
 
 const IndividualArticles = () => {
     const { articleId } = useParams();
@@ -92,7 +94,7 @@ const IndividualArticles = () => {
             }
         };
         fetchDataAndFilter();
-        setUserName(localStorage.getItem("user"));
+        setUserName(Cookies.get("user"));
     }
 
     const handleUserFilterCommet = (commentPage) => {
