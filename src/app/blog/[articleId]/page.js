@@ -98,7 +98,7 @@ const IndividualArticles = () => {
     }
 
     return (
-        <div className="IndividualArticles-container">
+        <div className="IndividualArticles-container" suppressHydrationWarning>
             <h1>{articleData[0]?.attributes?.title}</h1>
             <p>{articleData[0]?.attributes?.date}</p>
             <p>{descriptionBrokenInThree[0]}</p>

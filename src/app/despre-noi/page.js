@@ -30,7 +30,7 @@ const DespreNoiReal = () => {
         }
 
     return (
-        <div className="DespreNoiReal-container">
+        <div className="DespreNoiReal-container" suppressHydrationWarning>
             <div className="accordion-container">
                 
             <CustomizedAccordions/>

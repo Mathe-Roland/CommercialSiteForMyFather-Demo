@@ -26,14 +26,13 @@ const ContactUsForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
         // Handle form submission logic here
         await postareContact(formData);
         alert('Form submitted.');
     };
 
     return (
-        <div className="contact-container">
+        <div className="contact-container" suppressHydrationWarning>
 
         <Container>
             <h1 className="contact-header">Contacteaza-ne</h1>
@@ -130,5 +129,3 @@ const ContactUsForm = () => {
 };
 
 export default ContactUsForm;
-
-

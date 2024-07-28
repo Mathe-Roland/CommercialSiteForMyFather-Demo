@@ -38,8 +38,10 @@
 
 .cardList-container{
 
+    display: flex;
+    flex-wrap: wrap;
     margin: 12px 12px;
-
+    
 }
 
 

@@ -31,7 +31,7 @@ const PanouriDecorative=()=>{
     },[])
 
     return (
-        <div className="Cadouri-box">
+        <div className="Cadouri-box" suppressHydrationWarning>
                 <div className="accordionplushd">
 
                     <div className="accordion-container">

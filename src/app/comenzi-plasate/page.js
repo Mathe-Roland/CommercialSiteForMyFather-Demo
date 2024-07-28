@@ -26,7 +26,7 @@ const ComenziPlasate=()=>{
 
 
 
-    return (<div className="comenzi-plasate-container">
+    return (<div className="comenzi-plasate-container" suppressHydrationWarning>
         <div className="comenzi-plasate-header">
             <h2>Comenzi plasate</h2>
 

@@ -7,6 +7,7 @@ import CustomizedAccordions from "../components/accordion/Accordion";
 import "../cadouri/Cadouri.css";
 import ProdusCard from "../components/card-produse/ProdusCard";
 
+
 const Harti=()=>{
 
     const params=usePathname();
@@ -30,7 +31,7 @@ const Harti=()=>{
     },[])
 
     return (
-        <div className="Cadouri-box">
+        <div className="Cadouri-box" suppressHydrationWarning>
                 <div className="accordionplushd">
 
                     <div className="accordion-container">
@@ -55,13 +56,15 @@ const Harti=()=>{
                 <div className="cardList-container">
                     {cardList.length>0?
                     (cardList.map(e=>(
-                        <ProdusCard
-                            description={e.attributes.description}
-                            title={e.attributes.title}
-                            image={e.attributes.image.data.attributes.url}
-                            disponibil={"Disponibil"}
-                            price={e.attributes.price}
-                        />)
+                            <ProdusCard
+                                description={e.attributes.description}
+                                title={e.attributes.title}
+                                image={e.attributes.image.data.attributes.url}
+                                disponibil={"Disponibil"}
+                                price={e.attributes.price}
+                            />)
+
+                        
                     ))
                     :null}
                 </div>

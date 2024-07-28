@@ -26,7 +26,7 @@ import { useEffect,useState } from "react";
     
     
       return (
-        <div>
+        <div suppressHydrationWarning>
           <Produs
             img={cardList[0]?.attributes?.image?.data?.attributes?.url}
             title={cardList[0]?.attributes?.title}

@@ -31,7 +31,7 @@ const CadouriPersonalizate=()=>{
     },[])
 
     return (
-        <div className="Cadouri-box">
+        <div className="Cadouri-box" suppressHydrationWarning>
                 <div className="accordionplushd">
 
                     <div className="accordion-container">
@@ -55,11 +55,11 @@ const CadouriPersonalizate=()=>{
                     cardList.map(e=>(
 
                         <ProdusCard
-                            description={cardList[0].attributes.description}
-                            title={cardList[0].attributes.title}
-                            image={cardList[0].attributes.image.data.attributes.url}
+                            description={e.attributes.description}
+                            title={e.attributes.title}
+                            image={e.attributes.image.data.attributes.url}
                             disponibil={"Este disponibil"}
-                            price={cardList[0].attributes.price}
+                            price={e.attributes.price}
                         />)
                     )
                     

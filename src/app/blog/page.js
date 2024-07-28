@@ -41,7 +41,7 @@ const Articles = () => {
     };
 
     return (
-        <div className="articles-container">
+        <div className="articles-container" suppressHydrationWarning>
             <div className="accordion-container">
 
             <CustomizedAccordions/>
