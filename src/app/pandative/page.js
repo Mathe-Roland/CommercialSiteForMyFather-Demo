@@ -55,13 +55,15 @@ const Pandative=()=>{
                 </div>
                 <div className="cardList-container">
                     {cardList.length>0?
-                    (<ProdusCard
-                        description={cardList[0].attributes.description}
-                        title={cardList[0].attributes.title}
-                        image={cardList[0].attributes.image.data.attributes.url}
-                        disponibil={"Nu este disponibil"}
-                        price={cardList[0].attributes.price}
-                    />)
+                    (cardList.map(e=>(
+                        <ProdusCard
+                           description={e.attributes.description}
+                           title={e.attributes.title}
+                           image={e.attributes.image.data.attributes.url}
+                           disponibil={"Este disponibil"}
+                           price={e.attributes.price}
+                       />)
+                    ))
                     :null}
                 </div>
 
