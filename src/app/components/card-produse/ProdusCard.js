@@ -20,10 +20,10 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
   const priority=priorityImage===title;
 
   return (
-    <div className="financing-programmes-card-container" suppressHydrationWarning>
+    <div className="product-programmes-card-container" suppressHydrationWarning>
       <Image
         src={image}
-        alt="Panou decorativ Mos138n"
+        alt={`${title}`}
         width={500}
         height={500}
         layout="responsive"
@@ -31,11 +31,11 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
         className="produscard-image"
         priority={title==="Litere decorative Home"?true:priority}
       />
-      <div className="financing-programmes-card-content">
-        <h2 className="title-financing-programmes">{title}</h2>
-        <div className="financing-program-card-description">{description}</div>
+      <div className="product-card-content">
+        <h2 className="title-product-programmes">{title}</h2>
+        <div className="product-description">{description}</div>
         <div className="red-pret"><p>{price} RON</p></div>
-        <div className="financing-program-card-startDate"><p>{disponibil}</p></div>
+        <div className="product-startDate"><p>{disponibil}</p></div>
         <Link className="ignore" href={`/produse/${encodeURIComponent(title)}`}>
           <Button
             variant="contained"
