@@ -57,7 +57,7 @@ const Articles = () => {
                             date={element.attributes.date}
                             shortDescription={element.attributes.shortDescription}
                         />
-                    ))}
+                ))}
                 </div>
                 <div className="comment-pages-position">
                     <CommentPages

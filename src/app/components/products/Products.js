@@ -17,14 +17,14 @@ const Products = () => {
         setCardList(data);
       } catch (error) {
         console.error(error);
-        // Optionally, handle errors or update state
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, []); // No need to include containerHeight
+    
+  }, []); 
 
   if (loading) {
     return (

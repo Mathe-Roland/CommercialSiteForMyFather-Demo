@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useState,useEffect } from "react";
-import { fetchCategory } from "../components/asyncOperations/fetchData"; 
+import { fetchCategory } from "../components/asyncOperations/fetchData";
 import CustomizedAccordions from "../components/accordion/Accordion";
 import ProdusCard from "../components/card-produse/ProdusCard";
 import "../cadouri/Cadouri.css";
@@ -48,20 +48,19 @@ const CadouriPersonalizate=()=>{
 
 
                     </div>
-                    
-
-
 
                 </div>
                 <div className="cardList-container">
                     {cardList.length>0?
-                    (<ProdusCard
-                        description={cardList[0].attributes.description}
-                        title={cardList[0].attributes.title}
-                        image={cardList[0].attributes.image.data.attributes.url}
-                        disponibil={"Nu este disponibil"}
-                        price={cardList[0].attributes.price}
-                    />)
+                    (cardList.map(e=>(
+                        <ProdusCard
+                            description={e.attributes.description}
+                            title={e.attributes.title}
+                            image={e.attributes.image.data.attributes.url}
+                            disponibil={"Este disponibil"}
+                            price={e.attributes.price}
+                        />)
+                    ))
                     :null}
                 </div>
 
