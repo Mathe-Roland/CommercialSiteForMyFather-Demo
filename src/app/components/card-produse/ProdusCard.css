@@ -1,10 +1,10 @@
 
 .produs-container{
 
-  height: 362px;
+  height: 364px;
   display: flex;
   flex-direction: column;
-  width: 320px;
+  width: 180px;
   margin: auto;
   background-color: #F9FEFF;
 }
@@ -44,10 +44,3 @@
   
 }
 
-@media screen and (min-width:600px) {
-
-.produs-container{
-
-  width: 180px;
-}
-}
