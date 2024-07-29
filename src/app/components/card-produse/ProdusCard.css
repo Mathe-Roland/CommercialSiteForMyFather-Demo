@@ -1,20 +1,12 @@
 
 .produs-container{
-  height: 342px;
+  height: 376px;
   display: flex;
   flex-direction: column;
   width: 204px;
   gap: 10px;
   margin: auto;
   background-color: #F9FEFF;
-}
-
-
-
-.produs-image-container{
-  height: 160px;
-  width: 160px;
-  margin:  0 auto;
 }
 
 .title-produs{
