@@ -120,7 +120,7 @@ const Produs = ({ img, description, title, price }) => {
         <div className="produs">
             <div className="produs-container">
                 <div className="produs-images">
-                    <ImageZoom imageUrl={`${img}`} alt="failed-load" />
+                    <ImageZoom imageUrl={`${img ? img:""}`} alt="failed-load" />
                 </div>
                 <div className="produs-text-container">
                     <div className="produs-upper-text">

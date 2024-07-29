@@ -87,13 +87,15 @@ const CosCard = ({ id, image, title, price,quantityFromDatabase, addToCart }) =>
     }
     
 
+    const publicImage="cancel.webp";
+
     return (
         <div className="coscard-container">
             <div className="coscard-image">
             <Image alt="produs-buyed" 
             width={120}
             height={120}
-             className="cos-image" src={`${image}`} />
+             className="cos-image" src={`${image  ?image :""}`} />
             </div>
             <div className="coscard-title">
                 <h3>{title}</h3>
@@ -109,7 +111,8 @@ const CosCard = ({ id, image, title, price,quantityFromDatabase, addToCart }) =>
             </div>
             <div className="cancel-icon">
                 <Image 
-                 src="/cancel.webp" className="cancel"
+                src={`${publicImage  ?"/cancel.webp" :""}`}
+                className="cancel"
                 onClick={deleteItem}
                 height={24}
                 width={24}/>

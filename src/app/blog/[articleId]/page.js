@@ -112,19 +112,19 @@ const IndividualArticles = () => {
             <p>{articleData[0]?.attributes?.date}</p>
             <p>{descriptionBrokenInThree[0]}</p>
             <div className="images-container">
-                <Image className="image" src={`${articleData[0]?.attributes?.image?.data[0]?.attributes?.url}`}
+                <Image className="image" src={` ${ articleData ? articleData[0]?.attributes?.image?.data[0]?.attributes?.url :""}`}
                 width={250}
                 height={250} />
             </div>
             <p>{descriptionBrokenInThree[1]}</p>
             <div className="images-container">
-                <Image className="image" src={`${articleData[0]?.attributes?.image?.data[1]?.attributes?.url}`} 
+                <Image className="image" src={`${articleData ? articleData[0]?.attributes?.image?.data[1]?.attributes?.url : ""}`} 
                 width={250}
                 height={250}/>
             </div>
             <p>{descriptionBrokenInThree[2]}</p>
             <div className="images-container">
-                <Image className="image" src={`${articleData[0]?.attributes?.image?.data[2]?.attributes?.url}`} 
+                <Image className="image" src={`${articleData ? articleData[0]?.attributes?.image?.data[2]?.attributes?.url : ""}`} 
                 width={250}
                 height={250}/>
             </div>
