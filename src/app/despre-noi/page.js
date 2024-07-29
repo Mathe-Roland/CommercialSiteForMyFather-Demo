@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import ImageGallery from "../components/imageGallery/ImageGallery";
 import { fetchDataDespreNoiPage } from "../components/asyncOperations/fetchData";
 import CustomizedAccordions from "../components/accordion/Accordion";
-import Loading from "../components/anima/Loading";
 
 const DespreNoiReal = () => {
     const [imageGalleryPictures, setImageGalleryPictures] = useState([]);
