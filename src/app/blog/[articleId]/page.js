@@ -9,6 +9,7 @@ import CommentPages from "../../components/commentPages/CommentPages"
 import AddCommentModal from "../../components/coment-Modal/AddCommentModal";
 import 'next/image';
 import Cookies from "js-cookie";
+import Loading from "../../components/animations/loading";
 
 
 const IndividualArticles = () => {
@@ -94,7 +95,7 @@ const IndividualArticles = () => {
     }
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div><Loading/></div>;
     }
 
     return (

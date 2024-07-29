@@ -32,7 +32,7 @@ const Articles = () => {
         };
 
         fetchData();
-    }, []); // Empty dependency array to run only on mount
+    }, []);
 
     const handleUserFilterComment = (commentPage) => {
         const currentPage = commentPage * 3;
