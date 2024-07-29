@@ -5,7 +5,6 @@ import Cookies from 'js-cookie';
 import Image from 'next/image';
 
 const ProdusCard = ({ description, title, image, disponibil, price }) => {
-
   const handleData = () => {
     Cookies.set("description", description, { expires: 1 });
     Cookies.set("title", title, { expires: 1 });
@@ -13,36 +12,39 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
     Cookies.set("price", price, { expires: 1 });
   };
 
-  
-
-  const priorityImage="Panou decorativ Live Laugh Love";
-
-  const priority=priorityImage===title;
+  const priorityImage = "Panou decorativ Live Laugh Love";
+  const priority = priorityImage === title;
 
   return (
     <div className="produs-container" suppressHydrationWarning>
+      <div className="produs-image-container">
+
       <Image
         src={image}
-        alt={`${title}`}
-        width={500}
-        height={500}
+        alt={title}
+        width={250}
+        height={250}
         layout="responsive"
         sizes="(min-width: 600px) 450px, 352px"
-        className="produscard-image"
-        priority={title==="Litere decorative Home"?true:priority}
+        className="produs-image"
+        priority={title === "Litere decorative Home" ? true : priority}
       />
+
+      </div>
       <div className="produs-content">
         <h2 className="title-produs">{title}</h2>
         <div className="produs-description">{description}</div>
-        <div className="red-pret"><p>{price} RON</p></div>
-        <div className="produs-startDate"><p>{disponibil}</p></div>
-        <Link className="ignore" href={`/produse/${encodeURIComponent(title)}`}>
+        <div className="produs-pret"><p>{price} RON</p></div>
+        <div className="produs-disponibil"><p>{disponibil}</p></div>
+        <Link href={`/produse/${encodeURIComponent(title)}`}>
           <Button
             variant="contained"
             color="primary"
             onClick={handleData}
             sx={{
               backgroundColor: "green",
+              margin:"auto",
+              display:"block",
               "&:hover": {
                 backgroundColor: "red"
               }

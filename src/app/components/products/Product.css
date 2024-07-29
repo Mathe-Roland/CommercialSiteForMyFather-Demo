@@ -11,9 +11,38 @@
 }
 
 .margin0Auto {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(1,1fr);
   gap: 20px;
-  justify-content: center;
 }
+
+@media screen and (min-width:450px) {
+
+  .margin0Auto {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 20px;
+  }
+}
+
+
+@media screen and (min-width:650px) {
+
+  .margin0Auto {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+  }
+}
+
+@media screen and (min-width:900px) {
+
+  .margin0Auto {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+  }
+  
+}
+
 
