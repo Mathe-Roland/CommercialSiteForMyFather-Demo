@@ -1,4 +1,4 @@
-.producard-card-container {
+.produs-container {
   height: 320px;
   overflow: hidden;
   position: relative;
@@ -8,17 +8,17 @@
   background-color: white;
 }
 
-.produscard-image {
+.produs-image {
   width: 352px;
   height: 252px;
   transition: transform 0.5s;
 }
 
-.product-container:hover .financing-programmes-card {
+.produs-container:hover .produs-card {
   transform: scale(1.1);
 }
 
-.product-card-content {
+.produs-content {
   color: var(--darkBlue);
   font-weight: 400;
   font-size: 12px;
@@ -26,7 +26,7 @@
   padding: 16px;
 }
 
-.title-product-programmes {
+.title-produs {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -39,7 +39,7 @@
   color: var(--darkBlue);
 }
 
-.product-card-description {
+.produs-description {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -61,7 +61,7 @@
   display: contents;
 }
 
-.product-startDate {
+.produs-startDate {
   display: flex;
   justify-content: center;
   margin-bottom: 16px;
@@ -71,18 +71,18 @@
 
 @media (min-width: 768px) { 
 
-  .produscard-image {
+  .produs-image {
     height: 248px;
     width:248px;
   }
 
-  .product-card-container {
+  .produs-container {
     width: calc(50% - 16px);
   }
 }
 
 @media (min-width: 1024px) { 
-  .product-card-container {
+  .produs-container {
     width: calc(33.33% - 32px);
   }
 }

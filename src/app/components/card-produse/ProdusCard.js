@@ -20,7 +20,7 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
   const priority=priorityImage===title;
 
   return (
-    <div className="product-programmes-card-container" suppressHydrationWarning>
+    <div className="produs-container" suppressHydrationWarning>
       <Image
         src={image}
         alt={`${title}`}
@@ -31,11 +31,11 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
         className="produscard-image"
         priority={title==="Litere decorative Home"?true:priority}
       />
-      <div className="product-card-content">
-        <h2 className="title-product-programmes">{title}</h2>
-        <div className="product-description">{description}</div>
+      <div className="produs-content">
+        <h2 className="title-produs">{title}</h2>
+        <div className="produs-description">{description}</div>
         <div className="red-pret"><p>{price} RON</p></div>
-        <div className="product-startDate"><p>{disponibil}</p></div>
+        <div className="produs-startDate"><p>{disponibil}</p></div>
         <Link className="ignore" href={`/produse/${encodeURIComponent(title)}`}>
           <Button
             variant="contained"

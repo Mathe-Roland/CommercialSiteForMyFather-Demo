@@ -16,7 +16,6 @@ const Products = () => {
         const data = await fetchPanouriData();
         setCardList(data);
       } catch (error) {
-        console.error(error);
       } finally {
         setLoading(false);
       }
