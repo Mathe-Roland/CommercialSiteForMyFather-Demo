@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { userData } from "../components/asyncOperations/fetchData";
 import Cookies from 'js-cookie';
 import "./Stripe.css";
-import Loading from "../components/anima/Loading";
 
 if (process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY === undefined) {
   throw new Error("NEXT_PUBLIC_STRIPE_PUBLIC_KEY is not defined");
@@ -45,7 +44,16 @@ export default function Home() {
   }, []);
 
   if (!Array.isArray(userSpecificPanori.data)) {
-    return <div className="loading-screen"><Loading/></div>; 
+    return <div className="loading-screen">
+       <div class="sk-chase">
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            </div>
+    </div>; 
   }
 
   return (

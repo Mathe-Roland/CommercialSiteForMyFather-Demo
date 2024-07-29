@@ -25,7 +25,14 @@ const DespreNoiReal = () => {
 
 
         return( <div className="loading container">
-                <Loading/>
+                 <div class="sk-chase">
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            </div>
             </div>)
         }
 
@@ -40,7 +47,14 @@ const DespreNoiReal = () => {
                 <h1>Despre noi</h1>
                 {imageGalleryPictures ? 
             (<div>
-                <Loading/>
+                 <div class="sk-chase">
+                    <div class="sk-chase-dot"></div>
+                     <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                     <div class="sk-chase-dot"></div>
+                     <div class="sk-chase-dot"></div>
+                     <div class="sk-chase-dot"></div>
+            </div>
             </div>):    
             
                 (<div>

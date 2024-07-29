@@ -103,7 +103,16 @@ const IndividualArticles = () => {
     }
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div>
+             <div class="sk-chase">
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            </div>
+        </div>;
     }
 
     return (
