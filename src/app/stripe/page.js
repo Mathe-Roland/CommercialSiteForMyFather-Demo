@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { userData } from "../components/asyncOperations/fetchData";
 import Cookies from 'js-cookie';
 import "./Stripe.css";
-import Loading from "../components/animations/loading";
+import Loading from "../components/anima/Loading";
 
 if (process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY === undefined) {
   throw new Error("NEXT_PUBLIC_STRIPE_PUBLIC_KEY is not defined");

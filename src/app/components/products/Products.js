@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import "./Product.css";
 import ProdusCard from '../card-produse/ProdusCard';
 import { fetchPanouriData } from '../asyncOperations/fetchData';
-import Loading from '../animations/loading';
+import Loading from '../anima/Loading';
 
 const Products = () => {
   const [cardList, setCardList] = useState([]);
