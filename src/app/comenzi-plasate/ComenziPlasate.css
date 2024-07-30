@@ -12,3 +12,7 @@
     text-align: center;
     border-bottom: 1px solid black;
 }
+
+.comenzi-loading{
+    min-height: 100vh;
+}

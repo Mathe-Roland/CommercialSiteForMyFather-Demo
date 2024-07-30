@@ -3,6 +3,11 @@
     width:15%;
 }
 
+.articles-loading-screen{
+    min-height: 100vh;
+
+}
+
 
 .articles-container {
     display: flex;

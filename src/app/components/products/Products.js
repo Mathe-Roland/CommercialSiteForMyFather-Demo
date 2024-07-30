@@ -28,14 +28,6 @@ const Products = () => {
   if (loading) {
     return (
       <div className='loader-container'>
-         <div class="sk-chase">
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            </div>
       </div>
     );
   }

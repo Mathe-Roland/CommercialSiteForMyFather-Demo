@@ -94,16 +94,10 @@ const IndividualArticles = () => {
     }
 
     if (loading) {
-        return <div>
-             <div class="sk-chase">
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            </div>
-        </div>;
+        return( <div className="articles-loading-screen">
+             
+        
+        </div>);
     }
 
     return (
