@@ -45,14 +45,6 @@ export default function Home() {
 
   if (!Array.isArray(userSpecificPanori.data)) {
     return <div className="loading-screen">
-       <div class="sk-chase">
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            </div>
     </div>; 
   }
 

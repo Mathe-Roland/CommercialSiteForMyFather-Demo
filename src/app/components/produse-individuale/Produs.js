@@ -35,7 +35,6 @@ const Produs = ({ img, description, title, price }) => {
                         setCommentList(comments.data.slice(0, 12));
                         setOriginalComments(comments.data);
                     } else {
-                        console.log('No matching items found');
                     }
                 }
             } catch (error) {
