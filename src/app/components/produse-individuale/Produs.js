@@ -70,7 +70,7 @@ const Produs = ({ img, description, title, price }) => {
     
             if (filteredSpecificPanouUserRelatedData.length > 0) {
                 if (filteredOptiuniNormale.length > 0) {
-                    const newDatas = { price: hadlePrice(selectedValues), optiuninormale: selectedValues };
+                    const newDatas = { price: price, optiuninormale: selectedValues };
                     await updateProductData(filteredOptiuniNormale[0].id, filteredOptiuniNormale[0].attributes.quantity + 1, newDatas);
                 } else {
                     const images = Cookies.get("image");
@@ -85,7 +85,7 @@ const Produs = ({ img, description, title, price }) => {
                 const filesData = await imageFiles();
                 const currentImage = filesData.filter(image => image.url === images);
                 const id = await userIds();
-                const newDatas = { price: hadlePrice(selectedValues), optiuninormale: selectedValues };
+                const newDatas = { price: price, optiuninormale: selectedValues };
                 await userRelatedData(id, currentImage[0].id, newDatas);
             }
         } catch (error) {

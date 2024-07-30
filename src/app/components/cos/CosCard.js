@@ -1,8 +1,6 @@
-// CosCard.js
 import "./CosCard.css";
 import { useState } from "react";
 import { deleteProductData } from "../asyncOperations/fetchData";
-import { cloudinaryTransformation } from "../functions/regexconversion";
 import Image from 'next/image';
 
 
@@ -13,7 +11,6 @@ const CosCard = ({ id, image, title, price,quantityFromDatabase, addToCart }) =>
         const value = parseInt(e.target.value.trim());
         if (!isNaN(value)) {
             setCounter(value);
-            // Invoke the count change handler with the product ID and the new count
             const addToCartObject={
                 id:id,
                 image:image,
@@ -24,8 +21,7 @@ const CosCard = ({ id, image, title, price,quantityFromDatabase, addToCart }) =>
 
             addToCart(addToCartObject);
         } else {
-            setCounter(''); // Set counter to empty string for invalid inputs
-            // Invoke the count change handler with the product ID and 0 count
+            setCounter('');
             const addToCartObject={
                 id:id,
                 image:image,

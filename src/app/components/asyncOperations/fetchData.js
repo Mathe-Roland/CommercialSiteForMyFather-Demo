@@ -542,3 +542,17 @@ export const userData = async () => {
         console.error(error);
       });
   };
+
+export const paymentSession=async ()=>{
+  const metadataResponse = await userData();
+  // Send amount and metadata to the server
+  const response = await fetch("/api/create-payment-intent", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({metadata: metadataResponse }),
+  });
+}
+
+

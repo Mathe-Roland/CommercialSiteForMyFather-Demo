@@ -7,6 +7,13 @@ import { userData, postareComenzi, completeUserData, deleteProductData, updatePr
 import Button from '@mui/material/Button';
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { loadStripe } from '@stripe/stripe-js';
+
+
+const stripePromise = loadStripe(
+    process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY
+  );
+  
 
 const Cos = () => {
     const [cardList, setCardList] = useState({ data: [] });
@@ -14,6 +21,7 @@ const Cos = () => {
     const [payment, setPayment] = useState("");
 
     const router=useRouter();
+
 
     const handleComanda = async () => {
         const username = Cookies.get("user");
@@ -58,9 +66,47 @@ const Cos = () => {
             }
         } else if (payment === "card") {
             if (username) {
+                if (username) {
+                    const user = await userData();
+                    const data = await completeUserData();
+    
+                    const updatedItems = user?.data?.map(item => ({
+                        ...item,
+                        attributes: {
+                            ...item.attributes,
+                            quantity: cardList?.data?.find(cardItem => cardItem.id === item.id)?.counting || item.attributes.quantity
+                        }
+                    }));
+    
+                    await Promise.all(updatedItems.map(async (element) => {
+                        await updateProductQuantity(element.id, element.attributes.quantity);
+                    }));
+                    
 
-                router.push("/stripe");
-        }}
+                    fetch("/api/checkout_sessions", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            cart: cardList,
+                        }),
+                    })
+                        .then(res => {
+                            if (res.ok) return res.json();
+                            return res.json().then(json => Promise.reject(json));
+                        })
+                        .then(({ url }) => {
+                            window.location.href = url;
+                        })
+                        .catch(e => {
+                            console.error(e.error);
+                        });
+                } else {
+                    console.error("Username not found in local storage");
+                }
+            }
+        };
     };
 
     const addToCart = (product) => {
@@ -135,6 +181,14 @@ const Cos = () => {
 
     return (
         <div className="cos-container">
+                <form action="/api/checkout_sessions" method="POST">
+      <section>
+        <button type="submit" role="link">
+          Checkout
+        </button>
+      </section>
+    </form>
+
             <h2 className="cos-header">Cos de cumparaturi</h2>
             <div className="cos-separare">
                 <div className="cos-produse-cumparate">

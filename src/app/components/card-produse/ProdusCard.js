@@ -19,12 +19,13 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
 
       <Image
         src={ image ? image : ""}
-        alt={title}
+        alt={title? title :""}
         width={204}
         height={204}
         layout="responsive"
         sizes="(min-width: 600px) 450px, 352px"
         className="produs-image"
+        priority={`${"Litere decorative Home" ? true:false}`}
       />
 
       </div>

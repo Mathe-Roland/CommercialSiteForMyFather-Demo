@@ -21,7 +21,8 @@
 }
 
 .produs-pret{
-  font-size: medium;
+  width: 100%;
+  font-size: 18px;
   color: red;
   text-align: center;
 }
