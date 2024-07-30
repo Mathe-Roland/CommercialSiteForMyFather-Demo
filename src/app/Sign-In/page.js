@@ -54,11 +54,7 @@ const SignIn = () => {
         surname: formData.surname,
         address: formData.address,
       });
-      // Handle success.
-      console.log('Well done!');
-      console.log('User profile', response.data.user);
-      console.log('User token', response.data.jwt);
-      setFormData({ ...formData, err: '' }); // Clear errors on success
+      setFormData({ ...formData, err: '' }); 
     } catch (error) {
       console.log(error.response);
       const errorMessage = error.response?.data?.error.message;
@@ -67,7 +63,7 @@ const SignIn = () => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
     if (validateForm()) {
       registerUser();
     }
