@@ -19,8 +19,55 @@ const Cos = () => {
     const [cardList, setCardList] = useState({ data: [] });
     const [grandTotal, setGrandTotal] = useState(0);
     const [payment, setPayment] = useState("");
-
+    
     const router=useRouter();
+    useEffect(() => {
+        
+        const fetchCardListData = async () => {
+            try {
+                const data = await userData();
+                if (data && data.data) {
+                    setCardList(data);
+
+                    const updatedData = data.data.map(item => {
+                        const matchedItem = cardList.data.find(databaseItem => databaseItem.attributes.title === item.attributes.title);
+                        if (matchedItem) {
+                            item.counting = matchedItem.attributes.quantity || 0;
+                        }
+                        return item;
+                    });
+                    setCardList({ data: updatedData });
+
+                    let totalSum = 0;
+                    updatedData.forEach((element) => {
+                        const price = element.attributes.price || 0;
+                        const counting = element.counting || 0;
+                        totalSum += price * counting;
+                    });
+
+                    setGrandTotal(totalSum);
+                } else {
+                    setCardList({ data: [] });
+                }
+            } catch (error) {
+                console.error('Error fetching card list data:', error);
+            }
+        };
+        fetchCardListData();
+    }, []);
+
+    useEffect(() => {
+        if (cardList && cardList.data) {
+            let totalSum = 0;
+            cardList.data?.forEach((element) => {
+                const price = element.attributes.price || 0;
+                const counting = element.counting || element.attributes.quantity || 0;
+                totalSum += price * counting;
+            });
+
+            setGrandTotal(totalSum);
+        }
+    }, [cardList]);
 
 
     const handleComanda = async () => {
@@ -130,54 +177,6 @@ const Cos = () => {
         setPayment("cash");
     }
 
-    useEffect(() => {
-        
-        const fetchCardListData = async () => {
-            try {
-                const data = await userData();
-                if (data && data.data) {
-                    setCardList(data);
-
-                    const updatedData = data.data.map(item => {
-                        const matchedItem = cardList.data.find(databaseItem => databaseItem.attributes.title === item.attributes.title);
-                        if (matchedItem) {
-                            item.counting = matchedItem.attributes.quantity || 0;
-                        }
-                        return item;
-                    });
-                    setCardList({ data: updatedData });
-
-                    let totalSum = 0;
-                    updatedData.forEach((element) => {
-                        const price = element.attributes.price || 0;
-                        const counting = element.counting || 0;
-                        totalSum += price * counting;
-                    });
-
-                    setGrandTotal(totalSum);
-                } else {
-                    setCardList({ data: [] });
-                }
-            } catch (error) {
-                console.error('Error fetching card list data:', error);
-            }
-        };
-        fetchCardListData();
-    }, []);
-
-    useEffect(() => {
-    console.log(cardList)
-        if (cardList && cardList.data) {
-            let totalSum = 0;
-            cardList.data?.forEach((element) => {
-                const price = element.attributes.price || 0;
-                const counting = element.counting || element.attributes.quantity || 0;
-                totalSum += price * counting;
-            });
-
-            setGrandTotal(totalSum);
-        }
-    }, [cardList]);
 
     return (
         <div className="cos-container">
