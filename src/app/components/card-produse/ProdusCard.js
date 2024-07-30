@@ -20,7 +20,7 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
       <div className="produs-image-container">
 
       <Image
-        src={image}
+        src={ image ? image : ""}
         alt={title}
         width={204}
         height={204}

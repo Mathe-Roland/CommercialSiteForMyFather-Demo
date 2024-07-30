@@ -16,18 +16,19 @@
   gap: 20px;
 }
 
-@media screen and (min-width:450px) {
+
+@media screen  and (min-width:600px){
 
   .margin0Auto {
     display: grid;
     grid-template-columns: repeat(2,1fr);
     gap: 20px;
   }
+
 }
 
 
-@media screen and (min-width:650px) {
-
+@media screen and (min-width:760px) {
   .margin0Auto {
     display: grid;
     grid-template-columns: repeat(3,1fr);
@@ -35,11 +36,21 @@
   }
 }
 
-@media screen and (min-width:900px) {
+
+@media screen and (min-width:1000px) {
 
   .margin0Auto {
     display: grid;
     grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+  }
+}
+
+@media screen and (min-width:1500px) {
+
+  .margin0Auto {
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
     gap: 20px;
   }
   

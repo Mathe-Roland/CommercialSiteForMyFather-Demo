@@ -1,9 +1,8 @@
-
 .produs-container{
-  height: 376px;
+  height: 600px;
   display: flex;
   flex-direction: column;
-  width: 204px;
+  width: 362px;
   gap: 10px;
   margin: auto;
   background-color: #F9FEFF;
@@ -15,7 +14,6 @@
   -webkit-box-orient: vertical;
   font-style: italic;
   font-weight: bold;
-  width:204px;
   overflow: hidden;
   text-align: center;
 }
@@ -31,6 +29,9 @@
 }
 
 .produs-content{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin-bottom: 12px;
 }
 
@@ -40,5 +41,15 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin: auto;  
+  margin: auto;
+}
+
+@media screen  and (min-width:600px){
+  
+  .produs-container{
+    width: 204px;
+    height: 440px;
+  }
+  
+  
 }
