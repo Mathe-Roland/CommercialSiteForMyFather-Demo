@@ -1,0 +1,13 @@
+
+.despre-noi-container{
+    width:80%;
+    margin:0 auto;
+}
+   
+.despre-noi{
+    display: none;
+}
+
+.despre-noi-loading{
+    min-height: 100vh;
+}

@@ -16,7 +16,7 @@ const ComenziPlasate=()=>{
           const data =await comenziPlasateUserData();
           if(data===null){
 
-            return <div>Is Loading...</div>
+            return (<div className="comenzi-loading"></div>)
         }
           setComenziPlasate(data.data)
         }

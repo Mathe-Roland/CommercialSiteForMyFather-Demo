@@ -12,8 +12,6 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
     Cookies.set("price", price, { expires: 1 });
   };
 
-  const priorityImage = "Panou decorativ Live Laugh Love";
-  const priority = priorityImage === title;
 
   return (
     <div className="produs-container" suppressHydrationWarning>
@@ -27,7 +25,6 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
         layout="responsive"
         sizes="(min-width: 600px) 450px, 352px"
         className="produs-image"
-        priority={title === "Litere decorative Home" ? true : priority}
       />
 
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import "./DespreNoiReal.css";
+import "./DespreNoi.css";
 import { useState, useEffect } from "react";
 import ImageGallery from "../components/imageGallery/ImageGallery";
 import { fetchDataDespreNoiPage } from "../components/asyncOperations/fetchData";
@@ -23,37 +23,21 @@ const DespreNoiReal = () => {
     if(!imageGalleryPictures){
 
 
-        return( <div className="loading container">
-                 <div class="sk-chase">
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            <div class="sk-chase-dot"></div>
-            </div>
+        return( <div className="loading-container">
             </div>)
         }
 
     return (
-        <div className="DespreNoiReal-container" suppressHydrationWarning>
+        <div className="despre-noi-container" suppressHydrationWarning>
             <div className="accordion-container">
                 
             <CustomizedAccordions/>
 
             </div>
-            <div className="despreNoiReal-pageContents">
+            <div className="despre-noi-pageContents">
                 <h1>Despre noi</h1>
                 {imageGalleryPictures ? 
-            (<div>
-                 <div class="sk-chase">
-                    <div class="sk-chase-dot"></div>
-                     <div class="sk-chase-dot"></div>
-                    <div class="sk-chase-dot"></div>
-                     <div class="sk-chase-dot"></div>
-                     <div class="sk-chase-dot"></div>
-                     <div class="sk-chase-dot"></div>
-            </div>
+            (<div className="despre-noi-loading">
             </div>):    
             
                 (<div>
