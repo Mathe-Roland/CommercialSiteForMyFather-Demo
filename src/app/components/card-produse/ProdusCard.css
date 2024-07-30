@@ -17,6 +17,7 @@
   font-weight: bold;
   overflow: hidden;
   text-align: center;
+  height: 20px;
 }
 
 .produs-pret{
@@ -38,6 +39,7 @@
 
 .produs-description{
   width: 160px;
+  height: 50px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -45,18 +47,11 @@
   margin: auto;
 }
 
-@media screen and (min-width:500px) {
-  .produs-container{
-    height: 690px;  
-  }
-}
+
 
 @media screen  and (min-width:600px){
-  
   .produs-container{
     width: 204px;
     height: 440px;
-  }
-  
-  
+  } 
 }
