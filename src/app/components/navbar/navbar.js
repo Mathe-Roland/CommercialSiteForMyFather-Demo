@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import Link from "next/link"; // Use next/link instead of react-router-dom
+import Link from 'next/link'; // Use next/link for navigation in Next.js
 import './navbar.css';
 import Acasa from './navbarComponents/acasa';
 
@@ -12,20 +12,17 @@ export const navbarData = {
 
 const Navbar = () => {
   const [selectedOption, setSelectedOption] = useState('');
-  const [leave,setLeave]=useState(false)
+  const [showAcasa, setShowAcasa] = useState(false);
 
-  const handleMouseOver = (index) => {
-    if(index===1){
-      setLeave(true);
+  const handleMouseEnter = (index) => {
+    if (index === 1) { // Assuming index 1 corresponds to the item that triggers Acasa
+      setShowAcasa(true);
     }
   };
 
-  const handleMouseLeave = (index) => {
-    if(index===1){
-      setLeave(false)
-    }
+  const handleMouseLeave = () => {
+    setShowAcasa(false);
   };
-
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
@@ -40,15 +37,28 @@ const Navbar = () => {
       <div className="navbar-centered">
         <div className="navbar-contents">
           {navbarData.items.map((element, index) => (
-            <div key={index} onMouseEnter={() => handleMouseOver(index)} onMouseLeave={() => handleMouseLeave(index)}>
-              <p>
+            <div 
+              key={index}
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={handleMouseLeave}
+              className='navbarItems-height'
+            >
+                  {index===1 ? 
+                  <p>
+                    {element}
+                  </p>
+                  
+                :
+                   <p>
                 <Link href={element === "Acasa" ? "/" : generateUrl(element) || "/"}>
                   {element}
                 </Link>
-              </p>
-              {leave ? (
-                <div className="width100">
-                  {!exceptionIndex.includes(index) && <Acasa />}
+              </p>}             
+              {showAcasa && index===1? (
+                <div 
+                  className="width100"
+                >
+                  <Acasa />
                 </div>
               ):null}
             </div>
