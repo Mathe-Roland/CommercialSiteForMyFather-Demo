@@ -180,14 +180,6 @@ const Cos = () => {
 
     return (
         <div className="cos-container">
-                <form action="/api/checkout_sessions" method="POST">
-      <section>
-        <button type="submit" role="link">
-          Checkout
-        </button>
-      </section>
-    </form>
-
             <h2 className="cos-header">Cos de cumparaturi</h2>
             <div className="cos-separare">
                 <div className="cos-produse-cumparate">
