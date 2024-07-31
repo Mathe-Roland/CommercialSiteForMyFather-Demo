@@ -10,13 +10,8 @@
 .heightvh {
 
     display: flex;
-    justify-content: space-between;
-    height: auto;
-    background-image: url("/public/cardImages/lo.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100% 150%;
     width: 100%;
+    background-color: white;
 
 }
 

@@ -9,16 +9,16 @@ const Acasa=()=>{
     return (
 
         <div className="heightvh">
-            {accordion.slice(1).map((e,index)=>(
+            {accordion.map((e,index)=>(
                 <div key={index} className="acasa">
                 <Link className="acasa-link" href={`/${e}`}>
-                <h3 >{e}</h3>
+                <h3 >{e.split("-").join(" ")}</h3>
                
                 </Link>
                 <div className="acasa">
-                <Image className="acasa-ih" alt="failed to load" src={"https://gomagcdn.ro/domains2/krista.ro/files/category/300x300/46.jpg"} width={24} height={24}/>
-                <Image className="acasa-ih" alt="failed to load" src={"https://gomagcdn.ro/domains2/krista.ro/files/category/300x300/46.jpg"} width={24} height={24}/>
-                <Image className="acasa-ih" alt="failed to load" src={"https://gomagcdn.ro/domains2/krista.ro/files/category/300x300/46.jpg"} width={24} height={24}/>
+                <Image className="acasa-ih" alt="failed to load" src={""} width={24} height={24}/>
+                <Image className="acasa-ih" alt="failed to load" src={""} width={24} height={24}/>
+                <Image className="acasa-ih" alt="failed to load" src={""} width={24} height={24}/>
                 </div>
 
                 </div>

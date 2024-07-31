@@ -7,7 +7,7 @@ import './navbar.css';
 import Acasa from './navbarComponents/acasa';
 
 export const navbarData = {
-  items: ["Acasa", "Produse", "Blog", "Despre Noi", "Contact"]
+  items: ["Acasa", "Magazin", "Blog", "Despre Noi", "Contact"]
 };
 
 const Navbar = () => {
