@@ -16,7 +16,7 @@ const ImageGallery = ({ images }) => {
              <Image
              key={index}
              className="ImageSecondColumn"
-             src={`${cloudinaryTransformation(image?.attributes?.url,250,250)}`}
+             src={`${image?.attributes?.url}`}
              alt={`imageGallery-${index}`}
              width={250}
              height={250}
@@ -28,7 +28,7 @@ const ImageGallery = ({ images }) => {
             <Image
               key={index}
               className="ImageSecondColumn"
-              src={`${cloudinaryTransformation(image?.attributes?.url,250,250)}`}
+              src={`${image?.attributes?.url}`}
               alt={`imageGallery-${index}`}
               height={250}
               width={250}
@@ -41,7 +41,7 @@ const ImageGallery = ({ images }) => {
              <Image
              key={index}
              className="ImageSecondColumn"
-             src={`${cloudinaryTransformation(image?.attributes?.url,250,250)}`}
+             src={`${image?.attributes?.url}`}
              alt={`imageGallery-${index}`}
              width={250}
              height={250}

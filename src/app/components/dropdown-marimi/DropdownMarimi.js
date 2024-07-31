@@ -39,8 +39,11 @@ const DropdownMui = ({ onChange, render, actualPrice, price, vopsit }) => {
     }, [selectedValue]);
 
     return (
-        <div>
+        <div className='dropdownMarimi'>
             <div className='personalizareSIOptiuniNormaleContainer'>
+
+            <div className='optiuni-container'>
+                
                 <label htmlFor='selectPersonalizare1'>Personalizare</label>
                 <input 
                     onClick={() => {
@@ -52,7 +55,9 @@ const DropdownMui = ({ onChange, render, actualPrice, price, vopsit }) => {
                     type='radio' 
                     id="selectPersonalizare1" 
                 />
-                <label htmlFor='selectPersonalizare2'>Optiuni normale</label>
+            </div>
+            <div className='optiuni-container'>
+                <label htmlFor='selectPersonalizare2'>Optiuni</label>
                 <input 
                     onClick={() => {
                         setPersonalizare(false);
@@ -63,6 +68,9 @@ const DropdownMui = ({ onChange, render, actualPrice, price, vopsit }) => {
                     id="selectPersonalizare2" 
                 />
             </div>
+                
+            </div>
+
             {personalizare ? (
                 <textarea 
                     value={textareaValue}
@@ -75,8 +83,8 @@ const DropdownMui = ({ onChange, render, actualPrice, price, vopsit }) => {
                     style={{ marginTop: "12px", width: "50%", maxWidth: "300px" }}
                 />
             ) : (
-                <div>
-                    <p className='Marime'>Marime:</p>
+                <div className='dropdownMarimi'>
+                    <p>Marime:</p>
                     <p>Choose an option from the dropdown:</p>
                     <FormControl fullWidth style={{ width: '25%' }}>
                         <InputLabel id="demo-simple-select-label">Select an option</InputLabel>
@@ -95,6 +103,10 @@ const DropdownMui = ({ onChange, render, actualPrice, price, vopsit }) => {
                 </div>
             )}
             <div className='personalizareSIOptiuniNormaleContainer'>
+
+
+            <div className='optiuni-container'>
+
                 <label htmlFor='Vopsit'>Vopsit</label>
                 <input 
                     onClick={handleVopsit} 
@@ -103,6 +115,8 @@ const DropdownMui = ({ onChange, render, actualPrice, price, vopsit }) => {
                     type='radio' 
                     id="Vopsit" 
                 />
+            </div>
+            <div className='optiuni-container'>
                 <label htmlFor='Nevopsit'>Nevopsit</label>
                 <input 
                     onClick={handleNevopsit}
@@ -110,6 +124,9 @@ const DropdownMui = ({ onChange, render, actualPrice, price, vopsit }) => {
                     type='radio'
                     id="Nevopsit" 
                 />
+
+            </div>
+
             </div>
         </div>
     );

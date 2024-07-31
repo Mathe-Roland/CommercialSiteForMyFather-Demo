@@ -1,14 +1,28 @@
-.Marime{
 
-    margin-top: 10px;
-    
-}
-
-.personalizare{
-    margin-right: 5px;
+.dropdownMarimi{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .personalizareSIOptiuniNormaleContainer{
-
+    display: flex;
+    width: 220px;
     margin-top: 10px;
+
+}
+
+.optiuni-container{
+    width: 50%;
+}
+.optiuni-container{
+    width: 50%;
+}
+
+@media screen  and (min-width:600px){
+
+    .personalizareSIOptiuniNormaleContainer{
+        display: flex;
+        flex-direction: row;
+    }
 }

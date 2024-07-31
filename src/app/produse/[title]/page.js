@@ -1,9 +1,10 @@
 "use client";
-import Produs from "../../components/produse-individuale/Produs";
+import Produs from "../../components/produse-individuale/ProdusIndividual";
 import { useParams } from 'next/navigation';
 import React from 'react';
 import {fetchId} from "../../components/asyncOperations/fetchData";
 import { useEffect,useState } from "react";
+import "./Produse.css";
 
   const Produse = () => {
 
@@ -17,7 +18,6 @@ import { useEffect,useState } from "react";
 
             setCardList(data);
           } catch (error) {
-            console.error(error);
           }
         };
     
@@ -25,6 +25,12 @@ import { useEffect,useState } from "react";
       }, [title]);
     
     
+      if(!cardList){
+
+        return (<div className="loading-container"></div>)
+
+      }
+
       return (
         <div suppressHydrationWarning>
           <Produs
