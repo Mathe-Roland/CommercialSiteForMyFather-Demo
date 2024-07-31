@@ -15,7 +15,7 @@ const Navbar = () => {
   const [showAcasa, setShowAcasa] = useState(false);
 
   const handleMouseEnter = (index) => {
-    if (index === 1) { // Assuming index 1 corresponds to the item that triggers Acasa
+    if (index === 1) {
       setShowAcasa(true);
     }
   };
@@ -41,7 +41,6 @@ const Navbar = () => {
               key={index}
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={handleMouseLeave}
-              className='navbarItems-height'
             >
                   {index===1 ? 
                   <p>
