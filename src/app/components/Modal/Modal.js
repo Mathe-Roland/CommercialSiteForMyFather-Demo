@@ -49,10 +49,28 @@ const LoginModal = ({ setLogin }) => {
 
     try {
       const response = await registerUser(name, password);
-      Cookies.set('token', response.data.jwt);
-      Cookies.set('user', name);
+      Cookies.set('token', response.data.jwt, {
+        secure: true,
+        sameSite: 'Strict',
+        expires: 1,  
+        path: '/',
+      });
+      
+      Cookies.set('user', name, {
+        secure: true,
+        sameSite: 'Strict',
+        expires: 1,   
+        path: '/', 
+      });
+      
       const userId = await userIds();
-      Cookies.set('userId', userId);
+      Cookies.set('userId', userId, {
+        secure: true,
+        sameSite: 'Strict',
+        expires: 1, 
+        path: '/', 
+      });
+      
 
       setLogin(true);
     } catch (error) {
