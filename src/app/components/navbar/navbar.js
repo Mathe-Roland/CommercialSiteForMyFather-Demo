@@ -11,22 +11,21 @@ export const navbarData = {
 };
 
 const Navbar = () => {
-  const [showDropdowns, setShowDropdowns] = useState(Array(navbarData.items.length).fill(false));
   const [selectedOption, setSelectedOption] = useState('');
+  const [leave,setLeave]=useState(false)
 
   const handleMouseOver = (index) => {
-    const newShowDropdowns = [...showDropdowns];
-    newShowDropdowns[index] = true;
-    setShowDropdowns(newShowDropdowns);
+    if(index===1){
+      setLeave(true);
+    }
   };
 
   const handleMouseLeave = (index) => {
-    const newShowDropdowns = [...showDropdowns];
-    newShowDropdowns[index] = false;
-    setShowDropdowns(newShowDropdowns);
+    if(index===1){
+      setLeave(false)
+    }
   };
 
-  const exceptionIndex = [0, 2, 3, 4];
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
@@ -47,11 +46,11 @@ const Navbar = () => {
                   {element}
                 </Link>
               </p>
-              {showDropdowns[index] && (
+              {leave ? (
                 <div className="width100">
                   {!exceptionIndex.includes(index) && <Acasa />}
                 </div>
-              )}
+              ):null}
             </div>
           ))}
         </div>
