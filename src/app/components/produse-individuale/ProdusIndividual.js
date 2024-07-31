@@ -77,7 +77,7 @@ const Produs = ({ img, description, title, price }) => {
                     const filesData = await imageFiles();
                     const currentImage = filesData.filter(image => image.url === images);
                     const id = await userIds();
-                    const newDatas = { price: hadlePrice(selectedValues), optiuninormale: selectedValues };
+                    const newDatas = { price: ifVopsit ? prices : handlePrice(selectedValues), optiuninormale: selectedValues };
                     await userRelatedData(id, currentImage[0].id, newDatas);
                 }
             } else {
@@ -85,7 +85,7 @@ const Produs = ({ img, description, title, price }) => {
                 const filesData = await imageFiles();
                 const currentImage = filesData.filter(image => image.url === images);
                 const id = await userIds();
-                const newDatas = { price: price, optiuninormale: selectedValues };
+                const newDatas = { price: ifVopsit ? prices : handlePrice(selectedValues), optiuninormale: selectedValues };
                 await userRelatedData(id, currentImage[0].id, newDatas);
             }
         } catch (error) {
