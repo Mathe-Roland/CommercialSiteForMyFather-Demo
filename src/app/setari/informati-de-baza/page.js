@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Button, Grid, Typography, Container } from '@mui/material';
 import axios from 'axios';
 import Link from 'next/link'; // Corrected import for Next.js
-import { completeUserData, imageFiles } from '../../components/asyncOperations/fetchData';
+import {imageFiles } from '../../components/asyncOperations/fetchData';
 import "./Setari.css";
 import Cookies from 'js-cookie';
 import Image from 'next/image';
@@ -33,26 +33,7 @@ const Setari = () => {
     };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await completeUserData();
-                setFormData({
-                    id: data?.id,
-                    email: data?.email,
-                    username: data?.username,
-                    name: data?.name,
-                    surname: data?.surname,
-                    country: data?.country,
-                    postalCode: data?.postalcode,
-                    city: data?.city,
-                    birthDate: data?.birthdate,
-                    address: data?.address,
-                });
-            } catch (error) {
-                console.error("Error fetching user data:", error);
-            }
-        };
-
+       
         const fetchImageData = async () => {
             try {
                 const data = await imageFiles();
@@ -75,7 +56,6 @@ const Setari = () => {
         };
 
         getData();
-        fetchData();
     }, []);
 
     const updateUser = async () => {
@@ -115,32 +95,41 @@ const Setari = () => {
     return (
         <div className='setari-container'>
             <div className='setari-welcome'>
-                <h4 className='headers'>Bine ați venit</h4>
+                <h4 className='headers'>Bine ați venit {Cookies.get("user")} !!</h4>
                 <h3 className='headers'>{formData.surname} <span>{formData.name}</span></h3>
             </div>
 
             <div className='setari-changer'>
                 <Link href="/setari/schimbare-parola">
+                    <div className='setari-informatii-container'>
+
+                         <Image
+                         alt="settings icon"
+                         src={`${pictures ? pictures.schimbParolaPicture :"cancel.webp"}`} 
+                         width={32}
+                        height={32}/>
+
                         <p className="setari">
-                            <span>
-                                <Image
-                                    alt="settings icon"
-                                    src={`${pictures ? pictures.schimbParolaPicture :"cancel.webp"}`} 
-                                    width={24}
-                                    height={24}/>
-                            </span>Schimbare parolă
+                            Schimbare parolă
                         </p>
+                    </div>
                 </Link>
                 <Link href="/setari/informati-de-baza">
+                <div className='setari-informatii-container'>
+
+                     <Image
+                        alt="settings icon"
+                        src={`${pictures ? pictures.facturaPicture :"cancel.webp"}`} 
+                        width={32}
+                        height={32}/>
+
                         <p className="setari">
-                            <span>
-                                <Image
-                                    alt="settings icon"
-                                    src={`${pictures ? pictures.facturaPicture :"cancel.webp"}`} 
-                                    width={24}
-                                    height={24}/>
-                            </span>Date facturare
+
+
+                            Date facturare
                         </p>
+
+                </div>
                 </Link>
             </div>
 
