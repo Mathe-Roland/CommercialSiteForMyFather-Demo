@@ -86,7 +86,7 @@ const DropdownMui = ({ onChange, render, actualPrice, price, vopsit }) => {
                 <div className='dropdownMarimi'>
                     <p>Marime:</p>
                     <p>Choose an option from the dropdown:</p>
-                    <FormControl fullWidth style={{ width: '25%' }}>
+                    <FormControl fullWidth style={{ minWidth: '150px',maxWidth:"25%" }}>
                         <InputLabel id="demo-simple-select-label">Select an option</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"

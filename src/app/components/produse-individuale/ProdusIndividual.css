@@ -15,6 +15,10 @@
 
 }
 
+.produs-individual-header{
+    width: 50%;
+
+}
 
 .zoomedImageMaxWidth{
     max-width: 100%;
@@ -34,6 +38,7 @@
     flex-direction: column;
     width:80%;
     gap: 20px;
+    margin-left: 20px;
 }
 
 .comment {
@@ -73,6 +78,11 @@
     justify-content: flex-end;
     color :red;
     font-size: 24px;
+}
+
+.produs-upper-text{
+    display: flex;
+
 }
 
 

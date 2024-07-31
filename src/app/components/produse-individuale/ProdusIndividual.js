@@ -119,18 +119,18 @@ const Produs = ({ img, description, title, price }) => {
         <div className="produs-individual-container">
             <div className="produs-individual-columns">
                 <div className="produs-individual-images">
-                    <Image src={`${img ? img:""}`} alt="failed-load" width={600} height={250} />
+                    <Image src={`${img ? img:""}`} alt="failed-load" width={500} height={250} />
                 </div>
                 <div className="produs-individual-text-container">
                     <div className="produs-upper-text">
-                        <div className="produs-individual-header-plus-description">
+                        <div className="produs-individual-header">
                             <h2>{title}</h2>
                         </div>
-                        <div className="produs-individual-header-plus-description">
+                        <div className="produs-individual-header">
                            <p className="produs-individual-pret">{ifVopsit ? prices : handlePrice(selectedValues)} RON</p>
                         </div>
                     </div>
-                    <div className="produs-individual-header-plus-description">
+                    <div className="produs-individual-description">
                         {description}
                     </div>
                     <div>
