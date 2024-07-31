@@ -7,9 +7,18 @@ import Image from 'next/image';
 const ProdusCard = ({ description, title, image, disponibil, price }) => {
   const handleData = () => {
     Cookies.set("description", description, { expires: 1 });
-    Cookies.set("title", title, { expires: 1 });
-    Cookies.set("image", image, { expires: 1 });
-    Cookies.set("price", price, { expires: 1 });
+    Cookies.set("title", title, {secure: true,
+      sameSite: 'Strict',
+      expires: 1,   
+      path: '/', });
+    Cookies.set("image", image, { secure: true,
+      sameSite: 'Strict',
+      expires: 1,   
+      path: '/', });
+    Cookies.set("price", price, { secure: true,
+      sameSite: 'Strict',
+      expires: 1,   
+      path: '/', });
   };
 
 
@@ -25,7 +34,7 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
         layout="responsive"
         sizes="(min-width: 600px) 450px, 352px"
         className="produs-image"
-        priority={`${"Litere decorative Home" ? true:false}`}
+        priority={`${"Litere decorative Home" ? true:""}`}
       />
 
       </div>
