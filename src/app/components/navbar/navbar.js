@@ -73,15 +73,21 @@ const Navbar = () => {
             value={selectedOption}
             onChange={handleChange}
           >
-            <MenuItem component="a" href="/" value="Acasa">
-              Acasa
-            </MenuItem>
-            <MenuItem component="a" href="/despre-noi" value="Despre Noi">
-              Despre Noi
-            </MenuItem>
-            <MenuItem component="a" href="/blog" value="Blog">
-              Blog
-            </MenuItem>
+            {navbarData.items.map((e,index)=>{
+              return (
+                <div>
+              {index===1 ?
+              null
+              :
+              <MenuItem component="a" href={index===0 ? "/" :e.toLowerCase().split(" ").join("-")} value={e}>
+                {e}
+              </MenuItem>
+            }
+
+                </div>
+              )
+            }
+            )}
           </Select>
         </FormControl>
       </div>
