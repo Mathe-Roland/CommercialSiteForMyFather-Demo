@@ -31,3 +31,7 @@
 .setari-picture{
     margin-right: 4px;
 }
+
+.setari-felxbox{
+    display: flex;
+}

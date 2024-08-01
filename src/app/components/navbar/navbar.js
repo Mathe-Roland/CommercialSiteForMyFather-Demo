@@ -43,12 +43,12 @@ const Navbar = () => {
               onMouseLeave={handleMouseLeave}
             >
                   {index===1 ? 
-                  <p>
+                  <p className='navbar-text'>
                     {element}
                   </p>
                   
                 :
-                   <p>
+                   <p className='navbar-text'>
                 <Link href={element === "Acasa" ? "/" : generateUrl(element) || "/"}>
                   {element}
                 </Link>

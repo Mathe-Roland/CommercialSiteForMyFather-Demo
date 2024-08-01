@@ -15,10 +15,9 @@ const SignIn = () => {
     postalCode: '',
     city: '',
     address: '',
-    birthDate: '',
     password: '',
     confirmPassword: '',
-    err: '' // Error message field
+    err: '',
   });
 
   const handleChange = (field) => (event) => {
@@ -31,7 +30,6 @@ const SignIn = () => {
       return false;
     }
 
-    // Add additional validation checks here
     if (!formData.email || !formData.password) {
       setFormData({ ...formData, err: "Email and Password are required" });
       return false;
@@ -49,7 +47,6 @@ const SignIn = () => {
         postalcode: formData.postalCode,
         city: formData.city,
         country: formData.country,
-        birthdate: formData.birthDate,
         name: formData.name,
         surname: formData.surname,
         address: formData.address,
@@ -165,23 +162,6 @@ const SignIn = () => {
               variant="outlined"
               value={formData.city}
               onChange={handleChange('city')}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Birth Date"
-              variant="outlined"
-              value={formData.birthDate}
-              onChange={handleChange('birthDate')}
-              type="date"
-              InputLabelProps={{
-                shrink: true,
-                style: { transform: 'translate(0, -50%)' },
-              }}
-              InputProps={{
-                style: { padding: '16px 14px' },
-              }}
             />
           </Grid>
           <Grid item xs={12} align="center">

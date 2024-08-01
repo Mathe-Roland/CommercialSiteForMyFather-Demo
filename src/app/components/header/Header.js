@@ -50,9 +50,6 @@ const Header = () => {
                   <UserInfo setLogin={setIsLoggedIn}/> :
                   <LoginModal setLogin={setIsLoggedIn}/>
                 }
-                <Link href="/cos" className="headerCos">
-                  <strong>Cos</strong>
-                </Link>
               </div> :
               null
             }
@@ -75,12 +72,6 @@ const Header = () => {
               <LoginModal setLogin={setIsLoggedIn}/>
             }
           </div>
-          <div className="row j-c-c align-items-c">
-            <Link href="/cos" className="headerCos">
-              <strong>Cos</strong>
-            </Link>
-          </div>
-
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ import Link from 'next/link';
 import Cookies from 'js-cookie';
 import { registerUser, userIds } from '../asyncOperations/fetchData';
 import './Modal.css';
+import Image from 'next/image';
 
 const LoginModal = ({ setLogin }) => {
   const [open, setOpen] = useState(false);
@@ -99,7 +100,7 @@ const LoginModal = ({ setLogin }) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Log in</Button>
+      <Button onClick={handleOpen}><Image src={`/loginicon.png`} width={50} height={50}/></Button>
       <Modal
         open={open}
         onClose={handleClose}

@@ -78,8 +78,8 @@ const UserInfo = ({ setLogin }) => {
             {showUserInfo ? (
                 <div className="userInfo-info" onMouseLeave={onLeave}>
                     <Link href="/cos" className="setari">
-                        <p className="setari">
-                            <span>
+                    <div className="setari-felxbox">
+
                                 <Image
                                     className="setari-picture"
                                     alt="cos icon"
@@ -87,13 +87,18 @@ const UserInfo = ({ setLogin }) => {
                                     width={16}
                                     height={16}
                                 />
-                            </span>
-                            Comenzi
+                        <p className="setari">
+                        
+                            
+                            Cos
                         </p>
+
+
+                    </div>
                     </Link>
                     <Link href="/setari/informati-de-baza" className="setari">
-                        <p className="setari">
-                            <span>
+                    <div className="setari-felxbox">
+
                                 <Image
                                     className="setari-picture"
                                     alt="settings icon"
@@ -101,13 +106,18 @@ const UserInfo = ({ setLogin }) => {
                                     width={16}
                                     height={16}
                                 />
-                            </span>
+                        <p className="setari">
+                        
+                            
                             Setari
                         </p>
+
+
+                    </div>
                     </Link>
                     <Link href="/comenzi-plasate" className="setari">
-                        <p className="setari">
-                            <span>
+                    <div className="setari-felxbox"> 
+
                                 <Image
                                     className="setari-picture"
                                     alt="comenzi plasate"
@@ -115,22 +125,32 @@ const UserInfo = ({ setLogin }) => {
                                     width={16}
                                     height={16}
                                 />
-                            </span>
+                        <p className="setari">
+                        
+                            
                             Comenzi plasate
                         </p>
+
+
+                    </div>
                     </Link>
-                    <p className="logout" onClick={handleLoggout}>
-                        <span>
+                    <div className="setari-felxbox">
+
                             <Image
                                 className="setari-picture"
                                 alt="logout icon"
-                                src={pictures.loggoutPicture ? pictures.loggoutPicture.ur : '/cancel.webp'}
+                                src={pictures.loggoutPicture ? pictures.loggoutPicture.url : '/cancel.webp'}
                                 width={16}
                                 height={16}
                             />
-                        </span>
+                    <p className="logout" onClick={handleLoggout}>
+                    
+                        
                         Sign out
                     </p>
+
+
+                    </div>
                 </div>
             ) : null}
         </div>
