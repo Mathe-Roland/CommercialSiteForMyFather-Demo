@@ -70,7 +70,7 @@ const UserInfo = ({ setLogin }) => {
             <button onClick={handleUserInfo} onMouseOver={handleMover}>
                 <Image
                     alt="login"
-                    src={pictures.anonPicture ? pictures.anonPicture.url : '/cancel.webp'}
+                    src={pictures.anonPicture ? "/loginicon": '/cancel.webp'}
                     width={48}
                     height={48}
                 />
