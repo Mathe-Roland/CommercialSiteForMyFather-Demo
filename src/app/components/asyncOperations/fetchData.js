@@ -157,10 +157,8 @@ export const fetchId = async (title) => {
         { headers: headers }
       )
       .then((response) => {
-        console.log(response.data);
       })
       .catch((error) => {
-        console.error(error);
       });
   };
 
@@ -191,10 +189,8 @@ export const fetchId = async (title) => {
             { headers: headers }
         )
         .then((response) => {
-            console.log(response.data);
         })
         .catch((error) => {
-            console.error(error);
         });
 };
 
@@ -303,7 +299,6 @@ export const completeUserData=async ()=>{
 .then(response => {
 })
 .catch(error => {
-  console.error(error);
 });
   };
   
@@ -336,7 +331,6 @@ export const userData = async () => {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouritraforates?populate=*&filters[users_permissions_user][id][$eq]=${userId}`, { headers: headers });
       return response.data;
     } catch (error) {
-      console.error(error);
       return null;
     }
   };
@@ -369,10 +363,8 @@ export const userData = async () => {
         { headers: headers }
       )
       .then((response) => {
-        console.log(response.data);
       })
       .catch((error) => {
-        console.error(error);
       });
   };
 
@@ -403,10 +395,8 @@ export const userData = async () => {
         { headers: headers }
       )
       .then((response) => {
-        console.log(response.data);
       })
       .catch((error) => {
-        console.error(error);
       });
   };
 
@@ -430,10 +420,8 @@ export const userData = async () => {
         { headers: headers }
       )
       .then((response) => {
-        console.log(response.data);
       })
       .catch((error) => {
-        console.error(error);
       });
   };
 
@@ -477,10 +465,8 @@ export const userData = async () => {
         { headers: headers }
       )
       .then((response) => {
-        console.log(response.data);
       })
       .catch((error) => {
-        console.error(error);
       });
   };
 
@@ -496,7 +482,6 @@ export const userData = async () => {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/comenzis?populate=*&filters[customerName][id][$eq]=${userId}`, { headers: headers });
       return response.data;
     } catch (error) {
-      console.error(error);
       return null;
     }
   };
@@ -536,10 +521,8 @@ export const userData = async () => {
         { headers: headers }
       )
       .then((response) => {
-        console.log(response.data);
       })
       .catch((error) => {
-        console.error(error);
       });
   };
 

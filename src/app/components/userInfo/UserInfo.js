@@ -24,7 +24,6 @@ const UserInfo = ({ setLogin }) => {
                 const data = await imageFiles();
                 return data;
             } catch (error) {
-                console.error("Error fetching image files:", error);
                 return [];
             }
         };

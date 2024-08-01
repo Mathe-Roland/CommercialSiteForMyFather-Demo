@@ -39,7 +39,7 @@ const Setari = () => {
                 const data = await imageFiles();
                 return data;
             } catch (error) {
-                console.error("Error fetching image files:", error);
+
                 return [];
             }
         };
@@ -80,16 +80,13 @@ const Setari = () => {
 
             alert("Data successfully");
 
-            console.log('User profile updated successfully:', response.data.user);
         } catch (error) {
-            console.error('An error occurred:', error.response.data);
             alert("Data update unsuccessful")
         }
     };
 
     const handleSubmit = () => {
         updateUser();
-        console.log(formData);
     };
 
     return (

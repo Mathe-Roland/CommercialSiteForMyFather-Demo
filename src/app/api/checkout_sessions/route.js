@@ -6,7 +6,6 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 export async function POST(request) {
 
     const response=await request.json();
-    console.log(response.cart.data);
 
     const line_items=response.cart.data.map((e)=>{
 

@@ -38,7 +38,7 @@ const Produs = ({ img, description, title, price }) => {
                     }
                 }
             } catch (error) {
-                console.error('Error fetching data:', error);
+
             }
         };
         fetchDataAndFilter();
@@ -89,7 +89,7 @@ const Produs = ({ img, description, title, price }) => {
                 await userRelatedData(id, currentImage[0].id, newDatas);
             }
         } catch (error) {
-            console.error("Error in handleUserData:", error);
+            
         }
     };
 

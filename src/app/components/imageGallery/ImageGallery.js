@@ -3,7 +3,6 @@ import "./ImageGallery.css";
 import Image from "next/image";
 
 const ImageGallery = ({ images }) => {
-  console.log(images);
 
   if (!images || images.length === 0) {
     return <div>No images available</div>;

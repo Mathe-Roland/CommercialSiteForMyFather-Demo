@@ -28,16 +28,13 @@ const SchimbareParola = () => {
         const fetchData = async () => {
             try {
                 const data = await completeUserData(); // Wait for the promise to resolve
-                console.log(data); // Now you have the actual data
 
                 setFormData({
                     id: data?.id,
                     name: data?.name,
                     surname: data?.surname,
                 });
-                console.log(data.id);
             } catch (error) {
-                console.error("Error fetching user data:", error);
             }
         };
 
@@ -46,7 +43,7 @@ const SchimbareParola = () => {
                 const data = await imageFiles();
                 return data;
             } catch (error) {
-                console.error("Error fetching image files:", error);
+
                 return [];
             }
         };

@@ -50,7 +50,6 @@ const Cos = () => {
                     setCardList({ data: [] });
                 }
             } catch (error) {
-                console.error('Error fetching card list data:', error);
             }
         };
         fetchCardListData();
@@ -147,10 +146,10 @@ const Cos = () => {
                             window.location.href = url;
                         })
                         .catch(e => {
-                            console.error(e.error);
+
                         });
                 } else {
-                    console.error("Username not found in local storage");
+
                 }
             }
         };

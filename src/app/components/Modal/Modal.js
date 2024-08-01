@@ -74,7 +74,6 @@ const LoginModal = ({ setLogin }) => {
 
       setLogin(true);
     } catch (error) {
-      console.error('Error during login:', error);
     }
   };
 
