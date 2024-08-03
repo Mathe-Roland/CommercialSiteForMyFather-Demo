@@ -26,6 +26,8 @@ const Header = () => {
     setShow(false);
   }
 
+  const hamburger="/hamburger_menu.png"
+
   return (
     <div className='navbar-title-and-searchbar'>
       <div className="row width80 j-c-b">
@@ -35,7 +37,7 @@ const Header = () => {
         </div>
         <div>
           <div onMouseLeave={handleHamburger} className="hamburger-dropdown">
-            <Image src="/hamburger_menu.png" onClick={handleShow} 
+            <Image src={hamburger ? hamburger : null } onClick={handleShow} 
               className="hamburger-menu" alt="hamburger-menu"
               width={25}
               height={25}/>

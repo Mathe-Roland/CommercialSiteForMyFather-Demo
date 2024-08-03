@@ -89,10 +89,11 @@ const Setari = () => {
         updateUser();
     };
 
+
     return (
         <div className='setari-container'>
             <div className='setari-welcome'>
-                <h4 className='headers'>Bine ați venit {Cookies.get("user")} !!</h4>
+                <h2 className='headers'>Bine ați venit </h2>
                 <h3 className='headers'>{formData.surname} <span>{formData.name}</span></h3>
             </div>
 
@@ -206,23 +207,6 @@ const Setari = () => {
                                 variant="outlined"
                                 value={formData.city}
                                 onChange={handleChange('city')}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                fullWidth
-                                label="Birth Date"
-                                variant="outlined"
-                                value={formData.birthDate}
-                                onChange={handleChange('birthDate')}
-                                type="date"
-                                InputLabelProps={{
-                                    shrink: true,
-                                    style: { transform: 'translate(0, -50%)' },
-                                }}
-                                InputProps={{
-                                    style: { padding: '16px 14px' },
-                                }}
                             />
                         </Grid>
                         <Grid item xs={12} align="center">

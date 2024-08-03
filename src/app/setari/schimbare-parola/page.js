@@ -28,13 +28,13 @@ const SchimbareParola = () => {
         const fetchData = async () => {
             try {
                 const data = await completeUserData(); // Wait for the promise to resolve
-
                 setFormData({
-                    id: data?.id,
-                    name: data?.name,
-                    surname: data?.surname,
+                    id: data?.id || "",
+                    name: data?.name || "",
+                    surname: data?.surname || "",
                 });
             } catch (error) {
+                console.error("Error fetching user data:", error);
             }
         };
 
@@ -43,15 +43,15 @@ const SchimbareParola = () => {
                 const data = await imageFiles();
                 return data;
             } catch (error) {
-
+                console.error("Error fetching image data:", error);
                 return [];
             }
         };
 
         const getData = async () => {
             const result = await fetchImageData();
-            const schimbParolaPicture = result.find((element) => element.name === "schimbareParola.png");
-            const facturaPicture = result.find((element) => element.name === "factura.png");
+            const schimbParolaPicture = result.find((element) => element.name === "schimbareParola.png") || { url: "/cancel.webp" };
+            const facturaPicture = result.find((element) => element.name === "factura.png") || { url: "/cancel.webp" };
             setPictures({
                 schimbParolaPicture,
                 facturaPicture,
@@ -80,7 +80,7 @@ const SchimbareParola = () => {
     return (
         <div className="schimbareParola-container">
             <div className="setari-welcome">
-                <h4 className="headers">Bine ați venit</h4>
+                <h2 className="headers">Bine ați venit</h2>
                 <h3 className="headers">{formData.surname} <span>{formData.name}</span></h3>
             </div>
 
@@ -88,9 +88,13 @@ const SchimbareParola = () => {
                 <Link href="/setari/schimbare-parola" className="setari">
                     <p className="setari">
                         <span>
-                            <Image className="setari-picture" alt="settings icon" src={`${pictures ? pictures.schimbParolaPicture?.url: "cancel.webp"}`}
-                            height={24}
-                            width={24} />
+                            <Image
+                                className="setari-picture"
+                                alt="settings icon"
+                                src={pictures.schimbParolaPicture?.url || "/cancel.webp"}
+                                height={24}
+                                width={24}
+                            />
                         </span>
                         Schimbare parolă
                     </p>
@@ -98,9 +102,13 @@ const SchimbareParola = () => {
                 <Link href="/setari/informati-de-baza" className="setari">
                     <p className="setari">
                         <span>
-                            <Image className="setari-picture" alt="settings icon" src={`${pictures ? pictures.facturaPicture?.url: "cancel.webp"}`} 
-                            width={24}
-                            height={24}/>
+                            <Image
+                                className="setari-picture"
+                                alt="settings icon"
+                                src={pictures.facturaPicture?.url || "/cancel.webp"}
+                                width={24}
+                                height={24}
+                            />
                         </span>
                         Date facturare
                     </p>

@@ -6,7 +6,10 @@ import Image from 'next/image';
 
 const ProdusCard = ({ description, title, image, disponibil, price }) => {
   const handleData = () => {
-    Cookies.set("description", description, { expires: 1 });
+    Cookies.set("description", description, {secure: true,
+      sameSite: 'Strict',
+      expires: 1,   
+      path: '/', });
     Cookies.set("title", title, {secure: true,
       sameSite: 'Strict',
       expires: 1,   

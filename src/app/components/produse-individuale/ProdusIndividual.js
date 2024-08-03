@@ -19,6 +19,7 @@ const Produs = ({ img, description, title, price }) => {
     const [renderPersonalizare, setRenderPesonalizare] = useState(false);
     const [prices, setPrices] = useState(price);
     const [ifVopsit, setIfVopsit] = useState(false);
+    const [adaugaInCosShow, setAdaugaInCosShow] = useState(false);
 
     useEffect(() => {
         const fetchDataAndFilter = async () => {
@@ -63,6 +64,12 @@ const Produs = ({ img, description, title, price }) => {
     };
     
     const handleUserData = async () => {
+        setAdaugaInCosShow(true);
+
+        setTimeout(function() {
+            setAdaugaInCosShow(false)
+        }, 1000);
+        
         try {
             const data = await userData();
             const filteredSpecificPanouUserRelatedData = data.data.filter(element => element.attributes.title === title);
@@ -115,6 +122,8 @@ const Produs = ({ img, description, title, price }) => {
         }
     };
 
+    const bifa="/bifa.png";
+
     return (
         <div className="produs-individual-container">
             <div className="produs-individual-columns">
@@ -146,9 +155,10 @@ const Produs = ({ img, description, title, price }) => {
                         variant="contained"
                         onClick={handleUserData}
                         sx={{
-                            backgroundColor: "black",
+                            backgroundColor: "green",
                             marginTop: "50px",
                             width: "50%",
+                            height:"50px",
                             maxWidth: "300px",
                             marginBottom: "100px",
                             "&:hover": {
@@ -157,6 +167,9 @@ const Produs = ({ img, description, title, price }) => {
                         }}
                     >
                         Adauga in cos
+                    {adaugaInCosShow ? (<div>
+                        <Image src={`${bifa ? bifa:null}`} width={50} height={50}/>
+                    </div>):null}
                     </Button>
                 </div>
             </div>
