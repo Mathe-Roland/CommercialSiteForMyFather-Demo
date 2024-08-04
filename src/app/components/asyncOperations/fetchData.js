@@ -3,6 +3,41 @@ import Cookies from 'js-cookie';
 
 
 
+export const postNonRegisteredUserComanda = async (userId,imageId,data) => {
+
+  const description=Cookies.get("description");
+  const title=Cookies.get("title");
+
+  const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates?populate=*`;
+
+  const headers = {
+    "Content-type": "application/json; charset=UTF-8",
+  };
+  
+  axios
+    .post(
+      url,
+      {
+        data: {
+          users_permissions_user: userId,
+          description: description,
+          image: imageId,
+          title: title,
+          price:data.price,
+          optiuniNormale:data.optiuninormale,
+          quantity:1,
+        },
+      },
+      { headers: headers }
+    )
+    .then((response) => {
+    })
+    .catch((error) => {
+    });
+};
+
+
+
 export const fetchPanouriData= async()=>{
     try{
         const response=await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates?populate=*`)
@@ -486,7 +521,6 @@ export const userData = async () => {
   };
 
 
-  // /api/contacts
 
 
 
@@ -527,7 +561,6 @@ export const userData = async () => {
 
 export const paymentSession=async ()=>{
   const metadataResponse = await userData();
-  // Send amount and metadata to the server
   const response = await fetch("/api/create-payment-intent", {
     method: "POST",
     headers: {
