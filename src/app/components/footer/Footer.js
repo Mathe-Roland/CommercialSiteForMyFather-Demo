@@ -37,10 +37,10 @@ const Footer = () => {
                 <hr />
                 <div className="footer-second-part-columns">
                     <p className="footer-email">
-                        Adresa de e-mail: <span className="black">@apusite@yahoo.com</span>
+                        Adresa de e-mail: <span className="black">Mostrik.dreamland@gmail.com</span>
                     </p>
                     <p className="footer-phone">
-                        Numar de telefon: <span className="black">@apusite@yahoo.com</span>
+                        Numar de telefon: <span className="black">0770 803 858</span>
                     </p>
                 </div>
             </section>
