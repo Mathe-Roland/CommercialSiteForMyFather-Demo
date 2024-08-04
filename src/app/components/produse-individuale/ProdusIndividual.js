@@ -8,6 +8,7 @@ import CommentPages from "../commentPages/CommentPages";
 import DropdownMui from "../dropdown-marimi/DropdownMarimi";
 import Cookies from "js-cookie";
 import Image from 'next/image';
+import { v4 as uuidv4 } from 'uuid'; 
 
 const Produs = ({ img, description, title, price }) => {
     const [commentList, setCommentList] = useState([]);
@@ -64,6 +65,24 @@ const Produs = ({ img, description, title, price }) => {
     };
     
     const handleUserData = async () => {
+
+
+        if(!username){
+
+            let userUuid = localStorage.getItem("userUUID");
+    
+            if (!userUuid) {
+                userUuid = uuidv4();
+                localStorage.setItem('userUUID', userUuid);
+                }
+                
+
+        }
+
+
+
+        
+        
         setAdaugaInCosShow(true);
 
         setTimeout(function() {

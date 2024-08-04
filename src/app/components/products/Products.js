@@ -37,7 +37,7 @@ const Products = () => {
       <div className='margin0Auto'>
         {cardList.length > 0 ? cardList.map((data, index) => (
           <ProdusCard
-            key={index}
+            key={data.id}
             image={data.attributes?.image?.data?.attributes?.url}
             title={data.attributes?.title}
             disponibil={"Produs Disponibil"}

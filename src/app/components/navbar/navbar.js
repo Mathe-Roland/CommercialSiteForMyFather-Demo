@@ -36,30 +36,36 @@ const Navbar = () => {
     <div className="navbar">
       <div className="navbar-centered">
         <div className="navbar-contents">
-          {navbarData.items.map((element, index) => (
+          {navbarData.items.map((element,index) => (
             <div 
-              key={index}
-              onMouseEnter={() => handleMouseEnter(index)}
+              key={element} // Use the element itself as the key
+              onMouseEnter={() => handleMouseEnter(navbarData.items.indexOf(element))}
               onMouseLeave={handleMouseLeave}
             >
-                  {index===1 ? 
-                  <p className='navbar-text'>
-                    {element}
-                  </p>
-                  
-                :
-                   <p className='navbar-text'>
-                <Link href={element === "Acasa" ? "/" : generateUrl(element) || "/"}>
+              {element === "Acasa" ? (
+                <Link href={"/"}>
+                
+                <p className='navbar-text'>
                   {element}
+                </p>
                 </Link>
-              </p>}             
-              {showAcasa && index===1? (
-                <div 
-                  className="width100"
-                >
+                
+              ) : (element==="Magazin"?
+                <p className='navbar-text'>
+                  {element}
+                </p>
+              :
+                <p className='navbar-text'>
+                  <Link href={generateUrl(element)}>
+                    {element}
+                  </Link>
+                </p>
+              )}
+              {showAcasa && index === 1 ? (
+                <div className="width100">
                   <Acasa />
                 </div>
-              ):null}
+              ) : null}
             </div>
           ))}
         </div>
@@ -73,21 +79,18 @@ const Navbar = () => {
             value={selectedOption}
             onChange={handleChange}
           >
-            {navbarData.items.map((e,index)=>{
-              return (
-                <div>
-              {index===1 ?
-              null
-              :
-              <MenuItem component="a" href={index===0 ? "/" :e.toLowerCase().split(" ").join("-")} value={e}>
-                {e}
-              </MenuItem>
-            }
-
-                </div>
-              )
-            }
-            )}
+            {navbarData.items.map((e) => (
+              e !== "Acasa" ? (
+                <MenuItem 
+                  key={e} 
+                  component="a" 
+                  href={e.toLowerCase().split(" ").join("-")} 
+                  value={e}
+                >
+                  {e}
+                </MenuItem>
+              ) : null
+            ))}
           </Select>
         </FormControl>
       </div>

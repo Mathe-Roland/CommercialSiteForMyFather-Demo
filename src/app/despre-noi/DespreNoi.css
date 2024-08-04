@@ -11,3 +11,16 @@
 .despre-noi-loading{
     min-height: 100vh;
 }
+
+.accordion-container{
+    min-width: 240px;
+    max-width: 25%;
+}
+
+@media screen and (min-width:600px){
+    .despre-noi-container{
+        display: flex;
+        gap: 40px;
+    }
+    
+}

@@ -10,7 +10,7 @@ const Acasa=()=>{
 
         <div className="heightvh">
             {accordion.map((e,index)=>(
-                <div key={index} className="acasa">
+                <div key={e} className="acasa">
                 <Link className="acasa-link" href={`/${e}`}>
                 <h3 >{e.split("-").join(" ")}</h3>
                

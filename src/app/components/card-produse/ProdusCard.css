@@ -20,6 +20,11 @@
   height: 20px;
 }
 
+.ignore{
+  display: contents;
+
+}
+
 .produs-pret{
   display: block;
   width: 100%;

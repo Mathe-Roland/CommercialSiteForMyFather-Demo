@@ -57,6 +57,7 @@ const PanouriDecorative=()=>{
                     {cardList.length>0?
                     (cardList.map((e)=>(         
                         <ProdusCard
+                            key={e.id}
                             description={e.attributes.description}
                             title={e.attributes.title}
                             image={e.attributes.image.data.attributes.url}

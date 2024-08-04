@@ -44,15 +44,17 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
       <div className="produs-content">
         <h2 className="title-produs">{title}</h2>
         <div className="produs-description">{description}</div>
-        <div className="produs-pret"><p>{price} RON</p></div>
+        <div className="produs-pret"><p> De la {price} RON</p></div>
         <div className="produs-disponibil"><p>{disponibil}</p></div>
-        <Link href={`/produse/${encodeURIComponent(title)}`}>
+        <Link className="ignore" 
+        href={`/produse/${encodeURIComponent(title)}`}>
           <Button
             variant="contained"
             color="primary"
             onClick={handleData}
             sx={{
               backgroundColor: "green",
+              textDecoration:"none",
               margin:"auto",
               display:"block",
               "&:hover": {

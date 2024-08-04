@@ -74,6 +74,13 @@ const Header = () => {
               <LoginModal setLogin={setIsLoggedIn}/>
             }
           </div>
+          <div className="row j-c-c align-items-c">
+            <Link href={"/cos"}>
+            <p className="Header-cos">Cos</p>
+
+            </Link>
+           
+          </div>
         </div>
       </div>
     </div>

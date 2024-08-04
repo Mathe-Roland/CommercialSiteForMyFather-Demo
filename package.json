@@ -26,7 +26,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-medium-image-zoom": "^5.2.5",
-    "stripe": "^16.2.0"
+    "stripe": "^16.2.0",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",

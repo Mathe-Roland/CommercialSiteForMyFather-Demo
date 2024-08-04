@@ -171,7 +171,6 @@ export const fetchId = async (title) => {
 
     const headers = {
         "Content-type": "application/json; charset=UTF-8",
-        // No Authorization header needed
     };
 
     axios
