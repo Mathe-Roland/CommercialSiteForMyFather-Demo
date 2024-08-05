@@ -3,11 +3,12 @@
 import CosCard from "../components/cos/CosCard";
 import "./Cos.css";
 import { useState, useEffect } from "react";
-import { userData, postareComenzi, completeUserData, deleteProductData, updateProductQuantity } from "../components/asyncOperations/fetchData";
+import { nonRegisteredUserData,userData, postareComenzi, completeUserData, deleteProductData, updateProductQuantity } from "../components/asyncOperations/fetchData";
 import Button from '@mui/material/Button';
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { loadStripe } from '@stripe/stripe-js';
+import Cookies from "js-cookie";
 
 
 const stripePromise = loadStripe(
@@ -21,15 +22,49 @@ const Cos = () => {
     const [payment, setPayment] = useState("");
     
     const router=useRouter();
-    useEffect(() => {
-        
-        const fetchCardListData = async () => {
-            try {
-                const data = await userData();
-                if (data && data.data) {
-                    setCardList(data);
 
-                    const updatedData = data.data.map(item => {
+    useEffect(() => {
+        const userExistsOrNot=Cookies.get("user") || 0;
+        if(userExistsOrNot!==0){
+            const fetchCardListData = async () => {
+                try {
+                    const data = await userData();
+                    if (data && data.data) {
+                        setCardList(data);
+    
+                        const updatedData = data.data.map(item => {
+                            const matchedItem = cardList.data.find(databaseItem => databaseItem.attributes.title === item.attributes.title);
+                            if (matchedItem) {
+                                item.counting = matchedItem.attributes.quantity || 0;
+                            }
+                            return item;
+                        });
+                        setCardList({ data: updatedData });
+    
+                        let totalSum = 0;
+                        updatedData.forEach((element) => {
+                            const price = element.attributes.price || 0;
+                            const counting = element.counting || 0;
+                            totalSum += price * counting;
+                        });
+    
+                        setGrandTotal(totalSum);
+                    } else {
+                        setCardList({ data: [] });
+                    }
+                } catch (error) {
+                }
+            };
+            fetchCardListData();
+        }else{
+            const nonRegisteredUserDataFetch=async()=>{
+                const totalNonRegisteredData=await nonRegisteredUserData();
+                const actualUUID=localStorage.get("userUUID");
+                const filteredCards=totalNonRegisteredData.data.map((e)=>e.attributes.UniqueIdentifier===actualUUID);
+                if (filteredCards && filteredCards.data) {
+                    setCardList(filteredCards);
+
+                    const updatedData = filteredCards.data.map(item => {
                         const matchedItem = cardList.data.find(databaseItem => databaseItem.attributes.title === item.attributes.title);
                         if (matchedItem) {
                             item.counting = matchedItem.attributes.quantity || 0;
@@ -49,10 +84,14 @@ const Cos = () => {
                 } else {
                     setCardList({ data: [] });
                 }
-            } catch (error) {
+                
+                nonRegisteredUserDataFetch();
+                 
             }
-        };
-        fetchCardListData();
+
+        }
+
+
     }, []);
 
     useEffect(() => {
