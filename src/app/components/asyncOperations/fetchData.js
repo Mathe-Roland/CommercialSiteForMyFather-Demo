@@ -3,12 +3,12 @@ import Cookies from 'js-cookie';
 
 
 
-export const postNonRegisteredUserComanda = async (userId,imageId,data) => {
+export const postNonRegisteredUserComanda = async (imageId,data,quantity,ifVopsit) => {
 
   const description=Cookies.get("description");
   const title=Cookies.get("title");
 
-  const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates?populate=*`;
+  const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouritraforates?populate=*`;
 
   const headers = {
     "Content-type": "application/json; charset=UTF-8",
@@ -19,13 +19,44 @@ export const postNonRegisteredUserComanda = async (userId,imageId,data) => {
       url,
       {
         data: {
-          users_permissions_user: userId,
+          UniqueIdentifier: data.UniqueIdentifier,
           description: description,
           image: imageId,
           title: title,
           price:data.price,
           optiuniNormale:data.optiuninormale,
-          quantity:1,
+          quantity:quantity,
+          vopsit:ifVopsit,
+        },
+      },
+      { headers: headers }
+    )
+    .then((response) => {
+    })
+    .catch((error) => {
+    });
+};
+
+
+export const updateNonRegisteredUserData = async (productId,quantity,data) => {
+
+
+
+  const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouritraforates/${productId}`;
+
+
+  const headers = {
+    "Content-type": "application/json; charset=UTF-8",
+  };
+  
+  axios
+    .put(
+      url,
+      {
+        data: {
+          price:data.price,
+          optiuniNormale:data.optiuninormale,
+          quantity:quantity
         },
       },
       { headers: headers }
@@ -162,7 +193,7 @@ export const fetchId = async (title) => {
   };
 
 
-  export const userRelatedData = async (userId,imageId,data) => {
+  export const userRelatedData = async (userId,imageId,data,ifVopsit) => {
     const token = Cookies.get("token");
   
     const description=Cookies.get("description");
@@ -187,6 +218,7 @@ export const fetchId = async (title) => {
             price:data.price,
             optiuniNormale:data.optiuninormale,
             quantity:1,
+            vopsit:ifVopsit,
           },
         },
         { headers: headers }

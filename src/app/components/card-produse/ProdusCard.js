@@ -31,7 +31,7 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
 
       <Image
         src={ image ? image : ""}
-        alt={title? title :""}
+        alt={title ? title :""}
         width={204}
         height={204}
         layout="responsive"

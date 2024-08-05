@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "./ProdusIndividual.css";
 import Button from '@mui/material/Button';
-import { fetchPanouriData, fetchPanouriCommentsPerPanouId, updateProductData, userData, userRelatedComments, userIds, imageFiles, userRelatedData } from "../asyncOperations/fetchData";
+import {updateNonRegisteredUserData,postNonRegisteredUserComanda,fetchPanouriData, fetchPanouriCommentsPerPanouId, updateProductData, userData, userRelatedComments, userIds, imageFiles, userRelatedData } from "../asyncOperations/fetchData";
 import Comments from "../comments/Comments";
 import AddCommentModal from "../coment-Modal/AddCommentModal";
 import CommentPages from "../commentPages/CommentPages"; 
@@ -66,25 +66,8 @@ const Produs = ({ img, description, title, price }) => {
     
     const handleUserData = async () => {
 
-
-        if(!username){
-
-            let userUuid = localStorage.getItem("userUUID");
-    
-            if (!userUuid) {
-                userUuid = uuidv4();
-                localStorage.setItem('userUUID', userUuid);
-                }
-                
-
-        }
-
-
-
-        
-        
         setAdaugaInCosShow(true);
-
+        
         setTimeout(function() {
             setAdaugaInCosShow(false)
         }, 1000);
@@ -93,27 +76,67 @@ const Produs = ({ img, description, title, price }) => {
             const data = await userData();
             const filteredSpecificPanouUserRelatedData = data.data.filter(element => element.attributes.title === title);
             const filteredOptiuniNormale = filteredSpecificPanouUserRelatedData.filter(element => element.attributes.optiuniNormale === selectedValues);
+            const filteredVopsit = filteredSpecificPanouUserRelatedData[0].attributes.vopsit===true;
+            const images = Cookies.get("image");
+            const filesData = await imageFiles();
+            const currentImage = filesData.filter(image => image.url === images);
+            
+            if(!username){
     
-            if (filteredSpecificPanouUserRelatedData.length > 0) {
-                if (filteredOptiuniNormale.length > 0) {
-                    const newDatas = { price: price, optiuninormale: selectedValues };
-                    await updateProductData(filteredOptiuniNormale[0].id, filteredOptiuniNormale[0].attributes.quantity + 1, newDatas);
+                let userUuid = localStorage.getItem("userUUID");
+        
+                if (!userUuid) {
+                    userUuid = uuidv4();
+                    localStorage.setItem('userUUID', userUuid);
+                    };
+
+                    if (filteredSpecificPanouUserRelatedData.length > 0) {
+                        if (filteredOptiuniNormale && filteredVopsit) {
+                            const newDatas = { price: ifVopsit ? prices : handlePrice(selectedValues),UniqueIdentifier:userUuid, optiuninormale: selectedValues };
+
+                            await updateNonRegisteredUserData(filteredOptiuniNormale[0].id, filteredOptiuniNormale[0].attributes.quantity + 1, newDatas)
+                        } else{
+    
+                            if(filteredOptiuniNormale){
+                                
+                                const newDatas = { price: ifVopsit ? prices : handlePrice(selectedValues),UniqueIdentifier:userUuid,optiuninormale: selectedValues };
+                            await updateNonRegisteredUserData(filteredOptiuniNormale[0].id, filteredOptiuniNormale[0].attributes.quantity + 1, newDatas)
+                            }else{
+                                const id = await userIds();
+                                const newDatas = { price: ifVopsit ? prices : handlePrice(selectedValues),UniqueIdentifier:userUuid,optiuninormale: selectedValues };
+                                await postNonRegisteredUserComanda(id, currentImage[0].id, newDatas,ifVopsit);
+                            }
+                        }
+                    } else {
+                        const id = await userIds();
+                        const newDatas = { price: ifVopsit ? prices : handlePrice(selectedValues),UniqueIdentifier:userUuid, optiuninormale: selectedValues };
+                        await postNonRegisteredUserComanda(id, currentImage[0].id, newDatas,ifVopsit);
+                    }
+
+            }else{
+                if (filteredSpecificPanouUserRelatedData.length > 0) {
+                    if (filteredOptiuniNormale && filteredVopsit) {
+                        const newDatas = { price: ifVopsit ? prices : handlePrice(selectedValues), optiuninormale: selectedValues };
+                        await updateProductData(filteredOptiuniNormale[0].id, filteredOptiuniNormale[0].attributes.quantity + 1, newDatas);
+                    } else{
+
+                        if(filteredOptiuniNormale){
+                            
+                            const newDatas = { price: ifVopsit ? prices : handlePrice(selectedValues), optiuninormale: selectedValues };
+                            await updateProductData(filteredOptiuniNormale[0].id, filteredOptiuniNormale[0].attributes.quantity + 1, newDatas);
+                        }else{
+                            const id = await userIds();
+                            const newDatas = { price: ifVopsit ? prices : handlePrice(selectedValues), optiuninormale: selectedValues };
+                            await userRelatedData(id, currentImage[0].id, newDatas,ifVopsit);
+                        }
+                    }
                 } else {
-                    const images = Cookies.get("image");
-                    const filesData = await imageFiles();
-                    const currentImage = filesData.filter(image => image.url === images);
                     const id = await userIds();
                     const newDatas = { price: ifVopsit ? prices : handlePrice(selectedValues), optiuninormale: selectedValues };
-                    await userRelatedData(id, currentImage[0].id, newDatas);
+                    await userRelatedData(id, currentImage[0].id, newDatas,ifVopsit);
                 }
-            } else {
-                const images = Cookies.get("image");
-                const filesData = await imageFiles();
-                const currentImage = filesData.filter(image => image.url === images);
-                const id = await userIds();
-                const newDatas = { price: ifVopsit ? prices : handlePrice(selectedValues), optiuninormale: selectedValues };
-                await userRelatedData(id, currentImage[0].id, newDatas);
             }
+
         } catch (error) {
             
         }
