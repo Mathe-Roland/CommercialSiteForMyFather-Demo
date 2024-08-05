@@ -74,8 +74,11 @@ const Produs = ({ img, description, title, price }) => {
         
         try {
             const data = await userData();
+            const nonregisteredData=await nonRegisteredUserData();
             const filteredSpecificPanouUserRelatedData = data.data.filter(element => element.attributes.title === title);
-            const filteredOptiuniNormale = filteredSpecificPanouUserRelatedData.filter(element => element.attributes.optiuniNormale === selectedValues);
+            const filteredSpecificPanouNonRegisteredUser = nonregisteredData.data.filter(element => element.attributes.title === title);
+            const filteredOptiuniNormale = filteredSpecificPanouUserRelatedData.filter(element => element.attributes.optiuniNormale === selectedValues);  
+            const filteredOptiuniNonRegistered = filteredSpecificPanouNonRegisteredUser.filter(element => element.attributes.optiuniNormale === selectedValues);  
             const filteredVopsit = filteredSpecificPanouUserRelatedData[0].attributes.vopsit===true;
             const images = Cookies.get("image");
             const filesData = await imageFiles();
@@ -90,14 +93,15 @@ const Produs = ({ img, description, title, price }) => {
                     localStorage.setItem('userUUID', userUuid);
                     };
 
-                    if (filteredSpecificPanouUserRelatedData.length > 0) {
-                        if (filteredOptiuniNormale && filteredVopsit) {
+                    if (filteredSpecificPanouNonRegisteredUser.length > 0) {
+                        if (filteredOptiuniNonRegistered && filteredVopsit) {
+                            console.log(filteredOptiuniNormale,filteredVopsit)
                             const newDatas = { price: ifVopsit ? prices : handlePrice(selectedValues),UniqueIdentifier:userUuid, optiuninormale: selectedValues };
 
                             await updateNonRegisteredUserData(filteredOptiuniNormale[0].id, filteredOptiuniNormale[0].attributes.quantity + 1, newDatas)
                         } else{
     
-                            if(filteredOptiuniNormale){
+                            if(filteredOptiuniNonRegistered){
                                 
                                 const newDatas = { price: ifVopsit ? prices : handlePrice(selectedValues),UniqueIdentifier:userUuid,optiuninormale: selectedValues };
                             await updateNonRegisteredUserData(filteredOptiuniNormale[0].id, filteredOptiuniNormale[0].attributes.quantity + 1, newDatas)
