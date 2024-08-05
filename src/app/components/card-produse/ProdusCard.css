@@ -36,7 +36,6 @@
 .produs-disponibil{
   text-align: center;
 }
-
 .produs-content{
   display: flex;
   flex-direction: column;
@@ -54,13 +53,15 @@
   margin: auto;
 }
 
-.produs-image{
-  max-height: 204px;
-}
 
 @media screen  and (min-width:600px){
   .produs-container{
     width: 204px;
     height: 440px;
   } 
+
+  .produs-image{
+    max-height: 220px;
+  }
+
 }
