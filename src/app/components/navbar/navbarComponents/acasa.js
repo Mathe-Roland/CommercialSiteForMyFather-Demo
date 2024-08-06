@@ -15,7 +15,7 @@ const Acasa=()=>{
                 <h3 >{e.split("-").join(" ")}</h3>
                
                 </Link>
-                <div className="acasa">
+                <div className="acasa-pictures">
                     <img className="smallCatPicture" src="https://viralcats.net/blog/wp-content/uploads/2020/02/Relaxed-by-Ionut-Donici.jpg"/>
                     <img className="smallCatPicture" src="https://viralcats.net/blog/wp-content/uploads/2020/02/Relaxed-by-Ionut-Donici.jpg"/>
                     <img className="smallCatPicture" src="https://viralcats.net/blog/wp-content/uploads/2020/02/Relaxed-by-Ionut-Donici.jpg"/>

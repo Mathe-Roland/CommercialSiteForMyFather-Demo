@@ -1,24 +1,19 @@
 .acasa-height{
-
     background-color: red;
     color:blue;
     height:50px;
-
 }
 
 .smallCatPicture{
     height: 50px;
     width: 50px;
-    
 }
 
 .heightvh {
-
     display: flex;
     height: 300px;
     width: 100%;
     background-color: white;
-
 }
 
 .acasa-link {
@@ -27,11 +22,9 @@
 }
 
 .acasa{
-    
     text-align: center;
     padding:20px;
     margin:0 auto;
-
 }
 
 .acasa-pictures{
@@ -45,7 +38,6 @@
 
 
 .acasa-ih{
-
     height :56px;
     width: 60px;
 }
