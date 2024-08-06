@@ -10,15 +10,15 @@ const Acasa=()=>{
 
         <div className="heightvh">
             {accordion.map((e,index)=>(
-                <div key={e} className="acasa">
+                <div key={index} className="acasa">
                 <Link className="acasa-link" href={`/${e}`}>
                 <h3 >{e.split("-").join(" ")}</h3>
                
                 </Link>
                 <div className="acasa">
-                <Image className="acasa-ih" alt="failed to load" src={""} width={24} height={24}/>
-                <Image className="acasa-ih" alt="failed to load" src={""} width={24} height={24}/>
-                <Image className="acasa-ih" alt="failed to load" src={""} width={24} height={24}/>
+                    <img className="smallCatPicture" src="https://viralcats.net/blog/wp-content/uploads/2020/02/Relaxed-by-Ionut-Donici.jpg"/>
+                    <img className="smallCatPicture" src="https://viralcats.net/blog/wp-content/uploads/2020/02/Relaxed-by-Ionut-Donici.jpg"/>
+                    <img className="smallCatPicture" src="https://viralcats.net/blog/wp-content/uploads/2020/02/Relaxed-by-Ionut-Donici.jpg"/>
                 </div>
 
                 </div>
