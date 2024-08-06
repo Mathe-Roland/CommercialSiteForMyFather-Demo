@@ -8,7 +8,6 @@ import Button from '@mui/material/Button';
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { loadStripe } from '@stripe/stripe-js';
-import Cookies from "js-cookie";
 
 
 const stripePromise = loadStripe(

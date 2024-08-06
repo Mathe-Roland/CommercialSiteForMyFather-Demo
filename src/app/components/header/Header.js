@@ -26,14 +26,17 @@ const Header = () => {
     setShow(false);
   }
 
-  const hamburger="/hamburger_menu.png"
+  const hamburger="/hamburger_menu.png";
+  const monsrikLogo="/logosDecorcut.png";
 
   return (
     <div className='navbar-title-and-searchbar'>
       <div className="row width80 j-c-b">
         <div>
-          <h1 className="t-n-r">Decorcut</h1>
-          <h2 className="t-n-r">Monstrik Dreamland</h2>
+          <Image src={monsrikLogo ? monsrikLogo : "/cancel.webp"}
+          width={100}
+          height={100}
+          />
         </div>
         <div>
           <div onMouseLeave={handleHamburger} className="hamburger-dropdown">

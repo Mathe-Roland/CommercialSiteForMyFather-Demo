@@ -91,8 +91,8 @@ import Image from "next/image";
                     <Image
                         alt="login"
                         src={`${image ? image :null}`}
-                        width={48}
-                        height={48}
+                        width={40}
+                        height={50}
                     />
                 </button>
                 {showUserInfo && (

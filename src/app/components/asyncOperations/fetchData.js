@@ -3,19 +3,18 @@ import Cookies from 'js-cookie';
 
 
 
-export const postNonRegisteredUserComanda = async (imageId,data,quantity,ifVopsit) => {
-
-  const description=Cookies.get("description");
-  const title=Cookies.get("title");
+export const postNonRegisteredUserComanda = async (imageId, data, quantity, ifVopsit) => {
+  const description = Cookies.get("description");
+  const title = Cookies.get("title");
 
   const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouritraforates?populate=*`;
 
   const headers = {
     "Content-type": "application/json; charset=UTF-8",
   };
-  
-  axios
-    .post(
+
+  try {
+    const response = await axios.post(
       url,
       {
         data: {
@@ -23,19 +22,21 @@ export const postNonRegisteredUserComanda = async (imageId,data,quantity,ifVopsi
           description: description,
           image: imageId,
           title: title,
-          price:data.price,
-          optiuniNormale:data.optiuninormale,
-          quantity:quantity,
-          vopsit:ifVopsit,
+          price: data.price,
+          optiuniNormale: data.optiuninormale,
+          quantity: quantity,
+          vopsit: ifVopsit,
         },
       },
       { headers: headers }
-    )
-    .then((response) => {
-    })
-    .catch((error) => {
-    });
+    );
+    // Handle response if needed
+    console.log("Response:", response.data);
+  } catch (error) {
+    console.error("Error posting data:", error.message || error.response || error);
+  }
 };
+
 
 
 export const updateNonRegisteredUserData = async (productId,quantity,data) => {
@@ -193,7 +194,7 @@ export const fetchId = async (title) => {
   };
 
 
-  export const userRelatedData = async (userId,imageId,data,ifVopsit) => {
+  export const userRelatedData = async (userId,imageId,data) => {
     const token = Cookies.get("token");
   
     const description=Cookies.get("description");
@@ -218,7 +219,6 @@ export const fetchId = async (title) => {
             price:data.price,
             optiuniNormale:data.optiuninormale,
             quantity:1,
-            vopsit:ifVopsit,
           },
         },
         { headers: headers }
@@ -368,6 +368,18 @@ export const completeUserData=async ()=>{
 });
   };
   
+  export const imageNonREgisteredUser=async ()=>{
+
+
+    const headers = {
+    "Content-type": "application/json; charset=UTF-8",
+    };
+    
+    const response=await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/upload/files`, { headers: headers });
+
+    return response.data;
+   
+}
 
 
   export const imageFiles=async ()=>{
