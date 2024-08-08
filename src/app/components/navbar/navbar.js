@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import Link from 'next/link'; // Use next/link for navigation in Next.js
+import Link from 'next/link';
 import './navbar.css';
 import Acasa from './navbarComponents/acasa';
 
@@ -79,8 +79,11 @@ const Navbar = () => {
             value={selectedOption}
             onChange={handleChange}
           >
-            {navbarData.items.map((e) => (
+            {navbarData.items.map((e,index) => (
               e !== "Acasa" ? (
+                index===1?
+                null
+                :
                 <MenuItem 
                   key={e} 
                   component="a" 
@@ -89,7 +92,14 @@ const Navbar = () => {
                 >
                   {e}
                 </MenuItem>
-              ) : null
+              ) : (<MenuItem 
+                key={e} 
+                component="a" 
+                href={"/"} 
+                value={e}
+              >
+                {e}
+              </MenuItem>)
             ))}
           </Select>
         </FormControl>

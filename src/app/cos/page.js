@@ -56,14 +56,15 @@ const Cos = () => {
             };
             fetchCardListData();
         }else{
+            const actualUUID=localStorage.getItem("userUUID");
             const nonRegisteredUserDataFetch=async()=>{
                 const totalNonRegisteredData=await nonRegisteredUserData();
-                const actualUUID=localStorage.get("userUUID");
-                const filteredCards=totalNonRegisteredData.data.map((e)=>e.attributes.UniqueIdentifier===actualUUID);
-                if (filteredCards && filteredCards.data) {
-                    setCardList(filteredCards);
-
-                    const updatedData = filteredCards.data.map(item => {
+                const filteredCards=totalNonRegisteredData.data.filter((e)=>e.attributes.UniqueIdentifier===actualUUID);
+                if (filteredCards) {
+                    setCardList({data:filteredCards});
+                    
+                    console.log(filteredCards);
+                    const updatedData = filteredCards.map(item => {
                         const matchedItem = cardList.data.find(databaseItem => databaseItem.attributes.title === item.attributes.title);
                         if (matchedItem) {
                             item.counting = matchedItem.attributes.quantity || 0;
@@ -84,9 +85,8 @@ const Cos = () => {
                     setCardList({ data: [] });
                 }
                 
-                nonRegisteredUserDataFetch();
-                 
             }
+            nonRegisteredUserDataFetch();
 
         }
 

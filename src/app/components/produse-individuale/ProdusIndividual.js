@@ -127,7 +127,7 @@ const Produs = ({ img, description, title, price }) => {
                                 UniqueIdentifier: userUuid,
                                 optiuninormale: selectedValues
                             };
-                            await postNonRegisteredUserComanda(currentImage[0].id, newDatas, ifVopsit);
+                            await postNonRegisteredUserComanda(currentImage[0].id,newDatas,1);
                         }
                     }
                 } else {
@@ -136,7 +136,7 @@ const Produs = ({ img, description, title, price }) => {
                         UniqueIdentifier: userUuid,
                         optiuninormale: selectedValues
                     };
-                    await postNonRegisteredUserComanda(currentImage[0].id, newDatas, ifVopsit);
+                    await postNonRegisteredUserComanda(currentImage[0].id,newDatas,1);
                 }
             } else {
                 const data = await userData();

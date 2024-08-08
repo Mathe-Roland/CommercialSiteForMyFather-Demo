@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 
 
 
-export const postNonRegisteredUserComanda = async (imageId, data, quantity, ifVopsit) => {
+export const postNonRegisteredUserComanda = async (imageId, data, quantity) => {
   const description = Cookies.get("description");
   const title = Cookies.get("title");
 
@@ -25,12 +25,10 @@ export const postNonRegisteredUserComanda = async (imageId, data, quantity, ifVo
           price: data.price,
           optiuniNormale: data.optiuninormale,
           quantity: quantity,
-          vopsit: ifVopsit,
         },
       },
       { headers: headers }
     );
-    // Handle response if needed
     console.log("Response:", response.data);
   } catch (error) {
     console.error("Error posting data:", error.message || error.response || error);
