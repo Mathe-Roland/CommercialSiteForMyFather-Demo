@@ -3,7 +3,7 @@
 import CosCard from "../components/cos/CosCard";
 import "./Cos.css";
 import { useState, useEffect } from "react";
-import { nonRegisteredUserData,userData, postareComenzi, completeUserData, deleteProductData, updateProductQuantity } from "../components/asyncOperations/fetchData";
+import { updateProductQuantityForNonRegisteredUser,nonRegisteredUserData,userData, postareComenzi, completeUserData, deleteProductData, updateProductQuantity } from "../components/asyncOperations/fetchData";
 import Button from '@mui/material/Button';
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
@@ -146,10 +146,22 @@ const Cos = () => {
 
                 alert("Comanda a fost trimisă cu succes!");
                 setCardList({ data: [] });
-                setGrandTotal(0);
+                setGrandTotal(0);   
+
+                const panouForSpecificUser=await nonRegisteredUserData();
+
+                const UUIDS=localStorage.getItem("userUUID");
+              
+                const panouForNonRegisteredUser=panouForSpecificUser.data.filter((e)=>e.attributes.UniqueIdentifier===UUIDS);
+              
+                 await Promise.all(panouForNonRegisteredUser.map(async (element) => {
+                   await deleteNonRegisteredUserProduct(element.id);
+                }));
+
+                window.location.href = "/payment-success";
+
             }
         } else if (payment === "card") {
-            if (username) {
                 if (username) {
                     const user = await userData();
                     const data = await completeUserData();
@@ -165,6 +177,7 @@ const Cos = () => {
                     await Promise.all(updatedItems.map(async (element) => {
                         await updateProductQuantity(element.id, element.attributes.quantity);
                     }));
+
                     
 
                     fetch("/api/checkout_sessions", {
@@ -188,8 +201,47 @@ const Cos = () => {
                         });
                 } else {
 
+                    const panouForSpecificUser=await nonRegisteredUserData();
+
+                    const UUIDS=localStorage.getItem("userUUID")
+                  
+                    const panouForNonRegisteredUser=panouForSpecificUser.data.filter((e)=>e.attributes.UniqueIdentifier===UUIDS);
+                  
+
+                    const updatedItems = panouForNonRegisteredUser?.map(item => ({
+                        ...item,
+                        attributes: {
+                            ...item.attributes,
+                            quantity: cardList?.data?.find(cardItem => cardItem.id === item.id)?.counting || item.attributes.quantity
+                        }
+                    }));
+    
+                    await Promise.all(updatedItems.map(async (element) => {
+                        await updateProductQuantityForNonRegisteredUser(element.id, element.attributes.quantity);
+                    }));
+                    
+
+                    fetch("/api/checkout_sessions", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            cart: cardList,
+                        }),
+                    })
+                        .then(res => {
+                            if (res.ok) return res.json();
+                            return res.json().then(json => Promise.reject(json));
+                        })
+                        .then(({ url }) => {
+                            window.location.href = url;
+                        })
+                        .catch(e => {
+                        });
+
                 }
-            }
+            
         };
     };
 

@@ -76,31 +76,31 @@ const Produs = ({ img, description, title, price }) => {
     
         try {
             const useros = Cookies.get("user") || null;
-            console.log("User Cookie:", useros); // Log user cookie
+            console.log("User Cookie:", useros);
     
             let userUuid = typeof window !== 'undefined' ? localStorage.getItem('userUUID') : null;
-            console.log("Stored UUID:", userUuid); // Log stored UUID
+            console.log("Stored UUID:", userUuid);
     
             if (!userUuid) {
-                userUuid = uuidv4(); // Generate new UUID
-                console.log("Generated UUID:", userUuid); // Log newly generated UUID
+                userUuid = uuidv4();
+                console.log("Generated UUID:", userUuid);
                 if (typeof window !== 'undefined') {
-                    localStorage.setItem('userUUID', userUuid); // Store in localStorage
+                    localStorage.setItem('userUUID', userUuid);
                 }
             }
     
-            // Continue with the rest of your code
-            console.log("Final UUID:", userUuid); // Log the final UUID used
             
             if (!useros) {
                 const nonregisteredData = await nonRegisteredUserData();
-                console.log("Non-registered Data:", nonregisteredData.data);
     
                 const filteredSpecificPanouNonRegisteredUser = nonregisteredData.data.filter(element => element.attributes.title === title);
+
                 const filteredOptiuniNonRegistered = filteredSpecificPanouNonRegisteredUser.filter(element => element.attributes.optiuniNormale === selectedValues);
+
                 const images = Cookies.get("image");
-                console.log("User image :",images);
+
                 const filesData = await imageNonREgisteredUser();
+
                 const currentImage = filesData.filter(image => image.url === images);
 
     

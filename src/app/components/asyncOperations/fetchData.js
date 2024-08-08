@@ -39,8 +39,6 @@ export const postNonRegisteredUserComanda = async (imageId, data, quantity) => {
 
 export const updateNonRegisteredUserData = async (productId,quantity,data) => {
 
-
-
   const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouritraforates/${productId}`;
 
 
@@ -182,9 +180,7 @@ export const fetchId = async (title) => {
         identifier: username,
         password: password,
       });
-  
-
-  
+    
       return response;
     } catch (err) {
   
@@ -490,6 +486,35 @@ export const userData = async () => {
   };
 
 
+  export const updateProductQuantityForNonRegisteredUser = async (productId,quantity) => {
+    
+
+  
+
+    const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouritraforates/${productId}`;
+  
+
+    const headers = {
+      "Content-type": "application/json; charset=UTF-8",
+    };
+    
+    axios
+      .put(
+        url,
+        {
+          data: {
+            quantity:quantity
+          },
+        },
+        { headers: headers }
+      )
+      .then((response) => {
+      })
+      .catch((error) => {
+      });
+  };
+
+
   export const deleteProductData = async (productId) => {
     const token = Cookies.get("token");
   
@@ -513,6 +538,29 @@ export const userData = async () => {
       .catch((error) => {
       });
   };
+
+
+  export const deleteNonRegisteredUserProduct = async (productId) => {
+    
+
+    const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouritraforates/${productId}`;
+  
+
+    const headers = {
+      "Content-type": "application/json; charset=UTF-8",
+    };
+    
+    axios
+      .delete(
+        url,
+        { headers: headers }
+      )
+      .then((response) => {
+      })
+      .catch((error) => {
+      });
+  };
+
 
 
 
