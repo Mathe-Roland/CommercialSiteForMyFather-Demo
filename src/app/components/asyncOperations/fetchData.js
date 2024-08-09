@@ -7,7 +7,7 @@ export const postNonRegisteredUserComanda = async (imageId, data, quantity) => {
   const description = Cookies.get("description");
   const title = Cookies.get("title");
 
-  const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouritraforates?populate=*`;
+  const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforate-non-registered-users?populate=*`;
 
   const headers = {
     "Content-type": "application/json; charset=UTF-8",
@@ -39,7 +39,7 @@ export const postNonRegisteredUserComanda = async (imageId, data, quantity) => {
 
 export const updateNonRegisteredUserData = async (productId,quantity,data) => {
 
-  const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouritraforates/${productId}`;
+  const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforate-non-registered-users/${productId}`;
 
 
   const headers = {
@@ -397,7 +397,7 @@ export const nonRegisteredUserData = async () => {
     const headers = {
       "Content-type": "application/json; charset=UTF-8",
     };
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouritraforates?populate=*`, { headers: headers });
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforate-non-registered-users?populate=*`, { headers: headers });
     return response.data;
   } catch (error) {
     return null;
@@ -491,7 +491,7 @@ export const userData = async () => {
 
   
 
-    const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouritraforates/${productId}`;
+    const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforate-non-registered-users${productId}`;
   
 
     const headers = {
@@ -543,7 +543,7 @@ export const userData = async () => {
   export const deleteNonRegisteredUserProduct = async (productId) => {
     
 
-    const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouritraforates/${productId}`;
+    const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforate-non-registered-users/${productId}`;
   
 
     const headers = {
