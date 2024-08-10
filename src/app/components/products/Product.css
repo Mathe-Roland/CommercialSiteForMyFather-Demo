@@ -32,6 +32,17 @@
   }
 }
 
+.black{
+  background-color: black;
+}
+
+.products-container{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 
 @media screen and (min-width:1000px) {
 

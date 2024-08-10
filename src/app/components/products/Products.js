@@ -3,17 +3,22 @@
 import React, { useState, useEffect } from 'react';
 import "./Product.css";
 import ProdusCard from '../card-produse/ProdusCard';
-import { fetchPanouriData } from '../asyncOperations/fetchData';
+import { fetchPanouriData ,promotii} from '../asyncOperations/fetchData';
 
 
 const Products = () => {
   const [cardList, setCardList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [promotileMele,setPromotileMele]=useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await fetchPanouriData();
+        const dateleMele= await promotii();
+
+
+        setPromotileMele(dateleMele.data);
         setCardList(data);
       } catch (error) {
       } finally {
@@ -47,7 +52,34 @@ const Products = () => {
           />
         )) : null}
       </div>
-    </div>
+      <div className='products-container'>
+              
+      <p>Promotii  actuale</p>
+
+        <hr className='black'></hr>
+        <div className='margin0Auto'>
+
+        {
+        promotileMele.length>0
+        ? promotileMele.map(e=>
+        (  <ProdusCard
+           key={e.id}
+           image={e.attributes?.promotionImage?.data?.attributes?.url}
+           title={e.attributes?.title}
+           description={e.attributes?.description}
+           price={e.attributes?.promotionPrice}
+         />)
+          
+        )
+        :
+        null
+      }
+
+        </div>
+
+      </div>
+
+ </div>
   );
 };
 

@@ -49,7 +49,7 @@ const CosCard = ({ id, image, title, price,quantityFromDatabase, addToCart }) =>
                 addToCart(addToCartObject);
                 setCounter(counter - 1);
             }
-        } else if (action === "increment") { // Corrected action string
+        } else if (action === "increment") {
             if (counter === "") {
                 const newCounter = 1;
                 setCounter(newCounter);

@@ -404,6 +404,23 @@ export const nonRegisteredUserData = async () => {
   }
 };
 
+export const promotii = async () => {
+  try {
+    
+    const headers = {
+      "Content-type": "application/json; charset=UTF-8",
+    };
+
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/promotiis?populate=*`, { headers: headers });
+
+    return response.data;
+
+  } catch (error) {
+    return null;
+  }
+};
+
+
 
 export const userData = async () => {
     try {
