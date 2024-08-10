@@ -3,13 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import "./Product.css";
 import ProdusCard from '../card-produse/ProdusCard';
-import { fetchPanouriData ,promotii} from '../asyncOperations/fetchData';
+import {fetchPanouriData ,promotii} from '../asyncOperations/fetchData';
 
 
 const Products = () => {
   const [cardList, setCardList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [promotileMele,setPromotileMele]=useState([]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,6 +41,9 @@ const Products = () => {
   return (
     <div className='normal-headers' suppressHydrationWarning>
       <div className='margin0Auto'>
+        {cardList.forEach((e)=>{
+          console.log(e)
+        })}
         {cardList.length > 0 ? cardList.map((data, index) => (
           <ProdusCard
             key={data.id}
