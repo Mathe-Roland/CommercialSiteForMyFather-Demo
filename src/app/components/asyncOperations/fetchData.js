@@ -343,7 +343,6 @@ export const completeUserData=async ()=>{
  
 }
 
-
   
   export const getUserRelatedData = () => {
     const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouritraforates`;
@@ -355,12 +354,13 @@ export const completeUserData=async ()=>{
   headers: {
     'Authorization': `Bearer ${token}`
   }
-})
-.then(response => {
-})
-.catch(error => {
-});
-  };
+  })
+  .then(response => {
+  })
+  .catch(error => {
+  });
+    };
+
   
   export const imageNonREgisteredUser=async ()=>{
 

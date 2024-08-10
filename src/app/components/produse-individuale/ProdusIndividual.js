@@ -97,6 +97,9 @@ const Produs = ({ img, description, title, price }) => {
 
                 const filteredOptiuniNonRegistered = filteredSpecificPanouNonRegisteredUser.filter(element => element.attributes.optiuniNormale === selectedValues);
 
+                const vopsit=filteredOptiuniNonRegistered.filter(e=>e.attributes.vopsit===true);
+                
+
                 const images = Cookies.get("image");
 
                 const filesData = await imageNonREgisteredUser();
@@ -105,7 +108,7 @@ const Produs = ({ img, description, title, price }) => {
 
     
                 if (nonregisteredData.length > 0) {
-                    if (filteredOptiuniNonRegistered) {
+                    if (filteredOptiuniNonRegistered && vopsit.length>0) {
                         const newDatas = {
                             price: ifVopsit ? prices : handlePrice(selectedValues),
                             UniqueIdentifier: userUuid,

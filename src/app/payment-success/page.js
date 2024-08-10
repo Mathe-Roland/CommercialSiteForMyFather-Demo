@@ -15,9 +15,8 @@ const newDatas=async()=>{
      await deleteNonRegisteredUserProduct(element.id);
   }));
 
-
-
 } 
+
 
 export default function PaymentSuccess(){
 

@@ -207,7 +207,6 @@ const Cos = () => {
                   
                     const panouForNonRegisteredUser=panouForSpecificUser.data.filter((e)=>e.attributes.UniqueIdentifier===UUIDS);
                   
-
                     const updatedItems = panouForNonRegisteredUser?.map(item => ({
                         ...item,
                         attributes: {
@@ -331,4 +330,3 @@ const Cos = () => {
 }
 
 export default Cos;
-
