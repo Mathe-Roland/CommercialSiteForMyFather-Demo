@@ -14,6 +14,15 @@ const Acasa=()=>{
                 index==0 ?
 
                 <div key={index} className="acasa">
+                <Link className="acasa-link" href={`/${e}`}>
+                <h3 >{e}</h3>
+               
+                </Link>
+                </div>
+
+                :
+
+                <div key={index} className="acasa">
                 <Link className="acasa-link" href={`/${Object.keys(e)}}`}>
                 <h3 >{Object.keys(e)[0].split("-").join(" ")}</h3>
                
@@ -25,15 +34,6 @@ const Acasa=()=>{
                     <img className="smallCatPicture" src={e["panouri-decorative"][1]}/>
                 </div>
                 </div>
-
-                :
-                <div key={index} className="acasa">
-                <Link className="acasa-link" href={`/${e}`}>
-                <h3 >{e.split("-").join(" ")}</h3>
-               
-                </Link>
-                </div>
-
             ))}
 
         </div>
