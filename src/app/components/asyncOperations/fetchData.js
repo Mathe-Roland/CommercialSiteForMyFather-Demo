@@ -359,7 +359,7 @@ export const completeUserData=async ()=>{
   })
   .catch(error => {
   });
-    };
+};
 
   
   export const imageNonREgisteredUser=async ()=>{

@@ -63,7 +63,6 @@ const Cos = () => {
                 if (filteredCards) {
                     setCardList({data:filteredCards});
                     
-                    console.log(filteredCards);
                     const updatedData = filteredCards.map(item => {
                         const matchedItem = cardList.data.find(databaseItem => databaseItem.attributes.title === item.attributes.title);
                         if (matchedItem) {
@@ -144,7 +143,6 @@ const Cos = () => {
                     await deleteProductData(element.id);
                 }));
 
-                alert("Comanda a fost trimisă cu succes!");
                 setCardList({ data: [] });
                 setGrandTotal(0);   
 
