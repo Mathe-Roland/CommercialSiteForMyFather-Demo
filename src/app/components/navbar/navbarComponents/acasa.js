@@ -11,7 +11,7 @@ const Acasa=()=>{
 
         <div className="heightvh">
             {accordionCopy.map((e,index)=>(
-                index==0 ?
+                index==0 || index===1 ?
 
                 <div key={index} className="acasa">
                 <Link className="acasa-link" href={`/${e}`}>
@@ -29,9 +29,9 @@ const Acasa=()=>{
                 </Link>
 
                 <div className="acasa-pictures">
-                    <img className="smallCatPicture" src={e["panouri-decorative"][0]}/>
-                    <img className="smallCatPicture" src={e["panouri-decorative"][1]}/>
-                    <img className="smallCatPicture" src={e["panouri-decorative"][1]}/>
+                    <img className="smallCatPicture" src={e[Object.keys(e)[0]][0]}/>
+                    <img className="smallCatPicture" src={e[Object.keys(e)[0]][1]}/>
+                    <img className="smallCatPicture" src={e[Object.keys(e)[0]][2]}/>
                 </div>
                 </div>
             ))}
