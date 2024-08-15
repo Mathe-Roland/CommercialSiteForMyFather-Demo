@@ -58,13 +58,6 @@ const Header = () => {
         </div>
         <div className="phoneviewHideDesktopContent">
           <div className="row j-c-c align-items-c">
-            <input
-              type="text"
-              placeholder="Searchbar"
-              className="border-radius-10 search-icon search-input js"
-            />
-          </div>
-          <div className="row j-c-c align-items-c">
             { isLoggedIn ?
               <UserInfo setLogin={setIsLoggedIn}/> :
               <LoginModal setLogin={setIsLoggedIn}/>
