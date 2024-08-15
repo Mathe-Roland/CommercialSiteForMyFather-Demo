@@ -7,6 +7,7 @@ import UserInfo from "../userInfo/UserInfo";
 import Cookies from 'js-cookie';
 import Image from "next/image";
 
+
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [show, setShow] = useState(false);
@@ -46,11 +47,6 @@ const Header = () => {
               height={25}/>
             { show ?
               <div className="navbar-dropdown">
-                <input
-                  type="text"
-                  placeholder="Searchbar"
-                  className="border-radius-10 search-icon search-input js"
-                />
                 { isLoggedIn ?
                   <UserInfo setLogin={setIsLoggedIn}/> :
                   <LoginModal setLogin={setIsLoggedIn}/>
@@ -61,9 +57,6 @@ const Header = () => {
           </div>
         </div>
         <div className="phoneviewHideDesktopContent">
-
-
-
           <div className="row j-c-c align-items-c">
             <input
               type="text"
