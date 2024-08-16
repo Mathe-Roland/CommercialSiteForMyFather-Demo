@@ -21,10 +21,9 @@ export async function POST(request) {
     billing_address_collection: 'required',
   });
 
-  const responseHeaders = new Headers();
-  responseHeaders.set('Cache-Control', 's-maxage=3600');
-
   return new NextResponse(JSON.stringify({ url: checkoutSession.url }), {
-    headers: responseHeaders,
+    headers: {
+      'Cache-Control': 's-maxage=3600',
+    },
   });
 }
