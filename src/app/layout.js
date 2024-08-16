@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
             <head>
                 <title>Produse traforate personalizate</title>
                 <meta name="description" content="Produse traforate vopsite sau nevopsite din lemn, personalizate" />
-                <script defer src="https://js.stripe.com/v3/"></script>
+                <script async src="https://js.stripe.com/v3/"></script>
                 <link rel="preconnect" href="https://js.stripe.com"/>
                 <link rel="dns-prefetch" href="https://js.stripe.com/"/>
             </head>
