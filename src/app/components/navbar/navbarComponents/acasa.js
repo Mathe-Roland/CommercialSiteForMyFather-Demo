@@ -29,9 +29,9 @@ const Acasa=()=>{
                 </Link>
 
                 <div className="acasa-pictures">
-                    <img className="smallCatPicture" src={e[Object.keys(e)[0]][0]}/>
-                    <img className="smallCatPicture" src={e[Object.keys(e)[0]][1]}/>
-                    <img className="smallCatPicture" src={e[Object.keys(e)[0]][2]}/>
+                    <img className="smallCatPicture" alt="newImage" src={e[Object.keys(e)[0]][0]}/>
+                    <img className="smallCatPicture" alt="newImage" src={e[Object.keys(e)[0]][1]}/>
+                    <img className="smallCatPicture" alt="newImage" src={e[Object.keys(e)[0]][2]}/>
                 </div>
                 </div>
             ))}
