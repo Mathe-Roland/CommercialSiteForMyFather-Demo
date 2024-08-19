@@ -37,6 +37,7 @@ const Header = () => {
           <Image src={monsrikLogo ? monsrikLogo : "/cancel.webp"}
           width={100}
           height={100}
+          alt={`${monsrikLogo}`}
           />
         </div>
         <div>
