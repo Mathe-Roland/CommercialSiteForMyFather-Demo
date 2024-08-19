@@ -25,6 +25,7 @@ export const postNonRegisteredUserComanda = async (imageId, data, quantity) => {
           price: data.price,
           optiuniNormale: data.optiuninormale,
           quantity: quantity,
+          vopsit:data.vopsit
         },
       },
       { headers: headers }
@@ -53,7 +54,8 @@ export const updateNonRegisteredUserData = async (productId,quantity,data) => {
         data: {
           price:data.price,
           optiuniNormale:data.optiuninormale,
-          quantity:quantity
+          quantity:quantity,
+          vopsit:data.vopsit
         },
       },
       { headers: headers }
@@ -504,10 +506,8 @@ export const userData = async () => {
 
 
   export const updateProductQuantityForNonRegisteredUser = async (productId,quantity) => {
-    
-
   
-
+    
     const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforate-non-registered-users${productId}`;
   
 

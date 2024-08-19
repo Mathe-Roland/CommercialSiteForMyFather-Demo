@@ -41,9 +41,6 @@ const Products = () => {
   return (
     <div className='normal-headers' suppressHydrationWarning>
       <div className='margin0Auto'>
-        {cardList.forEach((e)=>{
-          console.log(e)
-        })}
         {cardList.length > 0 ? cardList.map((data, index) => (
           <ProdusCard
             key={data.id}

@@ -11,14 +11,14 @@ const DropdownMui = ({ onChange, render, actualPrice, price, vopsit }) => {
     const handleNevopsit = () => {
         vopsit(false);
         setVopsea(true);
-        let newPrice = actualPrice - (actualPrice * 50) / 100;
+        let newPrice = actualPrice - (actualPrice * 30) / 100;
         price(newPrice);
     };
 
     const handleVopsit = () => {
         setVopsea(true);
         vopsit(true);
-        let newPrice = actualPrice + (actualPrice * 50) / 100;
+        let newPrice = actualPrice + (actualPrice * 30) / 100;
         price(newPrice);
     };
 
@@ -31,7 +31,7 @@ const DropdownMui = ({ onChange, render, actualPrice, price, vopsit }) => {
     useEffect(() => {
 
         if(vopsea){
-            let newPrice=actualPrice+actualPrice*50/100;
+            let newPrice=actualPrice+actualPrice*30/100;
             price(newPrice);
         }
 

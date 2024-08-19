@@ -67,6 +67,7 @@ const Produs = ({ img, description, title, price }) => {
         setUserName(Cookies.get("user"));
     };
     
+
     const handleUserData = async () => {
         setAdaugaInCosShow(true);
     
@@ -88,7 +89,7 @@ const Produs = ({ img, description, title, price }) => {
                     localStorage.setItem('userUUID', userUuid);
                 }
             }
-    
+            
             
             if (!useros) {
                 const nonregisteredData = await nonRegisteredUserData();
@@ -98,90 +99,68 @@ const Produs = ({ img, description, title, price }) => {
                 const filteredOptiuniNonRegistered = filteredSpecificPanouNonRegisteredUser.filter(element => element.attributes.optiuniNormale === selectedValues);
 
                 const vopsit=filteredOptiuniNonRegistered.filter(e=>e.attributes.vopsit===true);
+                const nevopsit=filteredOptiuniNonRegistered.filter(e=>e.attributes.vopsit===false);
                 
-
                 const images = Cookies.get("image");
 
                 const filesData = await imageNonREgisteredUser();
 
                 const currentImage = filesData.filter(image => image.url === images);
+                
+                const newDatas = {
+                    price: Math.floor(ifVopsit ? prices : handlePrice(selectedValues)),
+                    UniqueIdentifier: userUuid,
+                    optiuninormale: selectedValues,
+                    vopsit:ifVopsit,
+                };
 
-    
-                if (nonregisteredData.length > 0) {
-                    if (filteredOptiuniNonRegistered && vopsit.length>0) {
-                        const newDatas = {
-                            price: ifVopsit ? prices : handlePrice(selectedValues),
-                            UniqueIdentifier: userUuid,
-                            optiuninormale: selectedValues
-                        };
-    
-                        await updateNonRegisteredUserData(filteredOptiuniNonRegistered[0].id, filteredOptiuniNonRegistered[0].attributes.quantity + 1, newDatas);
-                    } else {
-                        if (filteredOptiuniNonRegistered) {
-                            const newDatas = {
-                                price: ifVopsit ? prices : handlePrice(selectedValues),
-                                UniqueIdentifier: userUuid,
-                                optiuninormale: selectedValues
-                            };
-                            await updateNonRegisteredUserData(filteredOptiuniNonRegistered[0].id, filteredOptiuniNonRegistered[0].attributes.quantity + 1, newDatas);
-                        } else {
-                            const newDatas = {
-                                price: ifVopsit ? prices : handlePrice(selectedValues),
-                                UniqueIdentifier: userUuid,
-                                optiuninormale: selectedValues
-                            };
-                            await postNonRegisteredUserComanda(currentImage[0].id,newDatas,1);
-                        }
-                    }
-                } else {
-                    const newDatas = {
-                        price: ifVopsit ? prices : handlePrice(selectedValues),
-                        UniqueIdentifier: userUuid,
-                        optiuninormale: selectedValues
-                    };
+                if(vopsit.length>0 && ifVopsit===true){
+
+
+                    await updateNonRegisteredUserData(vopsit[0].id,vopsit[0].attributes.quantity + 1, newDatas);
+        
+                }else if(nevopsit.length>0 && ifVopsit===false){
+
+                    await updateNonRegisteredUserData(nevopsit[0].id,nevopsit[0].attributes.quantity + 1, newDatas);
+
+                }else{
+
                     await postNonRegisteredUserComanda(currentImage[0].id,newDatas,1);
+
                 }
+                   
+
             } else {
                 const data = await userData();
                 const filteredSpecificPanouUserRelatedData = data.data.filter(element => element.attributes.title === title);
                 const filteredOptiuniNormale = filteredSpecificPanouUserRelatedData.filter(element => element.attributes.optiuniNormale === selectedValues);
-                // const filteredVopsit = filteredSpecificPanouUserRelatedData[0].attributes.vopsit === true;
+                const filteredVopsit = filteredOptiuniNormale[0].attributes.vopsit === true;
+                const filteredNevopsit = filteredOptiuniNormale[0].attributes.vopsit === false;
     
                 const images = Cookies.get("image");
                 const filesData = await imageFiles();
                 const currentImage = filesData.filter(image => image.url === images);
-    
-                if (filteredSpecificPanouUserRelatedData.length > 0) {
-                    if (filteredOptiuniNormale && filteredVopsit) {
-                        const newDatas = {
-                            price: ifVopsit ? prices : handlePrice(selectedValues),
-                            optiuninormale: selectedValues
-                        };
-                        await updateProductData(filteredOptiuniNormale[0].id, filteredOptiuniNormale[0].attributes.quantity + 1, newDatas);
-                    } else {
-                        if (filteredOptiuniNormale) {
-                            const newDatas = {
-                                price: ifVopsit ? prices : handlePrice(selectedValues),
-                                optiuninormale: selectedValues
-                            };
-                            await updateProductData(filteredOptiuniNormale[0].id, filteredOptiuniNormale[0].attributes.quantity + 1, newDatas);
-                        } else {
-                            const id = await userIds();
-                            const newDatas = {
-                                price: ifVopsit ? prices : handlePrice(selectedValues),
-                                optiuninormale: selectedValues
-                            };
-                            await userRelatedData(id, currentImage[0].id, newDatas);
-                        }
-                    }
-                } else {
-                    const id = await userIds();
-                    const newDatas = {
-                        price: ifVopsit ? prices : handlePrice(selectedValues),
-                        optiuninormale: selectedValues
-                    };
+                const newDatas = {
+                    price: ifVopsit ? prices : handlePrice(selectedValues),
+                    optiuninormale: selectedValues
+                };
+
+                if(filteredVopsit.length>0 && ifVopsit===true){
+
+
+                    await updateProductData(filteredVopsit[0].id, filteredVopsit[0].attributes.quantity + 1, newDatas);
+        
+                }else if(filteredNevopsit.length>0 && ifVopsit===false){
+
+                    await updateProductData(filteredNevopsit[0].id, filteredNevopsit[0].attributes.quantity + 1, newDatas);
+
+                }else{
+
                     await userRelatedData(id, currentImage[0].id, newDatas);
+
                 }
+
+              
             }
         } catch (error) {
             console.error('Error:', error);

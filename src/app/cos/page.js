@@ -60,7 +60,7 @@ const Cos = () => {
             const nonRegisteredUserDataFetch=async()=>{
                 const totalNonRegisteredData=await nonRegisteredUserData();
                 const filteredCards=totalNonRegisteredData.data.filter((e)=>e.attributes.UniqueIdentifier===actualUUID);
-                if (filteredCards) {
+                if (filteredCards.length>0) {
                     setCardList({data:filteredCards});
                     
                     const updatedData = filteredCards.map(item => {
@@ -71,7 +71,7 @@ const Cos = () => {
                         return item;
                     });
                     setCardList({ data: updatedData });
-
+                    
                     let totalSum = 0;
                     updatedData.forEach((element) => {
                         const price = element.attributes.price || 0;
@@ -281,10 +281,10 @@ const Cos = () => {
                             <div className="cos-element" key={element.id}>
                                 <CosCard
                                     id={element.id}
-                                    title={element.attributes.title}
-                                    image={element.attributes.image.data.attributes.url}
-                                    price={element.attributes.price}
-                                    quantityFromDatabase={element.attributes.quantity}
+                                    title={element.attributes?.title}
+                                    image={element.attributes?.image?.data[0]?.attributes?.url}
+                                    price={element.attributes?.price}
+                                    quantityFromDatabase={element.attributes?.quantity}
                                     addToCart={addToCart}
                                 />
                             </div>

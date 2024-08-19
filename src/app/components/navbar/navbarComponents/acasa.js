@@ -1,4 +1,4 @@
-import "./acasa.css"
+import "./acasa.css";
 import { accordionCopy } from "../../card-produse/cardList";
 import  Link  from "next/link";
 import Image from "next/image";

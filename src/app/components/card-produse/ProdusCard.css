@@ -55,11 +55,11 @@
 
 
 @media screen  and (min-width:600px){
-  .produs-container{
+  .produs-container {
+    max-width: 204px;
     width: 204px;
     height: 440px;
-  } 
-
+}
   .produs-image{
     max-height: 220px;
   }
