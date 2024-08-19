@@ -45,7 +45,8 @@ const Header = () => {
             <Image src={hamburger ? hamburger : null } onClick={handleShow} 
               className="hamburger-menu" alt="hamburger-menu"
               width={25}
-              height={25}/>
+              height={25}
+              />
             { show ?
               <div className="navbar-dropdown">
                 { isLoggedIn ?

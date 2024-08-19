@@ -100,7 +100,7 @@ const LoginModal = ({ setLogin }) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}><Image src={`/loginicon.png`} width={40} height={50}/></Button>
+      <Button onClick={handleOpen}><Image src={`/loginicon.png`} width={40} height={50} alt='loginIcon'/></Button>
       <Modal
         open={open}
         onClose={handleClose}
