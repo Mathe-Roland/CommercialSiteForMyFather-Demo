@@ -50,13 +50,6 @@
     border-radius: 10em;
 }
 
-.search-icon{
-    background-image: url("https://openclipart.org/image/2400px/svg_to_png/213239/Search-icon.png");
-    background-position: right center;
-    background-repeat: no-repeat;
-    background-size: 1rem;
-    opacity: 50%;
-}
 .align-items-c{
     align-items: center;
 }
@@ -70,13 +63,6 @@
 .margin-top{
     margin-top: 2em;
 }
-.search-input {
-    padding: 0.5em 0.75em; /* Adjust padding as needed */
-    border: 0.0625rem solid #ccc; /* Add border styles as needed */
-    width: 8rem; /* Set the desired width of the input field */
-    font-size: 1rem; /* Set the desired font size */
-    height: 1.5rem;
-  }
 
 
 .image-container {
@@ -205,12 +191,4 @@
         display: none;
     }
 
-    .search-input {
-        padding: 0.5em 0.75em; /* Adjust padding as needed */
-        border: 0.0625rem solid #ccc; /* Add border styles as needed */
-        width: 15rem; /* Set the desired width of the input field */
-        font-size: 1rem; /* Set the desired font size */
-        height: 1.5rem;
-      }
-    
 }

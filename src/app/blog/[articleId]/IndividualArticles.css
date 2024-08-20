@@ -17,12 +17,6 @@ h1, p {
     width: 50%;
 }
 
-@media screen and (min-width: 768px) {
-    .image {
-        width: 400px;
-        height: 400px;
-    }
-}
 
 .comment-box {
     background-color: #fff; /* Alb pentru fundal */
@@ -39,19 +33,9 @@ h1, p {
     border-radius: 5px;
     border: 1px solid #e1e1e1;
 }
-
-@media screen and (min-width: 992px) {
-    /* Stiluri pentru ecrane mari */
-}
-
-@media screen and (min-width: 1200px) {
-    /* Stiluri pentru ecrane foarte mari */
-}
-
-@media screen and (min-width: 1440px) {
-    /* Stiluri pentru ecrane ultra-mari */
-}
-
-@media screen and (min-width: 1600px) {
-    /* Stiluri pentru ecrane extra-largi */
+@media screen and (min-width: 768px) {
+    .image {
+        width: 400px;
+        height: 400px;
+    }
 }
