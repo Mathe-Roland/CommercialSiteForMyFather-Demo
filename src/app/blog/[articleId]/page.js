@@ -1,14 +1,15 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
+import "./IndividualArticles.css";
 import { useParams } from 'next/navigation';
-import { userRelatedComments, fetchArticleId, fetchArticlesData, fetchPanouriArticlePerArticleId } from "../../components/asyncOperations/fetchData";
+import { useEffect, useState } from "react";
+import { userRelatedComments, fetchArticleId, fetchArticlesData, fetchPanouriArtiWclePerArticleId } from "../../components/asyncOperations/fetchData";
 import Comments from "../../components/comments/Comments";
 import CommentPages from "../../components/commentPages/CommentPages"
 import AddCommentModal from "../../components/coment-Modal/AddCommentModal";
-import Image from 'next/image';
+import 'next/image';
 import Cookies from "js-cookie";
-import Head from 'next/head';
+
 
 const IndividualArticles = () => {
     const { articleId } = useParams();
@@ -20,14 +21,6 @@ const IndividualArticles = () => {
     const [numberOfPages, setNumberOfPages] = useState([]);
     const [username, setUserName] = useState("");
     const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        // Dynamically load the CSS after the component mounts
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = '/path/to/IndividualArticles.css';
-        document.head.appendChild(link);
-    }, []);
 
     useEffect(() => {
         const fetchDataAndFilter = async () => {
@@ -109,14 +102,6 @@ const IndividualArticles = () => {
 
     return (
         <div className="IndividualArticles-container" suppressHydrationWarning>
-            <Head>
-                {/* Preload the IndividualArticles CSS */}
-                <link
-                    rel="preload"
-                    href="/path/to/IndividualArticles.css"
-                    as="style"
-                />
-            </Head>
             <h1>{articleData[0]?.attributes?.title}</h1>
             <p>{articleData[0]?.attributes?.date}</p>
             <p>{descriptionBrokenInThree[0]}</p>

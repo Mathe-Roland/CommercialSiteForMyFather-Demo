@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import Link from 'next/link';
-import Head from 'next/head'; // Import the Head component from Next.js
+import './navbar.css';
 import Acasa from './navbarComponents/acasa';
 
 export const navbarData = {
@@ -13,14 +13,6 @@ export const navbarData = {
 const Navbar = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [showAcasa, setShowAcasa] = useState(false);
-
-  useEffect(() => {
-    // Dynamically load the CSS after the component mounts
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = './navbar.css';
-    document.head.appendChild(link);
-  }, []);
 
   const handleMouseEnter = (index) => {
     if (index === 1) {
@@ -42,14 +34,6 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <Head>
-        {/* Preload the navbar CSS */}
-        <link
-          rel="preload"
-          href="/path/to/your/navbar.css"
-          as="style"
-        />
-      </Head>
       <div className="navbar-centered">
         <div className="navbar-contents">
           {navbarData.items.map((element,index) => (
