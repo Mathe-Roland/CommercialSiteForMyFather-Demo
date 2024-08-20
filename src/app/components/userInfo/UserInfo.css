@@ -13,6 +13,10 @@
     width: 200px;
 }
 
+.userInfo-desktop{
+    display: none;
+}
+
 .userInfo-pictures {
     margin: 8px;
     width: 40px; 
@@ -40,4 +44,17 @@
 
 .sign-out-item {
     cursor: pointer;
+}
+
+
+
+
+@media screen  and (min-width:600px){
+ 
+    .userInfo-desktop{
+        display: block;
+    }
+    .userInfo-mobile{
+        display: none;
+    }
 }

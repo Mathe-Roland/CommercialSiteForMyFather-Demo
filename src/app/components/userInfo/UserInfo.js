@@ -12,6 +12,7 @@ import Image from "next/image";
         const [pictures, setPicture] = useState({
             setariPicture: null,
             comenziPlasate: null,
+            cos:null,
             loggoutPicture: null,
         });
     
@@ -34,6 +35,7 @@ import Image from "next/image";
                 setPicture({
                     setariPicture: pictures.find((element) => element.name === "settings-icon.png") || null,
                     comenziPlasate: pictures.find((element) => element.name === "order.png") || null,
+                    cos: pictures.find((element) => element.name === "cos.png") || null,
                     loggoutPicture: pictures.find((element) => element.name === "out.png") || null,
                 });
             };
@@ -83,10 +85,85 @@ import Image from "next/image";
             }
         ];
         
+        const loginItemsFPhone = [
+            {
+                picture: pictures.setariPicture || "",
+                text: "Setari",
+                link: "/setari/informati-de-baza",
+            },
+            {
+                picture: pictures.comenziPlasate || "",
+                text: "Comenzi",
+                link: "/comenzi-plasate",
+            },
+            {
+                picture: pictures.cos || "",
+                text: "cos",
+                link: "/cos"
+            },
+            {
+                picture: pictures.loggoutPicture || "",
+                text: "Sign Out",
+                link: "#"
+            },
+        ];
+
         const image="/loginicon.png";
 
+
         return (
-            <div onMouseLeave={onLeave} className="userInfo-container">
+        <div onMouseLeave={onLeave} className="userInfo-container">
+
+                <div className="userInfo-mobile">
+
+    {Cookies.get("user") 
+    ? 
+        (loginItemsFPhone.map((item, index) => (
+          <div key={index}>
+            {item.text === "Sign Out" ? (
+              <div onClick={handleLoggout} className="sign-out-item">
+                <div className="setari-felxbox">
+                  <div className="userInfo-pictures">
+                    <Image
+                      className="setari-picture"
+                      alt={item.text}
+                      src={item.picture ? item.picture.url : "/cancel.webp"}
+                      width={40}
+                      height={40}
+                    />
+                  </div>
+                  <p className="setari">
+                    {item.text}
+                  </p>
+                </div>
+              </div>
+            ) : (
+        <Link href={item.link} passHref>
+            <div className="setari-felxbox">
+            <div className="userInfo-pictures">
+            <Image
+                className="setari-picture"
+                alt={item.text}
+                src={item.picture ? item.picture.url : "/cancel.webp"}
+                width={40}
+                height={40}
+            />
+            </div>
+            <p className="setari">
+            {item.text}
+                </p>
+            </div>
+            </Link>
+        )}
+        </div>
+        ))
+        ) : null}
+
+
+                </div>
+
+                <div className="userInfo-desktop">
+
                 <button onClick={handleUserInfo} onMouseOver={handleMover}>
                     <Image
                         alt="login"
@@ -138,6 +215,8 @@ import Image from "next/image";
                         ))}
                     </div>
                 )}
+
+                </div>
             </div>
         );
     };    

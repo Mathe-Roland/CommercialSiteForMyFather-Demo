@@ -100,8 +100,21 @@ const LoginModal = ({ setLogin }) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}><Image src={`/loginicon.png`} width={40} height={50} alt='loginIcon'/></Button>
+      <Button onClick={handleOpen}>
+        <div className='desktop'>
+
+        <Image src={`/loginicon.png`} width={40} height={50} alt='loginIcon'/>
+
+        </div>
+
+        <div className='mobile'>
+
+        <p>Login</p>
+
+        </div>
+        </Button>
       <Modal
+        className='modal-z-index'
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"

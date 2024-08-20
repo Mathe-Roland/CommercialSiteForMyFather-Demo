@@ -27,7 +27,7 @@ const Header = () => {
     setShow(false);
   }
 
-  const hamburger="/hamburger_menu.png";
+  const hamburger="/menu.png";
   const monsrikLogo="/logosDecorcut.png";
 
   return (
@@ -40,12 +40,13 @@ const Header = () => {
           alt={`${monsrikLogo}`}
           />
         </div>
-        <div>
+        <div className="hamburger-centered">
           <div onMouseLeave={handleHamburger} className="hamburger-dropdown">
+
             <Image src={hamburger ? hamburger : null } onClick={handleShow} 
               className="hamburger-menu" alt="hamburger-menu"
-              width={25}
-              height={25}
+              width={100}
+              height={100}
               />
             { show ?
               <div className="navbar-dropdown">
