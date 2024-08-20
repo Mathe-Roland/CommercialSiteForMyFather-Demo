@@ -6,13 +6,14 @@ import Navbar from './components/navbar/navbar';
 
 export default function RootLayout({ children }) {
     
-    window.addEventListener('load', () => {
+    if (typeof window !== 'undefined') {
         const script = document.createElement('script');
         script.src = 'https://js.stripe.com/';
         script.async = true;
         document.head.appendChild(script);
-      });
-      
+      }
+  
+
 
     return (
         <html lang="en">
