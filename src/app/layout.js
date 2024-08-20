@@ -8,7 +8,7 @@ export default function RootLayout({ children }) {
     
     window.addEventListener('load', () => {
         const script = document.createElement('script');
-        script.src = 'https://js.stripe.com/v3/';
+        script.src = 'https://js.stripe.com/';
         script.async = true;
         document.head.appendChild(script);
       });
