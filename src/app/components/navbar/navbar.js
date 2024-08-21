@@ -14,6 +14,9 @@ const Navbar = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [showAcasa, setShowAcasa] = useState(false);
 
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+
   const handleMouseEnter = (index) => {
     if (index === 1) {
       setShowAcasa(true);
@@ -36,9 +39,9 @@ const Navbar = () => {
     <div className="navbar">
       <div className="navbar-centered">
         <div className="navbar-contents">
-          {navbarData.items.map((element,index) => (
+          {!isMobile ? navbarData.items.map((element,index) => (
             <div 
-              key={element} // Use the element itself as the key
+              key={element}
               onMouseEnter={() => handleMouseEnter(navbarData.items.indexOf(element))}
               onMouseLeave={handleMouseLeave}
             >
@@ -67,7 +70,9 @@ const Navbar = () => {
                 </div>
               ) : null}
             </div>
-          ))}
+          ))
+          :
+          null}
         </div>
       </div>
       <div className="formControl">
@@ -79,7 +84,9 @@ const Navbar = () => {
             value={selectedOption}
             onChange={handleChange}
           >
-            {navbarData.items.map((e,index) => (
+            { isMobile
+            ?
+            navbarData.items.map((e,index) => (
               e !== "Acasa" ? (
                 index===1?
                 null
@@ -99,8 +106,12 @@ const Navbar = () => {
                 value={e}
               >
                 {e}
-              </MenuItem>)
-            ))}
+              </MenuItem>
+              )
+            ))
+            :
+            null
+          }
           </Select>
         </FormControl>
       </div>

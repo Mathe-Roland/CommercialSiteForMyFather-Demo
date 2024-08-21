@@ -42,7 +42,6 @@ const Header = () => {
         </div>
         <div className="hamburger-centered">
           <div onMouseLeave={handleHamburger} className="hamburger-dropdown">
-
             <Image src={hamburger ? hamburger : null } onClick={handleShow} 
               className="hamburger-menu" alt="hamburger-menu"
               width={100}
