@@ -5,8 +5,9 @@ import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import Link from 'next/link';
 import './navbar.css';
 
-// Lazy load the Acasa component
 const Acasa = lazy(() => import('./navbarComponents/acasa'));
+
+const LazyMenuItems = lazy(() => import('./LazyItems'));
 
 export const navbarData = {
   items: ["Acasa", "Magazin", "Blog", "Despre Noi", "Contact"]
@@ -84,30 +85,11 @@ const Navbar = () => {
             value={selectedOption}
             onChange={handleChange}
           >
-            {navbarData.items.map((e, index) => (
-              e !== "Acasa" ? (
-                index === 1 ?
-                  null
-                  :
-                  <MenuItem
-                    key={e}
-                    component="a"
-                    href={e.toLowerCase().split(" ").join("-")}
-                    value={e}
-                  >
-                    {e}
-                  </MenuItem>
-              ) : (
-                <MenuItem
-                  key={e}
-                  component="a"
-                  href={"/"}
-                  value={e}
-                >
-                  {e}
-                </MenuItem>
-              )
-            ))}
+
+          <Suspense fallback={<div>Loading menu items...</div>}>
+              <LazyMenuItems items={navbarData.items} />
+            </Suspense>
+
           </Select>
         </FormControl>
       </div>
