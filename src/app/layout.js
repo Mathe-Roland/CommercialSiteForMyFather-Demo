@@ -3,6 +3,7 @@ import './globals.css';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import Navbar from './components/navbar/navbar';
+const Header = React.lazy(() => import('./components/header/Header'));
 
 export default function RootLayout({ children }) {
     
