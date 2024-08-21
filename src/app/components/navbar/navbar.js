@@ -1,12 +1,10 @@
 'use client';
 
-import React, { useState, Suspense, lazy } from 'react';
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import Link from 'next/link';
+import React, { useState, Suspense, lazy, useCallback } from 'react';
+import { FormControl, InputLabel, Select } from '@mui/material';
 import './navbar.css';
 
-const Acasa = lazy(() => import('./navbarComponents/acasa'));
-
+const NavbarData = lazy(() => import('./NavbarData'));
 const LazyMenuItems = lazy(() => import('./LazyItems'));
 
 export const navbarData = {
@@ -17,18 +15,17 @@ const Navbar = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [showAcasa, setShowAcasa] = useState(false);
 
-  // Detect screen size using window.innerWidth
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
-  const handleMouseEnter = (index) => {
+  const handleMouseEnter = useCallback((index) => {
     if (index === 1) {
       setShowAcasa(true);
     }
-  };
+  }, []);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     setShowAcasa(false);
-  };
+  }, []);
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
@@ -42,38 +39,15 @@ const Navbar = () => {
     <div className="navbar">
       <div className="navbar-centered">
         <div className="navbar-contents">
-          {navbarData.items.map((element, index) => (
-            <div
-              key={element} // Use the element itself as the key
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={handleMouseLeave}
-            >
-              {element === "Acasa" ? (
-                <Link href={"/"}>
-                  <p className='navbar-text'>
-                    {element}
-                  </p>
-                </Link>
-              ) : (element === "Magazin" ?
-                <p className='navbar-text'>
-                  {element}
-                </p>
-                :
-                <p className='navbar-text'>
-                  <Link href={generateUrl(element)}>
-                    {element}
-                  </Link>
-                </p>
-              )}
-              {showAcasa && index === 1 && !isMobile ? (
-                <Suspense fallback={<div>Loading...</div>}>
-                  <div className="width100">
-                    <Acasa />
-                  </div>
-                </Suspense>
-              ) : null}
-            </div>
-          ))}
+          <Suspense fallback={<div>Loading menu items...</div>}>
+            <NavbarData
+              navbarData={navbarData}
+              generateUrl={generateUrl}
+              handleMouseEnter={handleMouseEnter}
+              handleMouseLeave={handleMouseLeave}
+              showAcasa={showAcasa}
+            />
+          </Suspense>
         </div>
       </div>
       <div className="formControl">
@@ -85,11 +59,9 @@ const Navbar = () => {
             value={selectedOption}
             onChange={handleChange}
           >
-
-          <Suspense fallback={<div>Loading menu items...</div>}>
+            <Suspense fallback={<div>Loading menu items...</div>}>
               <LazyMenuItems items={navbarData.items} />
             </Suspense>
-
           </Select>
         </FormControl>
       </div>
