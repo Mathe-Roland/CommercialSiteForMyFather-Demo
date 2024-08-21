@@ -38,7 +38,7 @@ const Navbar = () => {
         <div className="navbar-contents">
           {navbarData.items.map((element,index) => (
             <div 
-              key={element} 
+              key={element} // Use the element itself as the key
               onMouseEnter={() => handleMouseEnter(navbarData.items.indexOf(element))}
               onMouseLeave={handleMouseLeave}
             >
