@@ -21,6 +21,8 @@ export default function RootLayout({ children }) {
                 <meta name="description" content="Produse traforate vopsite sau nevopsite din lemn, personalizate" />
                 <link rel="preconnect" href="https://js.stripe.com"/>
                 <link rel="dns-prefetch" href="https://js.stripe.com/"/>
+                <link rel="dns-prefetch" href="https://js.stripe.com/"/>
+                <link rel="preload" href="https://www.decorcut.com/_next/static/css/a2504fd93a9ed98a.css" as="style"/>
             </head>
             <body className={`height`}>
                 <Header />
