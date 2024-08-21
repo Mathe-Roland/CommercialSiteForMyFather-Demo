@@ -1,12 +1,15 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from "react";
+import "./IndividualArticles.css";
 import { useParams } from 'next/navigation';
+import { useEffect, useState } from "react";
 import { userRelatedComments, fetchArticleId, fetchArticlesData, fetchPanouriArtiWclePerArticleId } from "../../components/asyncOperations/fetchData";
 import Comments from "../../components/comments/Comments";
-import CommentPages from "../../components/commentPages/CommentPages";
+import CommentPages from "../../components/commentPages/CommentPages"
 import AddCommentModal from "../../components/coment-Modal/AddCommentModal";
+import 'next/image';
 import Cookies from "js-cookie";
+
 
 const IndividualArticles = () => {
     const { articleId } = useParams();
@@ -20,14 +23,6 @@ const IndividualArticles = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Asynchronously import the CSS file
-        const loadCSS = async () => {
-            await import("./IndividualArticles.css");
-        };
-        loadCSS();
-    }, []);
-
-    useEffect(() => {
         const fetchDataAndFilter = async () => {
             try {
                 const getUserRelatedData = await fetchArticlesData();
@@ -35,7 +30,7 @@ const IndividualArticles = () => {
                     const specificPanou = getUserRelatedData.find(item => item.id === Number(articleId));
                     if (specificPanou) {
                         setArticleIds(specificPanou.id);
-                        const comments = await fetchPanouriArtiWclePerArticleId(specificPanou.id);
+                        const comments = await fetchPanouriArticlePerArticleId(specificPanou.id);
                         if (comments?.data) {
                             setCommentList(comments.data.slice(0, 12));
                             setOriginalComments(comments.data);
@@ -78,7 +73,7 @@ const IndividualArticles = () => {
                     const specificPanou = getUserRelatedData.find(item => item.id === articleId);
                     if (specificPanou) {
                         setArticleIds(specificPanou.id);
-                        const comments = await fetchPanouriArtiWclePerArticleId(specificPanou.id);
+                        const comments = await fetchPanouriArticlePerArticleId(specificPanou.id);
                         if (comments?.data) {
                             const currentPage = Math.floor(originalComments.length / 12) * 12;
                             setCommentList(comments.data.slice(currentPage, currentPage + 12));
@@ -99,11 +94,10 @@ const IndividualArticles = () => {
     }
 
     if (loading) {
-        return (
-            <div className="articles-loading-screen">
-                {/* Add your loading indicator here */}
-            </div>
-        );
+        return( <div className="articles-loading-screen">
+             
+        
+        </div>);
     }
 
     return (
@@ -112,21 +106,21 @@ const IndividualArticles = () => {
             <p>{articleData[0]?.attributes?.date}</p>
             <p>{descriptionBrokenInThree[0]}</p>
             <div className="images-container">
-                <Image className="image" src={` ${articleData ? articleData[0]?.attributes?.image?.data[0]?.attributes?.url : ""}`}
-                    width={250}
-                    height={250} />
+                <Image className="image" src={` ${ articleData ? articleData[0]?.attributes?.image?.data[0]?.attributes?.url :""}`}
+                width={250}
+                height={250} />
             </div>
             <p>{descriptionBrokenInThree[1]}</p>
             <div className="images-container">
-                <Image className="image" src={`${articleData ? articleData[0]?.attributes?.image?.data[1]?.attributes?.url : ""}`}
-                    width={250}
-                    height={250} />
+                <Image className="image" src={`${articleData ? articleData[0]?.attributes?.image?.data[1]?.attributes?.url : ""}`} 
+                width={250}
+                height={250}/>
             </div>
             <p>{descriptionBrokenInThree[2]}</p>
             <div className="images-container">
-                <Image className="image" src={`${articleData ? articleData[0]?.attributes?.image?.data[2]?.attributes?.url : ""}`}
-                    width={250}
-                    height={250} />
+                <Image className="image" src={`${articleData ? articleData[0]?.attributes?.image?.data[2]?.attributes?.url : ""}`} 
+                width={250}
+                height={250}/>
             </div>
             <p>{descriptionBrokenInThree[3]}</p>
             <div className="comment-header">
@@ -147,7 +141,7 @@ const IndividualArticles = () => {
                     CommentIconsList={numberOfPages} />
             </div>
         </div>
-    );
+    )
 }
 
 export default IndividualArticles;
