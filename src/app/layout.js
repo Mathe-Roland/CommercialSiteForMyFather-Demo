@@ -1,8 +1,8 @@
 import './layout.css';
 import './globals.css';
-import Footer from './components/footer/Footer';
-import Navbar from './components/navbar/navbar';
 const Header = React.lazy(() => import('./components/header/Header'));
+const Footer = React.lazy(() => import('./components/footer/Footer'));
+const Navbar = React.lazy(() => import('./components/navbar/navbar'));
 
 export default function RootLayout({ children }) {
     
