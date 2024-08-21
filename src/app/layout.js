@@ -1,20 +1,12 @@
 import './layout.css';
 import './globals.css';
 import Footer from './components/footer/Footer';
-import Header from './components/header/Header';
 import Navbar from './components/navbar/navbar';
+const Header = React.lazy(() => import('./components/header/Header'));
 
 export default function RootLayout({ children }) {
     
-    // if (typeof window !== 'undefined') {
-    //     const script = document.createElement('script');
-    //     script.src = 'https://js.stripe.com/v3/';
-    //     script.async = true;
-    //     document.head.appendChild(script);
-    //   }
-  
-
-
+    
     return (
         <html lang="en">
             <head>

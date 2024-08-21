@@ -20,7 +20,7 @@ const Navbar = () => {
   const handleMouseEnter = (index) => {
     if (index === 1) {
       setShowAcasa(true);
-      setDeferAcasa(true); // Trigger loading of Acasa component
+      setDeferAcasa(true);
     }
   };
 
