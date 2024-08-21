@@ -24,8 +24,8 @@ export default function RootLayout({ children }) {
                 <link rel="dns-prefetch" href="https://js.stripe.com/"/>
                 <link rel="dns-prefetch" href="https://js.stripe.com/"/>
                 <link rel="preload" href="https://www.decorcut.com/_next/static/css/a2504fd93a9ed98a.css" as="style"/>
-                <script src="https://www.decorcut.com/_next/static/chunks/fd9d1056-3e5d3c630784c984.js" defer></script>
-                <script src="https://www.decorcut.com/_next/static/chunks/7023-93c943c9116ac439.js" defer></script>
+                <script src="https://www.decorcut.com/_next/static/chunks/fd9d1056-3e5d3c630784c984.js" async></script>
+                <script src="https://www.decorcut.com/_next/static/chunks/7023-93c943c9116ac439.js" async></script>
 
 
             </head>
