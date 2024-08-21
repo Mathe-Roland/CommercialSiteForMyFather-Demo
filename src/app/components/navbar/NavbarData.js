@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Suspense, lazy } from 'react';
+import "./NavbarData.css";
 
 const Acasa = lazy(() => import('./navbarComponents/acasa'));
 

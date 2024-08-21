@@ -37,8 +37,6 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <div className="navbar-centered">
-        <div className="navbar-contents">
           <Suspense fallback={<div>Loading menu items...</div>}>
             <NavbarData
               navbarData={navbarData}
@@ -48,8 +46,6 @@ const Navbar = () => {
               showAcasa={showAcasa}
             />
           </Suspense>
-        </div>
-      </div>
       <div className="formControl">
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Select Option</InputLabel>
