@@ -10,24 +10,13 @@
 }
 
 
-.navbar-text{
-    font-size: 32px;
-    margin: 0;
-}
+
 
 .formControl{
 
     width: 80%;
     margin :0 auto;
 }
-
-.width100 {
-    width: 100%;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    height: 100%;
-  }
 
 .navbar-contents p{
     margin:0;

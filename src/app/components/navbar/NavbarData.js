@@ -9,7 +9,7 @@ const NavbarData = ({ navbarData, generateUrl, handleMouseLeave, handleMouseEnte
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   return (
-    <div>
+    <div className='navbarData'>
       {navbarData.items.map((element, index) => (
         <div
           key={element}
