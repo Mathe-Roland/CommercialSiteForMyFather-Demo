@@ -168,8 +168,20 @@
 }
 
 .phoneviewHideDesktopContent{
-    display: flex;
-    width: 50%;
-    justify-content: space-between;
+    display: none;
+}
 
+@media screen and (min-width:600px) {
+   
+    .hamburger-centered{
+        display: none;
+    }
+
+    .phoneviewHideDesktopContent{
+        display: flex;
+        width: 50%;
+        justify-content: space-between;
+    
+    }
+    
 }
