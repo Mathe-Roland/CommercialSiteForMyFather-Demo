@@ -9,18 +9,20 @@ export default function RootLayout({ children }) {
 
         const loadCSS = (href) => {
             const link = document.createElement('link');
-            link.rel = 'stylesheet';
+            link.rel = 'preload';
             link.href = href;
+            link.as = 'style';
+        
+            link.onload = () => {
+                link.rel = 'stylesheet';
+            };
             document.head.appendChild(link);
         };
-    
-        window.requestAnimationFrame(() => {
-            setTimeout(() => {
-                loadCSS('https://www.decorcut.com/_next/static/css/a2504fd93a9ed98a.css');
-                loadCSS('https://www.decorcut.com/_next/static/css/bd5aa9cff39a6305.css');
-                loadCSS('https://www.decorcut.com/_next/static/css/b2df370e7c0c4128.css');
-            }, 0);
-        });
+        
+        loadCSS('https://www.decorcut.com/_next/static/css/a2504fd93a9ed98a.css');
+        loadCSS('https://www.decorcut.com/_next/static/css/bd5aa9cff39a6305.css');
+        loadCSS('https://www.decorcut.com/_next/static/css/b2df370e7c0c4128.css');
+        
 
         const stripeScript = document.createElement('script');
         stripeScript.src = 'https://js.stripe.com/v3/';
