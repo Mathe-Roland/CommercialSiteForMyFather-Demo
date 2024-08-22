@@ -29,6 +29,19 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
     <div className="produs-container" suppressHydrationWarning>
       <div className="produs-image-container">
 
+    {"Panou decorativ Mos145"===title ? 
+    <Image
+      src={ image ? image : ""}
+      alt={title ? title :""}
+      width={204}
+      height={204}
+      layout="responsive"
+      sizes="(min-width: 600px) 450px, 352px"
+      className="produs-image"
+      priority={true}
+
+    />
+    :
       <Image
         src={ image ? image : ""}
         alt={title ? title :""}
@@ -38,6 +51,8 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
         sizes="(min-width: 600px) 450px, 352px"
         className="produs-image"
       />
+    }
+
 
       </div>
       <div className="produs-content">
