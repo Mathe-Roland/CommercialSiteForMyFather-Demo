@@ -5,6 +5,7 @@ import Header from './components/header/Header';
 import Navbar from './components/navbar/navbar';
 
 export default function RootLayout({ children }) {
+
     if (typeof window !== 'undefined') {
 
 
@@ -22,7 +23,7 @@ export default function RootLayout({ children }) {
         script2.src = 'https://www.decorcut.com/_next/static/chunks/7023-93c943c9116ac439.js';
         script2.defer = true;
         document.head.appendChild(script2);
-    }
+    };
 
     return (
         <html lang="en">
