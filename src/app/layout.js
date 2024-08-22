@@ -14,13 +14,12 @@ export default function RootLayout({ children }) {
             document.head.appendChild(link);
         };
     
-        // Defer the CSS load
         window.requestAnimationFrame(() => {
             setTimeout(() => {
                 loadCSS('https://www.decorcut.com/_next/static/css/a2504fd93a9ed98a.css');
                 loadCSS('https://www.decorcut.com/_next/static/css/bd5aa9cff39a6305.css');
                 loadCSS('https://www.decorcut.com/_next/static/css/b2df370e7c0c4128.css');
-            }, );
+            }, 0);
         });
 
         const stripeScript = document.createElement('script');
