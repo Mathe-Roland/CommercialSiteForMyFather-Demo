@@ -32,14 +32,12 @@ export default function RootLayout({ children }) {
                 <meta name="description" content="Produse traforate vopsite sau nevopsite din lemn, personalizate" />
                 <link rel="preconnect" href="https://js.stripe.com"/>
                 <link rel="dns-prefetch" href="https://js.stripe.com/"/>
-                <link rel="stylesheet" href="/criticalRendering.css" as="style"/>
             </head>
             <body className={`height`}>
                 <Header />
                 <Navbar />
                 <main>{children}</main>
                 <Footer />
-                <link rel="stylesheet" href="/nonCritical.css" as="style"/>
             </body>
         </html>
     );
