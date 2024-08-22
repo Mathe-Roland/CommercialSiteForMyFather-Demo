@@ -7,6 +7,7 @@ import Navbar from './components/navbar/navbar';
 export default function RootLayout({ children }) {
     if (typeof window !== 'undefined') {
 
+
         // Add Stripe script
         const stripeScript = document.createElement('script');
         stripeScript.src = 'https://js.stripe.com/v3/';
@@ -32,6 +33,12 @@ export default function RootLayout({ children }) {
                 <meta name="description" content="Produse traforate vopsite sau nevopsite din lemn, personalizate" />
                 <link rel="preconnect" href="https://js.stripe.com"/>
                 <link rel="dns-prefetch" href="https://js.stripe.com/"/>
+                <noscript>
+                <link rel="stylesheet" href="https://www.decorcut.com/_next/static/css/a2504fd93a9ed98a.css" />
+                <link rel="stylesheet" href="https://www.decorcut.com/_next/static/css/bd5aa9cff39a6305.css" />
+                <link rel="stylesheet" href="https://www.decorcut.com/_next/static/css/b2df370e7c0c4128.css" />
+              </noscript>
+
             </head>
             <body className={`height`}>
                 <Header />

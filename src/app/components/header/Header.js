@@ -1,4 +1,5 @@
 "use client";
+import "./Header.css";
 import LoginModal from "../Modal/Modal";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -10,17 +11,13 @@ import Image from "next/image";
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [show, setShow] = useState(false);
-
-
-
+  
   useEffect(() => {
     const userCookie = Cookies.get('user');
     if (userCookie) {
       setIsLoggedIn(true);
     }
   }, []);
-
-  
 
   const handleShow = () => {
     setShow(!show);
