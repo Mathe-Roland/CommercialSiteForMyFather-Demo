@@ -39,9 +39,6 @@ export default function RootLayout({ children }) {
                 <Navbar />
                 <main>{children}</main>
                 <Footer />
-                <link rel="stylesheet" href="https://www.decorcut.com/_next/static/css/a2504fd93a9ed98a.css" as="style"/>
-                <link rel="stylesheet" href="https://www.decorcut.com/_next/static/css/bd5aa9cff39a6305.css" as="style"/>
-                <link rel="stylesheet" href="https://www.decorcut.com/_next/static/css/b2df370e7c0c4128.css" as="style"/>
             </body>
         </html>
     );
