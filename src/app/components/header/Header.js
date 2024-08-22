@@ -1,5 +1,4 @@
 "use client";
-import "./Header.css";
 import LoginModal from "../Modal/Modal";
 import Link from "next/link";
 import { useState, useEffect } from "react";
