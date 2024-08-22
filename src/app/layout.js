@@ -5,17 +5,17 @@ import Header from './components/header/Header';
 import Navbar from './components/navbar/navbar';
 
 export default function RootLayout({ children }) {
-    if (typeof window !== 'undefined') {
+    // if (typeof window !== 'undefined') {
 
 
-        // Add Stripe script
-        const stripeScript = document.createElement('script');
-        stripeScript.src = 'https://js.stripe.com/v3/';
-        stripeScript.defer = true;
-        document.head.appendChild(stripeScript);
+    //     // Add Stripe script
+    //     const stripeScript = document.createElement('script');
+    //     stripeScript.src = 'https://js.stripe.com/v3/';
+    //     stripeScript.defer = true;
+    //     document.head.appendChild(stripeScript);
 
 
-    }
+    // }
 
     return (
         <html lang="en">
