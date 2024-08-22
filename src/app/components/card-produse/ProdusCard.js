@@ -37,7 +37,6 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
         layout="responsive"
         sizes="(min-width: 600px) 450px, 352px"
         className="produs-image"
-        priority={`${"Litere decorative Home" ? true:false}`}
       />
 
       </div>
