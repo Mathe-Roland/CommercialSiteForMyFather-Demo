@@ -29,7 +29,7 @@ const Products = () => {
 
     fetchData();
     
-  }, []); 
+  }, []);
 
   if (loading) {
     return (
