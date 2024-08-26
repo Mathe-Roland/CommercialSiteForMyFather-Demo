@@ -1,3 +1,6 @@
+"use client"
+
+import { useEffect } from 'react';
 import './layout.css';
 import './globals.css';
 import Footer from './components/footer/Footer';
@@ -6,16 +9,16 @@ import Navbar from './components/navbar/navbar';
 import Cookies from 'js-cookie';
 import ShowCookiesModal from './components/cookies/Cookies';
 
-
 export default function RootLayout({ children }) {
     
-    if (typeof window !== 'undefined') {
-        const stripeScript = document.createElement('script');
-        stripeScript.src = 'https://js.stripe.com/v3/';
-        stripeScript.defer = true;
-        document.head.appendChild(stripeScript);
-    };
+        if (typeof window !== 'undefined') {
+            const stripeScript = document.createElement('script');
+            stripeScript.src = 'https://js.stripe.com/v3/';
+            stripeScript.defer = true;
+            document.head.appendChild(stripeScript);
 
+        }
+    
     return (
         <html lang="en">
             <head>
@@ -28,8 +31,8 @@ export default function RootLayout({ children }) {
                 <Navbar />
                 <main>{children}</main>
                 <Footer />
-                <ShowCookiesModal/>
+                {typeof window !== 'undefined' ? !Cookies.get("showModal") ? <ShowCookiesModal /> : null :null}
             </body>
         </html>
     );
-}
+};
