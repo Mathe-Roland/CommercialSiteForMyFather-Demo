@@ -31,7 +31,8 @@ export default function RootLayout({ children }) {
                 <Navbar />
                 <main>{children}</main>
                 <Footer />
-                {typeof window !== 'undefined' ? !Cookies.get("showModal") ? <ShowCookiesModal /> : null :null}
+                <ShowCookiesModal/>
+                {/* {typeof window !== 'undefined' ? !Cookies.get("showModal") ? <ShowCookiesModal /> : null :null} */}
             </body>
         </html>
     );
