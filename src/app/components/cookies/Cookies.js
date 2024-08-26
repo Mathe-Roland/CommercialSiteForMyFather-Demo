@@ -5,15 +5,13 @@ import { Modal, Box, Typography, Button } from "@mui/material";
 import "./Cookies.css";
 import Cookies from "js-cookie";
 
-
 const ShowCookiesModal = () => {
   const [open, setOpen] = useState(false);
 
-  
   useEffect(() => {
     const cookieExists = Cookies.get("showModal");
     if (!cookieExists) {
-      setOpen(true);  
+      setOpen(true);
     }
   }, []);
 
@@ -27,7 +25,7 @@ const ShowCookiesModal = () => {
     setOpen(false);
   };
 
-  
+
   return (
     <div className="Cookie-position">
       <Modal
@@ -38,15 +36,15 @@ const ShowCookiesModal = () => {
       >
         <Box
           sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 400,
+            position: "fixed",
+            bottom: 0,
+            left: 0,
+            width: "100%",
             bgcolor: "background.paper",
-            border: "2px solid #000",
+            borderTop: "2px solid #000",
             boxShadow: 24,
             p: 4,
+            zIndex: 1300,
           }}
         >
           <Typography
@@ -65,7 +63,7 @@ const ShowCookiesModal = () => {
             id="modal-modal-description"
             variant="body1"
             component="div"
-            sx={{ marginBottom: "16px" }} 
+            sx={{ marginBottom: "16px" }}
           >
             La decorcut.com, utilizăm cookie-uri pentru a asigura funcționarea
             optimă a site-ului, pentru a îmbunătăți experiența utilizatorilor și
@@ -82,7 +80,6 @@ const ShowCookiesModal = () => {
                 backgroundColor: "green",
                 textDecoration: "none",
                 margin: "10px",
-                display: "block",
                 "&:hover": {
                   backgroundColor: "red",
                 },
@@ -98,7 +95,6 @@ const ShowCookiesModal = () => {
                 backgroundColor: "green",
                 textDecoration: "none",
                 margin: "10px",
-                display: "block",
                 "&:hover": {
                   backgroundColor: "red",
                 },

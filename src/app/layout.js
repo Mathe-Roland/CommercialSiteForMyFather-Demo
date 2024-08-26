@@ -10,14 +10,10 @@ import ShowCookiesModal from './components/cookies/Cookies';
 export default function RootLayout({ children }) {
     
     if (typeof window !== 'undefined') {
-        
-
         const stripeScript = document.createElement('script');
         stripeScript.src = 'https://js.stripe.com/v3/';
         stripeScript.defer = true;
         document.head.appendChild(stripeScript);
-        
-
     };
 
     return (
