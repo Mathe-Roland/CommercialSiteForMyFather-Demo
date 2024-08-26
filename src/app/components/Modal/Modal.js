@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
@@ -120,6 +121,7 @@ const LoginModal = ({ setLogin }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
+        
         <Box
           sx={{
             position: 'absolute',
@@ -150,7 +152,6 @@ const LoginModal = ({ setLogin }) => {
             value={name}
             onChange={nameChange}
           />
-          <p className={`${formIsValid.name !== '' ? 'modalInvalid' : null}`}>{formIsValid.name}</p>
           <TextField
             sx={{ marginBottom: '16px' }}
             label="password"
@@ -161,7 +162,6 @@ const LoginModal = ({ setLogin }) => {
             value={password}
             onChange={passwordChange}
           />
-          <p className={`${formIsValid.password !== '' ? 'modalInvalid' : null}`}>{formIsValid.password}</p>
           <Button sx={{ fontSize: '12px' }} onClick={handleLogIn}>
             Conectare
           </Button>

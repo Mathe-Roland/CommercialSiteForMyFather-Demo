@@ -12,7 +12,10 @@ const Footer = () => {
                 <div className="footer-first-part-columns">
                     <div className="footer-first-part-column">
                         <ul>
+                            <Link href={"/despre-noi"}>
+
                             <li>Despre noi</li>
+                            </Link>
                             <Link href={"/termeni-si-conditii"}>
                             <li>Termeni si Conditii</li>
                             </Link>
