@@ -6,7 +6,7 @@ import "./Cookies.css";
 import Cookies from "js-cookie";
 
 const ShowCookiesModal = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   useEffect(() => {
     const cookieExists = Cookies.get("showModal");
