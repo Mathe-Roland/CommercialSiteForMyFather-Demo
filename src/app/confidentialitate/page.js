@@ -114,7 +114,7 @@ Ai următoarele drepturi în legătură cu datele tale personale:
 <br></br>
 <br></br>
 
-Pentru a-ți exercita aceste drepturi, te rugăm să ne contactezi la Mostrik.dreamland@gmail.com.
+Pentru a-ți exercita aceste drepturi, te rugăm să ne contactezi la mostrik.dreamland@gmail.com.
 <br></br>
 <br></br>
 
@@ -124,7 +124,7 @@ Putem actualiza această politică de confidențialitate periodic pentru a refle
 <br></br>
 
  7. Contact
-Dacă ai întrebări sau nelămuriri cu privire la politica noastră de confidențialitate, ne poți contacta la Mostrik.dreamland@gmail.com.
+Dacă ai întrebări sau nelămuriri cu privire la politica noastră de confidențialitate, ne poți contacta la mostrik.dreamland@gmail.com.
 <br></br>
 <br></br>
 

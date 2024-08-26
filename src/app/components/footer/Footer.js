@@ -2,6 +2,8 @@ import "./Foot.css";
 import Link from "next/link";
 
 const Footer = () => {
+
+
     return (
         <footer className="footer-container">
             <section className="footer-first-part">
@@ -17,7 +19,9 @@ const Footer = () => {
                             <Link href={"/confidentialitate"}>
                             <li>Confidentialitate</li>
                             </Link>
+                            <Link href={"./metode-de-plata"}>
                             <li>Metode de plata</li>
+                            </Link>
                         </ul>
                     </div>
                     <div className="footer-first-part-column">
@@ -25,8 +29,14 @@ const Footer = () => {
                             <Link href="./politica-de-cookie-uri">
                             <li>Politica de Cookie-uri</li>
                             </Link>
+                            <Link href={"/politica-de-retur"}
+                            >
                             <li>Retur produse</li>
+                                
+                            </Link>
+                            <Link href={"/garantia"}>
                             <li>Garantia produselor</li>
+                            </Link>
                             <li>Intrebari Frecvente</li>
                             <li>Online Dispute Resolution</li>
                         </ul>
@@ -47,7 +57,7 @@ const Footer = () => {
                 <hr />
                 <div className="footer-second-part-columns">
                     <p className="footer-email">
-                        Adresa de e-mail: <span>Mostrik.dreamland@gmail.com</span>
+                        Adresa de e-mail: <span>mostrik.dreamland@gmail.com</span>
                     </p>
                     <p className="footer-phone">
                         Numar de telefon: <span>0770 803 858</span>
