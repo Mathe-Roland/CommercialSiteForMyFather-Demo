@@ -33,12 +33,13 @@ const Header = () => {
   return (
     <div className='navbar-title-and-searchbar'>
       <div className="row width80 j-c-b">
-        <div>
+        <div className="logo-decorcut">
           <Image src={monsrikLogo ? monsrikLogo : "/cancel.webp"}
-          width={100}
-          height={100}
+          width={70}
+          height={70}
           alt={`${monsrikLogo}`}
           />
+          <p className="logo-decorcut-text">Decorcut</p>
         </div>
         <div className="hamburger-centered">
           <div onMouseLeave={handleHamburger} className="hamburger-dropdown">
@@ -64,13 +65,11 @@ const Header = () => {
               <UserInfo setLogin={setIsLoggedIn}/> :
               <LoginModal setLogin={setIsLoggedIn}/>
             }
-          </div>
-          <div className="row j-c-c align-items-c">
             <Link href={"/cos"}>
             <p className="Header-cos">Cos</p>
 
             </Link>
-           
+            <p className="header-destopview-phone">0770 803 858</p>
           </div>
         </div>
       </div>

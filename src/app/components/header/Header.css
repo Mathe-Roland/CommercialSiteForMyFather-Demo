@@ -28,9 +28,9 @@
 }
 
 .row{
-    
     display: flex;
     flex-direction: row;
+    gap: 20px;
 }
 
 .column{
@@ -129,9 +129,26 @@
 
 }
 
+.logo-decorcut{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-decorcut-text{
+    display: none;
+}
+
+.header-destopview-phone{
+    font-size: 24px;
+}
+
 .navbar-title-and-searchbar{
     display: flex;
     justify-content: center;
+    background-color: rgb(73, 95, 62);
+    height:80px;
 }
 
 .headerCos{
@@ -180,8 +197,13 @@
     .phoneviewHideDesktopContent{
         display: flex;
         width: 50%;
-        justify-content: space-between;
+        justify-content: flex-end;
     
     }
     
-}
+    .logo-decorcut-text{
+        display: block;
+        font-size: 24px;
+    }
+
+    }
