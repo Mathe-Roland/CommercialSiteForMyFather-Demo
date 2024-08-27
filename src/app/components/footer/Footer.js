@@ -7,10 +7,10 @@ const Footer = () => {
     return (
         <footer className="footer-container">
             <section className="footer-first-part">
-                <h2>Link-uri rapide:</h2>
-                <hr />
                 <div className="footer-first-part-columns">
                     <div className="footer-first-part-column">
+                    <h3>MAGAZINUL MEU</h3>
+                    <hr />
                             <Link name="despre-noi" href={"/despre-noi"}>
 
                             <p>Despre noi</p>
@@ -24,8 +24,13 @@ const Footer = () => {
                             <Link name="metode-de-plata" href={"./metode-de-plata"}>
                             <p>Metode de plata</p>
                             </Link>
+                            <Link name="metode-de-plata" href={"./contact"}>
+                            <p>Contact</p>
+                            </Link>
                     </div>
                     <div className="footer-first-part-column">
+                    <h3>CLIENTI</h3>
+                    <hr />
                             <Link name="politica-de-cookiuri" href="./politica-de-cookie-uri">
                             <p>Politica de Cookie-uri</p>
                             </Link>
@@ -41,6 +46,8 @@ const Footer = () => {
                             <p>Online Dispute Resolution</p>
                     </div>
                     <div className="footer-first-part-column">
+                    <h3>DATE COMERCIALE</h3>
+                    <hr />
                             <Link name="anpc" href={"https://anpc.ro/"}>
                             <p>ANPC</p>
                             

@@ -20,12 +20,12 @@
     margin-bottom: 1rem;
 }
 
-.footer-first-part ul {
+.footer-first-part {
     list-style-type: none;
     padding: 0;
 }
 
-.footer-first-part li {
+.footer-first-part  {
     margin-bottom: 0.5rem;
 }
 
@@ -49,6 +49,9 @@
     }
 
     .footer-first-part-column {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
         flex: 1;
         margin-right: 1rem;
     }
@@ -70,5 +73,10 @@
 
     .footer-first-part h2, .footer-second-part h2, .footer-third-part h2 {
         font-size: 1.5rem;
+    }
+    .footer-second-part{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
     }
 }
