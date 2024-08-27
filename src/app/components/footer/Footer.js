@@ -11,46 +11,40 @@ const Footer = () => {
                 <hr />
                 <div className="footer-first-part-columns">
                     <div className="footer-first-part-column">
-                        <ul>
-                            <Link href={"/despre-noi"}>
+                            <Link name="despre-noi" href={"/despre-noi"}>
 
-                            <li>Despre noi</li>
+                            <p>Despre noi</p>
                             </Link>
-                            <Link href={"/termeni-si-conditii"}>
-                            <li>Termeni si Conditii</li>
+                            <Link name="termeni-si-conditii" href={"/termeni-si-conditii"}>
+                            <p>Termeni si Conditii</p>
                             </Link>
-                            <Link href={"/confidentialitate"}>
-                            <li>Confidentialitate</li>
+                            <Link name="confidentialitate" href={"/confidentialitate"}>
+                            <p>Confidentialitate</p>
                             </Link>
-                            <Link href={"./metode-de-plata"}>
-                            <li>Metode de plata</li>
+                            <Link name="metode-de-plata" href={"./metode-de-plata"}>
+                            <p>Metode de plata</p>
                             </Link>
-                        </ul>
                     </div>
                     <div className="footer-first-part-column">
-                        <ul>
-                            <Link href="./politica-de-cookie-uri">
-                            <li>Politica de Cookie-uri</li>
+                            <Link name="politica-de-cookiuri" href="./politica-de-cookie-uri">
+                            <p>Politica de Cookie-uri</p>
                             </Link>
-                            <Link href={"/politica-de-retur"}
+                            <Link  name="politica-de-retur"href={"/politica-de-retur"}
                             >
-                            <li>Retur produse</li>
+                            <p>Retur produse</p>
                                 
                             </Link>
-                            <Link href={"/garantia"}>
-                            <li>Garantia produselor</li>
+                            <Link name="ganartia-produselor" href={"/garantia"}>
+                            <p>Garantia produselor</p>
                             </Link>
-                            <li>Intrebari Frecvente</li>
-                            <li>Online Dispute Resolution</li>
-                        </ul>
+                            <p>Intrebari Frecvente</p>
+                            <p>Online Dispute Resolution</p>
                     </div>
                     <div className="footer-first-part-column">
-                        <ul>
-                            <Link href={"https://anpc.ro/"}>
-                            <li>ANPC</li>
+                            <Link name="anpc" href={"https://anpc.ro/"}>
+                            <p>ANPC</p>
                             
                             </Link>
-                        </ul>
                     </div>
                 </div>
             </section>
