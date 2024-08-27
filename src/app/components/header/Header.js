@@ -65,11 +65,13 @@ const Header = () => {
               <UserInfo setLogin={setIsLoggedIn}/> :
               <LoginModal setLogin={setIsLoggedIn}/>
             }
+            <p className="header-destopview-phone">0770 803 858</p>
             <Link href={"/cos"}>
-            <p className="Header-cos">Cos</p>
+            <Image src={"/cos-de-cumparaturi.png"}
+            width={50}
+            height={50}/>
 
             </Link>
-            <p className="header-destopview-phone">0770 803 858</p>
           </div>
         </div>
       </div>
