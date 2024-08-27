@@ -555,6 +555,26 @@ export const userData = async () => {
       .catch((error) => {
       });
   };
+  export const deleteProductDataFNonRegisteredUser = async (productId) => {
+  
+  
+    const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforate-non-registered-users/${productId}`;
+  
+
+    const headers = {
+      "Content-type": "application/json; charset=UTF-8",
+    };
+    
+    axios
+      .delete(
+        url,
+        { headers: headers }
+      )
+      .then((response) => {
+      })
+      .catch((error) => {
+      });
+  };
 
 
   export const deleteNonRegisteredUserProduct = async (productId) => {

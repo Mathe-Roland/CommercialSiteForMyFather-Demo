@@ -1,7 +1,8 @@
 import "./CosCard.css";
 import { useState } from "react";
-import { deleteProductData } from "../asyncOperations/fetchData";
+import { deleteProductData ,deleteProductDataFNonRegisteredUser} from "../asyncOperations/fetchData";
 import Image from 'next/image';
+import Cookies from "js-cookie";
 
 
 const CosCard = ({ id, image, title, price,quantityFromDatabase, addToCart }) => {
@@ -78,8 +79,13 @@ const CosCard = ({ id, image, title, price,quantityFromDatabase, addToCart }) =>
     
 
     const deleteItem = async () => {
-        await deleteProductData(id);
-        window.location.reload();
+        if(Cookies.get("user")!==undefined){
+            await deleteProductData(id);
+            window.location.reload();
+        }else{
+            await deleteProductDataFNonRegisteredUser(id);
+            window.location.reload();
+        }
     }
     
 

@@ -279,7 +279,6 @@ const Cos = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
     console.log("Form submitted:", formData);
     handleClose();
   };
@@ -343,6 +342,8 @@ const Cos = () => {
           </div>
         </div>
       </div>
+      {openModal ? (
+        
       <Modal
         className='modal-z-index'
         open={openModal}
@@ -465,6 +466,7 @@ const Cos = () => {
           </Button>
         </Box>
       </Modal>
+      ):null}
     </div>
   );
 }
