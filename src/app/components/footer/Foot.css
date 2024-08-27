@@ -6,10 +6,6 @@
     font-family: Arial, sans-serif;
 }
 
-.footer-first-part, .footer-second-part, .footer-third-part {
-    margin-bottom: 1.5rem;
-}
-
 .footer-first-part h2, .footer-second-part h2, .footer-third-part h2 {
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
@@ -49,6 +45,7 @@
     .footer-first-part-columns {
         flex-direction: row;
         justify-content: space-between;
+        gap: 20px;
     }
 
     .footer-first-part-column {
