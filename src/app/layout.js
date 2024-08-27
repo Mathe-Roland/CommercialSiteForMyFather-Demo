@@ -1,6 +1,3 @@
-"use client"
-
-import { useEffect } from 'react';
 import './layout.css';
 import './globals.css';
 import Footer from './components/footer/Footer';
@@ -8,6 +5,7 @@ import Header from './components/header/Header';
 import Navbar from './components/navbar/navbar';
 import Cookies from 'js-cookie';
 import ShowCookiesModal from './components/cookies/Cookies';
+
 
 export default function RootLayout({ children }) {
     
@@ -31,8 +29,7 @@ export default function RootLayout({ children }) {
                 <Navbar />
                 <main>{children}</main>
                 <Footer />
-                <ShowCookiesModal/>
-                {/* {typeof window !== 'undefined' ? !Cookies.get("showModal") ? <ShowCookiesModal /> : null :null} */}
+                {typeof window !== 'undefined' ? !Cookies.get("showModal") ? <ShowCookiesModal /> : null :null}
             </body>
         </html>
     );
