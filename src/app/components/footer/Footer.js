@@ -44,14 +44,19 @@ const Footer = () => {
                             </Link>
                             <p>Intrebari Frecvente</p>
                             <p>Online Dispute Resolution</p>
-                    </div>
-                    <div className="footer-first-part-column">
-                    <h3>DATE COMERCIALE</h3>
-                    <hr />
                             <Link name="anpc" href={"https://anpc.ro/"}>
                             <p>ANPC</p>
                             
                             </Link>
+                    </div>
+                    <div className="footer-first-part-column">
+                    <h3>DATE COMERCIALE</h3>
+                    <hr />
+                    <p>S.C. MOSTRIK DREAMLAND</p>
+                    <p>J26-1096-2018</p>
+                    <p>C.U.I. 39622807 </p>
+                    <p>Sighisoara </p>
+                    <p>Romania</p>
                     </div>
                 </div>
             </section>
