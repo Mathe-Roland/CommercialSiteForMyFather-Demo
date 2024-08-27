@@ -68,8 +68,8 @@ const Header = () => {
             <p className="header-destopview-phone">0770 803 858</p>
             <Link href={"/cos"}>
             <Image src={"/cos-de-cumparaturi.png"}
-            width={50}
-            height={50}/>
+            width={40}
+            height={40}/>
 
             </Link>
           </div>
