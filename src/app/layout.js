@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <head>
-                <title>Panou mdf traforat</title>
+                <title>Panou decorative mdf traforate</title>
                 <meta name="description" content="Produse traforate vopsite sau nevopsite din lemn, personalizate" />
                 <link rel="dns-prefetch" href="https://js.stripe.com/"/>             
             </head>
