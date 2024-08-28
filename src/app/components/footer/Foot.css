@@ -14,6 +14,7 @@
 .footer-first-part-columns {
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
 .footer-first-part-column {
@@ -60,7 +61,7 @@
         margin-right: 0;
     }
 
-    .footer-first-part ul {
+    .footer-first-part {
         padding-left: 1rem;
     }
 }
