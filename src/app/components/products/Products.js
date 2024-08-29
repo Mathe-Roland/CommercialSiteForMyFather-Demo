@@ -38,6 +38,8 @@ const Products = () => {
     );
   }
 
+  {console.log(cardList)}
+
   return (
     <div className='normal-headers' suppressHydrationWarning>
       <div className='margin0Auto'>
