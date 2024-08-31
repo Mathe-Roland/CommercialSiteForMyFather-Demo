@@ -3,7 +3,13 @@
     padding: 1rem;
     background-color: rgba(0, 0, 0, 0.712);
     font-family: Arial, sans-serif;
+    color: white;
 }
+
+.footer-second-part{
+    background-color: rgb(73, 95, 62);
+}
+
 
 .footer-first-part h2, .footer-second-part h2, .footer-third-part h2 {
     font-size: 1.2rem;

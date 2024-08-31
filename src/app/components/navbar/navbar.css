@@ -156,8 +156,9 @@
 }
 
 .navbar-text{
-    font-size: 32px;
+    font-size: 24px;
     margin: 0;
+    font-weight: 500;
 }
 
 .width100 {
