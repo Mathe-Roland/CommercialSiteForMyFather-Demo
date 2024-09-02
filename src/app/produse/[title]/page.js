@@ -31,10 +31,12 @@ import "./Produse.css";
 
       }
 
+      console.log(cardList)
+
       return (
         <div suppressHydrationWarning>
           <Produs
-            img={cardList[0]?.attributes?.image?.data?.attributes?.url}
+            img={cardList[0]?.attributes?.image?.data}
             title={cardList[0]?.attributes?.title}
             description={cardList[0]?.attributes?.description}
             price={cardList[0]?.attributes?.price}

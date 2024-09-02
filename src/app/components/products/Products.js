@@ -38,7 +38,6 @@ const Products = () => {
     );
   }
 
-  {console.log(cardList)}
 
   return (
     <div className='normal-headers' suppressHydrationWarning>
@@ -46,7 +45,7 @@ const Products = () => {
         {cardList.length > 0 ? cardList.map((data, index) => (
           <ProdusCard
             key={data.id}
-            image={data.attributes?.image?.data?.attributes?.url}
+            image={data?.attributes?.image?.data?.[0]?.attributes?.url}
             title={data.attributes?.title}
             disponibil={"Produs Disponibil"}
             description={data.attributes?.description}

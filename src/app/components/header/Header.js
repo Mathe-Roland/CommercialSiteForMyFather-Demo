@@ -39,7 +39,7 @@ const Header = () => {
           height={70}
           alt={`${monsrikLogo}`}
           />
-          <p className="logo-decorcut-text">decorcut.com : decorcut.ro</p>
+          <p className="logo-decorcut-text">decorcut.com  decorcut.ro</p>
         </div>
         <div className="hamburger-centered">
           <div onMouseLeave={handleHamburger} className="hamburger-dropdown">

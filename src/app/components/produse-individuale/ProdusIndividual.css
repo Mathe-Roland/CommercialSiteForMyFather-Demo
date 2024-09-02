@@ -69,7 +69,9 @@
 
 
 .produs-individual-images{
-    width: 100%;    
+    display: flex;
+    width: 100%;
+    gap: 10px;
 }
 
 .produs-individual-pret{
@@ -84,7 +86,27 @@
 
 }
 
+.imageContainer {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .produs-images-choice{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 400px;
+    overflow: hidden;
+  }
 
+.imageContainer:hover{
+
+    border: 1px solid black;
+}
 @media screen and (min-width:900px) {
 
     .produs-individual-container{

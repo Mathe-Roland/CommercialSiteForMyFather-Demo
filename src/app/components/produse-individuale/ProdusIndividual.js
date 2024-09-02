@@ -24,6 +24,8 @@ const Produs = ({ img, description, title, price }) => {
     const [prices, setPrices] = useState(price);
     const [ifVopsit, setIfVopsit] = useState(false);
     const [adaugaInCosShow, setAdaugaInCosShow] = useState(false);
+    const [pictureChange, setPictureChange] = useState("");
+
 
     useEffect(() => {
         const fetchDataAndFilter = async () => {
@@ -49,6 +51,9 @@ const Produs = ({ img, description, title, price }) => {
         fetchDataAndFilter();
     }, [title]);
     
+
+
+
     useEffect(() => {
         const commentLength = originalComments.length;
         const numberOfPagesF = Math.ceil(commentLength / 12);
@@ -191,12 +196,31 @@ const Produs = ({ img, description, title, price }) => {
     };
 
     const bifa="/bifa.png";
+    
 
     return (
         <div className="produs-individual-container">
             <div className="produs-individual-columns">
                 <div className="produs-individual-images">
-                    <Image src={`${img ? img:""}`} alt="failed-load" width={500} height={250} />
+
+                <div className='produs-images-choice'>
+                    
+                        {img?.length > 0 ? (
+                img.map((e) => (
+                <div key={e.id} className="imageContainer"
+                onMouseOver={()=>setPictureChange(e.attributes.url)}>
+                    <Image
+                    src={e.attributes.url}
+                    alt="produs-individual-images"
+                    layout="fill"
+                    objectFit="cover"
+                    />
+                </div>
+                ))
+            ) : null}
+                    </div>    
+
+                    <Image src={`${img?.length >0 && pictureChange === "" ? img?.[0]?.attributes?.url:pictureChange}`} alt="failed-load" width={400} height={450} />
                 </div>
                 <div className="produs-individual-text-container">
                     <div className="produs-upper-text">
