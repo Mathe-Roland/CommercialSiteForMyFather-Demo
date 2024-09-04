@@ -1,14 +1,4 @@
-
- export const accordion = [
-    "panouri-decorative",
-    "harti", 
-    "cadouri",
-    "pandative", 
-    "tablouri-gravate", 
-    "cadouri-personalizate"
-    ];
-
-    export const accordionCopy = [
+    export const accordion = [
         {"panouri-decorative":["https://res.cloudinary.com/ddrkdrrre/image/upload/v1724939390/evantai150_szobasnatur_215b96aac7.png","https://res.cloudinary.com/ddrkdrrre/image/upload/v1724939390/1_szobas_100_feketer_4323fb9665.png","https://res.cloudinary.com/ddrkdrrre/image/upload/v1724939390/szobaslapisfeher150_d9e6f511a5.png"]},
         
     {"tablouri-gravate":["https://res.cloudinary.com/ddrkdrrre/image/upload/v1724939278/2faemberfekete_de79e04a63.png","https://res.cloudinary.com/ddrkdrrre/image/upload/v1724939278/3f760280_dfa3_42e9_aa58_a29e871a62dc_be634c43be.jpg","https://res.cloudinary.com/ddrkdrrre/image/upload/v1724939278/378259471_2373166666193563_2527188812030739788_n_Copy_3b1b684b1f.jpg"]},

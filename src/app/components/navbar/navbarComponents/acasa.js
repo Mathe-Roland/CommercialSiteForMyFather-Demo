@@ -1,5 +1,5 @@
 import "./acasa.css";
-import { accordionCopy } from "../../card-produse/cardList";
+import { accordion } from "../../card-produse/cardList";
 import  Link  from "next/link";
 import Image from "next/image";
 
@@ -10,10 +10,10 @@ const Acasa=()=>{
     return (
 
         <div className="heightvh">
-            {accordionCopy.map((e,index)=>(
+            {accordion.map((e,index)=>(
                 
                 <div key={index} className="acasa">
-                <Link className="acasa-link" href={`/${Object.keys(e)}}`}>
+                <Link className="acasa-link" href={`/${Object.keys(e)[0]}`}>
                 <h3 >{Object.keys(e)[0].split("-").join(" ")}</h3>
                
                 </Link>

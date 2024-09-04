@@ -75,11 +75,11 @@ export default function CustomizedAccordions() {
 
         <Accordion key={index} expanded={expanded === `panel${index + 1}`} onChange={handleChange(`panel${index + 1}`)}>
           <AccordionSummary aria-controls={`panel${index + 1}d-content`} id={`panel${index + 1}d-header`}>
-            <Link href={`/${e}`}>
+            <Link href={`/${Object.keys(e)[0]}`}>
             
                 <Typography>
 
-                {e.split("-").join(" ")}
+                {Object.keys(e)[0].split("-").join(" ")}
 
                 </Typography>
             
