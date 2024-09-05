@@ -60,7 +60,7 @@ const PanouriDecorative=()=>{
                             key={e?.id}
                             description={e?.attributes?.description}
                             title={e?.attributes?.title}
-                            image={e?.attributes?.image?.data?.attributes?.url}
+                            image={e?.attributes?.image?.data?.[0]?.attributes?.url}
                             disponibil={"Este disponibil"}
                             price={e?.attributes?.price}
                         />))
