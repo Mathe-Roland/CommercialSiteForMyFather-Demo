@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import "./Header.css";
 import LoginModal from "../Modal/Modal";
 import Link from "next/link";
@@ -7,11 +7,10 @@ import UserInfo from "../userInfo/UserInfo";
 import Cookies from 'js-cookie';
 import Image from "next/image";
 
-
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [show, setShow] = useState(false);
-  
+
   useEffect(() => {
     const userCookie = Cookies.get('user');
     if (userCookie) {
@@ -25,58 +24,68 @@ const Header = () => {
 
   const handleHamburger = () => {
     setShow(false);
-  }
+  };
 
-  const hamburger="/menu.png";
-  const monsrikLogo="/logosDecorcut.png";
+  const hamburger = "/menu.png";
+  const monsrikLogo = "/logosDecorcut.png";
 
   return (
-    <div className='navbar-title-and-searchbar'>
-      <div className="row width80 j-c-b">
-        <div className="logo-decorcut">
-          <Image src={monsrikLogo ? monsrikLogo : "/cancel.webp"}
-          width={70}
-          height={70}
-          alt={`${monsrikLogo}`}
-          />
-          <p className="logo-decorcut-text">decorcut.com  decorcut.ro</p>
-        </div>
-        <div className="hamburger-centered">
-          <div onMouseLeave={handleHamburger} className="hamburger-dropdown">
-            <Image src={hamburger ? hamburger : null } onClick={handleShow} 
-              className="hamburger-menu" alt="hamburger-menu"
-              width={100}
-              height={100}
-              />
-            { show ?
-              <div className="navbar-dropdown">
-                { isLoggedIn ?
-                  <UserInfo setLogin={setIsLoggedIn}/> :
-                  <LoginModal setLogin={setIsLoggedIn}/>
-                }
-              </div> :
-              null
-            }
+    <header>
+      <div className='navbar-title-and-searchbar'>
+        <div className="row width80 j-c-b">
+          <div className="logo-decorcut">
+            <Image 
+              src={monsrikLogo ? monsrikLogo : "/cancel.webp"}
+              width={70}
+              height={70}
+              alt={`${monsrikLogo}`}
+            />
+            <p className="logo-decorcut-text">decorcut.com decorcut.ro</p>
           </div>
-        </div>
-        <div className="phoneviewHideDesktopContent">
-          <div className="row j-c-c align-items-c">
-            { isLoggedIn ?
-              <UserInfo setLogin={setIsLoggedIn}/> :
-              <LoginModal setLogin={setIsLoggedIn}/>
-            }
-            <p className="header-destopview-phone">0770 803 858</p>
-            <Link href={"/cos"}>
-            <Image src={"/cos-de-cumparaturi.png"}
-            alt="cos-de-cumparaturi"
-            width={40}
-            height={40}/>
 
-            </Link>
+          <div className="hamburger-centered">
+            <div onMouseLeave={handleHamburger} className="hamburger-dropdown">
+              <Image 
+                src={hamburger ? hamburger : null} 
+                onClick={handleShow} 
+                className="hamburger-menu" 
+                alt="hamburger-menu"
+                width={100}
+                height={100}
+              />
+              {show ? (
+                <div className="navbar-dropdown">
+                  {isLoggedIn ? (
+                    <UserInfo setLogin={setIsLoggedIn} />
+                  ) : (
+                    <LoginModal setLogin={setIsLoggedIn} />
+                  )}
+                </div>
+              ) : null}
+            </div>
+          </div>
+
+          <div className="phoneviewHideDesktopContent">
+            <div className="row j-c-c align-items-c">
+              {isLoggedIn ? (
+                <UserInfo setLogin={setIsLoggedIn} />
+              ) : (
+                <LoginModal setLogin={setIsLoggedIn} />
+              )}
+              <p className="header-destopview-phone">0770 803 858</p>
+              <Link href={"/cos"}>
+                <Image 
+                  src={"/cos-de-cumparaturi.png"}
+                  alt="cos-de-cumparaturi"
+                  width={40}
+                  height={40}
+                />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

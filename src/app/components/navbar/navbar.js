@@ -16,7 +16,6 @@ const Navbar = () => {
 
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
-
   const handleMouseEnter = (index) => {
     if (index === 1) {
       setShowAcasa(true);
@@ -36,86 +35,85 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar">
-      <div className="navbar-centered">
-        <div className="navbar-contents">
-          {!isMobile ? navbarData.items.map((element,index) => (
-            <div 
-              key={element}
-              onMouseEnter={() => handleMouseEnter(navbarData.items.indexOf(element))}
-              onMouseLeave={handleMouseLeave}
-            >
-              {element === "Acasa" ? (
-                <Link href={"/"}>
-                
-                <p className='navbar-text'>
-                  {element}
-                </p>
-                </Link>
-                
-              ) : (element==="Magazin"?
-                <p className='navbar-text'>
-                  {element}
-                </p>
-              :
-                <p className='navbar-text'>
-                  <Link href={generateUrl(element)}>
-                    {element}
-                  </Link>
-                </p>
-              )}
-              {showAcasa && index === 1 ? (
-                <div className="width100">
-                  <Acasa />
-                </div>
-              ) : null}
-            </div>
-          ))
-          :
-          null}
-        </div>
-      </div>
-      <div className="formControl">
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Select Option</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={selectedOption}
-            onChange={handleChange}
-          >
-            { isMobile
-            ?
-            navbarData.items.map((e,index) => (
-              e !== "Acasa" ? (
-                index===1?
-                null
-                :
-                <MenuItem 
-                  key={e} 
-                  component="a" 
-                  href={e.toLowerCase().split(" ").join("-")} 
-                  value={e}
-                >
-                  {e}
-                </MenuItem>
-              ) : (<MenuItem 
-                key={e} 
-                component="a" 
-                href={"/"} 
-                value={e}
+    <header>
+      <nav className="navbar">
+        <div className="navbar-centered">
+          <div className="navbar-contents">
+            {!isMobile ? navbarData.items.map((element, index) => (
+              <div 
+                key={element}
+                onMouseEnter={() => handleMouseEnter(navbarData.items.indexOf(element))}
+                onMouseLeave={handleMouseLeave}
               >
-                {e}
-              </MenuItem>
-              )
-            ))
-            :
-            null
-          }
-          </Select>
-        </FormControl>
-      </div>
-    </div>
+                {element === "Acasa" ? (
+                  <Link href={"/"}>
+                    <p className='navbar-text'>
+                      {element}
+                    </p>
+                  </Link>
+                ) : (element === "Magazin" ? (
+                  <p className='navbar-text'>
+                    {element}
+                  </p>
+                ) : (
+                  <p className='navbar-text'>
+                    <Link href={generateUrl(element)}>
+                      {element}
+                    </Link>
+                  </p>
+                ))}
+                {showAcasa && index === 1 ? (
+                  <div className="width100">
+                    <Acasa />
+                  </div>
+                ) : null}
+              </div>
+            )) : null}
+          </div>
+        </div>
+
+        <div className="formControl">
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Select Option</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={selectedOption}
+              onChange={handleChange}
+            >
+              {isMobile
+                ? navbarData.items.map((e, index) => (
+                    e !== "Acasa" ? (
+                      index === 1
+                        ? null
+                        : (
+                          <MenuItem 
+                            key={e} 
+                            component="a" 
+                            href={generateUrl(e)} 
+                            value={e}
+                          >
+                            {e}
+                          </MenuItem>
+                        )
+                    ) : (
+                      <MenuItem 
+                        key={e} 
+                        component="a" 
+                        href="/" 
+                        value={e}
+                      >
+                        {e}
+                      </MenuItem>
+                    )
+                  ))
+                : null
+              }
+            </Select>
+          </FormControl>
+        </div>
+      </nav>
+    </header>
   );
 };
 
