@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useState,useEffect } from "react";
 import { fetchCategory } from "../components/asyncOperations/fetchData"; 
 import CustomizedAccordions from "../components/accordion/Accordion";
-import "../cadouri/Cadouri.css";
+import "../cadouri-personalizate/Cadouri.css";
 import ProdusCard from "../components/card-produse/ProdusCard";
 
 
@@ -64,8 +64,6 @@ const Harti=()=>{
                                 disponibil={"Disponibil"}
                                 price={e?.attributes?.price}
                             />)
-
-                        
                     ))
                     :null}
                 </div>

@@ -2,12 +2,13 @@
 
 import { usePathname } from "next/navigation";
 import { useState,useEffect } from "react";
-import { fetchCategory } from "../components/asyncOperations/fetchData";
+import { fetchCategory } from "../components/asyncOperations/fetchData"; 
 import CustomizedAccordions from "../components/accordion/Accordion";
-import "./Cadouri.css";
 import ProdusCard from "../components/card-produse/ProdusCard";
+import "../cadouri-personalizate/Cadouri.css";
 
-const Cadouri=()=>{
+
+const MascaDeCalorifer=()=>{
 
     const params=usePathname();
     let newParam=params.split("-");
@@ -43,24 +44,27 @@ const Cadouri=()=>{
                     <h1 className="header">{header}</h1>
 
 
-                    <p>Descriere despre cadouri</p>
+                    <p>Cadouri personalizate </p>
 
 
                     </div>
                     
+
+
+
                 </div>
                 <div className="cardList-container">
-                    {cardList.length>0
-                    ?
-                    cardList.map(e=>
-                    (<ProdusCard
-                        description={e.attributes.description}
-                        title={e.attributes.title}
-                        image={e?.attributes?.image?.data?.[0]?.attributes?.url}
-                        disponibil={"Este disponibil"}
-                        price={e.attributes.price}
-                    />)
-                    )
+                    {cardList.length>0?
+                    (cardList.map(e=>(
+                        <ProdusCard
+                            key={e?.id}
+                           description={e?.attributes?.description}
+                           title={e?.attributes?.title}
+                           image={e?.attributes?.image?.data?.[0]?.attributes?.url}
+                           disponibil={"Este disponibil"}
+                           price={e?.attributes?.price}
+                       />)
+                    ))
                     :null}
                 </div>
 
@@ -70,4 +74,4 @@ const Cadouri=()=>{
 
 }
 
-export default Cadouri;
+export default MascaDeCalorifer;

@@ -5,7 +5,7 @@ import { useState,useEffect } from "react";
 import { fetchCategory } from "../components/asyncOperations/fetchData"; 
 import CustomizedAccordions from "../components/accordion/Accordion";
 import ProdusCard from "../components/card-produse/ProdusCard";
-import "../cadouri/Cadouri.css";
+import "./Cadouri.css";
 
 
 const CadouriPersonalizate=()=>{
