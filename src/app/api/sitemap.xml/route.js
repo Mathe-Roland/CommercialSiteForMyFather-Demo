@@ -25,7 +25,7 @@ const fetchDynamicPages = async () => {
     `).join('');
   } catch (error) {
     console.error('Error fetching dynamic pages:', error);
-    return '';  // Return empty string if error occurs
+    return ''; 
   }
 };
 
