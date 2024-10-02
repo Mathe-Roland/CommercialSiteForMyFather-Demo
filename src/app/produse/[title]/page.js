@@ -14,7 +14,9 @@ import "./Produse.css";
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const data = await fetchId(title);
+            let newTitle=title.split("-").join(" ");
+            newTitle=newTitle[0].toUpperCase()+newTitle.slice(1,newTitle.length);
+            const data = await fetchId(newTitle);
 
             setCardList(data);
           } catch (error) {

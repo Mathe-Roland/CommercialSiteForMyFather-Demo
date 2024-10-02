@@ -67,6 +67,25 @@ export const updateNonRegisteredUserData = async (productId,quantity,data) => {
 };
 
 
+export const plasareComandaNonRegisteredUser = async (data) => {
+  try {
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/comenzis?populate=*`, {
+      date: data.date,
+      payments: data.payments,
+      postalcode:data.postalcode,
+      total:data.total,
+      email:data.email,
+      surname:data.surname,
+      city:data.city,
+      name:data.name,
+      title:data.title,
+    });
+  
+  } catch (err) {
+
+  }
+};
+
 
 export const fetchPanouriData= async()=>{
     try{
@@ -312,8 +331,6 @@ export const fetchId = async (title) => {
 
   };
 
-
-
   
 export const userIds=async ()=>{
 
@@ -406,6 +423,7 @@ export const nonRegisteredUserData = async () => {
   }
 };
 
+
 export const promotii = async () => {
   try {
     
@@ -421,7 +439,6 @@ export const promotii = async () => {
     return null;
   }
 };
-
 
 
 export const userData = async () => {
@@ -644,6 +661,43 @@ export const userData = async () => {
       });
   };
 
+  export const postareComenziNonRegisteredUser = async (userData) => {
+
+    const date=new Date();
+
+    const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/comenzis`;
+  
+    const headers = {
+      "Content-type": "application/json; charset=UTF-8",
+    };
+
+    
+    axios
+      .post(
+        url,
+        {
+          data: {
+            name:userData.name,
+            city:userData.city,
+            surname:userData.surname,
+            email:userData.email,
+            postalcode:userData.postalcode,
+            country:userData.country,
+            total:userData.total,
+            description: userData.description,
+            payments:userData.payment,
+            date:date,
+            status:"pending",
+          },
+        },
+        { headers: headers }
+      )
+      .then((response) => {
+      })
+      .catch((error) => {
+      });
+  };
+
 
   export const comenziPlasateUserData = async () => {
     try {
@@ -709,5 +763,7 @@ export const paymentSession=async ()=>{
     body: JSON.stringify({metadata: metadataResponse }),
   });
 }
+
+
 
 

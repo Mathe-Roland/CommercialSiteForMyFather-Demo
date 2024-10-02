@@ -3,7 +3,7 @@
 import CosCard from "../components/cos/CosCard";
 import "./Cos.css";
 import { useState, useEffect } from "react";
-import { updateProductQuantityForNonRegisteredUser, nonRegisteredUserData, userData, postareComenzi, completeUserData, deleteProductData, updateProductQuantity } from "../components/asyncOperations/fetchData";
+import { postareComenziNonRegisteredUser , updateProductQuantityForNonRegisteredUser, nonRegisteredUserData, userData, postareComenzi, completeUserData, deleteProductData, updateProductQuantity } from "../components/asyncOperations/fetchData";
 import Button from '@mui/material/Button';
 import Cookies from "js-cookie";
 import { loadStripe } from '@stripe/stripe-js';
@@ -283,6 +283,33 @@ const Cos = () => {
     handleClose();
   };
 
+const handleSubmitNonRegisteredUser= async ()=>{
+
+  //  user?.data?.forEach((element) => {
+  //     const item = cardList?.data?.find(filteredCardlist => element.attributes.title === filteredCardlist.attributes.title);
+  //     if (item) {
+  //       description += `${element.attributes.title} at price ${element.attributes.price} number of items ${item.counting} at size ${element.attributes.optiuniNormale}\n`;
+  //     }
+  //   });
+
+
+    const dataForNonRegisteredUser={
+      name:formData.name,
+      city:formData.city,
+      surname:formData.surname,
+      email:formData.email,
+      postalcode:formData.postalcode,
+      country:formData.country,
+      total:grandTotal,
+      description: formData.description,
+      payment:payment,
+    }
+
+    await postareComenziNonRegisteredUser(dataForNonRegisteredUser);
+
+    window.location.href="/payment-success"
+  }
+
   return (
     <div className="cos-container">
       <h2 className="cos-header">Cos de cumparaturi</h2>
@@ -310,7 +337,7 @@ const Cos = () => {
             ))
           )}
         </div>
-        <div className="cos-trimite-comanda">
+        <div className="cos-trimite-comanda ">
           <div className="cos-trimite-comanda-background">
             <div className="form-check">
               <input onClick={plataCuCard}
@@ -379,16 +406,6 @@ const Cos = () => {
                   required
                 />
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Nume utilizator"
-                  name="username"
-                  value={formData.username}
-                  onChange={handleChange}
-                  required
-                />
-              </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
@@ -451,6 +468,7 @@ const Cos = () => {
               </Grid>
               <Grid item xs={12}>
                 <Button
+                  onClick={handleSubmitNonRegisteredUser}
                   type="submit"
                   fullWidth
                   variant="contained"

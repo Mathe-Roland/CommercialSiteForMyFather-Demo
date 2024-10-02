@@ -61,7 +61,7 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
         <div className="produs-pret"><p> De la {price} RON</p></div>
         <div className="produs-disponibil"><p>{disponibil}</p></div>
         <Link className="ignore" 
-        href={`/produse/${encodeURIComponent(title)}`}>
+        href={`/produse/${title.toLowerCase().split(" ").join("-")}`}>
           <Button
             variant="contained"
             color="primary"

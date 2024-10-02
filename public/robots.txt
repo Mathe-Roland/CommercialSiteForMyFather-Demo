@@ -1,13 +1,9 @@
 # *
 User-agent: *
-Disallow: /private/
-
-# *
-User-agent: *
 Allow: /
 
 # Host
-Host: https://www.decorcut.com/
+Host: https://www.decorcut.com
 
 # Sitemaps
 Sitemap: https://www.decorcut.com/sitemap.xml
