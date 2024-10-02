@@ -13,7 +13,7 @@ const staticPages = [
 const fetchDynamicPages = async () => {
   try {
     const response = await axios.get(
-      'https://app-ece6f1a7-8619-459e-a9f4-1643769a735e.cleverapps.io/api/panouri-traforates'
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates`
     );
     return response.data.data.map(item => `
       <url>
