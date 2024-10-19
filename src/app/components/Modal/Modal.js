@@ -99,12 +99,15 @@ const LoginModal = ({ setLogin }) => {
     }
   };
 
+  const loginIcon="/loginicon.png";
+
+
   return (
     <div>
       <Button onClick={handleOpen}>
         <div className='desktop'>
 
-        <Image src={`/loginicon .png`} width={40} height={40} alt='loginIcon'/>
+        <Image src={loginIcon ? loginIcon : ""} width={40} height={40} alt='loginIcon'/>
 
         </div>
 

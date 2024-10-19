@@ -82,16 +82,16 @@ const Produs = ({ img, description, title, price }) => {
     
         try {
             const useros = Cookies.get("user") || null;
-            console.log("User Cookie:", useros);
     
-            let userUuid = typeof window !== 'undefined' ? localStorage.getItem('userUUID') : null;
-            console.log("Stored UUID:", userUuid);
+            let userUuid = typeof window !== 'undefined' ? Cookies.get('userUUID') : null;
     
             if (!userUuid) {
                 userUuid = uuidv4();
-                console.log("Generated UUID:", userUuid);
                 if (typeof window !== 'undefined') {
-                    localStorage.setItem('userUUID', userUuid);
+                    Cookies.set("userUUID", userUuid, {secure: true,
+                        sameSite: 'Strict',
+                        expires: 7,   
+                        path: '/', });
                 }
             }
             
@@ -137,10 +137,10 @@ const Produs = ({ img, description, title, price }) => {
 
             } else {
                 const data = await userData();
-                const filteredSpecificPanouUserRelatedData = data.data.filter(element => element.attributes.title === title);
-                const filteredOptiuniNormale = filteredSpecificPanouUserRelatedData.filter(element => element.attributes.optiuniNormale === selectedValues);
-                const filteredVopsit = filteredOptiuniNormale[0].attributes.vopsit === true;
-                const filteredNevopsit = filteredOptiuniNormale[0].attributes.vopsit === false;
+                const filteredSpecificPanouUserRelatedData = data.length>0 ? data.data.filter(element => element.attributes.title === title):[];
+                const filteredOptiuniNormale =data.length>0 ? filteredSpecificPanouUserRelatedData.filter(element => element.attributes.optiuniNormale === selectedValues):[];
+                const filteredVopsit = filteredOptiuniNormale.length >0 ? filteredOptiuniNormale[0].attributes.vopsit === true :false;
+                const filteredNevopsit = filteredOptiuniNormale.length >0 ? filteredOptiuniNormale[0].attributes.vopsit === false : false;
     
                 const images = Cookies.get("image");
                 const filesData = await imageFiles();
@@ -161,11 +161,9 @@ const Produs = ({ img, description, title, price }) => {
 
                 }else{
 
-                    await userRelatedData(id, currentImage[0].id, newDatas);
+                    await userRelatedData(Cookies.get("userId"), currentImage[0].id, newDatas);
 
-                }
-
-              
+                }              
             }
         } catch (error) {
             console.error('Error:', error);
@@ -260,7 +258,7 @@ const Produs = ({ img, description, title, price }) => {
                     >
                         Adauga in cos
                     {adaugaInCosShow ? (<div>
-                        <Image src={`${bifa ? bifa:null}`} width={50} height={50}/>
+                        <Image src={`${bifa ? bifa:null}`} width={50} height={50} alt="bifa"/>
                     </div>):null}
                     </Button>
                 </div>

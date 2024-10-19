@@ -1,6 +1,6 @@
 
 
-.Cadouri-box{
+.despre-noi-items-box{
 
     display: flex;
     margin: 0 auto;
@@ -9,13 +9,10 @@
 }
 
 .accordionplushd{
-
     display: flex;
-
 }
 
 
-    
 .accordion-container{
 
     display: none;
@@ -38,8 +35,8 @@
 
 .cardList-container{
 
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr;
     margin: 12px 12px;
     
 }
@@ -52,6 +49,11 @@
         display: block;
         width:25%;
     }
+
+    .cardList-container{
+        grid-template-columns: repeat(2,1fr);
+        gap: 20px;
+    }
 }
 
 
@@ -61,4 +63,11 @@
 
         width:15%;
     }
+
+    .cardList-container{
+        grid-template-columns: repeat(3,1fr);
+        gap: 20px;
+    }
+
+
 }

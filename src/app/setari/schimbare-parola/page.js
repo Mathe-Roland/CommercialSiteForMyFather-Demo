@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import "./SchimbareParola.css";
 import { TextField, Button, Grid, Typography, Container } from '@mui/material';
 import Link from "next/link";
-import { completeUserData, imageFiles } from '../../components/asyncOperations/fetchData';
+import { changePasswordAuthUser,completeUserData, imageFiles } from '../../components/asyncOperations/fetchData';
 import Image from 'next/image';
 
 const SchimbareParola = () => {
@@ -66,7 +66,7 @@ const SchimbareParola = () => {
         setFormData({ ...formData, [field]: event.target.value });
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         let newPasswordTextMessage = "";
 
         if (formData.confirmNewPassword !== formData.newPassword) {
@@ -74,7 +74,11 @@ const SchimbareParola = () => {
         } else {
             newPasswordTextMessage = "Password changed successfully";
         }
+
         setTextMessage(newPasswordTextMessage);
+
+       const data= await changePasswordAuthUser(formData.oldPassword,formData.newPassword);
+       console.log(data);
     };
 
     return (
@@ -140,7 +144,6 @@ const SchimbareParola = () => {
                                 value={formData.newPassword}
                                 onChange={handleChange('newPassword')}
                             />
-                            <p className={`${textMessage !== "" ? "red" : null}`}>{textMessage}</p>
                         </Grid>
                         <Grid item xs={12}>
                             <TextField

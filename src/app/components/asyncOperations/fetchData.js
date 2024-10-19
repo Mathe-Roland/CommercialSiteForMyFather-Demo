@@ -277,6 +277,33 @@ export const fetchId = async (title) => {
 
 
 
+export const changePasswordAuthUser = async (currentPassword,newPassword) => {
+  
+  const token = Cookies.get("token");
+
+  const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/auth/change-password`;
+
+    try {
+      const response = await axios.post(url,
+        {
+          currentPassword: currentPassword,
+          password: newPassword,
+          passwordConfirmation: newPassword,
+        },
+        {
+          headers: {
+            "Authorization": `Bearer ${token}`,
+          },
+        }
+      );
+    
+      return response;
+    } catch (err) {
+  
+    }
+  };
+
+
 
   export const userRelatedCommentsGet = async () => {
     const token = Cookies.get("token");
@@ -686,6 +713,7 @@ export const userData = async () => {
             total:userData.total,
             description: userData.description,
             payments:userData.payment,
+            address:userData.address,
             date:date,
             status:"pending",
           },

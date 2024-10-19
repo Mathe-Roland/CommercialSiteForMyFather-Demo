@@ -108,7 +108,7 @@ import Image from "next/image";
             },
         ];
 
-        const image="/loginicon.png";
+        const loginIcon="/loginicon.png";
 
 
         return (
@@ -167,7 +167,7 @@ import Image from "next/image";
                 <button onClick={handleUserInfo} onMouseOver={handleMover}>
                     <Image
                         alt="login"
-                        src={`${image ? image :null}`}
+                        src={`${loginIcon ? loginIcon :null}`}
                         width={40}
                         height={50}
                     />

@@ -17,6 +17,7 @@ import "./Produse.css";
             let newTitle=title.split("-").join(" ");
             newTitle=newTitle[0].toUpperCase()+newTitle.slice(1,newTitle.length);
             const data = await fetchId(newTitle);
+            console.log(newTitle);
 
             setCardList(data);
           } catch (error) {
@@ -33,7 +34,7 @@ import "./Produse.css";
 
       }
 
-      console.log(cardList)
+      console.log(cardList);
 
       return (
         <div suppressHydrationWarning>

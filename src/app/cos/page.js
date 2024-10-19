@@ -63,7 +63,7 @@ const Cos = () => {
       };
       fetchCardListData();
     } else {
-      const actualUUID = localStorage.getItem("userUUID");
+      const actualUUID = Cookies.get("userUUID");
       const nonRegisteredUserDataFetch = async () => {
         const totalNonRegisteredData = await nonRegisteredUserData();
         const filteredCards = totalNonRegisteredData.data.filter((e) => e.attributes.UniqueIdentifier === actualUUID);
@@ -153,7 +153,7 @@ const Cos = () => {
 
           const panouForSpecificUser = await nonRegisteredUserData();
 
-          const UUIDS = localStorage.getItem("userUUID");
+          const UUIDS = Cookies.get("userUUID");
 
           const panouForNonRegisteredUser = panouForSpecificUser.data.filter((e) => e.attributes.UniqueIdentifier === UUIDS);
 
@@ -208,7 +208,7 @@ const Cos = () => {
 
         const panouForSpecificUser = await nonRegisteredUserData();
 
-        const UUIDS = localStorage.getItem("userUUID");
+        const UUIDS = Cookies.get("userUUID");
 
         const panouForNonRegisteredUser = panouForSpecificUser.data.filter((e) => e.attributes.UniqueIdentifier === UUIDS);
 
@@ -279,29 +279,36 @@ const Cos = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
     handleClose();
   };
 
 const handleSubmitNonRegisteredUser= async ()=>{
 
-  //  user?.data?.forEach((element) => {
-  //     const item = cardList?.data?.find(filteredCardlist => element.attributes.title === filteredCardlist.attributes.title);
-  //     if (item) {
-  //       description += `${element.attributes.title} at price ${element.attributes.price} number of items ${item.counting} at size ${element.attributes.optiuniNormale}\n`;
-  //     }
-  //   });
+      let nonRegisteredUserDatas=await nonRegisteredUserData();
 
+      let userUUID=Cookies.get("userUUID");
+
+      let currentNonRegisteredUserList=nonRegisteredUserDatas.data.filter((e)=>e.attributes.UniqueIdentifier===userUUID);
+
+      let description="";
+
+   currentNonRegisteredUserList?.forEach((element) => {
+      const item = cardList?.data?.find(filteredCardlist => element.attributes.title === filteredCardlist.attributes.title);
+      if (item) {
+        description += `${element.attributes.title} at price ${element.attributes.price} number of items ${item.counting} at size ${element.attributes.optiuniNormale}\n`;
+      }
+    });
 
     const dataForNonRegisteredUser={
       name:formData.name,
       city:formData.city,
       surname:formData.surname,
+      address:formData.address,
       email:formData.email,
       postalcode:formData.postalcode,
       country:formData.country,
       total:grandTotal,
-      description: formData.description,
+      description: description,
       payment:payment,
     }
 
@@ -328,7 +335,7 @@ const handleSubmitNonRegisteredUser= async ()=>{
                 <CosCard
                   id={element.id}
                   title={element.attributes?.title}
-                  image={element.attributes?.image?.data[0]?.attributes?.url}
+                  image={Cookies.get("user") ? element.attributes?.image?.data?.attributes?.url :element.attributes?.image?.data[0]?.attributes?.url}
                   price={element.attributes?.price}
                   quantityFromDatabase={element.attributes?.quantity}
                   addToCart={addToCart}
