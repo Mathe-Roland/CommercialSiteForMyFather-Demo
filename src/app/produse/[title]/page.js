@@ -1,52 +1,52 @@
 "use client";
 import Produs from "../../components/produse-individuale/ProdusIndividual";
-import { useParams } from 'next/navigation';
-import React from 'react';
-import {fetchId} from "../../components/asyncOperations/fetchData";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
+import { fetchId } from "../../components/asyncOperations/fetchData";
 import "./Produse.css";
 
-  const Produse = () => {
+const Produse = () => {
+  const [cardList, setCardList] = useState({});
+  const [url, setUrl] = useState(null);
 
-      const {title}=useParams();
-      const [cardList, setCardList] = useState({});
 
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            let newTitle=title.split("-").join(" ");
-            newTitle=newTitle[0].toUpperCase()+newTitle.slice(1,newTitle.length);
-            const data = await fetchId(newTitle);
-            console.log(newTitle);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Only set the URL in the browser
+      setUrl(window.location.href);
+    }
+  }, []);
 
-            setCardList(data);
-          } catch (error) {
-          }
-        };
-    
-        fetchData();
-      }, [title]);
-    
-    
-      if(!cardList){
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!url) return;
 
-        return (<div className="loading-container"></div>)
-
+      try {
+        let title = url.match(/title=([^&]+)/);
+        title = title[1][0].toUpperCase() + title[1].slice(1).split("-").join(" ");
+        const data = await fetchId(title);
+        setCardList(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
-
-      console.log(cardList);
-
-      return (
-        <div suppressHydrationWarning>
-          <Produs
-            img={cardList[0]?.attributes?.image?.data}
-            title={cardList[0]?.attributes?.title}
-            description={cardList[0]?.attributes?.description}
-            price={cardList[0]?.attributes?.price}
-          />
-        </div>
-      );
     };
-        
-  
-  export default Produse;
+
+    fetchData();
+  }, [url]);
+
+  if (!cardList) {
+    return <div className="loading-container"></div>;
+  }
+
+  return (
+    <div suppressHydrationWarning>
+      <Produs
+        img={cardList[0]?.attributes?.image?.data}
+        title={cardList[0]?.attributes?.title}
+        description={cardList[0]?.attributes?.description}
+        price={cardList[0]?.attributes?.price}
+      />
+    </div>
+  );
+};
+
+export default Produse;

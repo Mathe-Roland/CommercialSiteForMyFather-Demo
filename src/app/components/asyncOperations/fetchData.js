@@ -781,17 +781,4 @@ export const userData = async () => {
       });
   };
 
-export const paymentSession=async ()=>{
-  const metadataResponse = await userData();
-  const response = await fetch("/api/create-payment-intent", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({metadata: metadataResponse }),
-  });
-}
-
-
-
 

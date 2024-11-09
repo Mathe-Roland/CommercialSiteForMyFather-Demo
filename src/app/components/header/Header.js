@@ -11,8 +11,14 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [show, setShow] = useState(false);
 
+  
+  
   useEffect(() => {
-    const userCookie = Cookies.get('user');
+    Cookies.set("url", window.location.href, {secure: true,
+      sameSite: 'Strict',
+      expires: 1,   
+      path: '/', });   
+      const userCookie = Cookies.get('user');
     if (userCookie) {
       setIsLoggedIn(true);
     }
