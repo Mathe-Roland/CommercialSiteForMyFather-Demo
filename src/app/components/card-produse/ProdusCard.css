@@ -1,9 +1,9 @@
 .produs-container{
-  min-height: 400px;
+  min-height: 25rem;
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 10px;
+  gap: 0.625rem;
   height: auto;
   margin: auto;
   background-color: #F9FEFF;
@@ -17,7 +17,7 @@
   font-weight: bold;
   overflow: hidden;
   text-align: center;
-  height: 20px;
+  height: 1.25rem;
 }
 
 .ignore{
@@ -28,7 +28,7 @@
 .produs-pret{
   display: block;
   width: 100%;
-  font-size: 18px;
+  font-size: 1.125rem;
   color: red;
   text-align: center;
 }
@@ -39,13 +39,13 @@
 .produs-content{
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 12px;
+  gap: 0.625rem;
+  margin-bottom: 0.75rem;
 }
 
 .produs-description{
-  width: 160px;
-  height: 50px;
+  width: 10rem;
+  height: 3.125rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -54,14 +54,14 @@
 }
 
 
-@media screen  and (min-width:600px){
+@media screen  and (min-width:37.5rem){
   .produs-container {
-    max-width: 204px;
-    width: 204px;
-    height: 440px;
+    max-width: 12.75rem;
+    width: 12.75rem;
+    height: 27.5rem;
 }
   .produs-image{
-    max-height: 204px;
+    max-height: 12.75rem;
   }
 
 }

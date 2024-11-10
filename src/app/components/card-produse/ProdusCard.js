@@ -31,8 +31,8 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
 
     {"Panou decorativ Mos145"===title ? 
     <Image
-      src={ image ? image : ""}
-      alt={title ? title :""}
+      src={ image ? image : "/logosDecorcut.png"}
+      alt={title ? title :"/logosDecorcut.png"}
       width={204}
       height={204}
       layout="responsive"
@@ -43,8 +43,8 @@ const ProdusCard = ({ description, title, image, disponibil, price }) => {
     />
     :
       <Image
-        src={ image ? image : ""}
-        alt={title ? title :""}
+        src={ image ? image : "/logosDecorcut.png"}
+        alt={title ? title :"/logosDecorcut.png"}
         width={204}
         height={204}
         layout="responsive"

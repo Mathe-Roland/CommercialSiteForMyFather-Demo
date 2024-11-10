@@ -22,10 +22,20 @@ const Produs = ({ img, description, title, price }) => {
     const [selectedValues, setSelectedValues] = useState("");
     const [renderPersonalizare, setRenderPesonalizare] = useState(false);
     const [prices, setPrices] = useState(price);
+    const [noPrice,setNoPrice ] = useState("");
     const [ifVopsit, setIfVopsit] = useState(false);
     const [adaugaInCosShow, setAdaugaInCosShow] = useState(false);
     const [pictureChange, setPictureChange] = useState("");
 
+
+    useEffect(()=>{
+        if(renderPersonalizare){
+            setNoPrice("The price must be discussed");
+        }else{
+            setNoPrice("");
+        }
+    },
+    [renderPersonalizare])
 
     useEffect(() => {
         const fetchDataAndFilter = async () => {
@@ -119,6 +129,8 @@ const Produs = ({ img, description, title, price }) => {
                     vopsit:ifVopsit,
                 };
 
+
+
                 if(vopsit.length>0 && ifVopsit===true){
 
 
@@ -149,6 +161,9 @@ const Produs = ({ img, description, title, price }) => {
                     price: ifVopsit ? prices : handlePrice(selectedValues),
                     optiuninormale: selectedValues
                 };
+
+                console.log(selectedValues);
+
 
                 if(filteredVopsit.length>0 && ifVopsit===true){
 
@@ -226,7 +241,7 @@ const Produs = ({ img, description, title, price }) => {
                             <h2>{title}</h2>
                         </div>
                         <div className="produs-individual-header">
-                           <p className="produs-individual-pret">{ifVopsit ? prices : handlePrice(selectedValues)} RON</p>
+                           <p className="produs-individual-pret">{noPrice.length>0 ? noPrice : ifVopsit ? prices : `${handlePrice(selectedValues)} RON`}</p>
                         </div>
                     </div>
                     <div className="produs-individual-description">

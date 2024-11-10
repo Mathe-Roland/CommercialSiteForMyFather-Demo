@@ -30,7 +30,7 @@
 .row{
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: 1.25rem;
 }
 
 .column{
@@ -74,9 +74,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 0.5rem;
+    padding: 8px;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 19.2px;
 }
 
 
@@ -121,7 +121,7 @@
 }
 
 .Header-cos{
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 
 #whatever{
@@ -131,7 +131,7 @@
 
 .logo-decorcut{
     display: flex;
-    gap: 20px;
+    gap: 1.25rem;
     justify-content: center;
     align-items: center;
 }
@@ -141,14 +141,14 @@
 }
 
 .header-destopview-phone{
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 
 .navbar-title-and-searchbar{
     display: flex;
     justify-content: center;
     background-color: rgb(73, 95, 62);
-    height:80px;
+    height:5rem;
 }
 
 .headerCos{
@@ -160,7 +160,7 @@
 
     background-color: #ccc;
     position: absolute;
-    width:200px;
+    width:12.5rem;
     top:100%;
     right: 0;
     z-index: 100;
@@ -180,15 +180,15 @@
 }
 
 .hamburger-menu{
-    height:50px;
-    width:50px;
+    height:3.125rem;
+    width:3.125rem;
 }
 
 .phoneviewHideDesktopContent{
     display: none;
 }
 
-@media screen and (min-width:600px) {
+@media screen and (min-width:37.5rem) {
    
     .hamburger-centered{
         display: none;
@@ -203,7 +203,7 @@
     
     .logo-decorcut-text{
         display: block;
-        font-size: 24px;
+        font-size: 1.5rem;
     }
 
     }

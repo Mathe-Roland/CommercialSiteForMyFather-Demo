@@ -6,22 +6,22 @@
 .setari-welcome{
 
     background-color: #f5f5f5;
-    padding: 20px;
+    padding: 1.25rem;
 
 }
 
 .schimbareParola-container{
 
     width:80%;
-    margin:20px auto;
+    margin:1.25rem auto;
 }
 
 .setari-changer{
 
-    padding:20px;
+    padding:1.25rem;
     background-color: #f5f5f5;
     width:20%;
-    margin-top: 20px;
+    margin-top: 1.25rem;
 }
 
 .red{
@@ -36,5 +36,5 @@
 }
 
 .setari-picture{
-    margin-right: 8px;
+    margin-right: 0.5rem;
 }

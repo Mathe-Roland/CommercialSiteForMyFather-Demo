@@ -11,7 +11,6 @@ const Produse = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // Only set the URL in the browser
       setUrl(window.location.href);
     }
   }, []);

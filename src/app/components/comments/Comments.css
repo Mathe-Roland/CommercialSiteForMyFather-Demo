@@ -1,6 +1,6 @@
 .commentarii {
     position: relative;
-    border: 1px solid #ccc;
+    border: 0.0625rem solid #ccc;
     background-color: #fff;
 }
 
@@ -9,15 +9,15 @@
 
 .commentUserName{
 
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 700;
-    margin-left:5px;
+    margin-left:0.3125rem;
 }
 
 
 .comment{
 
-    margin-left: 10px;
+    margin-left: 0.625rem;
 }
 
 .id {

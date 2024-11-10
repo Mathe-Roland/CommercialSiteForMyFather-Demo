@@ -1,34 +1,34 @@
 .normal-headers {
   width: 80%;
-  margin: 100px auto;
+  margin: 6.25rem auto;
 }
 
 .margin0Auto {
   display: grid;
   grid-template-columns: repeat(1,1fr);
-  gap: 20px;
+  gap: 1.25rem;
 }
 
 .loader-container{
   min-height: 100vh;
 }
 
-@media screen  and (min-width:600px){
+@media screen  and (min-width:37.5rem){
 
   .margin0Auto {
     display: grid;
     grid-template-columns: repeat(2,1fr);
-    gap: 20px;
+    gap: 1.25rem;
   }
 
 }
 
 
-@media screen and (min-width:760px) {
+@media screen and (min-width:47.5rem) {
   .margin0Auto {
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    gap: 20px;
+    gap: 1.25rem;
   }
 }
 
@@ -37,19 +37,19 @@
 }
 
 .products-container{
-  margin-top: 20px;
+  margin-top: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.625rem;
 }
 
 
-@media screen and (min-width:1000px) {
+@media screen and (min-width:62.5rem) {
 
   .margin0Auto {
     display: grid;
     grid-template-columns: repeat(4,1fr);
-    gap: 20px;
+    gap: 1.25rem;
   }
 }
 

@@ -22,7 +22,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "js-cookie": "^3.0.5",
-    "next": "14.2.4",
+    "next": "^14.2.4",
     "react": "^18",
     "react-dom": "^18",
     "react-medium-image-zoom": "^5.2.5",

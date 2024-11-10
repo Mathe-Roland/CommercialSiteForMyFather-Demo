@@ -22,10 +22,10 @@
 }
 
 .cos-trimite-comanda {
-    margin-top: 100px;
+    margin-top: 6.25rem;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 48rem) {
     .form-check {
         display: flex;
     }
@@ -41,7 +41,7 @@
     }
 
     .cos-element {
-        margin-bottom: 10px;
+        margin-bottom: 0.625rem;
     }
 
     .cos-produse-cumparate {
@@ -49,7 +49,7 @@
     }
 
     .cos-trimite-comanda {
-        margin-top: 100px;
+        margin-top: 6.25rem;
         display: flex;
     }
 
@@ -62,8 +62,8 @@
 
     .cos-items {
         display: flex;
-        border-bottom: 1px solid black;
-        margin-bottom: 50px;
+        border-bottom: 0.0625rem solid black;
+        margin-bottom: 3.125rem;
     }
 
     .cos-cantitate {
@@ -96,7 +96,7 @@
     }
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 62rem) {
     .cos-container {
         margin: 0 auto;
         width: 80%;
@@ -104,7 +104,7 @@
     }
 
     .cos-element {
-        margin-bottom: 10px;
+        margin-bottom: 0.625rem;
     }
 
     .cos-produse-cumparate {
@@ -126,8 +126,8 @@
 
     .cos-items {
         display: flex;
-        border-bottom: 1px solid black;
-        margin-bottom: 50px;
+        border-bottom: 0.0625rem solid black;
+        margin-bottom: 3.125rem;
     }
 
     .cos-cantitate {

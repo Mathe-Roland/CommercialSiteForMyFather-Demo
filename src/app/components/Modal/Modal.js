@@ -107,7 +107,7 @@ const LoginModal = ({ setLogin }) => {
       <Button onClick={handleOpen}>
         <div className='desktop'>
 
-        <Image src={loginIcon ? loginIcon : ""} width={40} height={40} alt='loginIcon'/>
+        <Image src={loginIcon ? loginIcon : null} width={40} height={40} alt='loginIcon'/>
 
         </div>
 

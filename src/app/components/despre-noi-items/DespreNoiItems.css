@@ -21,7 +21,7 @@
 
 .header{
 
-    margin:12px 12px;
+    margin:0.75rem 0.75rem;
 
 }
 
@@ -29,7 +29,7 @@
 
     display:flex;
     flex-direction: column;
-    margin: 12px 12px;
+    margin: 0.75rem 0.75rem;
 
 }
 
@@ -37,13 +37,13 @@
 
     display: grid;
     grid-template-columns: 1fr;
-    margin: 12px 12px;
+    margin: 0.75rem 0.75rem;
     
 }
 
 
 
-@media screen and (min-width:600px) {
+@media screen and (min-width:37.5rem) {
     
     .accordion-container{
         display: block;
@@ -52,12 +52,12 @@
 
     .cardList-container{
         grid-template-columns: repeat(2,1fr);
-        gap: 20px;
+        gap: 1.25rem;
     }
 }
 
 
-@media screen and (min-width:800px) {
+@media screen and (min-width:50rem) {
  
     .accordion-container{
 
@@ -66,7 +66,7 @@
 
     .cardList-container{
         grid-template-columns: repeat(3,1fr);
-        gap: 20px;
+        gap: 1.25rem;
     }
 
 

@@ -25,37 +25,37 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 50px;
+    top: 3.125rem;
 }
 
-@media screen and (min-width:768px) {
+@media screen and (min-width:48rem) {
     .articles-center {
-        left: 350px;
+        left: 21.875rem;
     }
 }
 
-@media screen and (min-width:992px) {
+@media screen and (min-width:62rem) {
     
     .articles-center {
-        left: 400px;
+        left: 25rem;
     }
 }
 
 
-@media screen and (min-width:1200px) {
+@media screen and (min-width:75rem) {
     .articles-center {
-        left: 450px;
+        left: 28.125rem;
     }
 }
 
-@media screen and (min-width:1440px) {
+@media screen and (min-width:90rem) {
     .articles-center {
-        left: 450px;
+        left: 28.125rem;
     }
 }
 
-@media screen and (min-width:1600px) {
+@media screen and (min-width:100rem) {
     .articles-center {
-        left: 450px;
+        left: 28.125rem;
     }
 }

@@ -1,17 +1,17 @@
 .acasa-height{
     background-color: red;
     color:blue;
-    height:50px;
+    height:3.125rem;
 }
 
 .smallCatPicture{
-    height: 50px;
-    width: 50px;
+    height: 3.125rem;
+    width: 3.125rem;
 }
 
 .heightvh {
     display: flex;
-    height: 300px;
+    height: 18.75rem;
     width: 100%;
     background-color: white;
 }
@@ -23,21 +23,21 @@
 
 .acasa{
     text-align: center;
-    padding:20px;
+    padding:1.25rem;
     margin:0 auto;
 }
 
 .acasa-pictures{
     text-align: center;
-    padding:20px;
+    padding:1.25rem;
     margin:0 auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 0.625rem;
 }
 
 
 .acasa-ih{
-    height :56px;
-    width: 60px;
+    height :3.5rem;
+    width: 3.75rem;
 }

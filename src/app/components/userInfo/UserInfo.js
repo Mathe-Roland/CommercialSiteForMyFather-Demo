@@ -69,17 +69,17 @@ import Image from "next/image";
     
         const loginItems = [
             {
-                picture: pictures.setariPicture || "",
+                picture: pictures.setariPicture || null,
                 text: "Setari",
                 link: "/setari/informati-de-baza",
             },
             {
-                picture: pictures.comenziPlasate || "",
+                picture: pictures.comenziPlasate || null,
                 text: "Comenzi",
                 link: "/comenzi-plasate",
             },
             {
-                picture: pictures.loggoutPicture || "",
+                picture: pictures.loggoutPicture || null,
                 text: "Sign Out",
                 link: "#"
             }

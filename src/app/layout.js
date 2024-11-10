@@ -1,3 +1,4 @@
+
 import './layout.css';
 import './globals.css';
 import Footer from './components/footer/Footer';
@@ -5,26 +6,18 @@ import Header from './components/header/Header';
 import Navbar from './components/navbar/navbar';
 import Cookies from 'js-cookie';
 import ShowCookiesModal from './components/cookies/Cookies';
-import { headers } from 'next/headers';
+
+export default function RootLayout({ children }) {
 
 
-export default async function RootLayout({ children}) {
-
-    const headersList = headers();
-    const domain = headersList.get('host') || "";
-    const fullUrl = headersList.get('referer') || "";
-
-
-    let title = fullUrl.match(/title=([^&]+)/);
-
-    let description = fullUrl.match(/description=([^&]+)/);
-
-    
   return (
     <html lang="en">
       <head>
-        <title>{title}</title>
-        <meta name="description" content={decodeURIComponent(description[1])} />
+        <title>{"panou decorativ traforat"}</title>
+        <meta name="description" content={`Descoperiți o gamă largă de produse traforate din lemn si mdf, 
+            fiecare piesă fiind realizată cu atenție la detalii și o pasiune pentru design. 
+            De la panouri decorative care adaugă un aer sofisticat oricărei încăperi, 
+            la masti de calorifer, fiecare produs reflectă măiestria artizanală și durabilitatea lemnului de cea mai înaltă calitate.`} />
       </head>
       <body>
         <Header />
