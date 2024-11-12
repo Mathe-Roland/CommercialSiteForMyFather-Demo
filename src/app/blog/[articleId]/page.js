@@ -24,10 +24,9 @@ const IndividualArticles = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(()=>{
-        if(document.title){
+        if (typeof window !== "undefined" && typeof document !== "undefined") { 
             let titleMatch = window.location.href.match(/title=([^&]+)/);
             let descriptionMatch = window.location.href.match(/description=([^&]+)/);
-            console.log(titleMatch,"titlemarch",descriptionMatch,"descriptionMAtch");
             let title = titleMatch[1].split("-").join(" ") ;
             title = title[0].toUpperCase() + title.slice(1);
     
@@ -45,10 +44,9 @@ const IndividualArticles = () => {
               document.head.appendChild(meta);
             }
 
-
         }
 
-    },[document.title])
+    },[])
 
 
     useEffect(() => {
