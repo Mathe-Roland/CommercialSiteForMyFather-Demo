@@ -13,6 +13,8 @@ const DespreNoiReal = () => {
 
         const fetchData = async () => {
             const data = await fetchDataDespreNoiPage();
+            console.log(data);
+            console.log(data.data.data);
             setImageGalleryPictures(data.data.data);
         };
         
@@ -51,23 +53,22 @@ const DespreNoiReal = () => {
 
     return (
         <div className="despre-noi-container" suppressHydrationWarning>
-            <div className="accordion-container">
-                
-            <CustomizedAccordions/>
-
-            </div>
-            <div className="despre-noi-pageContents">
+            <div>
                 <h1>Despre noi</h1>
                 {imageGalleryPictures ? 
-            (<div className="despre-noi-loading">
-            </div>):    
-            
-                (<div>
+                (<div className="despre-noi-contents">
                 <ImageGallery images={imageGalleryPictures[0]?.attributes?.image?.data} />
-                {imageGalleryPictures[0]?.attributes?.description?.split("\n\n")?.map((element, index) => (
-                    <p key={index}>{element}</p>
-                ))}
+                    <div className="despre-noi-description"> 
+                        {imageGalleryPictures[0]?.attributes?.description?.split("\n\n")?.map((element) => (
+                            <p key={element.id}>{element}</p>
+                        ))}
+
+                    </div>
                 </div>)
+                :
+            (<div className="despre-noi-loading">
+            </div>)    
+            
             }
             </div>
         </div>

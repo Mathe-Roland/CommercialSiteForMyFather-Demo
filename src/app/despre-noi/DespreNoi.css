@@ -12,15 +12,25 @@
     min-height: 100vh;
 }
 
-.accordion-container{
-    min-width: 15rem;
-    max-width: 25%;
+.despre-noi-description{
+    display: flex;
+    flex-direction: column;
+    margin: 2.5rem 0;
 }
 
-@media screen and (min-width:37.5rem){
+
+@media screen and (min-width:600px){
     .despre-noi-container{
         display: flex;
         gap: 2.5rem;
+    }
+    
+}
+
+@media screen and (min-width:1200px) {
+
+    .despre-noi-contents{
+        display: flex;
     }
     
 }
