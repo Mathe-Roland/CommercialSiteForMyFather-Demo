@@ -1,5 +1,12 @@
 import FooterPages from "../components/footer-pages/FooterPages";
 
+export const metadata = {
+    title: 'Termeni si conditii',
+    description: `Descoperiți o gamă largă de produse traforate din lemn si mdf, 
+            fiecare piesă fiind realizată cu atenție la detalii și o pasiune pentru design. 
+            De la panouri decorative care adaugă un aer sofisticat oricărei încăperi, 
+            la masti de calorifer, fiecare produs reflectă măiestria artizanală și durabilitatea lemnului de cea mai înaltă calitate.`,
+  };
 
 const Termeni=()=>{
 

@@ -7,18 +7,22 @@ import Navbar from './components/navbar/navbar';
 import Cookies from 'js-cookie';
 import ShowCookiesModal from './components/cookies/Cookies';
 
+export const metadata = {
+    title: 'panou decorativ traforat',
+    description: `Descoperiți o gamă largă de produse traforate din lemn si mdf, 
+            fiecare piesă fiind realizată cu atenție la detalii și o pasiune pentru design. 
+            De la panouri decorative care adaugă un aer sofisticat oricărei încăperi, 
+            la masti de calorifer, fiecare produs reflectă măiestria artizanală și durabilitatea lemnului de cea mai înaltă calitate.`,
+  };
+  
+
+
 export default function RootLayout({ children }) {
 
 
   return (
     <html lang="en">
-      <head>
-        <title>{"panou decorativ traforat"}</title>
-        <meta name="description" content={`Descoperiți o gamă largă de produse traforate din lemn si mdf, 
-            fiecare piesă fiind realizată cu atenție la detalii și o pasiune pentru design. 
-            De la panouri decorative care adaugă un aer sofisticat oricărei încăperi, 
-            la masti de calorifer, fiecare produs reflectă măiestria artizanală și durabilitatea lemnului de cea mai înaltă calitate.`} />
-      </head>
+      <head/>
       <body>
         <Header />
         <Navbar />

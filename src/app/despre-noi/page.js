@@ -20,6 +20,32 @@ const DespreNoiReal = () => {
 
     }, []);
 
+    useEffect(()=>{
+        if(document.title){
+        
+            let title = "Despre noi";
+    
+            let description = `Descoperă povestea noastră și valorile care ne ghidează! Suntem o echipă dedicată, pasionată de 
+            crea produse personalizate pentru utilizatori, cu ani de experiență în oferirea de produse personalizate din mdf si lemn. Află mai multe despre misiunea noastră,
+             angajamentul față de clienți și de ce suntem alegerea potrivită pentru tine. Vino să ne cunoști!`;
+    
+            document.title = title;
+    
+            const metaDescription = document.querySelector('meta[name="description"]');
+            if (metaDescription) {
+              metaDescription.setAttribute("content", description);
+            } else {
+              const meta = document.createElement("meta");
+              meta.name = "description";
+              meta.content = description;
+              document.head.appendChild(meta);
+            }
+
+
+        }
+
+    },[document.title])
+
     if(!imageGalleryPictures){
 
 

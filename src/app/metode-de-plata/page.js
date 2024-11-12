@@ -1,5 +1,14 @@
 import FooterPages from "../components/footer-pages/FooterPages";
 
+export const metadata = {
+    title: 'Metode de plata',
+    description: `La MOSTRIK DREAMLAND
+, îți punem la dispoziție multiple metode de plată sigure și rapide, adaptate nevoilor tale.
+     Alege dintr-o varietate de opțiuni, inclusiv plăți online cu card bancar, transfer bancar, și alte metode populare.
+     Îți garantăm o experiență de plată fără probleme, cu opțiuni flexibile și securitate ridicată, pentru ca tu să te bucuri de cumpărături în siguranță.`,
+  };
+
+
 const MetodeDeplata=()=>{
 
 

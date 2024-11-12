@@ -1,5 +1,13 @@
 import FooterPages from "../components/footer-pages/FooterPages";
 
+export const metadata = {
+    title: 'Confidentialitate',
+    description: `La MOSTRIK DREAMLAND
+, confidențialitatea ta este prioritatea noastră.
+     Descoperă cum gestionăm informațiile tale personale, ce măsuri de securitate aplicăm și ce drepturi ai privind datele tale. 
+    Politica noastră de confidențialitate este creată pentru a-ți oferi transparență și încredere.`,
+  };
+
 
 const PoliticaDeConfidentialitate=()=>{
 

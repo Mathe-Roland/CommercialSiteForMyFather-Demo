@@ -23,11 +23,41 @@ const IndividualArticles = () => {
     const [username, setUserName] = useState("");
     const [loading, setLoading] = useState(true);
 
+    useEffect(()=>{
+        if(document.title){
+            let titleMatch = window.location.href.match(/title=([^&]+)/);
+            let descriptionMatch = window.location.href.match(/description=([^&]+)/);
+            console.log(titleMatch,"titlemarch",descriptionMatch,"descriptionMAtch");
+            let title = titleMatch[1].split("-").join(" ") ;
+            title = title[0].toUpperCase() + title.slice(1);
+    
+            let description = descriptionMatch ? decodeURIComponent(descriptionMatch[1]) : "Default Description";
+    
+            document.title = title;
+    
+            const metaDescription = document.querySelector('meta[name="description"]');
+            if (metaDescription) {
+              metaDescription.setAttribute("content", description);
+            } else {
+              const meta = document.createElement("meta");
+              meta.name = "description";
+              meta.content = description;
+              document.head.appendChild(meta);
+            }
+
+
+        }
+
+    },[document.title])
+
 
     useEffect(() => {
 
         const fetchDataAndFilter = async () => {
             try {
+
+                
+   
                 const getUserRelatedData = await fetchArticlesData();
                 if (getUserRelatedData && getUserRelatedData.length > 0) {
                     const specificPanou = getUserRelatedData.find(item => item.id === Number(articleId));
@@ -45,10 +75,6 @@ const IndividualArticles = () => {
                 setLoading(false);
             }
         };
-        fetchDataAndFilter();
-    }, [articleId]);
-
-    useEffect(() => {
         const fetchData = async () => {
             const data = await fetchArticleId(articleId);
             if (data && data.length > 0) {
@@ -57,6 +83,7 @@ const IndividualArticles = () => {
             }
         }
         fetchData();
+        fetchDataAndFilter();
     }, [articleId]);
 
     useEffect(() => {
