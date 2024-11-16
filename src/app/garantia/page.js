@@ -1,12 +1,12 @@
 import FooterPages from "../components/footer-pages/FooterPages";
 
 export const metadata = {
-    title: 'Garantia',
-    description: `La MOSTRIK DREAMLAND, suntem angajați să îți oferim produse de înaltă calitate, susținute de 
-    o garanție de încredere. Află detalii despre politica noastră de garanție,
-     termenele de acoperire și pașii pentru a beneficia de aceasta, pentru o experiență fără griji.`,
+    title: 'Garanția | MOSTRIK DREAMLAND',
+    description: `La MOSTRIK DREAMLAND, 
+    suntem dedicați să oferim produse de înaltă calitate, susținute de o garanție solidă. Descoperă politica noastră de garanție, 
+    termenele de acoperire și pașii necesari pentru a beneficia de aceasta.`,
   };
-
+  
 
 const Garantia=()=>{
 

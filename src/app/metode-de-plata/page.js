@@ -1,7 +1,7 @@
 import FooterPages from "../components/footer-pages/FooterPages";
 
 export const metadata = {
-    title: 'Metode de plata',
+    title: 'Metode de plata | MOSTRIK DREAMLAND',
     description: `La MOSTRIK DREAMLAND
 , îți punem la dispoziție multiple metode de plată sigure și rapide, adaptate nevoilor tale.
      Alege dintr-o varietate de opțiuni, inclusiv plăți online cu card bancar, transfer bancar, și alte metode populare.

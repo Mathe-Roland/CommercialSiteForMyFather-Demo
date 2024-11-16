@@ -1,7 +1,7 @@
 import DespreNoiItems from "../components/despre-noi-items/DespreNoiItems";
 
 export const metadata = {
-    title: 'Harti',
+    title: 'Harti | MOSTRIK DREAMLAND',
     description: `La MOSTRIK DREAMLAND, oferim hărți realizate cu precizie CNC, ideale pentru a aduce o notă personalizată în orice spațiu. 
     Fie că îți dorești o hartă a lumii, a unei țări sau a unei regiuni, produsele noastre combină arta și ingineria pentru un rezultat impresionant. 
     Cu o atenție deosebită la detalii, hărțile noastre sunt perfecte pentru decorul locuinței sau pentru un cadou deosebit.

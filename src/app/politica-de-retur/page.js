@@ -1,7 +1,7 @@
 import FooterPages from "../components/footer-pages/FooterPages";
 
 export const metadata = {
-    title: 'Politica de retur',
+    title: 'Politica de retur | MOSTRIK DREAMLAND',
     description: `La MOSTRIK DREAMLAND, înțelegem cât de importantă este satisfacția ta.
      Politica noastră de retur este simplă și transparentă,
      oferindu-ți opțiuni flexibile pentru schimb sau rambursare. Descoperă cum poți returna produsele ușor, pentru o experiență de cumpărături fără riscuri.`,

@@ -1,7 +1,7 @@
 import FooterPages from "../components/footer-pages/FooterPages";
 
 export const metadata = {
-    title: 'Termeni si conditii',
+    title: 'Termeni si conditii | MOSTRIK DREAMLAND',
     description: `Descoperiți o gamă largă de produse traforate din lemn si mdf, 
             fiecare piesă fiind realizată cu atenție la detalii și o pasiune pentru design. 
             De la panouri decorative care adaugă un aer sofisticat oricărei încăperi, 

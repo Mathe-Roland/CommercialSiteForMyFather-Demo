@@ -30,7 +30,6 @@ export const postNonRegisteredUserComanda = async (imageId, data, quantity) => {
       },
       { headers: headers }
     );
-    console.log("Response:", response.data);
   } catch (error) {
     console.error("Error posting data:", error.message || error.response || error);
   }

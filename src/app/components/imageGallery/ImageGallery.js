@@ -11,7 +11,7 @@ const ImageGallery = ({ images }) => {
   return (
     <div className="ImageGallery-container">
         <div className="ImageFirstColumn">
-          {images.slice(0, 3).map((image, index) => (
+          {images.slice(0, 3).map((image,index) => (
              <Image
              key={index}
              className="ImageSecondColumn"

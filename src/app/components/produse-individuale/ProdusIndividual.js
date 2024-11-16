@@ -162,7 +162,6 @@ const Produs = ({ img, description, title, price }) => {
                     optiuninormale: selectedValues
                 };
 
-                console.log(selectedValues);
 
 
                 if(filteredVopsit.length>0 && ifVopsit===true){

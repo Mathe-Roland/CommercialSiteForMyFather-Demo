@@ -1,44 +1,19 @@
+import ComenziPlasate from "./ComenziPlasate";
 
-"use client";
+export const metadata = {
+    title: `Cos de cumpărături | MOSTRIK DREAMLAND`,
+    description: `Gestionează și finalizează comanda în coșul tău de cumpărături la MOSTRIK DREAMLAND.
+     Revizuiește produsele alese, verifică detaliile și descoperă cât de simplu este să finalizezi achizițiile.
+      Produse personalizate din MDF și lemn, perfecte pentru tine.`,
+};
 
-import OrderCard from "../components/orderCard/OrderCard";
-import "./ComenziPlasate.css";
-import { useEffect,useState } from "react";
-import { comenziPlasateUserData } from "../components/asyncOperations/fetchData";
-
-const ComenziPlasate=()=>{
-
-    const [comenziPlasate,setComenziPlasate]=useState([]);
-    const [loading,setLoading]=useState(true);
-
-    useEffect(()=>{
-        const getData=async ()=>{
-          const data =await comenziPlasateUserData();
-          if(data===null){
-
-            return (<div className="comenzi-loading"></div>)
-        }
-          setComenziPlasate(data.data)
-        }
-        getData();
-
-    },[])
+const ComenziPlasatePage=()=>{
 
 
 
-    return (<div className="comenzi-plasate-container" suppressHydrationWarning>
-        <div className="comenzi-plasate-header">
-            <h2>Comenzi plasate</h2>
 
-        </div>
-        {
-        comenziPlasate?.map((element)=>(
-            <OrderCard 
-            key={element.id}
-            order={element}/>
-        ))}
-    </div>)
+    return (<ComenziPlasate/>)
 }
 
 
-export default ComenziPlasate;
+export default ComenziPlasatePage;
