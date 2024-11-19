@@ -54,19 +54,18 @@ const AddCommentModal = ({addComment}) => {
             Add comment
           </Typography>
           <TextField
+              sx={{ marginBottom: "0", height: "140px" }}
+              label="text"
+              rows={4}
+              multiline
+              fullWidth
+              variant="outlined"
+              type="text"
+              margin="normal"
+              value={comment.message}
+              onChange={(e) => setComment({ ...comment, message: e.target.value })}
+            />
 
-          sx={{marginBottom:"0",height:"140px"}}
-          label="text"
-          rows={4}
-          multiline
-          fullWidth
-          variant='outlined'
-          type='text'
-          margin='normal'
-          value={comment.message}
-          onChange={(e)=>setComment(e.target.value)}>
-
-          </TextField>
           <Button onClick={handleAddComment}>Add</Button>
           <Button onClick={handleClose}>Close Modal</Button>
         </Box>
