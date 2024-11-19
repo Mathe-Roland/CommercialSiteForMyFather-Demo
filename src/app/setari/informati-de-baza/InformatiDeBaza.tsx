@@ -64,7 +64,6 @@ const Setari = () => {
             const response = await axios.put(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/users/${formData.id}`, {
                 username: formData.username,
                 email: formData.email,
-                password: formData.password,
                 postalcode: formData.postalCode,
                 city: formData.city,
                 country: formData.country,
@@ -209,13 +208,18 @@ const Setari = () => {
                                 onChange={handleChange('city')}
                             />
                         </Grid>
-                        <Grid item xs={12} align="center">
-                            <Link href="/">
-                                    <Button variant="contained" color="primary" onClick={handleSubmit}>
-                                        Submit
-                                    </Button>
-                            </Link>
-                        </Grid>
+                        <Grid item xs={12} sx={{ textAlign: "center" }}>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                component="a"
+                                href="/"
+                                onClick={handleSubmit}
+                            >
+                                Submit
+                            </Button>
+                            </Grid>
+
                     </Grid>
                 </form>
             </Container>
