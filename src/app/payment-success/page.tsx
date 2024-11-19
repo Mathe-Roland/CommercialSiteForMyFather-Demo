@@ -2,7 +2,7 @@ import PaymentSuccess from "./Payments";
 import { Metadata } from 'next';
 
 
-export const metada:Metadata={
+export const metadata:Metadata={
   title:`Confirmare plata | MOSTRIK DREAMLAND`,
   description:`Confirmarea plății la MOSTRIK DREAMLAND este simplă și sigură. 
   Află detalii despre procesul de verificare a plăților,
