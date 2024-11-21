@@ -1,23 +1,17 @@
 import IndividualArticlesClient from "./IndividualArticlesClient";
-
-import { headers } from 'next/headers';
 import { Metadata } from 'next';
 
-      
-export async function generateMetadata() {
-  const headersList = headers();
-  const fullUrl = headersList.get('referer') || "";
 
-  let titleMatch = fullUrl.match(/title=([^&]+)/);
-  let descriptionMatch = fullUrl.match(/description=([^&]+)/);
+export async function generateMetadata({ searchParams }: { searchParams: { [key: string]: string } }): Promise<Metadata> {
+  const title = searchParams.title ? searchParams.title.split("-").join(" ") : "Default Title";
+  const description = searchParams.description ? decodeURIComponent(searchParams.description) : "Default Description";
 
-  const metadata:Metadata={
-    title: titleMatch[1]?.split("-").join(" "),
-    description: decodeURIComponent(descriptionMatch[1]),
+  return {
+    title,
+    description,
   };
-
-  return metadata;
 }
+
 
 const IndividualArticles = () => {
 
@@ -26,3 +20,4 @@ const IndividualArticles = () => {
 }
 
 export default IndividualArticles;
+

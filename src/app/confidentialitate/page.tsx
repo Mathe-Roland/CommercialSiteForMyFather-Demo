@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 
 
 export const metadata:Metadata = {
-    title: 'Confidentialitate',
+    title: 'Confidentialitate | MOSTRIK DREAMLAND',
     description: `La MOSTRIK DREAMLAND
 , confidențialitatea ta este prioritatea noastră.
      Descoperă cum gestionăm informațiile tale personale, ce măsuri de securitate aplicăm și ce drepturi ai privind datele tale. 

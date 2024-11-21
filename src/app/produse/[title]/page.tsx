@@ -1,29 +1,24 @@
 import ProdusCC from "./ProdusCC";
 import { headers } from 'next/headers';
-import { Metadata } from 'next';
 
-      
-export async function generateMetadata() {
-  const headersList = headers();
-  const fullUrl = headersList.get('referer') || "";
+import { Metadata } from "next";
 
-  const titleMatch = fullUrl.match(/title=([^&]+)/)||"";
-  const descriptionMatch = fullUrl.match(/description=([^&]+)/)||"";
+export async function generateMetadata({ searchParams }: { searchParams: { [key: string]: string } }): Promise<Metadata> {
+  const title = searchParams.title ? searchParams.title.split("-").join(" ") : "Default Title";
+  const description = searchParams.description ? decodeURIComponent(searchParams.description) : "Default Description";
 
-  const metadata:Metadata={
-    title: titleMatch[1]?.split("-").join(" "),
-    description: decodeURIComponent(descriptionMatch[1]),
+  return {
+    title,
+    description,
   };
-
-  return metadata;
-  
 }
+
 
 
 const Produse = () => {
 
   return (
-    <div suppressHydrationWarning>
+    <div>
       <ProdusCC/>
     </div>
   );
