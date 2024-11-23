@@ -20,11 +20,13 @@ interface ProdusProps{
     price:number,
 }
 
+const ITEMS_PER_PAGE=12;
+
 const Produs = ({ img, description, title, price }:ProdusProps) => {
     const [commentList, setCommentList] = useState([]);
     const [username, setUserName] = useState("");
     const [panouId, setPanouId] = useState("");
-    const [numberOfPages, setNumberOfPages] = useState([]);
+    const [numberOfPages, setNumberOfPages] = useState(0);
     const [originalComments, setOriginalComments] = useState([]);
     const [selectedValues, setSelectedValues] = useState("");
     const [renderPersonalizare, setRenderPesonalizare] = useState(false);
@@ -69,18 +71,6 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
     }, [title]);
     
 
-
-
-    useEffect(() => {
-        const commentLength = originalComments.length;
-        const numberOfPagesF = Math.ceil(commentLength / 12);
-        const numberOfPagesListed = [];
-        for (let i = 1; i <= numberOfPagesF; i++) {
-            numberOfPagesListed.push(i);
-        }
-        setNumberOfPages(numberOfPagesListed);
-    }, [originalComments.length]);
-    
     const handleCommentList = async (arg) => {
         const comments = await userRelatedComments("api::panouri-traforate.panouri-traforate", panouId, arg.message);
         const updatedComments = await fetchPanouriCommentsPerPanouId(panouId);
@@ -196,12 +186,15 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
         }
     };
     
+    const ITEMS_PER_PAGE = 12;
 
-    const handleUserFilterComment = (commentPage) => {
-        const currentPage = commentPage * 12;
-        const newCommentList = originalComments.slice(currentPage - 12, currentPage);
-        setCommentList(newCommentList);
-    };
+
+    const handlePageChange = (event, value) => {
+        setNumberOfPages(value);
+        const startIndex = (value - 1) * ITEMS_PER_PAGE;
+        const endIndex = startIndex + ITEMS_PER_PAGE;
+        setCommentList(originalComments.slice(startIndex, endIndex));
+      };
 
     const handlePrice = (selectedValue) => {
         if (renderPersonalizare === true) {
@@ -304,7 +297,12 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
                     />
                 ))}
                  <Stack spacing={2}>
-                    <Pagination count={10} color="primary" />
+                    <Pagination
+                        count={Math.ceil(originalComments.length / ITEMS_PER_PAGE)}
+                        page={numberOfPages}
+                        onChange={handlePageChange}
+                        color="primary"
+                    />
                 </Stack>
             </div>
         </div>

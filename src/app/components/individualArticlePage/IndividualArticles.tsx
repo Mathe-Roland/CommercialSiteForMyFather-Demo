@@ -29,20 +29,17 @@ const IndividualArticles = () => {
   const [username, setUserName] = useState("");
   const [loading, setLoading] = useState(true);
 
-  // Fetch article data and comments
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
 
-        // Fetch individual article details
         const data = await fetchArticleId(articleId);
         if (data && data.length > 0) {
           setDescriptionSections(data[0].attributes.description.split("\n\n"));
           setArticleData(data);
         }
 
-        // Fetch all articles to find the specific one
         const allArticles = await fetchArticlesData();
         if (allArticles && allArticles.length > 0) {
           const specificPanou = allArticles.find(
@@ -51,7 +48,6 @@ const IndividualArticles = () => {
           if (specificPanou) {
             setArticleIds(specificPanou.id);
 
-            // Fetch comments for the specific article
             const comments = await fetchPanouriArticlePerArticleId(
               specificPanou.id
             );
