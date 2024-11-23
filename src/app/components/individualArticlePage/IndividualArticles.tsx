@@ -136,15 +136,15 @@ const IndividualArticles = () => {
           />
         ))}
 
-        <Stack spacing={2}>
+      </div>
+    <Stack spacing={2}>
           <Pagination
             count={Math.ceil(originalComments.length / ITEMS_PER_PAGE)}
             page={currentPage}
             onChange={handlePageChange}
             color="primary"
           />
-        </Stack>
-      </div>
+    </Stack>
     </div>
   );
 };

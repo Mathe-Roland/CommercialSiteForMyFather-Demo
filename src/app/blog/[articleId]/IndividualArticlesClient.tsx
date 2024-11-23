@@ -161,14 +161,14 @@ const IndividualArticlesClient = () => {
             comments={comment.content}
           />
         ))}
-        <Stack spacing={2}>
+      </div>
+    <Stack spacing={2}>
           <Pagination
             count={numberOfPages}
             color="primary"
             onChange={handlePageChange}
           />
-        </Stack>
-      </div>
+    </Stack>
     </div>
   );
 };
