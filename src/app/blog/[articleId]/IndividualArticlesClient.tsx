@@ -23,10 +23,10 @@ const IndividualArticlesClient = () => {
   const [articleIds, setArticleIds] = useState("");
   const [commentList, setCommentList] = useState([]);
   const [originalComments, setOriginalComments] = useState([]);
-  const [numberOfPages, setNumberOfPages] = useState(0); // Changed to number
+  const [numberOfPages, setNumberOfPages] = useState(0);
   const [username, setUserName] = useState("");
   const [loading, setLoading] = useState(true);
-  const commentsPerPage = 12; // Use a constant for clarity
+  const commentsPerPage = 12;
 
   useEffect(() => {
     const fetchDataAndFilter = async () => {
@@ -81,7 +81,6 @@ const IndividualArticlesClient = () => {
       const url = "api::article.article";
       await userRelatedComments(url, articleId, newComment.message);
 
-      // Refresh comments
       const comments = await fetchPanouriArticlePerArticleId(articleIds);
       if (comments?.data) {
         setOriginalComments(comments.data);

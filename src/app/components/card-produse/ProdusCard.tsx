@@ -50,7 +50,7 @@ const ProdusCard = ({ description, title, image, disponibil, price }: ProdusCard
     <Card sx={{ maxWidth: 545, margin: 'auto' ,padding:`1rem`}}>
       <Link
           className="ignore"
-          href={`/produse/panou-decorativ?title=${title.toLowerCase().split(" ").join("-")}&description=${description}`}
+          href={`/produse/panou-decorativ?title=${title}&description=${description}`}
       >
         <CardActionArea>
           <CardMedia
