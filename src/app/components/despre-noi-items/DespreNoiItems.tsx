@@ -54,6 +54,7 @@ const DespreNoiItems=()=>{
                     (cardList.map(e=>(
                         <ProdusCard
                             key={e?.id}
+                            id={e?.id}
                             description={e?.attributes?.description}
                             title={e?.attributes?.title}
                             image={e?.attributes?.image?.data[0]?.attributes?.url}
