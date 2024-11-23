@@ -6,11 +6,12 @@ import Button from '@mui/material/Button';
 import {imageNonREgisteredUser,nonRegisteredUserData,updateNonRegisteredUserData,postNonRegisteredUserComanda,fetchPanouriData, fetchPanouriCommentsPerPanouId, updateProductData, userData, userRelatedComments, userIds, imageFiles, userRelatedData } from "../asyncOperations/fetchData";
 import Comments from "../comments/Comments";
 import AddCommentModal from "../coment-Modal/AddCommentModal";
-import CommentPages from "../commentPages/CommentPages"; 
 import DropdownMui from "../dropdown-marimi/DropdownMarimi";
 import Cookies from "js-cookie";
 import Image from 'next/image';
 import { v4 as uuidv4 } from 'uuid'; 
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 interface ProdusProps{
     img: Array<{ id?: string; attributes: { url: string } }>;
@@ -302,11 +303,9 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
                         comments={element.content}
                     />
                 ))}
-                <CommentPages
-                    filterList={handleUserFilterComment}
-                    inputNumberFilter={handleUserFilterComment}
-                    CommentIconsList={numberOfPages}
-                />
+                 <Stack spacing={2}>
+                    <Pagination count={10} color="primary" />
+                </Stack>
             </div>
         </div>
     );

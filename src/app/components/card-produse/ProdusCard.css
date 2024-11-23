@@ -1,14 +1,3 @@
-.produs-container{
-  min-height: 25rem;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 0.625rem;
-  height: auto;
-  margin: auto;
-  background-color: #F9FEFF;
-}
-
 .title-produs{
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -17,7 +6,6 @@
   font-weight: bold;
   overflow: hidden;
   text-align: center;
-  height: 1.25rem;
 }
 
 .ignore{
@@ -26,26 +14,15 @@
 }
 
 .produs-pret{
-  display: block;
-  width: 100%;
   font-size: 1.125rem;
-  color: red;
   text-align: center;
 }
 
 .produs-disponibil{
   text-align: center;
 }
-.produs-content{
-  display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
-  margin-bottom: 0.75rem;
-}
 
 .produs-description{
-  width: 10rem;
-  height: 3.125rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;

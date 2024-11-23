@@ -1,143 +1,156 @@
-"use client"
+"use client";
+
 import "./IndividualArticles.css";
-import { useParams } from 'next/navigation';
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { userRelatedComments, fetchArticleId, fetchArticlesData, fetchPanouriArticlePerArticleId } from "../asyncOperations/fetchData";
+import {
+  userRelatedComments,
+  fetchArticleId,
+  fetchArticlesData,
+  fetchPanouriArticlePerArticleId,
+} from "../asyncOperations/fetchData";
 import Comments from "../comments/Comments";
-import CommentPages from "../commentPages/CommentPages";
 import AddCommentModal from "../coment-Modal/AddCommentModal";
 import Image from "next/image";
 import Cookies from "js-cookie";
+import Stack from "@mui/material/Stack";
+import Pagination from "@mui/material/Pagination";
 
+const ITEMS_PER_PAGE = 12;
 
 const IndividualArticles = () => {
-    const { articleId } = useParams();
-    const [articleData, setArticleData] = useState([]);
-    const [descriptionBrokenInThree, setDescriptionBrokenInThree] = useState([]);
-    const [articleIds, setArticleIds] = useState("");
-    const [commentList, setCommentList] = useState([]);
-    const [originalComments, setOriginalComments] = useState([]);
-    const [numberOfPages, setNumberOfPages] = useState([]);
-    const [username, setUserName] = useState("");
-    const [loading, setLoading] = useState(true);
+  const { articleId } = useParams();
+  const [articleData, setArticleData] = useState([]);
+  const [descriptionSections, setDescriptionSections] = useState([]);
+  const [articleIds, setArticleIds] = useState("");
+  const [commentList, setCommentList] = useState([]);
+  const [originalComments, setOriginalComments] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [username, setUserName] = useState("");
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchDataAndFilter = async () => {
-            try {
-                const getUserRelatedData = await fetchArticlesData();
-                if (getUserRelatedData && getUserRelatedData.length > 0) {
-                    const specificPanou = getUserRelatedData.find(item => item.id === Number(articleId));
-                    if (specificPanou) {
-                        setArticleIds(specificPanou.id);
-                        const comments = await fetchPanouriArticlePerArticleId(specificPanou.id);
-                        if (comments?.data) {
-                            setCommentList(comments.data.slice(0, 12));
-                            setOriginalComments(comments.data);
-                        }
-                    }
-                }
-            } catch (error) {
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchDataAndFilter();
-    }, [articleId]);
+  // Fetch article data and comments
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await fetchArticleId(articleId);
-            if (data && data.length > 0) {
-                setDescriptionBrokenInThree(data[0].attributes.description.split('\n\n'));
-                setArticleData(data);
-            }
+        // Fetch individual article details
+        const data = await fetchArticleId(articleId);
+        if (data && data.length > 0) {
+          setDescriptionSections(data[0].attributes.description.split("\n\n"));
+          setArticleData(data);
         }
-        fetchData();
-    }, [articleId]);
 
-    useEffect(() => {
-        const commentLength = originalComments.length;
-        const numberOfPagesF = Math.ceil(commentLength / 12);
-        const numberOfPagesListed = Array.from({ length: numberOfPagesF }, (_, i) => i + 1);
-        setNumberOfPages(numberOfPagesListed);
-    }, [commentList.length, originalComments.length]);
+        // Fetch all articles to find the specific one
+        const allArticles = await fetchArticlesData();
+        if (allArticles && allArticles.length > 0) {
+          const specificPanou = allArticles.find(
+            (item) => item.id === Number(articleId)
+          );
+          if (specificPanou) {
+            setArticleIds(specificPanou.id);
 
-    const handleCommentList = async (arg) => {
-        const url = "api::article.article";
-        const comments = await userRelatedComments(url, articleId, arg.message);
-        const fetchDataAndFilter = async () => {
-            try {
-                const getUserRelatedData = await fetchArticlesData();
-                if (getUserRelatedData && getUserRelatedData.length > 0) {
-                    const specificPanou = getUserRelatedData.find(item => item.id === articleId);
-                    if (specificPanou) {
-                        setArticleIds(specificPanou.id);
-                        const comments = await fetchPanouriArticlePerArticleId(specificPanou.id);
-                        if (comments?.data) {
-                            const currentPage = Math.floor(originalComments.length / 12) * 12;
-                            setCommentList(comments.data.slice(currentPage, currentPage + 12));
-                            setOriginalComments(comments.data);
-                        }
-                    }
-                }
-            } catch (error) {
+            // Fetch comments for the specific article
+            const comments = await fetchPanouriArticlePerArticleId(
+              specificPanou.id
+            );
+            if (comments?.data) {
+              setOriginalComments(comments.data);
+              setCommentList(comments.data.slice(0, ITEMS_PER_PAGE));
             }
-        };
-        fetchDataAndFilter();
-        setUserName(Cookies.get("user"));
-    }
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching article or comments:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    const handleUserFilterCommet = (commentPage) => {
-        const currentPage = commentPage * 12;
-        setCommentList(originalComments.slice(currentPage - 12, currentPage));
-    }
+    fetchData();
+  }, [articleId]);
 
-    if (loading) {
-        return <div className="loading-container">
-        </div>;
-    }
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+    const startIndex = (value - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    setCommentList(originalComments.slice(startIndex, endIndex));
+  };
 
-    return (
-        <div className="IndividualArticles-container">
-            <h1>{articleData[0]?.attributes?.title}</h1>
-            <p>{articleData[0]?.attributes?.date}</p>
-            <p>{descriptionBrokenInThree[0]}</p>
+  const handleAddComment = async (arg) => {
+    try {
+      const url = "api::article.article";
+      await userRelatedComments(url, articleId, arg.message);
+
+      const comments = await fetchPanouriArticlePerArticleId(articleIds);
+      if (comments?.data) {
+        setOriginalComments(comments.data);
+        setCommentList(comments.data.slice(0, ITEMS_PER_PAGE));
+        setCurrentPage(1);
+      }
+
+      setUserName(Cookies.get("user"));
+    } catch (error) {
+      console.error("Error adding comment:", error);
+    }
+  };
+
+  if (loading) {
+    return <div className="loading-container">Loading...</div>;
+  }
+
+  return (
+    <div className="IndividualArticles-container">
+      <h1>{articleData[0]?.attributes?.title}</h1>
+      <p>{articleData[0]?.attributes?.date}</p>
+
+      {descriptionSections.map((section, index) => (
+        <div key={index}>
+          <p>{section}</p>
+          {articleData[0]?.attributes?.image?.data[index]?.attributes?.url && (
             <div className="images-container">
-                <Image className="image" alt={articleData[0]?.attributes.title} src={`${articleData[0]?.attributes?.image?.data[0]?.attributes?.url|| "/loginicon.png"}`}  
+              <Image
+                className="image"
+                alt={`Article Image ${index + 1}`}
+                src={
+                  articleData[0]?.attributes?.image?.data[index]?.attributes
+                    ?.url || "/default-image.png"
+                }
                 width={250}
-                height={250}/>
-            </div>
-            <p>{descriptionBrokenInThree[1]}</p>
-            <div className="images-container">
-                <Image className="image" alt={articleData[0].attributes.title} src={`${articleData[0]?.attributes?.image?.data[1]?.attributes?.url|| "/loginicon.png"}`} 
                 height={250}
-                width={250}/>
+              />
             </div>
-            <p>{descriptionBrokenInThree[2]}</p>
-            <div className="images-container">
-                <Image className="image" alt={articleData[0].attributes.title} src={`${articleData[0]?.attributes?.image?.data[2]?.attributes?.url|| "/loginicon.png"}`} 
-                height={250}
-                width={250}/>
-            </div>
-            <p>{descriptionBrokenInThree[3]}</p>
-            <div className="comment-header">
-                <h3>Commentarii</h3>
-                <AddCommentModal addComment={handleCommentList} />
-            </div>
-            <div className="comment-box">
-                {commentList?.map((element) => (
-                    <Comments key={element.id}
-                        id={element.id}
-                        panouId={articleIds}
-                        username={element?.author?.name}
-                        comments={element.content} />
-                ))}
-                <CommentPages filterList={handleUserFilterCommet}
-                    inputNumberFilter={handleUserFilterCommet}
-                    CommentIconsList={numberOfPages} />
-            </div>
+          )}
         </div>
-    )
-}
+      ))}
+
+      <div className="comment-header">
+        <h3>Comments</h3>
+        <AddCommentModal addComment={handleAddComment} />
+      </div>
+      <div className="comment-box">
+        {commentList.map((element) => (
+          <Comments
+            key={element.id}
+            id={element.id}
+            panouId={articleIds}
+            username={element?.author?.name}
+            comments={element.content}
+          />
+        ))}
+
+        <Stack spacing={2}>
+          <Pagination
+            count={Math.ceil(originalComments.length / ITEMS_PER_PAGE)}
+            page={currentPage}
+            onChange={handlePageChange}
+            color="primary"
+          />
+        </Stack>
+      </div>
+    </div>
+  );
+};
 
 export default IndividualArticles;

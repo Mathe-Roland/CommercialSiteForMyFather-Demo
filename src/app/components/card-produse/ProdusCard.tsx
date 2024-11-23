@@ -1,94 +1,110 @@
+import * as React from 'react';
 import "./ProdusCard.css";
 import Button from '@mui/material/Button';
 import Link from "next/link";
 import Cookies from 'js-cookie';
 import Image from 'next/image';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import CardActionArea from '@mui/material/CardActionArea';
 
-interface ProduscCardProps{
-  description:string,
-  title:string,
-  image:string,
-  disponibil:string,
-  price:number
+interface ProdusCardProps {
+  description: string;
+  title: string;
+  image: string;
+  disponibil: string;
+  price: number;
 }
 
-const ProdusCard = ({ description, title, image, disponibil, price }:ProduscCardProps) => {
+const ProdusCard = ({ description, title, image, disponibil, price }: ProdusCardProps) => {
   const handleData = () => {
-    Cookies.set("description", description, {secure: true,
+    Cookies.set("description", description, {
+      secure: true,
       sameSite: 'Strict',
-      expires: 1,   
-      path: '/', });
-    Cookies.set("title", title, {secure: true,
+      expires: 1,
+      path: '/',
+    });
+    Cookies.set("title", title, {
+      secure: true,
       sameSite: 'Strict',
-      expires: 1,   
-      path: '/', });
-    Cookies.set("image", image, { secure: true,
+      expires: 1,
+      path: '/',
+    });
+    Cookies.set("image", image, {
+      secure: true,
       sameSite: 'Strict',
-      expires: 1,   
-      path: '/', });
-    Cookies.set("price", price, { secure: true,
+      expires: 1,
+      path: '/',
+    });
+    Cookies.set("price", price.toString(), {
+      secure: true,
       sameSite: 'Strict',
-      expires: 1,   
-      path: '/', });
+      expires: 1,
+      path: '/',
+    });
   };
 
-
   return (
-    <div className="produs-container" suppressHydrationWarning>
-      <div className="produs-image-container">
+    <Card sx={{ maxWidth: 545, margin: 'auto' ,padding:`1rem`}}>
+      <Link
+          className="ignore"
+          href={`/produse/panou-decorativ?title=${title.toLowerCase().split(" ").join("-")}&description=${description}`}
+      >
+        <CardActionArea>
+          <CardMedia
+            className='produs-image'
+            component="img"
+            height="180"
+            width="180"
+            image={image || "/logosDecorcut.png"}
+            alt={title}
+          />
+          <CardContent>
+          <Typography 
+              gutterBottom 
+              variant="h5" 
+              component="div"
+              className="title-produs"
+            >
+              {title}
+            </Typography>
 
-    {"Panou decorativ Mos145"===title ? 
-    <Image
-      src={ image ? image : "/logosDecorcut.png"}
-      alt={title ? title :"/logosDecorcut.png"}
-      width={204}
-      height={204}
-      layout="responsive"
-      sizes="(min-width: 600px) 450px, 352px"
-      className="produs-image"
-      priority={true}
+            <Typography
+                variant="body2"
+                className='produs-description'
+              >
+                {description}
+            </Typography>
 
-    />
-    :
-      <Image
-        src={ image ? image : "/logosDecorcut.png"}
-        alt={title ? title :"/logosDecorcut.png"}
-        width={204}
-        height={204}
-        layout="responsive"
-        sizes="(min-width: 600px) 450px, 352px"
-        className="produs-image"
-      />
-    }
-
-
-      </div>
-      <div className="produs-content">
-        <h2 className="title-produs">{title}</h2>
-        <div className="produs-description">{description}</div>
-        <div className="produs-pret"><p> De la {price} RON</p></div>
-        <div className="produs-disponibil"><p>{disponibil}</p></div>
-        <Link className="ignore" 
-        href={`/produse/panou-decorativ?title=${title.toLowerCase().split(" ").join("-")}&description=${description}`}>
+            <Typography variant="body1" sx={{ color: 'red' }} className='produs-pret'>
+              <strong>{price} RON</strong>
+            </Typography>
+            <Typography variant="body2" sx={{ color: 'text.secondary' }} className='produs-disponibil'>
+              {disponibil}
+            </Typography>
+          </CardContent>
           <Button
             variant="contained"
             color="primary"
             onClick={handleData}
             sx={{
               backgroundColor: "green",
-              textDecoration:"none",
-              margin:"auto",
-              display:"block",
+              textDecoration: "none",
+              margin: "auto",
+              display: "block",
               "&:hover": {
-                backgroundColor: "red"
-              }
+                backgroundColor: "red",
+              },
             }}
-          >
+            >
             Vezi Detalii
           </Button>
-        </Link>
-      </div>
-    </div>
+        </CardActionArea>
+    </Link>
+
+    </Card>
   );
 };
 
