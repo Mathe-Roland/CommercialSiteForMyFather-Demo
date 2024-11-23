@@ -16,9 +16,10 @@ interface ProdusCardProps {
   image: string;
   disponibil: string;
   price: number;
+  id:number
 }
 
-const ProdusCard = ({ description, title, image, disponibil, price }: ProdusCardProps) => {
+const ProdusCard = ({ description, title, image, disponibil, price ,id}: ProdusCardProps) => {
   const handleData = () => {
     Cookies.set("description", description, {
       secure: true,
@@ -50,7 +51,7 @@ const ProdusCard = ({ description, title, image, disponibil, price }: ProdusCard
     <Card sx={{ maxWidth: 545, margin: 'auto' ,padding:`1rem`}}>
        <Link
         className="ignore"
-        href={`/produse/panou-decorativ?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`}
+        href={`/produse/${id}?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`}
       >
  
         <CardActionArea>

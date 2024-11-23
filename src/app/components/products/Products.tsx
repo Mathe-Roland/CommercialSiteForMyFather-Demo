@@ -50,6 +50,7 @@ const Products = () => {
             disponibil={"Produs Disponibil"}
             description={data.attributes?.description}
             price={data.attributes?.price}
+            id={data.id}
           />
         )) : null}
       </div>
@@ -70,6 +71,7 @@ const Products = () => {
            description={e.attributes?.description}
            price={e.attributes?.promotionPrice}
            disponibil='disponibil'
+          id={e.id}          
          />)
           
         )
