@@ -48,10 +48,11 @@ const ProdusCard = ({ description, title, image, disponibil, price }: ProdusCard
 
   return (
     <Card sx={{ maxWidth: 545, margin: 'auto' ,padding:`1rem`}}>
-      <Link
-          className="ignore"
-          href={`/produse/panou-decorativ?title=${title}&description=${description}`}
+       <Link
+        className="ignore"
+        href={`/produse/panou-decorativ?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`}
       >
+ 
         <CardActionArea>
           <CardMedia
             className='produs-image'
