@@ -222,8 +222,8 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
 
                 <div className='produs-images-choice'>
                     
-                        {img?.length > 0 ? (
-                img.map((e) => (
+            {img?.length > 0 ? (
+                img.map((e) => (  
                 <div key={e.id} className="imageContainer"
                 onMouseOver={()=>setPictureChange(e.attributes.url)}>
                     <Image
@@ -236,8 +236,12 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
                 ))
             ) : null}
                     </div>    
-
-                    <Image src={`${img?.length >0 && pictureChange === "" ? img?.[0]?.attributes?.url:pictureChange}`} alt="failed-load" width={400} height={450} />
+                    <Image
+                            src={`${img?.length >0 && pictureChange === "" ? img?.[0]?.attributes?.url:pictureChange}`} alt="current selected image from carrousel" 
+                            width={400}
+                            height={400}
+                            className='produs-individual-displayed-image'
+                    />
                 </div>
                 <div className="produs-individual-text-container">
                     <div className="produs-upper-text">
@@ -245,7 +249,7 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
                             <h2>{title}</h2>
                         </div>
                         <div className="produs-individual-header">
-                           <p className="produs-individual-pret">{noPrice.length>0 ? noPrice : ifVopsit ? prices : `${handlePrice(selectedValues)} RON`}</p>
+                           <p className="produs-individual-pret">{noPrice.length>0 ? noPrice : ifVopsit ? `${prices} RON`: `${handlePrice(selectedValues)} RON`}</p>
                         </div>
                     </div>
                     <div className="produs-individual-description">
@@ -296,6 +300,8 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
                         comments={element.content}
                     />
                 ))}
+                
+            </div>
                  <Stack spacing={2}>
                     <Pagination
                         count={Math.ceil(originalComments.length / ITEMS_PER_PAGE)}
@@ -304,7 +310,6 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
                         color="primary"
                     />
                 </Stack>
-            </div>
         </div>
     );
 };

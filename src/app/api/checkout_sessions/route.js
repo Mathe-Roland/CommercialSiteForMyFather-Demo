@@ -30,7 +30,7 @@ export async function POST(request) {
         line_items:line_items,
         mode: 'payment',
         success_url: `https://www.decorcut.com/payment-success`,
-        cancel_url: `https://www.decorcut.com/`,
+        cancel_url: `https://www.decorcut.com/cos`,
         billing_address_collection: 'required',
       });
       

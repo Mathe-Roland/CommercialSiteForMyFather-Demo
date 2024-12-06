@@ -2,7 +2,8 @@
 import "./Contact.css";
 import React, { useState } from 'react';
 import { TextField, MenuItem, Button, Container, Grid } from '@mui/material';
-import { postareContact } from "../components/asyncOperations/fetchData";
+import { postareContact, postareContactNonRegisteredUser } from "../components/asyncOperations/fetchData";
+import Cookies from "js-cookie";
 
 
 
@@ -26,8 +27,11 @@ const ContactUsForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await postareContact(formData);
-        alert('Form submitted.');
+        const user=Cookies.get("user") || 0;
+
+        user ? await postareContact(formData) : await postareContactNonRegisteredUser(formData);
+
+        alert('Form submitted.');        
     };
 
     return (

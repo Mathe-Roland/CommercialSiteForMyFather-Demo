@@ -16,7 +16,8 @@ const DespreNoi = async () => {
 
         const fetchData = async () => {
             const data = await fetchDataDespreNoiPage();
-            return data.data.data;
+
+                return data.data.data;
         };
         
         const ImageGalleryPictures=await fetchData() || null;

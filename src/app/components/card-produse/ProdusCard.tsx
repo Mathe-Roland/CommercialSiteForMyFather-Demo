@@ -3,7 +3,6 @@ import "./ProdusCard.css";
 import Button from '@mui/material/Button';
 import Link from "next/link";
 import Cookies from 'js-cookie';
-import Image from 'next/image';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';

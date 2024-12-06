@@ -10,7 +10,6 @@
 
 .ignore{
   display: contents;
-
 }
 
 .produs-pret{
@@ -31,14 +30,19 @@
 }
 
 
-@media screen  and (min-width:37.5rem){
+
+@media screen  and (min-width:600px){
   .produs-container {
     max-width: 12.75rem;
     width: 12.75rem;
     height: 27.5rem;
 }
-  .produs-image{
-    max-height: 12.75rem;
-  }
+  
+  .produs-image {
+    width: 100%; 
+    height: auto; 
+    max-width: 31.25rem; 
+    object-fit: contain;
+}
 
 }

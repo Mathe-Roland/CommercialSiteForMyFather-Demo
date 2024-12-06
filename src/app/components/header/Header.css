@@ -188,7 +188,7 @@
     display: none;
 }
 
-@media screen and (min-width:37.5rem) {
+@media screen and (min-width:750px) {
    
     .hamburger-centered{
         display: none;

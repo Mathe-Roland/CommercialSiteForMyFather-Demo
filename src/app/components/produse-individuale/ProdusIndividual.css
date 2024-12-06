@@ -68,11 +68,6 @@
 }
 
 
-.produs-individual-images{
-    display: flex;
-    width: 100%;
-    gap: 0.625rem;
-}
 
 .produs-individual-pret{
     display: flex;
@@ -97,9 +92,8 @@
   
   .produs-images-choice{
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 0.625rem;
-    height: 25rem;
     overflow: hidden;
   }
 
@@ -108,7 +102,40 @@
     border: 0.0625rem solid black;
 }
 
-@media screen and (min-width:100rem) {
+    .produs-individual-displayed-image{
+            max-height: 400px;
+            max-width: 400px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+    }
+
+    .produs-individual-images{
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+@media screen and (min-width:600px) {
+ 
+    
+    .produs-individual-images{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        gap: 0.625rem;
+    }
+
+    
+    .produs-images-choice{
+        display: flex;
+        flex-direction: column;
+        gap: 0.625rem;
+        overflow: hidden;
+      }
+}
+
+@media screen and (min-width:1600px) {
 
     .produs-individual-container{
         min-height: 36.25rem;

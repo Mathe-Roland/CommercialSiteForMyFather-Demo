@@ -13,7 +13,7 @@ interface dataForUsers{
   vopsit?:boolean,
   date?: string,
   payment?: string,
-  postalCode?:string,
+  postalCode?:number,
   total?:number,
   email?:string,
   surname?:string,
@@ -622,6 +622,7 @@ export const userData = async () => {
       .catch((error) => {
       });
   };
+  
   export const deleteProductDataFNonRegisteredUser = async (productId:string) => {
   
   
@@ -803,5 +804,35 @@ export const userData = async () => {
       .catch((error) => {
       });
   };
-
-
+  
+  export const postareContactNonRegisteredUser = async (userData:dataForUsers) => {
+    
+    const date=new Date();
+    
+    const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/contacts`;
+    
+    const headers = {
+      "Content-type": "application/json; charset=UTF-8",
+    };
+    
+    axios
+    .post(
+      url,
+        {
+          data: {
+            name:userData.name,
+            inquiry:userData.message,
+            email:userData.email,
+            company:userData.company,
+            phone:userData.phone,
+            category:userData.category,
+            date:date,
+          },
+        },
+        { headers: headers }
+      )
+      .then((response) => {
+      })
+      .catch((error) => {
+      });
+  };

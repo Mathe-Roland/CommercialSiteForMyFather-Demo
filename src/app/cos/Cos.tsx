@@ -115,58 +115,9 @@ const Cos = () => {
     const userId = Cookies.get("userId");
 
     if (payment === "cash") {
-      if (username !== 0) {
-        const data = await completeUserData();
-        const user = await userData();
-
-        let description = "";
-
-        user?.data?.forEach((element) => {
-          const item = cardList?.data?.find(filteredCardlist => element.attributes.title === filteredCardlist.attributes.title);
-          if (item) {
-            description += `${element.attributes.title} at price ${element.attributes.price} number of items ${item.counting} at size ${element.attributes.optiuniNormale}\n`;
-          }
-        });
-
-        const comandaData = {
-          name: data.name,
-          postalcode: data.postalCode,
-          country: data.country,
-          city: data.city,
-          surname: data.surname,
-          customerName: userId,
-          email: data.email,
-          total: grandTotal,
-          payment: payment,
-          description: description,
-        };
-
-        if (grandTotal !== 0) {
-          await postareComenzi(comandaData);
-
-          await Promise.all(user.data.map(async (element) => {
-            await deleteProductData(element.id);
-          }));
-
-          setCardList({ data: [] });
-          setGrandTotal(0);
-
-          const panouForSpecificUser = await nonRegisteredUserData();
-
-          const UUIDS = Cookies.get("userUUID");
-
-          const panouForNonRegisteredUser = panouForSpecificUser.data.filter((e) => e.attributes.UniqueIdentifier === UUIDS);
-
-          await Promise.all(panouForNonRegisteredUser.map(async (element) => {
-            await deleteNonRegisteredUserProduct(element.id);
-          }));
-
-          window.location.href = "/payment-success";
-
-        }
-      } else {
+      
         setOpenModal(true);
-      }
+      
 
     } else if (payment === "card") {
       if (username) {
@@ -282,6 +233,7 @@ const Cos = () => {
     handleClose();
   };
 
+
 const handleSubmitNonRegisteredUser= async ()=>{
 
       let nonRegisteredUserDatas=await nonRegisteredUserData();
@@ -305,7 +257,7 @@ const handleSubmitNonRegisteredUser= async ()=>{
       surname:formData.surname,
       address:formData.address,
       email:formData.email,
-      postalcode:formData.postalCode,
+      postalCode:parseInt(formData.postalCode),
       country:formData.country,
       total:grandTotal,
       description: description,
@@ -314,7 +266,8 @@ const handleSubmitNonRegisteredUser= async ()=>{
 
     await postareComenziNonRegisteredUser(dataForNonRegisteredUser);
 
-    window.location.href="/payment-success"
+    window.location.href="/payment-success";
+
   }
 
 

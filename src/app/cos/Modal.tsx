@@ -95,9 +95,9 @@ const CosModal = ({
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label="Cod postal"
-                name="postalCode"
-                value={formData.postalCode}
+                label="Oras"
+                name="city"
+                value={formData.city}
                 onChange={handleChange}
                 required
               />
@@ -105,9 +105,9 @@ const CosModal = ({
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label="Oras"
-                name="city"
-                value={formData.city}
+                label="Cod postal"
+                name="postalCode"
+                value={formData.postalCode}
                 onChange={handleChange}
                 required
               />
