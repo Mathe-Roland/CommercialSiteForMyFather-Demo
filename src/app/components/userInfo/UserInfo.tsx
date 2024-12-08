@@ -114,7 +114,7 @@ import Image from "next/image";
         return (
         <div onMouseLeave={onLeave} className="userInfo-container">
 
-                <div className="userInfo-mobile">
+            <div className="userInfo-mobile">
 
     {Cookies.get("user") 
     ? 

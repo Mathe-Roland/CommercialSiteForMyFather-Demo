@@ -1,21 +1,9 @@
-.navbar{
-    position: sticky;
-    top:0;
-    width: 100%;
-    z-index: 800;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 1.25rem 0rem;
-}
-
-
 
 
 .formControl{
 
     width: 80%;
-    margin :0 auto;
+    margin :2rem auto;
 }
 
 .navbar-contents p{
@@ -203,7 +191,20 @@
 }
 
 
-@media screen  and (min-width:43.125rem){
+@media screen  and (min-width:690px){
+
+    .navbar{
+        position: sticky;
+        top:0;
+        width: 100%;
+        z-index: 800;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 1.25rem;
+        background-color: #2e8b57;
+    }
+    
 
     .navbar-contents{
 

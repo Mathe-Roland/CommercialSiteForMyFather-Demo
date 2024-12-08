@@ -156,9 +156,11 @@
     color: inherit;
 }
 
+
 .navbar-dropdown{
 
-    background-color: #ccc;
+    background-color: white;
+    box-shadow: 0rem 0rem 0.625rem 0.3125rem rgba(0, 0, 0, 0.1);
     position: absolute;
     width:12.5rem;
     top:100%;
