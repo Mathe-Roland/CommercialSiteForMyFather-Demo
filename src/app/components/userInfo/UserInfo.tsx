@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 import Image from "next/image";
 
 
-    const UserInfo = ({ setLogin }) => {
+const UserInfo = ({ setLogin }) => {
         const [pictures, setPicture] = useState({
             setariPicture: null,
             comenziPlasate: null,
@@ -114,7 +114,7 @@ import Image from "next/image";
         return (
         <div onMouseLeave={onLeave} className="userInfo-container">
 
-            <div className="userInfo-mobile">
+                <div className="userInfo-mobile">
 
     {Cookies.get("user") 
     ? 

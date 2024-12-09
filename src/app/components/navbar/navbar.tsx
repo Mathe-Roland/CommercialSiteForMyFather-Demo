@@ -10,6 +10,10 @@ export const navbarData = {
   items: ["Acasa", "Magazin", "Blog", "Despre Noi", "Contact"],
 };
 
+const magazinList={
+  items:["Harti","Masca de calorifer","Pandative","Panouri decorative","Tablouri decorative","Tablouri gravate",]
+}
+
 const Navbar = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [showAcasa, setShowAcasa] = useState(false);
@@ -81,24 +85,51 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className='formControl'>
+        <div className="formControl">
           <FormControl fullWidth>
-            <InputLabel id='demo-simple-select-label'>Select Option</InputLabel>
-            <Select
-              labelId='demo-simple-select-label'
-              id='demo-simple-select'
-              value={selectedOption}
-              onChange={handleChange}
-            >
-              {isMobile &&
-                navbarData.items.map((e) => (
-                  <Link href={e === 'Acasa' ? '/' : generateUrl(e)} passHref key={e}>
-                    <MenuItem value={e}>{e}</MenuItem>
+            <InputLabel id="main-select-label">Select Option</InputLabel>
+          <Select
+            labelId="main-select-label"
+            id="main-select"
+            value={selectedOption}
+            onChange={handleChange}
+          >
+          {isMobile &&
+            navbarData.items.map((e) => {
+              if (e === "Magazin") {
+                return (
+                  <FormControl fullWidth key="magazin">
+                    <InputLabel id="magazin-select-label">Magazin</InputLabel>
+                    <Select
+                      labelId="magazin-select-label"
+                      id="magazin-select"
+                      value={selectedOption}
+                      onChange={handleChange}
+                    >
+                      {magazinList.items.map((item) => (
+                      <Link href={generateUrl(item)} passHref>
+                        <MenuItem value={item} key={item}>
+                            {item}
+                        </MenuItem>
+                      </Link>
+                      ))}
+                    </Select>
+                  </FormControl>
+                );
+              } else {
+                return (
+                  <Link href={e === "Acasa" ? "/" : generateUrl(e)} passHref>
+                    <MenuItem value={e} key={e}>
+                      {e}
+                    </MenuItem>
                   </Link>
-                ))}
-            </Select>
+                );
+              }
+            })}
+             </Select>
           </FormControl>
         </div>
+
       </nav>
     </header>
   );

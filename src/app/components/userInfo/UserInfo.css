@@ -6,7 +6,6 @@
     position: absolute;
     top: 100%;
     left: 0;
-    z-index: 999;
     background-color: white;
     border: 0.0625rem solid #dee1cd;
     box-shadow: 0rem 0rem 0.625rem 0.3125rem rgba(0, 0, 0, 0.1);
@@ -47,13 +46,12 @@
 }
 
 
-
-
-@media screen  and (min-width:37.5rem){
+@media screen  and (min-width:750px){
  
     .userInfo-desktop{
         display: block;
     }
+
     .userInfo-mobile{
         display: none;
     }

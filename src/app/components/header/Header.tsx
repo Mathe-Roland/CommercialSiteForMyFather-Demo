@@ -66,14 +66,6 @@ const Header = () => {
                   ) : (
                     <LoginModal setLogin={setIsLoggedIn} />
                   )}
-                  <Link href={"/cos"}>
-                    <Image 
-                      src={"/cos-de-cumparaturi.png"}
-                      alt="cos-de-cumparaturi"
-                      width={40}
-                      height={40}
-                    />
-                  </Link>
                 </div>
               ) : null}
             </div>

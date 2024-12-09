@@ -13,8 +13,7 @@ const MascaDeCalorifer=()=>{
 
 
 
-    return (<DespreNoiItems
-    />)
+    return (<DespreNoiItems/>)
 
 }
 

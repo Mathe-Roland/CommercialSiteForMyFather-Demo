@@ -40,11 +40,10 @@
 
 
 
-@media screen and (min-width:37.5rem) {
+@media screen and (min-width:600px) {
     
     .accordion-container{
         display: block;
-        width:25%;
     }
 
     .cardList-container{
@@ -54,14 +53,9 @@
 }
 
 
-@media screen and (min-width:50rem) {
+@media screen and (min-width:800px) {
  
-    .accordion-container{
-
-        width:15%;
-    }
-
-    .cardList-container{
+   .cardList-container{
         grid-template-columns: repeat(3,1fr);
         gap: 1.25rem;
     }
