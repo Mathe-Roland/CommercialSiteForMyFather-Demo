@@ -1,23 +1,23 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
-import { FormControl, InputLabel, MenuItem, Select, Menu } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import Link from 'next/link';
 import './navbar.css';
+import Acasa from './navbarComponents/acasa';
 
 export const navbarData = {
   items: ["Acasa", "Magazin", "Blog", "Despre Noi", "Contact"],
 };
 
-const magazinList = {
-  items: ["Harti", "Masca de calorifer", "Pandative", "Panouri decorative", "Tablouri decorative", "Tablouri gravate"],
-};
+const magazinList={
+  items:["Harti","Masca de calorifer","Pandative","Panouri decorative","Tablouri decorative","Tablouri gravate",]
+}
 
 const Navbar = () => {
   const [selectedOption, setSelectedOption] = useState('');
-  const [isMobile, setIsMobile] = useState(false);
-  const [submenuAnchor, setSubmenuAnchor] = useState(null);
-  const formControlRef = useRef(null);
+  const [showAcasa, setShowAcasa] = useState(false);
+  const [isMobile, setIsMobile] = useState(false); 
 
   useEffect(() => {
     const updateView = () => {
@@ -33,16 +33,18 @@ const Navbar = () => {
     };
   }, []);
 
+  const handleMouseEnter = (index) => {
+    if (index === 1) {
+      setShowAcasa(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setShowAcasa(false);
+  };
+
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
-  };
-
-  const handleOpenSubmenu = (event) => {
-    setSubmenuAnchor(event.currentTarget);
-  };
-
-  const handleCloseSubmenu = () => {
-    setSubmenuAnchor(null);
   };
 
   const generateUrl = (name) => {
@@ -50,85 +52,84 @@ const Navbar = () => {
   };
 
   return (
-    <header className="navbar">
+    <header className='navbar'>
       <nav>
-        <div className="navbar-centered">
-          <div className="navbar-contents">
-            {!isMobile &&
-              navbarData.items.map((element) => (
-                <div key={element}>
-                  <p className="navbar-text">
-                    {element === "Magazin" ? (
-                      <span onClick={handleOpenSubmenu}>{element}</span>
+        <div className='navbar-centered'>
+          <div className='navbar-contents'>
+            {!isMobile
+              ? navbarData.items.map((element, index) => (
+                  <div
+                    key={element}
+                    onMouseEnter={() => handleMouseEnter(navbarData.items.indexOf(element))}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    {element === 'Acasa' ? (
+                      <Link href={'/'}>
+                        <p className='navbar-text'>{element}</p>
+                      </Link>
+                    ) : element === 'Magazin' ? (
+                      <p className='navbar-text'>{element}</p>
                     ) : (
-                      <Link href={generateUrl(element)}>{element}</Link>
+                      <p className='navbar-text'>
+                        <Link href={generateUrl(element)}>{element}</Link>
+                      </p>
                     )}
-                  </p>
-                </div>
-              ))}
+                    {showAcasa && index === 1 ? (
+                      <div className='width100'>
+                        <Acasa />
+                      </div>
+                    ) : null}
+                  </div>
+                ))
+              : null}
           </div>
         </div>
 
-        <div className="formControl" ref={formControlRef}>
+        <div className="formControl">
           <FormControl fullWidth>
             <InputLabel id="main-select-label">Select Option</InputLabel>
-            <Select
-              labelId="main-select-label"
-              id="main-select"
-              value={selectedOption}
-              onChange={handleChange}
-              onClick={(event) => setSubmenuAnchor(event.currentTarget)}
-            >
-              {navbarData.items.map((e) => {
-                if (e === "Magazin") {
-                  return (
-                    <MenuItem key="magazin" value="magazin" onClick={handleOpenSubmenu}>
-                      Magazin
-                    </MenuItem>
-                  );
-                } else {
-                  return (
-                    <Link href={generateUrl(e)} passHref>
-                      <MenuItem value={e} key={e}>
-                        {e}
-                      </MenuItem>
-                    </Link>
-                  );
-                }
-              })}
-            </Select>
-          </FormControl>
-
-          <Menu
-            anchorEl={submenuAnchor}
-            open={Boolean(submenuAnchor)}
-            onClose={handleCloseSubmenu}
-            MenuListProps={{
-              'aria-labelledby': 'main-select',
-            }}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
-            }}
-            PaperProps={{
-              style: {
-                width: formControlRef.current
-                  ? formControlRef.current.offsetWidth 
-                  : 'auto',
-              },
-            }}
+          <Select
+            labelId="main-select-label"
+            id="main-select"
+            value={selectedOption}
+            onChange={handleChange}
           >
-            {magazinList.items.map((item) => (
-              <Link href={generateUrl(item)} passHref key={item}>
-                <MenuItem onClick={handleCloseSubmenu}>{item}</MenuItem>
-              </Link>
-            ))}
-          </Menu>
+          {isMobile &&
+            navbarData.items.map((e) => {
+              if (e === "Magazin") {
+                return (
+                  <FormControl fullWidth key="magazin">
+                    <InputLabel id="magazin-select-label">Magazin</InputLabel>
+                    <Select
+                      labelId="magazin-select-label"
+                      id="magazin-select"
+                      value={selectedOption}
+                      onChange={handleChange}
+                    >
+                      {magazinList.items.map((item) => (
+                      <Link href={generateUrl(item)} passHref>
+                        <MenuItem value={item} key={item}>
+                            {item}
+                        </MenuItem>
+                      </Link>
+                      ))}
+                    </Select>
+                  </FormControl>
+                );
+              } else {
+                return (
+                  <Link href={e === "Acasa" ? "/" : generateUrl(e)} passHref>
+                    <MenuItem value={e} key={e}>
+                      {e}
+                    </MenuItem>
+                  </Link>
+                );
+              }
+            })}
+             </Select>
+          </FormControl>
         </div>
+
       </nav>
     </header>
   );

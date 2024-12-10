@@ -11,7 +11,8 @@
 
 .heightvh {
     display: flex;
-    height: 18.75rem;
+    flex-wrap: wrap;
+    height: 600px;
     width: 100%;
     background-color: white;
 }
