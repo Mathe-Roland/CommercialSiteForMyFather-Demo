@@ -1,3 +1,9 @@
+.produscard-container {
+  max-width: 34.0625rem; 
+  margin: auto;
+  padding: 1rem;
+}
+
 .title-produs{
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -6,6 +12,8 @@
   font-weight: bold;
   overflow: hidden;
   text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+
 }
 
 .ignore{
@@ -27,9 +35,16 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin: auto;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 
+.produs-image {
+  width: 100%; 
+  height: auto; 
+  max-width: 31.25rem;
+  object-fit: contain;
+}
 
 @media screen  and (min-width:600px){
   .produs-container {
@@ -38,11 +53,5 @@
     height: 27.5rem;
 }
   
-  .produs-image {
-    width: 100%; 
-    height: auto; 
-    max-width: 31.25rem; 
-    object-fit: contain;
-}
 
 }

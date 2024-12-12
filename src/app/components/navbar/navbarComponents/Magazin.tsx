@@ -1,10 +1,10 @@
-import "./acasa.css";
+import "./magazin.css";
 import { accordion } from "../../card-produse/cardList";
 import  Link  from "next/link";
 import Image from "next/image";
 
 
-const Acasa=()=>{
+const Magazin=()=>{
 
 
     return (
@@ -30,4 +30,4 @@ const Acasa=()=>{
     )
 }
 
-export default Acasa;
+export default Magazin;

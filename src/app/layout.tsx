@@ -1,6 +1,5 @@
 
 import './layout.css';
-import './globals.css';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import Navbar from './components/navbar/navbar';

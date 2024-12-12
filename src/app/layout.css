@@ -4,7 +4,7 @@ html, body {
 }
 
 body {
-    background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+    background: linear-gradient(to right, #cbd9cd 0% ,#fff 50%, #cbd9cd 100%);
     display: flex;
     flex-direction: column;
     min-height: 100vh; 
@@ -15,7 +15,7 @@ main {
 }
 
 footer {
-    background-color: #333;
+    background-color: #23552f;
     color: white;
     text-align: center;
     padding: 1em;

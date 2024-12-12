@@ -134,6 +134,7 @@
     gap: 1.25rem;
     justify-content: center;
     align-items: center;
+    filter: saturate(300%);
 }
 
 .logo-decorcut-text{
@@ -147,8 +148,9 @@
 .navbar-title-and-searchbar{
     display: flex;
     justify-content: center;
-    background-color: rgb(73, 95, 62);
+    background-color: #204426;
     height:5rem;
+    color: #fff;
 }
 
 .headerCos{

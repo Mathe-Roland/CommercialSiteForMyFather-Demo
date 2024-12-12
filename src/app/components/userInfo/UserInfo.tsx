@@ -164,7 +164,8 @@ const UserInfo = ({ setLogin }) => {
 
                 <div className="userInfo-desktop">
 
-                <button onClick={handleUserInfo} onMouseOver={handleMover}>
+                <button onClick={handleUserInfo} onMouseOver={handleMover}
+                className="login-button">
                     <Image
                         alt="login"
                         src={`${loginIcon ? loginIcon :null}`}

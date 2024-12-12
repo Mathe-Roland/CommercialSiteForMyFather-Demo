@@ -47,7 +47,7 @@ const ProdusCard = ({ description, title, image, disponibil, price ,id}: ProdusC
   };
 
   return (
-    <Card sx={{ maxWidth: 545, margin: 'auto' ,padding:`1rem`}}>
+    <Card className='produscard-container'>
        <Link
         className="ignore"
         href={`/produse/${id}?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`}
