@@ -108,6 +108,12 @@ const Cos = () => {
 
       setGrandTotal(totalSum);
     }
+
+    if(cardList.data.length===0){
+
+      Cookies.remove("isInCart");
+    }
+
   }, [cardList]);
 
   const handleComanda = async () => {

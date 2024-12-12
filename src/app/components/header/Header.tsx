@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import UserInfo from "../userInfo/UserInfo";
 import Cookies from 'js-cookie';
 import Image from "next/image";
+import { Cookie } from "@mui/icons-material";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -46,7 +47,7 @@ const Header = () => {
               height={70}
               alt={`${monsrikLogo}`}
             />
-            <p className="logo-decorcut-text">decorcut.com decorcut.ro</p>
+            <p className="logo-decorcut-text">decorcut.ro</p>
           </div>
 
           <div className="hamburger-centered">
@@ -79,13 +80,28 @@ const Header = () => {
                 <LoginModal setLogin={setIsLoggedIn} />
               )}
               <p className="header-destopview-phone">0770 803 858</p>
-              <Link href={"/cos"}>
-                <Image 
+              <Link
+               href={"/cos"}
+               className="cos-de-cumparaturi"
+               >
+                <Image                
                   src={"/cos-de-cumparaturi.png"}
-                  alt="cos-de-cumparaturi"
+                  alt="cos de cumparaturi"
                   width={40}
                   height={40}
                 />
+              {Cookies.get("isInCart") ? (
+                <Image
+                className="is-in-cart"
+                src={"/exclamation-mark.png"}
+                alt="exclamation mark"
+                width={20}
+                height={20}
+                />
+              )
+                :
+              null
+            } 
               </Link>
             </div>
           </div>

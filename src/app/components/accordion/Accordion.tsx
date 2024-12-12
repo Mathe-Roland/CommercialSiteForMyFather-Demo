@@ -77,7 +77,7 @@ export default function CustomizedAccordions() {
           <AccordionSummary aria-controls={`panel${index + 1}d-content`} id={`panel${index + 1}d-header`}>
             <Link href={`/${Object.keys(e)[0]}`}>
             
-                <Typography>
+                <Typography className='accordion-typography'>
 
                 {Object.keys(e)[0].split("-").join(" ")}
 

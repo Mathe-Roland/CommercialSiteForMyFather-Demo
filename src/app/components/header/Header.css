@@ -158,6 +158,17 @@
     color: inherit;
 }
 
+.cos-de-cumparaturi{
+    position: relative;
+}
+
+
+.is-in-cart{
+    position: absolute;
+    top:0;
+    right: -10px;
+}
+
 
 .navbar-dropdown{
 

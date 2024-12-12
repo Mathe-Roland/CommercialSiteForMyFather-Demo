@@ -88,10 +88,12 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
             setAdaugaInCosShow(false);
         }, 1000);
     
+        
         Cookies.set("isInCart", true, {secure: true,
             sameSite: 'Strict',
             expires: 7,   
             path: '/', });
+
         try {
             const useros = Cookies.get("user") || null;
     
@@ -120,8 +122,9 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
                 
                 const images = Cookies.get("image");
 
+                
                 const filesData = await imageNonREgisteredUser();
-
+                
                 const currentImage = filesData.filter(image => image.url === images);
                 
                 const newDatas = {
@@ -189,6 +192,8 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
         } catch (error) {
             console.error('Error:', error);
         }
+
+        window.location.reload();
     };
     
     const ITEMS_PER_PAGE = 12;

@@ -53,7 +53,7 @@ const ProdusCard = ({ description, title, image, disponibil, price ,id}: ProdusC
         href={`/produse/${id}?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`}
       >
  
-        <CardActionArea>
+        <CardActionArea onClick={handleData}>
           <CardMedia
             className='produs-image'
             component="img"
@@ -89,7 +89,6 @@ const ProdusCard = ({ description, title, image, disponibil, price ,id}: ProdusC
           <Button
             variant="contained"
             color="primary"
-            onClick={handleData}
             sx={{
               backgroundColor: "green",
               textDecoration: "none",
