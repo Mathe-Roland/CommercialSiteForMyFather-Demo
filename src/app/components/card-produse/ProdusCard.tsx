@@ -47,13 +47,15 @@ const ProdusCard = ({ description, title, image, disponibil, price ,id}: ProdusC
   };
 
   return (
-    <Card className='produscard-container'>
+    <Card className='produscard-container'
+      onClick={handleData}
+    >
        <Link
         className="ignore"
         href={`/produse/${id}?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`}
       >
  
-        <CardActionArea onClick={handleData}>
+        <CardActionArea>
           <CardMedia
             className='produs-image'
             component="img"

@@ -6,6 +6,7 @@ import Navbar from './components/navbar/navbar';
 import Cookies from 'js-cookie';
 import ShowCookiesModal from './components/cookies/Cookies';
 
+
 export const metadata = {
     title: 'Mostrik Dreamland | Panouri Decorative Traforate din Lemn și MDF',
     description: `Descoperiți o gamă largă de produse traforate din lemn si mdf, 
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
 
 
   return (
+
     <html lang="en">
       <head/>
       <body>

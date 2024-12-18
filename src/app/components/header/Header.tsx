@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import UserInfo from "../userInfo/UserInfo";
 import Cookies from 'js-cookie';
 import Image from "next/image";
-import { Cookie } from "@mui/icons-material";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -90,20 +89,10 @@ const Header = () => {
                   width={40}
                   height={40}
                 />
-              {Cookies.get("isInCart") ? (
-                <Image
-                className="is-in-cart"
-                src={"/exclamation-mark.png"}
-                alt="exclamation mark"
-                width={20}
-                height={20}
-                />
-              )
-                :
-              null
-            } 
+              
               </Link>
             </div>
+
           </div>
         </div>
       </div>

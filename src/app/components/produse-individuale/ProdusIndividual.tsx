@@ -35,11 +35,12 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
     const [ifVopsit, setIfVopsit] = useState(false);
     const [adaugaInCosShow, setAdaugaInCosShow] = useState(false);
     const [pictureChange, setPictureChange] = useState("");
+    const [originalPriceWithoutSettings, setOriginalPriceWithoutSettings] = useState(true);
 
 
     useEffect(()=>{
         if(renderPersonalizare){
-            setNoPrice("The price must be discussed");
+            setNoPrice("Pretul trebuie discutat");
         }else{
             setNoPrice("");
         }
@@ -55,6 +56,8 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
     
                 if (getUserRelatedData && getUserRelatedData.length > 0) {
                     specificPanou = getUserRelatedData.filter(item => item.attributes.title === title)[0] || null;
+                    console.log(specificPanou);
+                    setOriginalPriceWithoutSettings(specificPanou.attributes.original_price_is_or_not);
                     setPanouId(specificPanou.id);
                     if (specificPanou) {
                         comments = await fetchPanouriCommentsPerPanouId(specificPanou.id) || null;
@@ -80,19 +83,19 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
     };
     
 
-    const handleUserData = async () => {
-        setAdaugaInCosShow(true);
+const handleUserData = async () => {
+    setAdaugaInCosShow(true);
         
 
-        setTimeout(() => {
-            setAdaugaInCosShow(false);
-        }, 1000);
+    setTimeout(() => {
+        setAdaugaInCosShow(false);
+    }, 1000);
     
         
-        Cookies.set("isInCart", true, {secure: true,
-            sameSite: 'Strict',
-            expires: 7,   
-            path: '/', });
+    Cookies.set("isInCart", true, {secure: true,
+        sameSite: 'Strict',
+        expires: 7,   
+        path: '/', });
 
         try {
             const useros = Cookies.get("user") || null;
@@ -128,7 +131,7 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
                 const currentImage = filesData.filter(image => image.url === images);
                 
                 const newDatas = {
-                    price: Math.floor(ifVopsit ? prices : handlePrice(selectedValues)),
+                    price: originalPriceWithoutSettings ? price : Math.floor(ifVopsit ? prices : handlePrice(selectedValues)),
                     UniqueIdentifier: userUuid,
                     optiuninormale: selectedValues,
                     vopsit:ifVopsit,
@@ -168,7 +171,7 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
                 const filesData = await imageFiles();
                 const currentImage = filesData.filter(image => image.url === images);
                 const newDatas = {
-                    price: ifVopsit ? prices : handlePrice(selectedValues),
+                    price: originalPriceWithoutSettings ? price : ifVopsit ? prices : handlePrice(selectedValues),
                     optiuninormale: selectedValues
                 };
 
@@ -193,7 +196,6 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
             console.error('Error:', error);
         }
 
-        window.location.reload();
     };
     
     const ITEMS_PER_PAGE = 12;
@@ -259,20 +261,25 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
                             <h2>{title}</h2>
                         </div>
                         <div className="produs-individual-header">
-                           <p className="produs-individual-pret">{noPrice.length>0 ? noPrice : ifVopsit ? `${prices} RON`: `${handlePrice(selectedValues)} RON`}</p>
+                           <p className="produs-individual-pret">{originalPriceWithoutSettings? `${price} RON` : noPrice.length>0 ? noPrice : ifVopsit ? `${prices} RON`: `${handlePrice(selectedValues)} RON`}</p>
                         </div>
                     </div>
                     <div className="produs-individual-description">
                         {description}
                     </div>
                     <div>
-                        <DropdownMui
+                    {
+                        originalPriceWithoutSettings ? 
+                        null
+                        :
+                        (<DropdownMui
                             onChange={setSelectedValues}
                             render={setRenderPesonalizare}
                             actualPrice={handlePrice(selectedValues)}
                             price={setPrices}
                             vopsit={setIfVopsit}
-                        />
+                        />)
+                    }
                     </div>
                     <Button
                         variant="contained"

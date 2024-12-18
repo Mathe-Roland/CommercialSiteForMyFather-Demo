@@ -47,8 +47,6 @@ const PaymentSuccess = () => {
       await deleteCosDatas();
     };
 
-    Cookies.remove("isInCart");
-
     fetchData(); 
   }, []);
 
