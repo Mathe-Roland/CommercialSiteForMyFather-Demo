@@ -96,12 +96,11 @@ const Cos = () => {
 
     }
   }, []);
-
+  
   useEffect(() => {
     if (cardList && cardList.data) {
-
       let totalSum = 0;
-      cardList.data?.forEach((element) => {
+      cardList.data.forEach((element) => {
         const price = element.attributes.price || 0;
         const counting = element.counting || element.attributes.quantity || 0;
         totalSum += price * counting;
@@ -110,7 +109,21 @@ const Cos = () => {
       setGrandTotal(totalSum);
     }
 
+    if (cardList.data.length === 0) {
+      localStorage.removeItem("isInCart");
+
+      window.dispatchEvent(
+        new CustomEvent("localStorageUpdate", { detail: { key: "isInCart" } })
+      );
+    } else {
+      localStorage.setItem("isInCart", "true");
+
+      window.dispatchEvent(
+        new CustomEvent("localStorageUpdate", { detail: { key: "isInCart" } })
+      );
+    }
   }, [cardList]);
+
 
   const handleComanda = async () => {
     const username = Cookies.get("user") || 0;

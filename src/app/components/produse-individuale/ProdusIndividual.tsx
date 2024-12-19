@@ -85,7 +85,11 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
 
 const handleUserData = async () => {
     setAdaugaInCosShow(true);
-        
+    
+    localStorage.setItem("isInCart","true");
+
+    window.dispatchEvent(new CustomEvent("localStorageUpdate", { detail: { key: "isInCart" } }));
+
 
     setTimeout(() => {
         setAdaugaInCosShow(false);

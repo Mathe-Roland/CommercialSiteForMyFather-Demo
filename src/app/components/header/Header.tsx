@@ -8,10 +8,34 @@ import Cookies from 'js-cookie';
 import Image from "next/image";
 
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [show, setShow] = useState(false);
+  const [isLoggedIn,setIsLoggedIn] = useState(false);
+  const [show,setShow] = useState(false);  
+  const [isInCart,setIsInCart] = useState(false);
 
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const cartStatus = localStorage.getItem("isInCart");
+      setIsInCart(cartStatus === "true");
+    };
   
+    handleStorageChange();
+  
+    const handleCustomStorageChange = (event) => {
+      if (event.detail?.key === "isInCart") {
+        handleStorageChange();
+      }
+    };
+  
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("localStorageUpdate", handleCustomStorageChange);
+  
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("localStorageUpdate", handleCustomStorageChange);
+    };7
+  }, []);
+  
+
   
   useEffect(() => {
     Cookies.set("url", window.location.href, {secure: true,
@@ -89,7 +113,17 @@ const Header = () => {
                   width={40}
                   height={40}
                 />
-              
+                { isInCart ?  
+                  (<Image
+                  className="is-in-cart"
+                  src={"/exclamation-mark.png"}
+                  alt="exclamation mark"
+                  width={20}
+                  height={20}
+                  />)
+                  :
+                  null
+                }              
               </Link>
             </div>
 

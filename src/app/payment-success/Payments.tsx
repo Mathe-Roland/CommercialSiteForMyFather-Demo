@@ -1,43 +1,37 @@
 "use client";
+
 import React, { useEffect } from 'react';
 import Cookies from 'js-cookie';
-import { userData,nonRegisteredUserData, deleteNonRegisteredUserProduct } from '../components/asyncOperations/fetchData';
+import { userData, nonRegisteredUserData, deleteNonRegisteredUserProduct } from '../components/asyncOperations/fetchData';
+import "./Payments.css";
 
 const deleteCosDatas = async () => {
   try {
     const panouForSpecificUser = await nonRegisteredUserData();
-
-    const registeredUserData=await userData();
-
+    const registeredUserData = await userData();
     const UUIDS = Cookies.get("userUUID");
 
     const panouForNonRegisteredUser = panouForSpecificUser.data.filter(
       (e) => e.attributes.UniqueIdentifier === UUIDS
     );
 
-    panouForNonRegisteredUser.length>0 ? 
-    await Promise.all(
-      panouForNonRegisteredUser.map(async (element) => {
-        await deleteNonRegisteredUserProduct(element.id);
-      })
-    )
-    :
-    null;
+    if (panouForNonRegisteredUser.length > 0) {
+      await Promise.all(
+        panouForNonRegisteredUser.map(async (element) => {
+          await deleteNonRegisteredUserProduct(element.id);
+        })
+      );
+    }
 
-
-    registeredUserData.length>0 ?
-    
-    await Promise.all(
-      registeredUserData.map(async (element) => {
-        await deleteNonRegisteredUserProduct(element.id);
-      })
-    )
-    :
-    null;
-
-
+    if (registeredUserData.length > 0) {
+      await Promise.all(
+        registeredUserData.map(async (element) => {
+          await deleteNonRegisteredUserProduct(element.id);
+        })
+      );
+    }
   } catch (error) {
-    console.error('Error during data fetching or deletion:', error);
+    console.error('Error during data for deletion:', error);
   }
 };
 
@@ -47,14 +41,20 @@ const PaymentSuccess = () => {
       await deleteCosDatas();
     };
 
-    fetchData(); 
+    localStorage.removeItem("isInCart");
+
+    window.dispatchEvent(
+      new CustomEvent("localStorageUpdate", { detail: { key: "isInCart" } })
+    );
+
+    fetchData();
   }, []);
 
   return (
-    <main className="max-w-6xl mx-auto p-10 text-white text-center border m-10 rounded-md bg-gradient-to-tr from-blue-500 to-purple-500">
-      <div className="mb-10">
-        <h1 className="text-4xl font-extrabold mb-2">Thank you!</h1>
-        <h2 className="text-2xl">You successfully sent the order or payment.</h2>
+    <main className="main-container">
+      <div className="heading-container">
+        <h1>Thank you!</h1>
+        <h2>You successfully sent the order or payment.</h2>
       </div>
     </main>
   );
