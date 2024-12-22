@@ -102,19 +102,22 @@
     border: 0.0625rem solid black;
 }
 
-    .produs-individual-displayed-image{
-            max-height: 400px;
-            max-width: 400px;
-            position: relative;
-            overflow: hidden;
-            border-radius: 0.5rem;
-    }
-
     .produs-individual-images{
         display: flex;
         flex-direction: column-reverse;
         gap: 10px;
     }
+
+
+    
+.produs-individual-displayed-image {
+        width: 100%; 
+        height: auto; 
+        max-width: 400px;
+        max-height: 400px;
+        object-fit: contain;
+
+  }
 
 @media screen and (min-width:600px) {
  

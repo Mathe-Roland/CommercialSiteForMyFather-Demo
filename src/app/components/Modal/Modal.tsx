@@ -1,18 +1,18 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { TextField } from '@mui/material';
-import Link from 'next/link'; 
+import Link from 'next/link';
 import Cookies from 'js-cookie';
 import { registerUser, userIds } from '../asyncOperations/fetchData';
 import './Modal.css';
 import Image from 'next/image';
 
-const LoginModal = ({ setLogin }:{setLogin:(value:boolean)=>void}) => {
+const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void }) => {
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -20,6 +20,28 @@ const LoginModal = ({ setLogin }:{setLogin:(value:boolean)=>void}) => {
     name: '',
     password: '',
   });
+  const [isInCart, setIsInCart] = useState(() => localStorage.getItem("isInCart") === "true");
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const cartStatus = localStorage.getItem("isInCart");
+      setIsInCart(cartStatus === "true");
+    };
+
+    const handleCustomStorageChange = (event) => {
+      if (event.detail?.key === "isInCart") {
+        handleStorageChange();
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("localStorageUpdate", handleCustomStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("localStorageUpdate", handleCustomStorageChange);
+    };
+  }, []);
 
   const handleOpen = () => {
     setOpen(true);
@@ -54,28 +76,28 @@ const LoginModal = ({ setLogin }:{setLogin:(value:boolean)=>void}) => {
       Cookies.set('token', response.data.jwt, {
         secure: true,
         sameSite: 'Strict',
-        expires: 1,  
+        expires: 1,
         path: '/',
       });
-      
+
       Cookies.set('user', name, {
         secure: true,
         sameSite: 'Strict',
-        expires: 1,   
-        path: '/', 
+        expires: 1,
+        path: '/',
       });
-      
+
       const userId = await userIds();
       Cookies.set('userId', userId, {
         secure: true,
         sameSite: 'Strict',
-        expires: 1, 
-        path: '/', 
+        expires: 1,
+        path: '/',
       });
-      
 
       setLogin(true);
     } catch (error) {
+      console.error(error);
     }
   };
 
@@ -99,32 +121,47 @@ const LoginModal = ({ setLogin }:{setLogin:(value:boolean)=>void}) => {
     }
   };
 
-  const loginIcon="/loginicon.png";
-
+  const loginIcon = "/loginicon.png";
 
   return (
     <div>
-      <Button onClick={handleOpen}>
-        <div className='desktop'>
-
-        <Image src={loginIcon ? loginIcon : null} width={40} height={40} alt='loginIcon'/>
-
+      <div className='mobile-container'>
+      <Button
+       onClick={handleOpen}
+       className='modal-button'>
+        <div className="desktop">
+          <Image src={loginIcon} width={40} height={40} alt="loginIcon" />
         </div>
+          <p>Login</p>
+      </Button>
 
-        <div className='mobile'>
+          {!Cookies.get("user") ? (
+            <Link className='modal-cos-link'
+             href={"/cos"}>
+              Cos
+              {isInCart && (
+                <Image
+                  className="is-in-cart"
+                  src="/exclamation-mark.png"
+                  alt="exclamation mark"
+                  width={20}
+                  height={20}
+                />
+              )}
+            </Link>
+          ) : null}
 
-        <p>Login</p>
+        
+      </div>
+      
 
-        </div>
-        </Button>
       <Modal
-        className='modal-z-index'
+        className="modal-z-index"
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        
         <Box
           sx={{
             position: 'absolute',
@@ -147,7 +184,6 @@ const LoginModal = ({ setLogin }:{setLogin:(value:boolean)=>void}) => {
             Conectarea
           </Typography>
           <TextField
-            sx={{ marginBottom: '0' }}
             label="name"
             fullWidth
             variant="outlined"
@@ -156,7 +192,6 @@ const LoginModal = ({ setLogin }:{setLogin:(value:boolean)=>void}) => {
             onChange={nameChange}
           />
           <TextField
-            sx={{ marginBottom: '16px' }}
             label="password"
             fullWidth
             variant="outlined"
@@ -170,9 +205,8 @@ const LoginModal = ({ setLogin }:{setLogin:(value:boolean)=>void}) => {
           </Button>
           <Link className="modal-link" href="/Sign-In">
             <Button sx={{ fontSize: '12px' }} onClick={handleClose}>
-              Inregistrare
+              Înregistrare
             </Button>
-            <br />
           </Link>
           <Button onClick={handleClose}>Close Modal</Button>
         </Box>

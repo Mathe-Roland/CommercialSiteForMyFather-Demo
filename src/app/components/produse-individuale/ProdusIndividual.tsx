@@ -70,7 +70,9 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
 
             }
         };
-        fetchDataAndFilter();
+
+    fetchDataAndFilter();
+
     }, [title]);
     
 
@@ -251,13 +253,14 @@ const handleUserData = async () => {
                 </div>
                 ))
             ) : null}
-                    </div>    
-                    <Image
-                            src={`${img?.length >0 && pictureChange === "" ? img?.[0]?.attributes?.url:pictureChange}`} alt="current selected image from carrousel" 
-                            width={400}
-                            height={400}
-                            className='produs-individual-displayed-image'
-                    />
+                    </div>
+                <Image
+                    width={400}
+                    height={400}
+                    className='produs-individual-displayed-image'
+                    src={img?.length >0 && pictureChange === "" ? img?.[0]?.attributes?.url:pictureChange || "/logosDecorcut.png"}
+                    alt={"current selected image from carrousel"}
+                    />            
                 </div>
                 <div className="produs-individual-text-container">
                     <div className="produs-upper-text">

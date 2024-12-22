@@ -50,6 +50,10 @@
     cursor: pointer;
 }
 
+.userInfo-mobile{
+    color:black;
+}
+
 
 @media screen  and (min-width:750px){
  
