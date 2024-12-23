@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import Link from 'next/link';
 import './navbar.css';
-import Magazin from './navbarComponents/Magazin';
 
 export const navbarData = {
   items: ["Acasa", "Magazin", "Blog", "Despre Noi", "Contact"],
@@ -62,21 +61,10 @@ const Navbar = () => {
                     key={element}
                     onMouseEnter={() => handleMouseEnter(navbarData.items.indexOf(element))}
                     onMouseLeave={handleMouseLeave}
-                  >{
-                    element==="Magazin"?
-                    (<p className='navbar-text'>{element}</p>)
-                    :
-                    (<Link href={element==="Acasa"? "/" : generateUrl(element)}>
+                  >
+                    <Link href={element==="Acasa"? "/" : generateUrl(element)}>
                       <p className='navbar-text'>{element}</p>
                     </Link>
-                    )
-                  }
-                    
-                    {showAcasa && index === 1 ? (
-                      <div className='width100'>
-                        <Magazin />
-                      </div>
-                    ) : null}
                   </div>
                 ))
               : null}

@@ -20,28 +20,32 @@ const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void }) => {
     name: '',
     password: '',
   });
-  const [isInCart, setIsInCart] = useState(() => localStorage.getItem("isInCart") === "true");
+  
+  const [isInCart, setIsInCart] = useState(false);
 
   useEffect(() => {
     const handleStorageChange = () => {
       const cartStatus = localStorage.getItem("isInCart");
       setIsInCart(cartStatus === "true");
     };
-
+  
+    handleStorageChange();
+  
     const handleCustomStorageChange = (event) => {
       if (event.detail?.key === "isInCart") {
         handleStorageChange();
       }
     };
-
+  
     window.addEventListener("storage", handleStorageChange);
     window.addEventListener("localStorageUpdate", handleCustomStorageChange);
-
+  
     return () => {
       window.removeEventListener("storage", handleStorageChange);
       window.removeEventListener("localStorageUpdate", handleCustomStorageChange);
     };
   }, []);
+  
 
   const handleOpen = () => {
     setOpen(true);
@@ -125,23 +129,25 @@ const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void }) => {
 
   return (
     <div>
-      <div className='mobile-container'>
+      <div className='modal-items-container'>
+
       <Button
        onClick={handleOpen}
        className='modal-button'>
         <div className="desktop">
           <Image src={loginIcon} width={40} height={40} alt="loginIcon" />
         </div>
+        <div className='mobile'>
           <p>Login</p>
+        </div>
       </Button>
-
           {!Cookies.get("user") ? (
             <Link className='modal-cos-link'
              href={"/cos"}>
               Cos
               {isInCart && (
                 <Image
-                  className="is-in-cart"
+                  className="modal-exclamation-mark"
                   src="/exclamation-mark.png"
                   alt="exclamation mark"
                   width={20}
@@ -151,9 +157,7 @@ const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void }) => {
             </Link>
           ) : null}
 
-        
-      </div>
-      
+       </div>
 
       <Modal
         className="modal-z-index"
@@ -200,14 +204,16 @@ const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void }) => {
             value={password}
             onChange={passwordChange}
           />
-          <Button sx={{ fontSize: '12px' }} onClick={handleLogIn}>
-            Conectare
-          </Button>
-          <Link className="modal-link" href="/Sign-In">
-            <Button sx={{ fontSize: '12px' }} onClick={handleClose}>
-              Înregistrare
+          <div>
+            <Button sx={{ fontSize: '12px' }} onClick={handleLogIn}>
+              Conectare
             </Button>
-          </Link>
+            <Link className="modal-link" href="/Sign-In">
+              <Button sx={{ fontSize: '12px' }} onClick={handleClose}>
+                Înregistrare
+              </Button>
+            </Link>
+          </div>
           <Button onClick={handleClose}>Close Modal</Button>
         </Box>
       </Modal>

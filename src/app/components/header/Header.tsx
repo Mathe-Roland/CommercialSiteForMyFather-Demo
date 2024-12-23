@@ -32,7 +32,7 @@ const Header = () => {
     return () => {
       window.removeEventListener("storage", handleStorageChange);
       window.removeEventListener("localStorageUpdate", handleCustomStorageChange);
-    };7
+    };
   }, []);
   
 
