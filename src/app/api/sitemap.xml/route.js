@@ -27,7 +27,7 @@ const fetchDynamicPages = async () => {
       </url>
     `).join('') + bloguri.data.data.map(item => `
       <url>
-        <loc>https://www.decorcut.com/blog//blog/${item.id}?title=${item.attributes.title}&description=${item.attributes.shortDescription}</loc>
+        <loc>https://www.decorcut.com/blog/${item.id}?title=${item.attributes.title}&description=${item.attributes.shortDescription}</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
