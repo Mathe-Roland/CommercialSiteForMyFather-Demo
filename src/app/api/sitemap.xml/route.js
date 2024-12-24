@@ -12,17 +12,28 @@ const staticPages = [
 
 const fetchDynamicPages = async () => {
   try {
-    const response = await axios.get(
+    const panoruiTraforate = await axios.get(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates`
     );
-    return response.data.data.map(item => `
+    const bloguri = await axios.get(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/articles`
+    );
+    return panoruiTraforate.data.data.map(item => `
       <url>
-        <loc>https://www.decorcut.com/produse/${item.attributes.title.toLowerCase().split(' ').join('-')}</loc>
+        <loc>https://www.decorcut.com/produse/$${item.id}?title=${item.attributes.title}&description=${item.attributes.description}}</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
       </url>
-    `).join('');
+    `).join('') + bloguri.data.data.map(item => `
+      <url>
+        <loc>https://www.decorcut.com/blog//blog/${item.id}?title=${item.attributes.title}&description=${item.attributes.shortDescription}</loc>
+        <lastmod>${new Date().toISOString()}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+      </url>
+    `).join('')
+    ;
   } catch (error) {
     console.error('Error fetching dynamic pages:', error);
     return ''; 
