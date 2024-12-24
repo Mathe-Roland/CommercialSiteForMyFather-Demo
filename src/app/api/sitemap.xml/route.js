@@ -10,16 +10,15 @@ const staticPages = [
   '/blog'
 ];
 
-
-const noIndexPages = ['/setari/informati-de-baza',"/garantia","/cos",
-  "metode-de-plata","politica-de-cookie-uri","politica-de-retur",
-  "payment-success","termeni-si-conditii","contact","confidentialitate",
+const noIndexPages = ['/setari/informati-de-baza', "/garantia", "/cos",
+  "metode-de-plata", "politica-de-cookie-uri", "politica-de-retur",
+  "payment-success", "termeni-si-conditii", "contact", "confidentialitate",
 ];
 
 const fetchDynamicPages = async () => {
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates`
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforate`
     );
     return response.data.data.map(item => `
       <url>
@@ -47,7 +46,7 @@ export async function GET() {
           <lastmod>${new Date().toISOString()}</lastmod>
           <changefreq>daily</changefreq>
           <priority>0.7</priority>
-          ${isNoIndex ? '<x-robots-tag>noindex</x-robots-tag>' : ''}
+          ${isNoIndex ? '<robots>noindex, nofollow</robots>' : ''}
         </url>
       `;
     }).join('') + dynamicPages;
