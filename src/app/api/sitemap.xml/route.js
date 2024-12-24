@@ -10,15 +10,10 @@ const staticPages = [
   '/blog'
 ];
 
-const noIndexPages = ['/setari/informati-de-baza', "/garantia", "/cos",
-  "metode-de-plata", "politica-de-cookie-uri", "politica-de-retur",
-  "payment-success", "termeni-si-conditii", "contact", "confidentialitate",
-];
-
 const fetchDynamicPages = async () => {
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforate`
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates`
     );
     return response.data.data.map(item => `
       <url>
@@ -39,14 +34,12 @@ export async function GET() {
     const dynamicPages = await fetchDynamicPages();
     
     const allPages = staticPages.map(page => {
-      const isNoIndex = noIndexPages.includes(page);
       return `
         <url>
           <loc>https://www.decorcut.com${page}</loc>
           <lastmod>${new Date().toISOString()}</lastmod>
           <changefreq>daily</changefreq>
           <priority>0.7</priority>
-          ${isNoIndex ? '<robots>noindex, nofollow</robots>' : ''}
         </url>
       `;
     }).join('') + dynamicPages;
