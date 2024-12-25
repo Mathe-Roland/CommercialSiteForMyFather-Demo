@@ -1,13 +1,15 @@
-import * as React from 'react';
+"use client";
+
 import "./ProdusCard.css";
 import Button from '@mui/material/Button';
 import Link from "next/link";
 import Cookies from 'js-cookie';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
+import { useEffect,useState } from "react";
+import Image from 'next/image';
 
 interface ProdusCardProps {
   description: string;
@@ -15,10 +17,24 @@ interface ProdusCardProps {
   image: string;
   disponibil: string;
   price: number;
-  id:number
+  id: number;
 }
 
-const ProdusCard = ({ description, title, image, disponibil, price ,id}: ProdusCardProps) => {
+const ProdusCard = ({ description, title, image, disponibil, price, id }: ProdusCardProps) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile); 
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
   const handleData = () => {
     Cookies.set("description", description, {
       secure: true,
@@ -46,26 +62,38 @@ const ProdusCard = ({ description, title, image, disponibil, price ,id}: ProdusC
     });
   };
 
+  const isHighPriorityImage = 
+    image === "https://res.cloudinary.com/ddrkdrrre/image/upload/v1732733779/Raft_suport_wifi_din_mdf_alb_1_kepavif_6fe4bc39a0.avif";
+
   return (
-    <Card className='produscard-container'
-      onClick={handleData}
-    >
-       <Link
+    <Card className='produscard-container' onClick={handleData}>
+      <Link
         className="ignore"
         href={`/produse/${id}?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`}
       >
- 
         <CardActionArea>
-          <CardMedia
-            className='produs-image'
-            component="img"
-            height="180"
-            width="180"
-            image={image || "/logosDecorcut.png"}
-            alt={title}
-          />
+          {isHighPriorityImage && isMobile ? (
+            <Image
+              className='produs-image'
+              src={image}
+              alt={title}
+              width={180}
+              height={180}
+              priority 
+              placeholder="blur"
+              blurDataURL="/logosDecorcut.png"
+            />
+          ) : (
+            <Image
+              className="produs-image"
+              src={image || "/logosDecorcut.png"}
+              alt={title}
+              height="180"
+              width="180"
+            />
+          )}
           <CardContent>
-          <Typography 
+            <Typography 
               gutterBottom 
               variant="h5" 
               component="div"
@@ -104,8 +132,7 @@ const ProdusCard = ({ description, title, image, disponibil, price ,id}: ProdusC
             Vezi Detalii
           </Button>
         </CardActionArea>
-    </Link>
-
+      </Link>
     </Card>
   );
 };

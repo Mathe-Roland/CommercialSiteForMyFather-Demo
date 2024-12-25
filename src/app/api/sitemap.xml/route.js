@@ -20,14 +20,14 @@ const fetchDynamicPages = async () => {
     );
     return panoruiTraforate.data.data.map(item => `
       <url>
-        <loc>https://www.decorcut.com/produse/${item.id}?title=${item.attributes.title}&amp;description=${item.attributes.description}</loc>
+        <loc>https://www.decorcut.com/produse/${item.id}?title=${encodeURIComponent(item.attributes.title)}&amp;description=${encodeURIComponent(item.attributes.description)}</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
       </url>
     `).join('')+bloguri.data.data.map(item=>`
       <url>
-        <loc>https://www.decorcut.com/blog/${item.id}?title=${item.attributes.title}&amp;description=${item.attributes.shortDescription}</loc>
+        <loc>https://www.decorcut.com/blog/${item.id}?title=${encodeURIComponent(item.attributes.title)}&amp;description=${encodeURIComponent(item.attributes.shortDescription)}</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>

@@ -80,8 +80,8 @@ const Header = () => {
                 onClick={handleShow} 
                 className="hamburger-menu" 
                 alt="hamburger-menu"
-                width={100}
-                height={100}
+                width={28}
+                height={31}
               />
               {show ? (
                 <div className="navbar-dropdown">
