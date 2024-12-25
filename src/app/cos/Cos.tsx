@@ -3,7 +3,7 @@
 import CosCard from "../components/cos/CosCard";
 import "./Cos.css";
 import { useState, useEffect } from "react";
-import { postareComenziNonRegisteredUser , updateProductQuantityForNonRegisteredUser, nonRegisteredUserData, userData, postareComenzi, completeUserData, deleteProductData, updateProductQuantity,deleteNonRegisteredUserProduct } from "../components/asyncOperations/fetchData";
+import { postareComenziNonRegisteredUser , nonRegisteredUserData, userData, postareComenzi, completeUserData, deleteProductData, updateProductQuantity,deleteNonRegisteredUserProduct } from "../components/asyncOperations/fetchData";
 import Button from '@mui/material/Button';
 import Cookies from "js-cookie";
 import { loadStripe } from '@stripe/stripe-js';
@@ -29,72 +29,50 @@ const Cos = () => {
   });
 
   useEffect(() => {
-    const userExistsOrNot = Cookies.get("user") || 0;
-    if (userExistsOrNot !== 0) {
-      const fetchCardListData = async () => {
-        try {
-          const data = await userData();
-          if (data && data.data) {
-            setCardList(data);
-
-            const updatedData = data.data.map(item => {
-              const matchedItem = cardList.data.find(databaseItem => databaseItem.attributes.title === item.attributes.title);
-              if (matchedItem) {
-                item.counting = matchedItem.attributes.quantity || 0;
-              }
-              return item;
-            });
-            setCardList({ data: updatedData });
-
-            let totalSum = 0;
-            updatedData.forEach((element) => {
-              const price = element.attributes.price || 0;
-              const counting = element.counting || 0;
-              totalSum += price * counting;
-            });
-
-            setGrandTotal(totalSum);
-          } else {
-            setCardList({ data: [] });
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      fetchCardListData();
-    } else {
-      const actualUUID = Cookies.get("userUUID");
-      const nonRegisteredUserDataFetch = async () => {
-        const totalNonRegisteredData = await nonRegisteredUserData();
-        const filteredCards = totalNonRegisteredData.data.filter((e) => e.attributes.UniqueIdentifier === actualUUID);
-        if (filteredCards.length > 0) {
-          setCardList({ data: filteredCards });
-
-          const updatedData = filteredCards.map(item => {
-            const matchedItem = cardList.data.find(databaseItem => databaseItem.attributes.title === item.attributes.title);
-            if (matchedItem) {
-              item.counting = matchedItem.attributes.quantity || 0;
-            }
-            return item;
-          });
-          setCardList({ data: updatedData });
-
-          let totalSum = 0;
-          updatedData.forEach((element) => {
-            const price = element.attributes.price || 0;
-            const counting = element.counting || 0;
-            totalSum += price * counting;
-          });
-
-          setGrandTotal(totalSum);
+    const fetchData = async () => {
+      try {
+        const userExistsOrNot = Cookies.get("user") || 0;
+        let data = { data: [] };
+        
+        if (userExistsOrNot !== 0) {
+          data = await userData();
         } else {
-          setCardList({ data: [] });
+          const actualUUID = Cookies.get("userUUID");
+          const totalNonRegisteredData = await nonRegisteredUserData();
+          const filteredCards = totalNonRegisteredData.data.filter(
+            (e) => e.attributes.UniqueIdentifier === actualUUID
+          );
+          data = { data: filteredCards };
         }
-
+  
+        const updatedData = data.data.map((item) => {
+          const counting = item.attributes.quantity || 0;
+          const optiuni = item.attributes.optiuniNormale.length > 0
+            ? item.attributes.optiuniNormale
+            : "original";
+          return {
+            ...item,
+            counting,
+            optiuni,
+          };
+        });
+  
+        setCardList({ data: updatedData });
+  
+        let totalSum = 0;
+        updatedData.forEach((element) => {
+          const price = element.attributes.price || 0;
+          const counting = element.counting || 0;
+          totalSum += price * counting;
+        });
+  
+        setGrandTotal(totalSum);
+      } catch (error) {
+        console.error(error);
       }
-      nonRegisteredUserDataFetch();
-
-    }
+    };
+  
+    fetchData();
   }, []);
   
   useEffect(() => {
@@ -108,6 +86,8 @@ const Cos = () => {
 
       setGrandTotal(totalSum);
     }
+
+    console.log(cardList.data);
 
     if (cardList.data.length === 0) {
       localStorage.removeItem("isInCart");
@@ -136,21 +116,7 @@ const Cos = () => {
 
     } else if (payment === "card") {
       if (username) {
-        const user = await userData();
-        const data = await completeUserData();
-
-        const updatedItems = user?.data?.map(item => ({
-          ...item,
-          attributes: {
-            ...item.attributes,
-            quantity: cardList?.data?.find(cardItem => cardItem.id === item.id)?.counting || item.attributes.quantity
-          }
-        }));
-
-        await Promise.all(updatedItems.map(async (element) => {
-          await updateProductQuantity(element.id, element.attributes.quantity);
-        }));
-
+        
         fetch("/api/checkout_sessions", {
           method: "POST",
           headers: {
@@ -172,23 +138,6 @@ const Cos = () => {
           });
       } else {
 
-        const panouForSpecificUser = await nonRegisteredUserData();
-
-        const UUIDS = Cookies.get("userUUID");
-
-        const panouForNonRegisteredUser = panouForSpecificUser.data.filter((e) => e.attributes.UniqueIdentifier === UUIDS);
-
-        const updatedItems = panouForNonRegisteredUser?.map(item => ({
-          ...item,
-          attributes: {
-            ...item.attributes,
-            quantity: cardList?.data?.find(cardItem => cardItem.id === item.id)?.counting || item.attributes.quantity
-          }
-        }));
-
-        await Promise.all(updatedItems.map(async (element) => {
-          await updateProductQuantityForNonRegisteredUser(element.id, element.attributes.quantity);
-        }));
 
         fetch("/api/checkout_sessions", {
           method: "POST",
@@ -251,38 +200,41 @@ const Cos = () => {
 
 const handleSubmitNonRegisteredUser= async ()=>{
 
-      let nonRegisteredUserDatas=await nonRegisteredUserData();
-
-      let userUUID=Cookies.get("userUUID");
-
-      let currentNonRegisteredUserList=nonRegisteredUserDatas.data.filter((e)=>e.attributes.UniqueIdentifier===userUUID);
+      const userExist= Cookies.get("user") || 0;
 
       let description="";
+  
+      cardList?.data.forEach((element) => {
 
-   currentNonRegisteredUserList?.forEach((element) => {
-      const item = cardList?.data?.find(filteredCardlist => element.attributes.title === filteredCardlist.attributes.title);
-      if (item) {
-        description += `${element.attributes.title} at price ${element.attributes.price} number of items ${item.counting} at size ${element.attributes.optiuniNormale}\n`;
+          description += `${element.attributes.title} at price ${element.attributes.price} RON number of items ${element.counting} at size ${element.optiuni} \n`;
+      });
+  
+      const dataForNonRegisteredUser={
+        name:formData.name,
+        city:formData.city,
+        surname:formData.surname,
+        address:formData.address,
+        email:formData.email,
+        postalCode:parseInt(formData.postalCode),
+        country:formData.country,
+        total:grandTotal,
+        description: description,
+        payment:payment,
       }
-    });
 
-    const dataForNonRegisteredUser={
-      name:formData.name,
-      city:formData.city,
-      surname:formData.surname,
-      address:formData.address,
-      email:formData.email,
-      postalCode:parseInt(formData.postalCode),
-      country:formData.country,
-      total:grandTotal,
-      description: description,
-      payment:payment,
-    }
+      if(userExist){
 
-    await postareComenziNonRegisteredUser(dataForNonRegisteredUser);
+        await postareComenzi(dataForNonRegisteredUser);
+        window.location.href="/payment-success";
 
-    window.location.href="/payment-success";
+      }else{
 
+  
+      await postareComenziNonRegisteredUser(dataForNonRegisteredUser);
+  
+      window.location.href="/payment-success";
+
+      }
   }
 
 
