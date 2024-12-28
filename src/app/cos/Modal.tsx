@@ -31,8 +31,7 @@ const CosModal = ({
       className="modal-z-index"
       open={openModal}
       onClose={handleClose}
-      aria-labelledby="modal title"
-      aria-describedby="modal description"
+      aria-labelledby="modal-title"
     >
       <Box
         sx={{
@@ -47,7 +46,7 @@ const CosModal = ({
           p: 4,
         }}
       >
-        <Typography variant="h5" align="center" gutterBottom>
+        <Typography id="modal-title" variant="h5" align="center" gutterBottom>
           Înregistrare comanda
         </Typography>
         <form onSubmit={handleSubmit}>

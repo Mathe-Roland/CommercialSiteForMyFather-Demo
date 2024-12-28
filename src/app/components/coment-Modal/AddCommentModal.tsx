@@ -46,11 +46,10 @@ const AddCommentModal = ({addComment}) => {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby="modal-title"
       >
         <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, bgcolor: 'background.paper', border: '2px solid #000', boxShadow: 24, p: 4 }}>
-          <Typography sx={{borderBottom:"2px solid lightgray",paddingBottom:"8px"}} id="modal-modal-title" variant="h6" component="h2">
+          <Typography sx={{borderBottom:"2px solid lightgray",paddingBottom:"8px"}} id="modal-title" variant="h6" component="h2">
             Add comment
           </Typography>
           <TextField

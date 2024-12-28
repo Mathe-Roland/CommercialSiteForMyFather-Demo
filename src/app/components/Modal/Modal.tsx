@@ -163,8 +163,7 @@ const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void }) => {
         className="modal-z-index"
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal title"
-        aria-describedby="modal modal description"
+        aria-labelledby="modal-title"
       >
         <Box
           sx={{
@@ -181,7 +180,7 @@ const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void }) => {
         >
           <Typography
             sx={{ borderBottom: '2px solid lightgray', paddingBottom: '8px' }}
-            id="modal-modal-title"
+            id="modal-title"
             variant="h6"
             component="h2"
           >

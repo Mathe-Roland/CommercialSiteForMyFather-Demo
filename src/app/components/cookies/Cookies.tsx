@@ -31,8 +31,7 @@ const ShowCookiesModal = () => {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal title"
-        aria-describedby="modal description"
+        aria-labelledby="modal-title"
       >
         <Box
           sx={{
@@ -53,7 +52,7 @@ const ShowCookiesModal = () => {
               paddingBottom: "8px",
               marginBottom: "16px",
             }}
-            id="modal-modal-title"
+            id="modal-title"
             variant="h6"
             component="h2"
           >
