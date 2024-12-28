@@ -1,4 +1,3 @@
-
 import './layout.css';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
@@ -15,8 +14,6 @@ export const metadata = {
             la masti de calorifer, fiecare produs reflectă măiestria artizanală și durabilitatea lemnului de cea mai înaltă calitate.`,
   };
   
-
-
 export default function RootLayout({ children }) {
 
 

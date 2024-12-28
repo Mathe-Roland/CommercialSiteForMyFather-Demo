@@ -8,7 +8,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
-import { useEffect,useState } from "react";
+import { useMediaQuery } from '@mui/material';
 import Image from 'next/image';
 
 interface ProdusCardProps {
@@ -21,19 +21,8 @@ interface ProdusCardProps {
 }
 
 const ProdusCard = ({ description, title, image, disponibil, price, id }: ProdusCardProps) => {
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile); 
-    return () => {
-      window.removeEventListener('resize', checkMobile);
-    };
-  }, []);
+  const isMobile = useMediaQuery('(max-width:768px)');
 
   const handleData = () => {
     Cookies.set("description", description, {
@@ -103,10 +92,10 @@ const ProdusCard = ({ description, title, image, disponibil, price, id }: Produs
             </Typography>
 
             <Typography
-                variant="body2"
-                className='produs-description'
-              >
-                {description}
+              variant="body2"
+              className='produs-description'
+            >
+              {description}
             </Typography>
 
             <Typography variant="body1" sx={{ color: 'red' }} className='produs-pret'>
