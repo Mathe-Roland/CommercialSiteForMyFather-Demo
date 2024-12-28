@@ -19,8 +19,11 @@ export default function RootLayout({ children }) {
 
   return (
 
-    <html lang="en">
-      <head/>
+    <html lang="ro">
+      <head>
+      <script defer src="https://js.stripe.com/v3/"></script>
+      <script defer src="https://m.stripe.network/"></script>
+      </head>
       <body>
         <Header />
         <Navbar />
