@@ -31,8 +31,8 @@ const CosModal = ({
       className="modal-z-index"
       open={openModal}
       onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
+      aria-labelledby="modal title"
+      aria-describedby="modal description"
     >
       <Box
         sx={{
