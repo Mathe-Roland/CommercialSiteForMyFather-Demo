@@ -12,17 +12,20 @@ import Image from 'next/image';
 import { v4 as uuidv4 } from 'uuid'; 
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import DropDownCustomizat from '../dropdown-marimi/DropDownCustomizat';
+import VopsitRadio from '../DynamicRadioButtons/VopsitRadio/VopsitRadio';
 
 interface ProdusProps{
     img: Array<{ id?: string; attributes: { url: string } }>;
     description:string,
     title:string,
-    price:number,
+    price:number;
+    category:string;
 }
 
 const ITEMS_PER_PAGE=12;
 
-const Produs = ({ img, description, title, price }:ProdusProps) => {
+const Produs = ({ img, description, title, price,category}:ProdusProps) => {
     const [commentList, setCommentList] = useState([]);
     const [username, setUserName] = useState("");
     const [panouId, setPanouId] = useState("");
@@ -33,6 +36,7 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
     const [prices, setPrices] = useState(price);
     const [noPrice,setNoPrice ] = useState("");
     const [ifVopsit, setIfVopsit] = useState(false);
+    const [ifVopsitMascaCalorifer, setIfVopsitMascaCalorifer] = useState(false);
     const [adaugaInCosShow, setAdaugaInCosShow] = useState(false);
     const [pictureChange, setPictureChange] = useState("");
     const [originalPriceWithoutSettings, setOriginalPriceWithoutSettings] = useState(true);
@@ -43,9 +47,37 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
             setNoPrice("Pretul trebuie discutat");
         }else{
             setNoPrice("");
+            setPrices(price);
         }
     },
-    [renderPersonalizare])
+    [renderPersonalizare]);
+
+    const [dropdownValues, setDropdownValues] = useState({
+        lungime: 0,
+        inaltime: 0,
+        adancime: 0
+    });
+    
+    useEffect(() => {
+        if(ifVopsitMascaCalorifer){
+           
+            const initialPrice = price;
+            
+            const totalPrice = Object.values(dropdownValues).reduce((acc, val) => acc + val, initialPrice);
+            const newTotal=totalPrice+(totalPrice*30)/100;
+            setPrices(newTotal);
+        }else{
+            const initialPrice = price;
+            const totalPrice = Object.values(dropdownValues).reduce((acc, val) => acc + val, initialPrice);
+            setPrices(totalPrice);
+        }
+    }, [dropdownValues, price,ifVopsitMascaCalorifer]);
+
+    
+    const updateDropdownValue = (key, value) => {
+        setDropdownValues(prev => ({ ...prev, [key]: value }));
+    };
+
 
     useEffect(() => {
         const fetchDataAndFilter = async () => {
@@ -56,7 +88,6 @@ const Produs = ({ img, description, title, price }:ProdusProps) => {
     
                 if (getUserRelatedData && getUserRelatedData.length > 0) {
                     specificPanou = getUserRelatedData.filter(item => item.attributes.title === title)[0] || null;
-                    console.log(specificPanou);
                     setOriginalPriceWithoutSettings(specificPanou.attributes.original_price_is_or_not);
                     setPanouId(specificPanou.id);
                     if (specificPanou) {
@@ -215,9 +246,9 @@ const handleUserData = async () => {
       };
 
     const handlePrice = (selectedValue) => {
-        if (renderPersonalizare === true) {
+        if (renderPersonalizare === false) {
             
-            return (price * 10) / 100 + price;
+            return price;
         }
         if (selectedValue === "option1") {
             return price * 1;
@@ -231,7 +262,16 @@ const handleUserData = async () => {
     };
 
     const bifa="/bifa.png";
-    
+
+    const handleNevopsit = () => {
+        
+        setIfVopsitMascaCalorifer(false);
+    };
+
+    const handleVopsit = () => {
+        setIfVopsitMascaCalorifer(true);
+        
+    };
 
     return (
         <div className="produs-individual-container">
@@ -268,25 +308,58 @@ const handleUserData = async () => {
                             <h2>{title}</h2>
                         </div>
                         <div className="produs-individual-header">
-                           <p className="produs-individual-pret">{originalPriceWithoutSettings? `${price} RON` : noPrice.length>0 ? noPrice : ifVopsit ? `${prices} RON`: `${handlePrice(selectedValues)} RON`}</p>
+                           <p className="produs-individual-pret">{category?.toLowerCase()==='masca de calorifer'? `${prices} RON`: originalPriceWithoutSettings? `${price} RON` : noPrice.length>0 ? noPrice : ifVopsit ? `${prices} RON`: `${handlePrice(selectedValues)} RON`}</p>
                         </div>
                     </div>
                     <div className="produs-individual-description">
                         {description}
                     </div>
                     <div>
-                    {
-                        originalPriceWithoutSettings ? 
-                        null
-                        :
-                        (<DropdownMui
-                            onChange={setSelectedValues}
-                            render={setRenderPesonalizare}
-                            actualPrice={handlePrice(selectedValues)}
-                            price={setPrices}
-                            vopsit={setIfVopsit}
-                        />)
-                    }
+                        {category?.toLowerCase()==="masca de calorifer" ? 
+                        (<div>
+                            <DropdownMui 
+                                listStart={80}
+                                listEndPoint={160}
+                                listIncrement={20}
+                                specificitati={'Lungime'} 
+                                price={(value) => updateDropdownValue('lungime', value)}
+                                pretIncrementat={100} 
+                            />
+                        
+                            <DropdownMui 
+                                listStart={75}
+                                listEndPoint={100}
+                                listIncrement={5}
+                                specificitati={'Inaltime'}
+                                price={(value) => updateDropdownValue('inaltime', value)}
+                                pretIncrementat={20}  
+                            />
+                        
+                            <DropdownMui 
+                                listStart={15}
+                                listEndPoint={22}
+                                listIncrement={1}
+                                specificitati={'Adancime'} 
+                                price={(value) => updateDropdownValue('adancime', value)}
+                                pretIncrementat={10} 
+                            />
+                            <VopsitRadio handleNevopsit={handleNevopsit} handleVopsit={handleVopsit}/>
+                        </div>
+                        )
+                            :
+                                originalPriceWithoutSettings ? 
+                                null
+                                :
+                                (
+                                <DropDownCustomizat 
+                                    price={setPrices} 
+                                    vopsit={setIfVopsit}
+                                    actualPrice={handlePrice(selectedValues)} 
+                                    render={setRenderPesonalizare}    
+                                    onChange={setSelectedValues}
+                                />)
+                            }
+
                     </div>
                     <Button
                         variant="contained"

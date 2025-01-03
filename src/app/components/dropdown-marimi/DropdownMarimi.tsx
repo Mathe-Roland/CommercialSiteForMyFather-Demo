@@ -2,90 +2,62 @@ import React, { useState, useEffect } from 'react';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import "./DropdownMarimi.css";
 
-const DropdownMui = ({ onChange, render, actualPrice, price, vopsit }) => {
-    const [selectedValue, setSelectedValue] = useState('option1');
-    const [personalizare, setPersonalizare] = useState(false);
-    const [textareaValue, setTextareaValue] = useState("Adauga o mesaj de personalizare si te vom contacta noi");
-    const [vopsea,setVopsea]=useState(false);
+interface dropDownMui {
+    listStart: number;
+    listEndPoint: number;
+    listIncrement: number;
+    specificitati:string;
+    price:(dynamicPrice:number)=>void;
+    pretIncrementat:number;
+}
 
-    const handleNevopsit = () => {
-        vopsit(false);
-        setVopsea(true);
-        let newPrice = actualPrice - (actualPrice * 30) / 100;
-        price(newPrice);
-    };
+const DropdownMui = ({listStart,listEndPoint,listIncrement,specificitati,pretIncrementat,price}:dropDownMui) => {
+    const [selectedValue, setSelectedValue] = useState("");
+    
+    let list=[];
+    let priceList=[];
 
-    const handleVopsit = () => {
-        setVopsea(true);
-        vopsit(true);
-        let newPrice = actualPrice + (actualPrice * 30) / 100;
-        price(newPrice);
-    };
+
+    for(let i=listStart;i<=listEndPoint;i+=listIncrement){
+        list.push(i);
+    }
+
+    let pretFinal=0;
+
+    for(let i=0;i<list.length;i++){
+        if(i===0){
+            priceList.push(i)
+        }else{
+            
+            pretFinal+=pretIncrementat;
+            priceList.push(pretFinal);
+        }
+    }
+    
 
     const handleChange = (event) => {
         const newValue = event.target.value;
         setSelectedValue(newValue);
-        onChange(newValue);
     };
 
     useEffect(() => {
+    setSelectedValue(list[0].toString());
+    price(0);
+    }, []);
 
-        if(vopsea){
-            let newPrice=actualPrice+actualPrice*30/100;
-            price(newPrice);
+    useEffect(() => {
+        if (selectedValue !== "") {
+            const dynamicPrice = priceList[list.indexOf(parseInt(selectedValue))];
+            if (dynamicPrice !== undefined) {
+                price(dynamicPrice);
+            }
         }
-
-        onChange(selectedValue); 
     }, [selectedValue]);
-
+    
     return (
-        <div className='dropdownMarimi'>
-            <div className='personalizareSIOptiuniNormaleContainer'>
-
-            <div className='optiuni-container'>
-                
-                <label htmlFor='selectPersonalizare1'>Personalizare</label>
-                <input 
-                    onClick={() => {
-                        setPersonalizare(true);
-                        render(true);
-                    }} 
-                    className='personalizare' 
-                    name="personalizare" 
-                    type='radio' 
-                    id="selectPersonalizare1" 
-                />
-            </div>
-            <div className='optiuni-container'>
-                <label htmlFor='selectPersonalizare2'>Optiuni</label>
-                <input 
-                    onClick={() => {
-                        setPersonalizare(false);
-                        render(false);
-                    }} 
-                    name="personalizare" 
-                    type='radio' 
-                    id="selectPersonalizare2" 
-                />
-            </div>
-                
-            </div>
-
-            {personalizare ? (
-                <textarea 
-                    value={textareaValue}
-                    onChange={(e) => {
-                        setTextareaValue(e.target.value);
-                        onChange(e.target.value);
-                    }}
-                    className="form-control"
-                    rows={5}
-                    style={{ marginTop: "12px", width: "50%", maxWidth: "300px" }}
-                />
-            ) : (
+        <div className='dropdownMarimi'>            
                 <div className='dropdownMarimi'>
-                    <p>Marime:</p>
-                    <p>Choose an option from the dropdown:</p>
+                    <p>{specificitati}: </p>
                     <FormControl fullWidth style={{ minWidth: '150px',maxWidth:"25%" }}>
                         <InputLabel id="demo-simple-select-label">Select an option</InputLabel>
                         <Select
@@ -94,40 +66,13 @@ const DropdownMui = ({ onChange, render, actualPrice, price, vopsit }) => {
                             value={selectedValue}
                             label="Select an option"
                             onChange={handleChange}
-                        >
-                            <MenuItem value="option1">48/50</MenuItem>
-                            <MenuItem value="option2">48/100</MenuItem>
-                            <MenuItem value="option3">48/150</MenuItem>
+                            >
+                            {
+                                list.map(e=>(<MenuItem key={e} value={e} >{e}</MenuItem>))
+                            }
                         </Select>
                     </FormControl>
                 </div>
-            )}
-            <div className='personalizareSIOptiuniNormaleContainer'>
-
-
-            <div className='optiuni-container'>
-
-                <label htmlFor='Vopsit'>Vopsit</label>
-                <input 
-                    onClick={handleVopsit} 
-                    className='vopsit' 
-                    name="vopsit" 
-                    type='radio' 
-                    id="Vopsit" 
-                />
-            </div>
-            <div className='optiuni-container'>
-                <label htmlFor='Nevopsit'>Nevopsit</label>
-                <input 
-                    onClick={handleNevopsit}
-                    name="vopsit" 
-                    type='radio'
-                    id="Nevopsit" 
-                />
-
-            </div>
-
-            </div>
         </div>
     );
 };

@@ -44,6 +44,7 @@ const ProdusCC = () => {
         title={cardList[0]?.attributes?.title || "Default Title"}
         description={cardList[0]?.attributes?.description || "Default Description"}
         price={cardList[0]?.attributes?.price}
+        category={cardList[0].attributes.category}
       />
     </div>
   );

@@ -6,8 +6,9 @@ import Cookies from 'js-cookie';
 import ShowCookiesModal from './components/cookies/Cookies';
 
 
+
 export const metadata = {
-    title: 'Mostrik Dreamland | Panouri Decorative | Panou ornamental | Panou MDF',
+    title: 'Mostrik Dreamland | Panouri Decorative | Panou ornamental',
     description: `Descoperiți o gamă largă de produse traforate din lemn si mdf, 
             fiecare piesă fiind realizată cu atenție la detalii și o pasiune pentru design. 
             De la panouri decorative care adaugă un aer sofisticat oricărei încăperi, 
