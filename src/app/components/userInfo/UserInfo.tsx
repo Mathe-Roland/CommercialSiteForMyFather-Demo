@@ -2,7 +2,6 @@
 
 import "./UserInfo.css";
 import React, { useState, useEffect } from "react";
-import { imageFiles } from "../asyncOperations/fetchData";
 import Link from "next/link";
 import Cookies from 'js-cookie';
 import Image from "next/image";
@@ -17,30 +16,39 @@ const UserInfo = ({ setLogin }) => {
         });
     
         const [showUserInfo, setShowUserInfo] = useState(false);
-    
-        useEffect(() => {
-            const fetchData = async () => {
-                try {
-                    const data = await imageFiles();
-                    return data;
-                } catch (error) {
-                    console.error("Error fetching image data:", error);
-                    return [];
-                }
-            };
-    
-            const getData = async () => {
-                const result = await fetchData();
-                const pictures = result || [];
+        const [isInCart,setIsInCart] = useState(false);
+
+       useEffect(() => {
+          const handleStorageChange = () => {
+            const cartStatus = localStorage.getItem("isInCart");
+            setIsInCart(cartStatus === "true");
+          };
+        
+          handleStorageChange();
+        
+          const handleCustomStorageChange = (event) => {
+            if (event.detail?.key === "isInCart") {
+              handleStorageChange();
+            }
+          };
+        
+          window.addEventListener("storage", handleStorageChange);
+          window.addEventListener("localStorageUpdate", handleCustomStorageChange);
+        
+          return () => {
+            window.removeEventListener("storage", handleStorageChange);
+            window.removeEventListener("localStorageUpdate", handleCustomStorageChange);
+          };
+        }, []);
+        
+        useEffect(() => {           
                 setPicture({
-                    setariPicture: pictures.find((element) => element.name === "settings-icon.png") || null,
-                    comenziPlasate: pictures.find((element) => element.name === "order.png") || null,
-                    cos: pictures.find((element) => element.name === "cos.png") || null,
-                    loggoutPicture: pictures.find((element) => element.name === "out.png") || null,
+                    setariPicture: "/settings-icon.png",
+                    comenziPlasate: "/order.png",
+                    cos: "/cos-de-cumparaturi.png",
+                    loggoutPicture: "/out.png",
                 });
-            };
     
-            getData();
         }, []);
     
 
@@ -69,17 +77,17 @@ const UserInfo = ({ setLogin }) => {
     
         const loginItems = [
             {
-                picture: pictures.setariPicture || null,
+                picture: "/settings-icon.png",
                 text: "Setari",
                 link: "/setari/informati-de-baza",
             },
             {
-                picture: pictures.comenziPlasate || null,
+                picture: "/order.png",
                 text: "Comenzi",
                 link: "/comenzi-plasate",
             },
             {
-                picture: pictures.loggoutPicture || null,
+                picture: "/out.png",
                 text: "Sign Out",
                 link: "#"
             }
@@ -98,7 +106,7 @@ const UserInfo = ({ setLogin }) => {
             },
             {
                 picture: pictures.cos || "",
-                text: "cos",
+                text: "Cos",
                 link: "/cos"
             },
             {
@@ -116,48 +124,72 @@ const UserInfo = ({ setLogin }) => {
 
                 <div className="userInfo-mobile">
 
-    {Cookies.get("user") 
-    ? 
-        (loginItemsFPhone.map((item, index) => (
-          <div key={index}>
-            {item.text === "Sign Out" ? (
-              <div onClick={handleLoggout} className="sign-out-item">
-                <div className="setari-felxbox">
-                  <div className="userInfo-pictures">
-                    <Image
-                      className="setari-picture"
-                      alt={item.text}
-                      src={item.picture ? item.picture.url : "/cancel.webp"}
-                      width={40}
-                      height={40}
-                    />
-                  </div>
-                  <p className="setari">
-                    {item.text}
-                  </p>
-                </div>
-              </div>
-            ) : (
-        <Link href={item.link} passHref>
-            <div className="setari-felxbox">
+                {Cookies.get("user") ? (
+  loginItemsFPhone.map((item, index) => (
+    <div key={index}>
+      {item.text === "Sign Out" ? (
+        <div onClick={handleLoggout} className="sign-out-item">
+          <div className="mobile-flexbox">
             <div className="userInfo-pictures">
-            <Image
+              <Image
                 className="setari-picture"
                 alt={item.text}
-                src={item.picture ? item.picture.url : "/cancel.webp"}
+                src={item.picture ? item.picture : "/cancel.webp"}
                 width={40}
                 height={40}
-            />
+              />
             </div>
-            <p className="setari">
-            {item.text}
-                </p>
-            </div>
-            </Link>
-        )}
+            <p className="setari">{item.text}</p>
+          </div>
         </div>
-        ))
-        ) : null}
+      ) : item.text === "Cos" ? (
+        <div className="cos-item cos-item-position">
+          <Link href={item.link} passHref>
+            <div className="mobile-flexbox">
+              <div className="userInfo-pictures">
+                <Image
+                  className="setari-picture"
+                  alt={item.text}
+                  src={item.picture ? item.picture: "/cancel.webp"}
+                  width={40}
+                  height={40}
+                />
+              </div>
+              <p className="setari">{item.text}</p>
+            </div>
+          </Link>
+                {isInCart ?  
+                  (<Image
+                  className="cart-position"
+                  src={"/exclamation-mark.png"}
+                  alt="exclamation mark"
+                  width={20}
+                  height={20}
+                  />)
+                  :
+                  null
+                }  
+        </div>
+      ) : (
+        <Link href={item.link} passHref>
+          <div className="mobile-flexbox">
+            <div className="userInfo-pictures">
+              <Image
+                className="setari-picture"
+                alt={item.text}
+                src={item.picture ? item.picture : "/cancel.webp"}
+                width={40}
+                height={40}
+              />
+            </div>
+            <p className="setari">{item.text}</p>
+          </div>
+        </Link>
+      )}
+    </div>
+  ))
+) : null}
+
 
 
                 </div>
@@ -184,7 +216,7 @@ const UserInfo = ({ setLogin }) => {
                                                 <Image
                                                     className="setari-picture"
                                                     alt={item.text}
-                                                    src={item.picture ? item.picture.url : "/cancel.webp"}
+                                                    src={item.picture ? item.picture : "/cancel.webp"}
                                                     width={40} 
                                                     height={40}
                                                 />
@@ -201,7 +233,7 @@ const UserInfo = ({ setLogin }) => {
                                                 <Image
                                                     className="setari-picture"
                                                     alt={item.text}
-                                                    src={item.picture ? item.picture.url : "/cancel.webp"}
+                                                    src={item.picture ? item.picture : "/cancel.webp"}
                                                     width={40} 
                                                     height={40}
                                                 />

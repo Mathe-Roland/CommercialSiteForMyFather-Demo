@@ -31,13 +31,14 @@
     flex-direction: column;
     margin: 1.25rem auto;
     gap: 1.25rem;
+    width: 100%;
 }
 
 
 .produs-individual-text-container{
     display: flex;
     flex-direction: column;
-    width:80%;
+    width:50%;
     gap: 1.25rem;
     margin-left: 1.25rem;
 }
@@ -71,15 +72,10 @@
 
 .produs-individual-pret{
     display: flex;
-    justify-content: flex-end;
     color :red;
-    font-size: 1.5rem;
+    font-size: 3.125rem;
 }
 
-.produs-upper-text{
-    display: flex;
-
-}
 
 .imageContainer {
     width: 6.25rem;
@@ -102,13 +98,15 @@
     border: 0.0625rem solid black;
 }
 
-    .produs-individual-images{
+.produs-individual-images{
         display: flex;
         flex-direction: column-reverse;
         gap: 10px;
     }
 
-
+.produs-individual-description{
+        font-size: 1.25rem;
+    }
     
 .produs-individual-displayed-image {
         width: 100%; 
@@ -120,12 +118,24 @@
   }
 
 @media screen and (min-width:600px) {
- 
+    
+    
+    .produs-upper-text{
+        display: flex;
+
+    }
+
+    .produs-individual-pret{
+        display: flex;
+        justify-content: flex-end;
+        color :red;
+        font-size: 3.125rem;
+}
     
     .produs-individual-images{
         display: flex;
         flex-direction: row;
-        width: 100%;
+        width: 50%;
         gap: 0.625rem;
     }
 
@@ -155,7 +165,4 @@
 
     }
 
-    .produs-individual-images{
-        width: 50%;
-    }
 }

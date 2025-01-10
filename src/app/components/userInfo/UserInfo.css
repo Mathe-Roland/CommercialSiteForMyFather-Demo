@@ -1,5 +1,7 @@
 .userInfo-container {
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .userInfo-info {
@@ -38,7 +40,12 @@
 .setari-felxbox {
     display: flex;
     align-items: center;
-    padding: 0.625rem; 
+    padding: 0.625rem;
+}
+
+.mobile-flexbox{
+    display: flex;
+    align-items: center;
 }
 
 .setari-felxbox:hover {
@@ -54,6 +61,15 @@
     color:black;
 }
 
+.cos-item-position{
+    position: relative;
+}
+
+.cart-position{
+    position: absolute;
+    top:0;
+    left: 0;
+}
 
 @media screen  and (min-width:750px){
  

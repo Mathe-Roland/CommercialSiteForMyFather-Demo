@@ -1,19 +1,17 @@
 
 User-agent: *
-Disallow: /setari/informati-de-baza  # Block access to 'informati-de-baza'
-Disallow: /garantia  # Block access to 'garantia'
-Disallow: /cos  # Block access to shopping cart page
-Disallow: /metode-de-plata  # Block access to 'metode-de-plata'
-Disallow: /politica-de-cookie-uri  # Block access to cookie policy page
-Disallow: /politica-de-retur  # Block access to return policy page
-Disallow: /payment-success  # Block access to payment success page
-Disallow: /termeni-si-conditii  # Block access to terms and conditions page
-Disallow: /contact  # Block access to contact page
-Disallow: /confidentialitate  # Block access to privacy policy page
+Disallow: /setari/informati-de-baza
+Disallow: /garantia
+Disallow: /cos
+Disallow: /metode-de-plata
+Disallow: /politica-de-cookie-uri
+Disallow: /politica-de-retur
+Disallow: /payment-success
+Disallow: /termeni-si-conditii
+Disallow: /contact
+Disallow: /confidentialitate 
 
 Allow: /
 
 
-Sitemap: https://www.decorcut.com/api/sitemap.xml
-
-Host: https://www.decorcut.com
+Sitemap: https://www.decorcut.ro/api/sitemap.xml
