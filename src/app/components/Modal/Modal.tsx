@@ -166,23 +166,13 @@ const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void }) => {
         aria-labelledby="modal-title"
       >
         <Box
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: 400,
-            bgcolor: 'background.paper',
-            border: '2px solid #000',
-            boxShadow: 24,
-            p: 4,
-          }}
+          className="modal-box"
         >
           <Typography
-            sx={{ borderBottom: '2px solid lightgray', paddingBottom: '8px' }}
             id="modal-title"
             variant="h6"
             component="h2"
+            className='modal-title'
           >
             Conectarea
           </Typography>
@@ -204,11 +194,11 @@ const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void }) => {
             onChange={passwordChange}
           />
           <div>
-            <Button sx={{ fontSize: '12px' }} onClick={handleLogIn}>
+            <Button className='modal-button' onClick={handleLogIn}>
               Conectare
             </Button>
             <Link className="modal-link" href="/Sign-In">
-              <Button sx={{ fontSize: '12px' }} onClick={handleClose}>
+              <Button className='modal-button' onClick={handleClose}>
                 Înregistrare
               </Button>
             </Link>

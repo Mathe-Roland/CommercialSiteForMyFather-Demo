@@ -65,7 +65,7 @@ const SignIn = () => {
   };
 
   return (
-    <Container maxWidth="sm" style={{ marginTop: '40px' }}>
+    <Container maxWidth="sm" className='inregistrare-container' >
       <Typography variant="h5" align="center" gutterBottom>
         Înregistrare
       </Typography>
@@ -163,13 +163,13 @@ const SignIn = () => {
               onChange={handleChange('city')}
             />
           </Grid>
-          <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
+          <Grid item xs={12} className='gridItems'>
               <Button type="submit" variant="contained" color="primary">
                   Submit
               </Button>
           </Grid>
           {formData.err ? (
-              <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
+              <Grid item xs={12} className='gridItems'>
                   <Typography color="error">{formData.err}</Typography>
               </Grid>
           ) : null}

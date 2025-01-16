@@ -126,7 +126,7 @@ const SchimbareParola = () => {
                 </Link>
             </div>
 
-            <Container maxWidth="sm" style={{ marginTop: '40px' }}>
+            <Container maxWidth="sm" className='schimbare-parola-container'>
                 <Typography variant="h5" align="center" gutterBottom>
                     Schimbare parolă
                 </Typography>
@@ -163,7 +163,7 @@ const SchimbareParola = () => {
                             />
                             <p className={`${textMessage !== "" ? "red" : null}`}>{textMessage}</p>
                         </Grid>
-                        <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
+                        <Grid item xs={12}  className='schimbare-parola-submit-container' >
                             <Button variant="contained" color="primary" onClick={handleSubmit}>
                                 Submit
                             </Button>

@@ -117,6 +117,21 @@
 
   }
 
+
+.custom-button {
+    background-color: green;
+    margin-top: 50px;
+    width: 50%;
+    height: 50px;
+    max-width: 300px;
+    margin-bottom: 100px;
+  }
+  
+.custom-button:hover {
+    background-color: red;
+  }
+  
+
 @media screen and (min-width:600px) {
     
     

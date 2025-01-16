@@ -23,6 +23,11 @@
 .produs-pret{
   font-size: 1.125rem;
   text-align: center;
+  color:red
+}
+
+.text-secondary {
+  color: var(--text-secondary, #6c757d);
 }
 
 .produs-disponibil{
@@ -36,6 +41,19 @@
   overflow: hidden;
   margin: auto;
   color: rgba(0, 0, 0, 0.6);
+}
+
+.custom-button {
+    background-color: green;
+    margin-top: 50px;
+    width: 50%;
+    height: 50px;
+    max-width: 300px;
+    margin-bottom: 100px;
+}
+
+.custom-button:hover {
+  background-color: red;
 }
 
 

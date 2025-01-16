@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import "./ProdusIndividual.css";
 import Button from '@mui/material/Button';
-import {imageNonREgisteredUser,nonRegisteredUserData,updateNonRegisteredUserData,postNonRegisteredUserComanda,fetchPanouriData, fetchPanouriCommentsPerPanouId, updateProductData, userData, userRelatedComments, userIds, imageFiles, userRelatedData } from "../asyncOperations/fetchData";
+import {imageNonREgisteredUser,nonRegisteredUserData,updateNonRegisteredUserData,postNonRegisteredUserComanda,fetchPanouriData, fetchPanouriCommentsPerPanouId, updateProductData, userData, userRelatedComments, userIds, imageFiles, userRelatedData, updateProductDataNonRegisteredUserOriginalSetting, updateProductDataOriginalSetting } from "../asyncOperations/fetchData";
 import Comments from "../comments/Comments";
 import AddCommentModal from "../coment-Modal/AddCommentModal";
 import DropdownMui from "../dropdown-marimi/DropdownMarimi";
@@ -152,10 +152,16 @@ const handleUserData = async () => {
             
             if (!useros) {
                 const nonregisteredData = await nonRegisteredUserData();
-    
-                const filteredSpecificPanouNonRegisteredUser = nonregisteredData.data.filter(element => element.attributes.title === title);
+                
+                const userUUID=Cookies.get("userUUID");
 
-                const filteredOptiuniNonRegistered = filteredSpecificPanouNonRegisteredUser.filter(element => element.attributes.optiuniNormale === selectedValues);
+                
+                const filteredSpecificPanouNonRegisteredUser = nonregisteredData.data.filter(element => element.attributes.UniqueIdentifier === userUUID);
+                
+
+                const filteredSpecificPanouNonRegisteredUserByTitle =filteredSpecificPanouNonRegisteredUser.length>0 ?  filteredSpecificPanouNonRegisteredUser.filter(element => element.attributes.title === title):[];
+
+                const filteredOptiuniNonRegistered = filteredSpecificPanouNonRegisteredUserByTitle.filter(element => element.attributes.optiuniNormale === selectedValues);
 
                 const vopsit=filteredOptiuniNonRegistered.filter(e=>e.attributes.vopsit===true);
                 const nevopsit=filteredOptiuniNonRegistered.filter(e=>e.attributes.vopsit===false);
@@ -174,9 +180,17 @@ const handleUserData = async () => {
                     vopsit:ifVopsit,
                 };
 
+                const originalPriceWithoutSettingsObj={
+                    price:price,
+                };
 
+                console.log(originalPriceWithoutSettings,filteredSpecificPanouNonRegisteredUserByTitle.length>0);
 
-                if(vopsit.length>0 && ifVopsit===true){
+                if(originalPriceWithoutSettings && filteredSpecificPanouNonRegisteredUserByTitle.length>0){
+
+                    await updateProductDataNonRegisteredUserOriginalSetting(filteredSpecificPanouNonRegisteredUserByTitle[0].id,filteredSpecificPanouNonRegisteredUserByTitle[0].attributes.quantity+1,originalPriceWithoutSettingsObj);
+
+                }else if(vopsit.length>0 && ifVopsit===true){
 
 
                     await updateNonRegisteredUserData(vopsit[0].id,vopsit[0].attributes.quantity + 1, newDatas);
@@ -212,9 +226,15 @@ const handleUserData = async () => {
                     optiuninormale: selectedValues
                 };
 
+                const originalPriceWithoutSettingsObj={
+                    price:price,
+                };
 
 
-                if(filteredVopsit.length>0 && ifVopsit===true){
+                if(originalPriceWithoutSettings && filteredSpecificPanouUserRelatedData.length>0){
+
+                    await updateProductDataOriginalSetting(filteredSpecificPanouUserRelatedData[0].id,filteredSpecificPanouUserRelatedData[0].attributes.quantity+1,originalPriceWithoutSettingsObj)
+                }else if(filteredVopsit.length>0 && ifVopsit===true){
 
 
                     await updateProductData(filteredVopsit[0].id, filteredVopsit[0].attributes.quantity + 1, newDatas);
@@ -364,17 +384,7 @@ const handleUserData = async () => {
                     <Button
                         variant="contained"
                         onClick={handleUserData}
-                        sx={{
-                            backgroundColor: "green",
-                            marginTop: "50px",
-                            width: "50%",
-                            height:"50px",
-                            maxWidth: "300px",
-                            marginBottom: "100px",
-                            "&:hover": {
-                                backgroundColor: "red"
-                            }
-                        }}
+                        className='custom-button'
                     >
                         Adauga in cos
                     {adaugaInCosShow ? (<div>

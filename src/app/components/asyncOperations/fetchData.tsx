@@ -506,6 +506,62 @@ export const userData = async () => {
     }
   };
 
+  
+  export const updateProductDataOriginalSetting = async (productId:string,quantity:number,data:dataForUsers) => {
+    const token = Cookies.get("token");
+  
+  
+
+    const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouritraforates/${productId}`;
+  
+
+    const headers = {
+      "Content-type": "application/json; charset=UTF-8",
+      "Authorization": `Bearer ${token}`,
+    };
+    
+    axios
+      .put(
+        url,
+        {
+          data: {
+            price:data.price,
+            quantity:quantity
+          },
+        },
+        { headers: headers }
+      )
+      .then((response) => {
+      })
+      .catch((error) => {
+      });
+  };
+  
+export const updateProductDataNonRegisteredUserOriginalSetting = async (productId :string,quantity:number,data:dataForUsers) => {
+
+  const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforate-non-registered-users/${productId}`;
+
+
+    const headers = {
+      "Content-type": "application/json; charset=UTF-8",
+    };
+  
+    axios
+      .put(
+       url,
+        {
+          data: {
+            price:data.price,
+            quantity:quantity,
+        },
+      },
+      { headers: headers }
+    )
+    .then((response) => {
+    })
+    .catch((error) => {
+    });
+};
 
 
   export const updateProductData = async (productId:string,quantity:number,data:dataForUsers) => {

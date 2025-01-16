@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { TextField } from '@mui/material';
 import "./Modal.css";
-
+import "CommentModal.css";
 
 
 
@@ -48,12 +48,13 @@ const AddCommentModal = ({addComment}) => {
         onClose={handleClose}
         aria-labelledby="modal-title"
       >
-        <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, bgcolor: 'background.paper', border: '2px solid #000', boxShadow: 24, p: 4 }}>
-          <Typography sx={{borderBottom:"2px solid lightgray",paddingBottom:"8px"}} id="modal-title" variant="h6" component="h2">
+        <Box className="centered-box">
+          <Typography
+          className='bottom-border' 
+           id="modal-title" variant="h6" component="h2">
             Add comment
           </Typography>
           <TextField
-              sx={{ marginBottom: "0", height: "140px" }}
               label="text"
               rows={4}
               multiline
@@ -61,6 +62,7 @@ const AddCommentModal = ({addComment}) => {
               variant="outlined"
               type="text"
               margin="normal"
+              className='custom-textfield'
               value={comment.message}
               onChange={(e) => setComment({ ...comment, message: e.target.value })}
             />

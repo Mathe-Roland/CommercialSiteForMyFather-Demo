@@ -1,0 +1,10 @@
+
+.inregistrare-container{
+    margin-top: 40px;
+}
+
+
+.gridItems{
+    display: flex;
+    justify-content: center;
+}

@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import { TextField } from '@mui/material';
 import "./Modal.css";
 import { userRelatedCommentsPluginUpdate} from '../asyncOperations/fetchData';
+import "CommentModal.css"
 
 
 const CommentModal = (props) => {
@@ -39,13 +40,15 @@ const CommentModal = (props) => {
         onClose={handleClose}
         aria-labelledby="modal-title"
       >
-        <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, bgcolor: 'background.paper', border: '2px solid #000', boxShadow: 24, p: 4 }}>
-          <Typography sx={{borderBottom:"2px solid lightgray",paddingBottom:"8px"}} id="modal-title" variant="h6" component="h2">
+        <Box 
+        className="centered-box"
+        >
+          <Typography
+           className='bottom-border' 
+           id="modal-title" variant="h6" component="h2">
             Change comment
           </Typography>
           <TextField
-
-          sx={{marginBottom:"0",height:"140px"}}
           label="text"
           rows={4}
           multiline
@@ -53,6 +56,7 @@ const CommentModal = (props) => {
           variant='outlined'
           type='text'
           margin='normal'
+          className="custom-textfield"
           value={comment}
           onChange={(e)=>setComment(e.target.value)}>
 

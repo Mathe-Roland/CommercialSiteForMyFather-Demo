@@ -24,6 +24,15 @@
     margin-top: 1.25rem;
 }
 
+.schimbare-parola-container{
+    margin-top: 40px;
+}
+
+.schimbare-parola-submit-container{
+    display: flex;
+    justify-content: center;
+}
+
 .red{
     color: red;
 }

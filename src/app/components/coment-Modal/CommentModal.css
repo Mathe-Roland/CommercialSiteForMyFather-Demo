@@ -1,0 +1,21 @@
+.custom-textfield {
+    margin-bottom: 0;
+    height: 140px;
+  }
+
+.centered-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: var(--background-paper, #fff); 
+    border: 2px solid #000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06); 
+    padding: 16px;
+  }
+
+.bottom-border {
+    border-bottom: 2px solid lightgray;
+    padding-bottom: 8px;
+}
