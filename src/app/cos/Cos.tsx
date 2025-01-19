@@ -285,14 +285,7 @@ const handleSubmitNonRegisteredUser= async ()=>{
             <Button
               onClick={handleComanda}
               variant="contained"
-              sx={{
-                backgroundColor: "black",
-                marginTop: "auto",
-                marginBottom: "100px",
-                "&:hover": {
-                  backgroundColor: "red"
-                }
-              }}
+              className="custom-button"
             >
               Trimite comanda
             </Button>

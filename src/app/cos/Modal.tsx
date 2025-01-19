@@ -1,5 +1,5 @@
 import { Modal, Box, Typography, TextField, Grid, Button } from "@mui/material";
-
+import "./Modal.css";
 
 type CosModalProps = {
   openModal: boolean;
@@ -34,17 +34,7 @@ const CosModal = ({
       aria-labelledby="modal-title"
     >
       <Box
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: 400,
-          bgcolor: "background.paper",
-          border: "2px solid #000",
-          boxShadow: 24,
-          p: 4,
-        }}
+        className="modal-box"
       >
         <Typography id="modal-title" variant="h5" align="center" gutterBottom>
           Înregistrare comanda
@@ -127,18 +117,16 @@ const CosModal = ({
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{
-                  mt: 2,
-                  backgroundColor: "black",
-                  "&:hover": { backgroundColor: "red" },
-                }}
+                className="button-styles"
               >
                 Trimite comanda
               </Button>
             </Grid>
           </Grid>
         </form>
-        <Button onClick={handleClose} sx={{ mt: 2 }}>
+        <Button onClick={handleClose}
+        className="margin-top-2"
+        >
           Închide
         </Button>
       </Box>

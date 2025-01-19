@@ -130,7 +130,7 @@ const Setari = () => {
                 </Link>
             </div>
 
-            <Container maxWidth="sm" style={{ marginTop: '40px' }}>
+            <Container maxWidth="sm" className='container-informatii-de-baza'>
                 <Typography variant="h5" align="center" gutterBottom>
                     Date facturare
                 </Typography>
@@ -208,7 +208,9 @@ const Setari = () => {
                                 onChange={handleChange('city')}
                             />
                         </Grid>
-                        <Grid item xs={12} sx={{ textAlign: "center" }}>
+                        <Grid item xs={12} 
+                        className='submit-button-container'
+                        >
                             <Button
                                 variant="contained"
                                 color="primary"

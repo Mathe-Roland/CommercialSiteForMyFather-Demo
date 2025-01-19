@@ -34,24 +34,9 @@ const ShowCookiesModal = () => {
         aria-labelledby="modal-title"
       >
         <Box
-          sx={{
-            position: "fixed",
-            bottom: 0,
-            left: 0,
-            width: "100%",
-            bgcolor: "background.paper",
-            borderTop: "2px solid #000",
-            boxShadow: 24,
-            p: 4,
-            zIndex: 1300,
-          }}
+          className="fixed-footer"
         >
           <Typography
-            sx={{
-              borderBottom: "2px solid lightgray",
-              paddingBottom: "8px",
-              marginBottom: "16px",
-            }}
             id="modal-title"
             variant="h6"
             component="h2"
@@ -62,7 +47,6 @@ const ShowCookiesModal = () => {
             id="modal-modal-description"
             variant="body1"
             component="div"
-            sx={{ marginBottom: "16px" }}
           >
             La decorcut.com, utilizăm cookie-uri pentru a asigura funcționarea
             optimă a site-ului, pentru a îmbunătăți experiența utilizatorilor și
@@ -75,14 +59,7 @@ const ShowCookiesModal = () => {
             <Button
               variant="contained"
               color="primary"
-              sx={{
-                backgroundColor: "green",
-                textDecoration: "none",
-                margin: "10px",
-                "&:hover": {
-                  backgroundColor: "red",
-                },
-              }}
+              className="essential-cookies-btn"
               onClick={handleClose}
             >
               Folosesc doar cookie-uri esențiale
@@ -90,14 +67,7 @@ const ShowCookiesModal = () => {
             <Button
               variant="contained"
               color="primary"
-              sx={{
-                backgroundColor: "green",
-                textDecoration: "none",
-                margin: "10px",
-                "&:hover": {
-                  backgroundColor: "red",
-                },
-              }}
+              className="essential-cookies-btn"
               onClick={handleClose}
             >
               Am înțeles

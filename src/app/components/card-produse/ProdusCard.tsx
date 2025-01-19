@@ -98,25 +98,17 @@ const ProdusCard = ({ description, title, image, disponibil, price, id }: Produs
               {description}
             </Typography>
 
-            <Typography variant="body1" sx={{ color: 'red' }} className='produs-pret'>
+            <Typography variant="body1"  className='produs-pret'>
               <strong>{price} RON</strong>
             </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }} className='produs-disponibil'>
+            <Typography variant="body2" className='produs-disponibil'>
               {disponibil}
             </Typography>
           </CardContent>
           <Button
             variant="contained"
             color="primary"
-            sx={{
-              backgroundColor: "green",
-              textDecoration: "none",
-              margin: "auto",
-              display: "block",
-              "&:hover": {
-                backgroundColor: "red",
-              },
-            }}
+            className="produs-button"
             >
             Vezi Detalii
           </Button>

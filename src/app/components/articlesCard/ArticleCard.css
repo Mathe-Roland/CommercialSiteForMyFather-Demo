@@ -3,3 +3,14 @@
 
     margin:0;
 }
+
+.article-card {
+    max-width: 545px;
+    margin: 1rem;
+  }
+  
+
+  .article-date,
+.article-description {
+  color: #6c757d;
+}

@@ -21,7 +21,19 @@
     flex-direction: column;
 }
 
-.cos-trimite-comanda {
+.custom-button {
+    background-color: black;
+    margin-top: auto;
+    margin-bottom: 100px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-button:hover {
+    background-color: red;
+  }
+  
+
+.cos-trimite-comanda .custom-button{
     margin-top: 6.25rem;
 }
 

@@ -26,13 +26,6 @@
   color:red
 }
 
-.text-secondary {
-  color: var(--text-secondary, #6c757d);
-}
-
-.produs-disponibil{
-  text-align: center;
-}
 
 .produs-description{
   display: -webkit-box;
@@ -43,19 +36,22 @@
   color: rgba(0, 0, 0, 0.6);
 }
 
-.custom-button {
-    background-color: green;
-    margin-top: 50px;
-    width: 50%;
-    height: 50px;
-    max-width: 300px;
-    margin-bottom: 100px;
+
+.produs-disponibil {
+  color: #6c757d; 
+  text-align: center;
 }
 
-.custom-button:hover {
+.produs-button {
+  background-color: green;
+  text-decoration: none;
+  margin: auto;
+  display: block;
+}
+
+.produs-button:hover {
   background-color: red;
 }
-
 
 .produs-image {
   width: 100%; 

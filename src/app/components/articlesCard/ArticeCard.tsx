@@ -16,16 +16,18 @@ interface ArticleProps{
 
 const ArticleCard = ({ title, date, shortDescription, id }:ArticleProps) => {
   return (
-    <Card sx={{maxWidth: 545 ,margin:"1rem"}}>
+    <Card
+    className='article-card'
+    >
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" className='article-title'>
             {title}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }} className='article-date'>
+          <Typography variant="body2"  className='article-date'>
                   {date}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }} className='article-description'>
+          <Typography variant="body2"  className='article-description'>
                   {shortDescription}
           </Typography>
         <Link href={`/blog/${id}?title=${title}&description=${shortDescription}`} className="read-more">Citeste mai mult</Link>
