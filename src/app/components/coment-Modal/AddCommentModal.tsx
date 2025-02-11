@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { TextField } from '@mui/material';
 import "./Modal.css";
-import "CommentModal.css";
+import "./CommentModal.css";
 
 
 

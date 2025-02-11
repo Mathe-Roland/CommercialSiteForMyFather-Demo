@@ -9,9 +9,10 @@ interface dropDownMui {
     specificitati:string;
     price:(dynamicPrice:number)=>void;
     pretIncrementat:number;
+    passSelectedValues:(selectedValue:number)=>void,
 }
 
-const DropdownMui = ({listStart,listEndPoint,listIncrement,specificitati,pretIncrementat,price}:dropDownMui) => {
+const DropdownMui = ({passSelectedValues,listStart,listEndPoint,listIncrement,specificitati,pretIncrementat,price}:dropDownMui) => {
     const [selectedValue, setSelectedValue] = useState("");
     
     let list=[];
@@ -38,6 +39,7 @@ const DropdownMui = ({listStart,listEndPoint,listIncrement,specificitati,pretInc
     const handleChange = (event) => {
         const newValue = event.target.value;
         setSelectedValue(newValue);
+        passSelectedValues(newValue);
     };
 
     useEffect(() => {
@@ -52,6 +54,7 @@ const DropdownMui = ({listStart,listEndPoint,listIncrement,specificitati,pretInc
                 price(dynamicPrice);
             }
         }
+        console.log(selectedValue);
     }, [selectedValue]);
     
     return (

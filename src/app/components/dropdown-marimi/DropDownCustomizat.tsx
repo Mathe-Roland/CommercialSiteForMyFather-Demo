@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import React, { useState } from "react";
+import { FormControl, InputLabel, Select, MenuItem, TextField } from "@mui/material";
 import "./DropdownMarimi.css";
-import TextField from "@mui/material/TextField";
 import DynamicRadioButtons from "../DynamicRadioButtons/RadioButtonGroup";
 import VopsitRadio from "../DynamicRadioButtons/VopsitRadio/VopsitRadio";
 
@@ -13,73 +12,70 @@ interface DropDownCustomizatProps {
     onChange: (value: string) => void;
 }
 
-
-const DropDownCustomizat = ({ onChange, render, actualPrice, price, vopsit }:DropDownCustomizatProps) => {
+const DropDownCustomizat: React.FC<DropDownCustomizatProps> = ({ onChange, render, actualPrice, price, vopsit }) => {
     const [selectedValue, setSelectedValue] = useState("option1");
     const [personalizare, setPersonalizare] = useState(false);
-    const [textareaValue, setTextareaValue] = useState("Adauga un mesaj de personalizare si te vom contacta noi si apasa butonul adauga");
+    const [textareaValue, setTextareaValue] = useState(
+        "Adauga un mesaj de personalizare si te vom contacta noi si apasa butonul adauga"
+    );
     const [vopsea, setVopsea] = useState(false);
 
     const radioOptions = [
-        { label: 'Optiuni', value: 'Optiuni' },
-        { label: 'Personalizare', value: 'Personalizare' },
-      ];
-      
+        { label: "Optiuni", value: "Optiuni" },
+        { label: "Personalizare", value: "Personalizare" },
+    ];
 
-    const handleNevopsit = () => {
-        setVopsea(true);
-        vopsit(false);
-        const newPrice = actualPrice - (actualPrice * 30) / 100;
+    const handlePrice = (selectedValue: string, isVopsit: boolean): void => {
+        let newPrice = actualPrice;
+
+        switch (selectedValue) {
+            case "option2":
+                newPrice *= 2;
+                break;
+            case "option3":
+                newPrice *= 3;
+                break;
+            default:
+                newPrice *= 1;
+        }
+
+        if (isVopsit) {
+            newPrice *= 1.3;
+        }
+
         price(newPrice);
     };
 
-    const handleVopsit = () => {
-        setVopsea(true);
-        vopsit(true);
-        const newPrice = actualPrice + (actualPrice * 30) / 100;
-        price(newPrice);
+    const handleVopsitToggle = (isVopsit: boolean) => {
+        setVopsea(isVopsit);
+        vopsit(isVopsit);
+        handlePrice(selectedValue, isVopsit);
     };
 
-    const handleChange = (event) => {
+    const handleChange = (event: { target: { value: string } }) => {
         const newValue = event.target.value;
         setSelectedValue(newValue);
         onChange(newValue);
+        handlePrice(newValue, vopsea);
     };
 
-    useEffect(() => {
-        if (vopsea) {
-            const newPrice = actualPrice + (actualPrice * 30) / 100;
-            price(newPrice);
-        }
-        onChange(selectedValue);
-    }, [selectedValue]);
-
-    
-    const isPersonalizare=(event)=>{
-        if(event==="Personalizare"){
-            setPersonalizare(true)
-            render(true);
-
-        }else{
-            setPersonalizare(false);
-            render(false);
-        } 
-    }
-
+    const handlePersonalizareChange = (value: string) => {
+        setPersonalizare(value === "Personalizare");
+        render(value === "Personalizare");
+    };
 
     return (
         <div className="dropdownMarimi">
             <div className="personalizareSIOptiuniNormaleContainer">
-                <DynamicRadioButtons 
-                    formName="Personalizare" 
-                    radioList={radioOptions} 
-                    event={isPersonalizare} 
+                <DynamicRadioButtons
+                    formName="Personalizare"
+                    radioList={radioOptions}
+                    event={handlePersonalizareChange}
                     isEvent={true}
                 />
             </div>
 
             {personalizare ? (
-               
                 <TextField
                     id="outlined-textarea"
                     label="Multiline Placeholder"
@@ -110,13 +106,9 @@ const DropDownCustomizat = ({ onChange, render, actualPrice, price, vopsit }:Dro
                     </FormControl>
                 </div>
             )}
-              <div className='personalizareSIOptiuniNormaleContainer'>
 
-              <VopsitRadio
-                handleNevopsit={handleNevopsit} 
-                handleVopsit={handleVopsit} 
-                />
-
+            <div className="personalizareSIOptiuniNormaleContainer">
+                <VopsitRadio handleNevopsit={() => handleVopsitToggle(false)} handleVopsit={() => handleVopsitToggle(true)} />
             </div>
         </div>
     );

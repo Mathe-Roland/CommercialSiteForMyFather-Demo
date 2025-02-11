@@ -1,128 +1,71 @@
 import "./CosCard.css";
-import { useState } from "react";
-import { deleteProductData ,deleteProductDataFNonRegisteredUser} from "../asyncOperations/fetchData";
-import Image from 'next/image';
+import { useDispatch } from "react-redux";
+import { setQuantity, removeItem, addItem } from "../../../redux/cart";
+import Image from "next/image";
 import Cookies from "js-cookie";
+import { deleteProductData, deleteProductDataFNonRegisteredUser } from "../asyncOperations/fetchData";
 
+const CosCard = ({ id, image, title, price, quantity }) => {
+  const dispatch = useDispatch();
+  
+  const encodedId=btoa(`${title}-${price}`)
 
-const CosCard = ({ id, image, title, price,quantityFromDatabase, addToCart }) => {
-    const [counter, setCounter] = useState(quantityFromDatabase > 1 ? quantityFromDatabase : 1);
-
-    const handleCounterChange = (e) => {
-        const value = parseInt(e.target.value.trim());
-        if (!isNaN(value)) {
-            setCounter(value);
-            const addToCartObject={
-                id:id,
-                image:image,
-                title:title,
-                price:price,
-                count:value,
-            }
-
-            addToCart(addToCartObject);
-        } else {
-            setCounter('');
-            const addToCartObject={
-                id:id,
-                image:image,
-                title:title,
-                price:price,
-                count:0,
-            }
-
-            addToCart(addToCartObject);
-           
-        }
-    };
-    
-    const handleCounter = (action) => {
-        if (action === "decrement") {
-            if (counter > 1) {
-                const newCounter = counter - 1;
-                const addToCartObject = {
-                    id: id,
-                    image: image,
-                    title: title,
-                    price: price,
-                    count: newCounter,
-                };
-                addToCart(addToCartObject);
-                setCounter(counter - 1);
-            }
-        } else if (action === "increment") {
-            if (counter === "") {
-                const newCounter = 1;
-                setCounter(newCounter);
-                const addToCartObject = {
-                    id: id,
-                    image: image,
-                    title: title,
-                    price: price,
-                    count: newCounter,
-                };
-                addToCart(addToCartObject);
-            } else {
-                const newCounter = parseInt(counter) + 1;
-                const addToCartObject = {
-                    id: id,
-                    image: image,
-                    title: title,
-                    price: price,
-                    count: newCounter,
-                };
-                addToCart(addToCartObject);
-                setCounter(newCounter);
-            }
-        }
-    };
-    
-
-    const deleteItem = async () => {
-        if(Cookies.get("user")!==undefined){
-            await deleteProductData(id);
-            window.location.reload();
-        }else{
-            await deleteProductDataFNonRegisteredUser(id);
-            window.location.reload();
-        }
+  
+  const handleCounterChange = (e) => {
+    const value = parseInt(e.target.value.trim());
+    if (!isNaN(value) && value >= 0) {
+      dispatch(setQuantity({ id:encodedId, quantity: value }));
     }
-    
+  };
 
-    const publicImage="cancel.webp";
+  const handleIncrement = () => {
+    dispatch(setQuantity({ id:encodedId, quantity: quantity + 1 }));
+  };
 
-    return (
-        <div className="coscard-container">
-            <div className="coscard-image">
-            <Image alt="produs-buyed" 
-            width={120}
-            height={120}
-             className="cos-image" src={`${image  ?image :""}`} />
-            </div>
-            <div className="coscard-title">
-                <h3>{title}</h3>
-            </div>
-            <p className="cantitate-pentru-increment-buttons">Cantitate</p>
-            <div className="incremental-buttons">
-                <button id="decrement" className="cos-descrement" onClick={() => handleCounter("decrement")}>-</button>
-                <input type="text" id="counter" value={counter} onChange={handleCounterChange} className="cos-counter" />
-                <button id="increment" onClick={() => handleCounter("increment")} className="cos-descrement">+</button>
-            </div>
-            <div className="price">
-                <span className="prices"><span className="cantitate-pentru-increment-buttons">Pret</span> {price}</span>
-            </div>
-            <div className="cancel-icon">
-                <Image 
-                src={`${publicImage  ?"/cancel.webp" :""}`}
-                alt={title}
-                className="cancel"
-                onClick={deleteItem}
-                height={24}
-                width={24}/>
-            </div>
-        </div>
+  const handleDecrement = () => {
+    if (quantity > 1) {
+      dispatch(setQuantity({ id:encodedId, quantity: quantity - 1 }));
+    }
+  };
 
-    );
-}
+  const deleteItem = async () => {
+    if (Cookies.get("user")) {
+      await deleteProductData(id);
+    } else {
+      await deleteProductDataFNonRegisteredUser(id);
+    }
+    dispatch(removeItem(encodedId));
+    console.log(id,title);
+  };
+
+  return (
+    <div className="coscard-container">
+      <div className="coscard-image">
+        <Image alt="produs-buyed" width={120} height={120} className="cos-image" src={image || ""} />
+      </div>
+      <div className="coscard-title">
+        <h3>{title}</h3>
+      </div>
+      <p className="cantitate-pentru-increment-buttons">Cantitate</p>
+      <div className="incremental-buttons">
+        <button id="decrement" className="cos-descrement" onClick={handleDecrement}>
+          -
+        </button>
+        <input type="text" id="counter" value={quantity} onChange={handleCounterChange} className="cos-counter" />
+        <button id="increment" className="cos-descrement" onClick={handleIncrement}>
+          +
+        </button>
+      </div>
+      <div className="price">
+        <span className="prices">
+          <span className="cantitate-pentru-increment-buttons">Pret</span> {price}
+        </span>
+      </div>
+      <div className="cancel-icon">
+        <Image src="/cancel.webp" alt={title} className="cancel" onClick={deleteItem} height={24} width={24} />
+      </div>
+    </div>
+  );
+};
 
 export default CosCard;

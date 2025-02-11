@@ -1,9 +1,9 @@
 import './layout.css';
 import Footer from './components/footer/Footer';
-import Header from './components/header/Header';
 import Navbar from './components/navbar/navbar';
 import Cookies from 'js-cookie';
 import ShowCookiesModal from './components/cookies/Cookies';
+import HeaderWithProvider from './components/header/Header';
 
 
 
@@ -23,7 +23,8 @@ export default function RootLayout({ children }) {
     <html lang="ro">
       <head/>
       <body>
-        <Header />
+        
+        <HeaderWithProvider />
         <Navbar />
         <main>{children}</main>
         <Footer />

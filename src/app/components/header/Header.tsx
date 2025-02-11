@@ -1,4 +1,5 @@
 'use client';
+
 import "./Header.css";
 import LoginModal from "../Modal/Modal";
 import Link from "next/link";
@@ -6,43 +7,28 @@ import { useState, useEffect } from "react";
 import UserInfo from "../userInfo/UserInfo";
 import Cookies from 'js-cookie';
 import Image from "next/image";
+import { Provider } from "react-redux";
+import { store, persistor } from "../../../redux/store";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 const Header = () => {
-  const [isLoggedIn,setIsLoggedIn] = useState(false);
-  const [show,setShow] = useState(false);  
-  const [isInCart,setIsInCart] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const cartItems = useSelector((state: RootState) => state.cart);
+  const isInCart = cartItems.totalQuantity > 0;
 
   useEffect(() => {
-    const handleStorageChange = () => {
-      const cartStatus = localStorage.getItem("isInCart");
-      setIsInCart(cartStatus === "true");
-    };
-  
-    handleStorageChange();
-  
-    const handleCustomStorageChange = (event) => {
-      if (event.detail?.key === "isInCart") {
-        handleStorageChange();
-      }
-    };
-  
-    window.addEventListener("storage", handleStorageChange);
-    window.addEventListener("localStorageUpdate", handleCustomStorageChange);
-  
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-      window.removeEventListener("localStorageUpdate", handleCustomStorageChange);
-    };
-  }, []);
-  
+    Cookies.set("url", window.location.href, {
+      secure: true,
+      sameSite: "Strict",
+      expires: 1,
+      path: "/",
+    });
 
-  
-  useEffect(() => {
-    Cookies.set("url", window.location.href, {secure: true,
-      sameSite: 'Strict',
-      expires: 1,   
-      path: '/', });   
-      const userCookie = Cookies.get('user');
+    const userCookie = Cookies.get("user");
     if (userCookie) {
       setIsLoggedIn(true);
     }
@@ -61,10 +47,10 @@ const Header = () => {
 
   return (
     <header>
-      <div className='navbar-title-and-searchbar'>
+      <div className="navbar-title-and-searchbar">
         <div className="row width80 j-c-b">
           <div className="logo-decorcut">
-            <Image 
+            <Image
               src={monsrikLogo ? monsrikLogo : "/cancel.webp"}
               width={70}
               height={70}
@@ -75,10 +61,10 @@ const Header = () => {
 
           <div className="hamburger-centered">
             <div onMouseLeave={handleHamburger} className="hamburger-dropdown">
-              <Image 
-                src={hamburger ? hamburger : null} 
-                onClick={handleShow} 
-                className="hamburger-menu" 
+              <Image
+                src={hamburger ? hamburger : null}
+                onClick={handleShow}
+                className="hamburger-menu"
                 alt="hamburger-menu"
                 width={28}
                 height={31}
@@ -103,30 +89,24 @@ const Header = () => {
                 <LoginModal setLogin={setIsLoggedIn} />
               )}
               <p className="header-destopview-phone">0770 803 858</p>
-              <Link
-               href={"/cos"}
-               className="cos-de-cumparaturi"
-               >
-                <Image                
+              <Link href={"/cos"} className="cos-de-cumparaturi">
+                <Image
                   src={"/cos-de-cumparaturi.png"}
                   alt="cos de cumparaturi"
                   width={40}
                   height={40}
                 />
-                { isInCart ?  
-                  (<Image
-                  className="is-in-cart"
-                  src={"/exclamation-mark.png"}
-                  alt="exclamation mark"
-                  width={20}
-                  height={20}
-                  />)
-                  :
-                  null
-                }              
+                {isInCart ? (
+                  <Image
+                    className="is-in-cart"
+                    src={"/exclamation-mark.png"}
+                    alt="exclamation mark"
+                    width={20}
+                    height={20}
+                  />
+                ) : null}
               </Link>
             </div>
-
           </div>
         </div>
       </div>
@@ -134,4 +114,14 @@ const Header = () => {
   );
 };
 
-export default Header;
+const HeaderWithProvider = () => {
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Header />
+      </PersistGate>
+    </Provider>
+  );
+};
+
+export default HeaderWithProvider;

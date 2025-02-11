@@ -8,6 +8,11 @@ import Button from '@mui/material/Button';
 import Cookies from "js-cookie";
 import { loadStripe } from '@stripe/stripe-js';
 import CosModal from "./Modal";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor, RootState, store } from "../../redux/store";
+import { clearCart } from "../../redux/cart";
+import { useSelector,useDispatch } from "react-redux";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
@@ -28,153 +33,20 @@ const Cos = () => {
     err: '',
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userExistsOrNot = Cookies.get("user") || 0;
-        let data = { data: [] };
-        
-        if (userExistsOrNot !== 0) {
-          data = await userData();
-        } else {
-          const actualUUID = Cookies.get("userUUID");
-          const totalNonRegisteredData = await nonRegisteredUserData();
-          const filteredCards = totalNonRegisteredData.data.filter(
-            (e) => e.attributes.UniqueIdentifier === actualUUID
-          );
-          data = { data: filteredCards };
-        }
-  
-        const updatedData = data.data.map((item) => {
-          const counting = item.attributes.quantity || 0;
-          const optiuni = item.attributes.optiuniNormale.length > 0
-            ? item.attributes.optiuniNormale
-            : "original";
-          return {
-            ...item,
-            counting,
-            optiuni,
-          };
-        });
-  
-        setCardList({ data: updatedData });
-  
-        let totalSum = 0;
-        updatedData.forEach((element) => {
-          const price = element.attributes.price || 0;
-          const counting = element.counting || 0;
-          totalSum += price * counting;
-        });
-  
-        setGrandTotal(totalSum);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-  
-    fetchData();
-  }, []);
-  
-  useEffect(() => {
-    if (cardList && cardList.data) {
-      let totalSum = 0;
-      cardList.data.forEach((element) => {
-        const price = element.attributes.price || 0;
-        const counting = element.counting || element.attributes.quantity || 0;
-        totalSum += price * counting;
-      });
+  const cartItems = useSelector((state: RootState) => state.cart);
+  const dispatch=useDispatch();
 
-      setGrandTotal(totalSum);
+
+  useEffect(() => {
+
+    if(cartItems){
+      setCardList({data:cartItems.items});
+      setGrandTotal(cartItems.totalPrice);
     }
 
-    console.log(cardList.data);
+    }, [cartItems]);
+    
 
-    if (cardList.data.length === 0) {
-      localStorage.removeItem("isInCart");
-
-      window.dispatchEvent(
-        new CustomEvent("localStorageUpdate", { detail: { key: "isInCart" } })
-      );
-    } else {
-      localStorage.setItem("isInCart", "true");
-
-      window.dispatchEvent(
-        new CustomEvent("localStorageUpdate", { detail: { key: "isInCart" } })
-      );
-    }
-  }, [cardList]);
-
-
-  const handleComanda = async () => {
-    const username = Cookies.get("user") || 0;
-    const userId = Cookies.get("userId");
-
-    if (payment === "cash") {
-      
-        setOpenModal(true);
-      
-
-    } else if (payment === "card") {
-      if (username) {
-        
-        fetch("/api/checkout_sessions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            cart: cardList,
-          }),
-        })
-          .then(res => {
-            if (res.ok) return res.json();
-            return res.json().then(json => Promise.reject(json));
-          })
-          .then(({ url }) => {
-            window.location.href = url;
-          })
-          .catch(e => {
-            console.error(e);
-          });
-      } else {
-
-
-        fetch("/api/checkout_sessions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            cart: cardList,
-          }),
-        })
-          .then(res => {
-            if (res.ok) return res.json();
-            return res.json().then(json => Promise.reject(json));
-          })
-          .then(({ url }) => {
-            window.location.href = url;
-          })
-          .catch(e => {
-            console.error(e);
-          });
-      }
-
-    };
-  };
-
-  const addToCart = (product) => {
-    setCardList(prevCardList => {
-      const updatedData = prevCardList.data.map(item => {
-        if (item.id === product.id) {
-          item.counting = product.count;
-        }
-        return item;
-      });
-
-      return { ...prevCardList, data: updatedData };
-    });
-  };
 
   const plataCuCard = () => {
     setPayment("card");
@@ -198,47 +70,87 @@ const Cos = () => {
   };
 
 
-const handleSubmitNonRegisteredUser= async ()=>{
+  const handleSubmitNonRegisteredUser= async ()=>{
 
-      const userExist= Cookies.get("user") || 0;
+    const userExist= Cookies.get("user") || 0;
 
-      let description="";
-  
-      cardList?.data.forEach((element) => {
+    let description="";
 
-          description += `${element.attributes.title} at price ${element.attributes.price} RON number of items ${element.counting} at size ${element.optiuni} \n`;
-      });
-  
-      const dataForNonRegisteredUser={
-        name:formData.name,
-        city:formData.city,
-        surname:formData.surname,
-        address:formData.address,
-        email:formData.email,
-        postalCode:parseInt(formData.postalCode),
-        country:formData.country,
-        total:grandTotal,
-        description: description,
-        payment:payment,
-      }
+    cardList?.data.forEach((element) => {
 
-      if(userExist){
+        description += `${element.title} at price ${element.price} RON number of items ${element.quantity} at size ${element.selectedValues} \n`;
+    });
 
-        await postareComenzi(dataForNonRegisteredUser);
-        window.location.href="/payment-success";
+    const dataForNonRegisteredUser={
+      name:formData.name,
+      city:formData.city,
+      surname:formData.surname,
+      address:formData.address,
+      email:formData.email,
+      postalCode:parseInt(formData.postalCode),
+      country:formData.country,
+      total:grandTotal,
+      description: description,
+      payment:payment,
+    }
 
-      }else{
+    if(userExist){
 
-  
-      await postareComenziNonRegisteredUser(dataForNonRegisteredUser);
-  
-      window.location.href="/payment-success";
+      await postareComenzi(dataForNonRegisteredUser);
+      await dispatch(clearCart());
+      setTimeout(() => {
+        window.location.href = "/payment-success";
+      }, 100);
 
-      }
+    }else{
+
+    await postareComenziNonRegisteredUser(dataForNonRegisteredUser);
+    await dispatch(clearCart());
+
+    setTimeout(() => {
+
+      window.location.href = "/payment-success";
+
+    }, 100);
+
+    }
+}
+
+
+const handleComanda = async () => {
+  if (payment === "cash") {
+      setOpenModal(true);
+      return;
   }
 
+  try {
+      const res = await fetch("/api/checkout_sessions", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ cart: cardList }),
+      });
 
-  
+      if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(errorData.message || "Something went wrong with the checkout session.");
+      }
+
+      const { url } = await res.json();
+
+      await dispatch(clearCart());
+
+      setTimeout(() => {
+          window.location.href = url;
+      }, 100);
+      
+  } catch (error) {
+      console.error("Checkout error:", error);
+  }
+};
+
+
 
   return (
     <div className="cos-container">
@@ -250,22 +162,19 @@ const handleSubmitNonRegisteredUser= async ()=>{
             <div className="cos-cantitate">Cantitate</div>
             <div className="cos-pret">Pret</div>
           </div>
-          {cardList.data.length === 0 ? (
-            null
-          ) : (
-            cardList.data.map((element) => (
-              <div className="cos-element" key={element.id}>
-                <CosCard
-                  id={element.id}
-                  title={element.attributes?.title}
-                  image={Cookies.get("user") ? element.attributes?.image?.data?.attributes?.url :element.attributes?.image?.data[0]?.attributes?.url}
-                  price={element.attributes?.price}
-                  quantityFromDatabase={element.attributes?.quantity}
-                  addToCart={addToCart}
-                />
-              </div>
-            ))
-          )}
+          {cardList.data.map((element) => {
+            return (
+              <CosCard
+                key={element.id}
+                id={element.id}
+                title={element?.title}
+                image={element?.image}
+                price={element?.price}
+                quantity={element?.quantity}
+              />
+            );
+          })}
+
         </div>
         <div className="cos-trimite-comanda ">
           <div className="cos-trimite-comanda-background">
@@ -307,4 +216,19 @@ const handleSubmitNonRegisteredUser= async ()=>{
   );
 }
 
-export default Cos;
+
+
+
+const CosWithProvider=()=>{
+
+
+  return(
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Cos/>
+      </PersistGate>
+    </Provider>
+  )
+}
+
+export default CosWithProvider;

@@ -7,6 +7,8 @@ export async function generateMetadata({ params }: { params: { [key: string]: st
 
   const filteredPanouriData = panouriData?.filter(element => element.id === parseInt(params.title));
 
+
+  
   const title = filteredPanouriData[0]?.attributes?.title
     ? filteredPanouriData[0].attributes.title
     : "Normal Title";

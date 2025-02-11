@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import { TextField } from '@mui/material';
 import "./Modal.css";
 import { userRelatedCommentsPluginUpdate} from '../asyncOperations/fetchData';
-import "CommentModal.css"
+import "./CommentModal.css";
 
 
 const CommentModal = (props) => {

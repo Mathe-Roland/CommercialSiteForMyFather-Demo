@@ -1,4 +1,4 @@
-import Cos from "./Cos";
+import CosWithProvider from "./Cos";
 import { Metadata } from 'next';
 
 
@@ -11,7 +11,7 @@ const CosPage = () => {
  
  
 
-  return (<Cos/>);
+  return (<CosWithProvider/>);
 }
 
 export default CosPage;
