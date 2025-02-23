@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import "./ProdusIndividual.css";
 import Button from '@mui/material/Button';
-import {imageNonREgisteredUser,nonRegisteredUserData,updateNonRegisteredUserData,postNonRegisteredUserComanda,fetchPanouriData, fetchPanouriCommentsPerPanouId, updateProductData, userData, userRelatedComments, userIds, imageFiles, userRelatedData, updateProductDataNonRegisteredUserOriginalSetting, updateProductDataOriginalSetting } from "../asyncOperations/fetchData";
+import {fetchPanouriData, fetchPanouriCommentsPerPanouId, updateProductData, userData, userRelatedComments, userIds, imageFiles, userRelatedData } from "../asyncOperations/fetchData";
 import Comments from "../comments/Comments";
 import AddCommentModal from "../coment-Modal/AddCommentModal";
 import DropdownMui from "../dropdown-marimi/DropdownMarimi";
@@ -41,7 +41,6 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
     const [prices, setPrices] = useState(price);
     const [noPrice,setNoPrice ] = useState("");
     const [ifVopsit, setIfVopsit] = useState(false);
-    const [ifVopsitMascaCalorifer, setIfVopsitMascaCalorifer] = useState(false);
     const [adaugaInCosShow, setAdaugaInCosShow] = useState(false);
     const [mascaCaloriferValues, setMascaCaloriferValues] = useState({
         lungime: 80,
@@ -60,7 +59,6 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
             setNoPrice("Pretul trebuie discutat");
         }else{
             setNoPrice("");
-            setPrices(price);
         }
     },
     [renderPersonalizare]);
@@ -72,7 +70,7 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
     });
     
     useEffect(() => {
-        if(ifVopsitMascaCalorifer){
+        if(ifVopsit){
            
             const initialPrice = price;
             
@@ -84,7 +82,7 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
             const totalPrice = Object.values(dropdownValues).reduce((acc, val) => acc + val, initialPrice);
             setPrices(totalPrice);
         }
-    }, [dropdownValues, price,ifVopsitMascaCalorifer]);
+    }, [dropdownValues, price,ifVopsit]);
 
     
     const updateDropdownValue = (key, value) => {
@@ -132,165 +130,82 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
         setUserName(Cookies.get("user"));
     };
 
+
     const handleUserData = async () => {
-        setAdaugaInCosShow(true);
-       
+        try {
+            setAdaugaInCosShow(true);
     
-        setTimeout(() => {
-            setAdaugaInCosShow(false);
-        }, 1000);
-        
+            setTimeout(() => {
+                setAdaugaInCosShow(false);
+            }, 1000);
+    
+            const useros = Cookies.get("user") || null;
+    
+            const encodedId = btoa(`${title}-${prices}`);
+    
+            const newItem = {
+                id: encodedId,
+                title: title,
+                price: prices,
+                category: category,
+                selectedValues: category === "masca de calorifer"
+                    ? `lungime:${mascaCaloriferValues.lungime},inaltime:${mascaCaloriferValues.inaltime},adancime:${mascaCaloriferValues.adancime}`
+                    : selectedValues,
+                image: img?.[0]?.attributes?.url || "",
+                quantity: 1,
+            };
+    
+            const existingItem = cartItems.find(
+                (item) => item.title === title && item.price === prices
+);
+
             
-        Cookies.set("isInCart", true, {secure: true,
-            sameSite: 'Strict',
-            expires: 7,   
-            path: '/', });
-    
-            try {
-                const useros = Cookies.get("user") || null;
-        
-                let userUuid = typeof window !== 'undefined' ? Cookies.get('userUUID') : null;
-        
-                if (!userUuid) {
-                    userUuid = uuidv4();
-                    if (typeof window !== 'undefined') {
-                        Cookies.set("userUUID", userUuid, {secure: true,
-                            sameSite: 'Strict',
-                            expires: 7,   
-                            path: '/', });
-                    }
-                }
-                
-                
-                if (!useros) {
-                    const nonregisteredData = await nonRegisteredUserData();
-                    
-                    const userUUID=Cookies.get("userUUID");
-    
-                    
-                    const filteredSpecificPanouNonRegisteredUser = nonregisteredData.data.filter(element => element.attributes.UniqueIdentifier === userUUID);
-                    
-    
-                    const filteredSpecificPanouNonRegisteredUserByTitle =filteredSpecificPanouNonRegisteredUser.length>0 ?  filteredSpecificPanouNonRegisteredUser.filter(element => element.attributes.title === title):[];
-    
-                    const filteredOptiuniNonRegistered = filteredSpecificPanouNonRegisteredUserByTitle.filter(element => element.attributes.optiuniNormale === selectedValues);
-    
-                    const vopsit=filteredOptiuniNonRegistered.filter(e=>e.attributes.vopsit===true);
-                    const nevopsit=filteredOptiuniNonRegistered.filter(e=>e.attributes.vopsit===false);
-                    
-                    const newDatas = {
-                        price: prices,
-                        UniqueIdentifier: userUuid,
-                        optiuninormale: selectedValues,
-                        vopsit: ifVopsit,
-                    };
-                    
-                    const originalPriceWithoutSettingsObj={
-                        price:price,
-                    };
-                    
-                    const encodedId=btoa(`${title}-${prices}`);
+            if (existingItem) {
+                dispatch(
+                setQuantity({ id: existingItem.id, quantity: existingItem.quantity + 1 })
+);
 
-                    const newItem = {
-                        id: encodedId,
-                        title: title,
-                        price: prices,
-                        category:category,
-                        selectedValues:category ==="masca de calorifer" ? `lungime:${mascaCaloriferValues.lungime},inaltime:${mascaCaloriferValues.inaltime},adancime:${mascaCaloriferValues.adancime}` : selectedValues,
-                        image: img?.[0]?.attributes?.url || "",
-                        quantity: 1,
-                      };
-
-                      const existingItem = cartItems.find(item => item.name === title && item.price === prices);
-
-                  
-                      if (existingItem) {
-                        dispatch(setQuantity({ id: existingItem.id, quantity: existingItem.quantity + 1 }));
-                        } else {
-                        dispatch(addItem(newItem));
-                    }                
-    
-
-                    if(originalPriceWithoutSettings && filteredSpecificPanouNonRegisteredUserByTitle.length>0){
-    
-                        await updateProductDataNonRegisteredUserOriginalSetting(filteredSpecificPanouNonRegisteredUserByTitle[0].id,filteredSpecificPanouNonRegisteredUserByTitle[0].attributes.quantity+1,originalPriceWithoutSettingsObj);
-    
-                    }else if(vopsit.length>0 && ifVopsit===true){
-                        
-                        await updateNonRegisteredUserData(vopsit[0].id,vopsit[0].attributes.quantity + 1, newDatas);
-            
-                    }else if(nevopsit.length>0 && ifVopsit===false){
-                        
-                        await updateNonRegisteredUserData(nevopsit[0].id,nevopsit[0].attributes.quantity + 1, newDatas);
-    
-                    }else{
-    
-                        await postNonRegisteredUserComanda(img[0].id,newDatas,1);
-    
-                    }
-    
                 } else {
-
-                    const data = await userData();
-                    const filteredSpecificPanouUserRelatedData = data.length>0 ? data.data.filter(element => element.attributes.title === title):[];
-                    const filteredOptiuniNormale =data.length>0 ? filteredSpecificPanouUserRelatedData.filter(element => element.attributes.optiuniNormale === selectedValues):[];
-                    const filteredVopsit = filteredOptiuniNormale.filter(
-                        (item) => item.attributes.vopsit === true
-                    );
-                    const filteredNevopsit = filteredOptiuniNormale.filter(
-                        (item) => item.attributes.vopsit === false
-                    );
-                                    
-        
-                    const newDatas = {
-                        price: prices,
-                        optiuninormale: selectedValues
-                    };
-    
-                    const originalPriceWithoutSettingsObj={
-                        price:price,
-                    };
-                    
-                    const encodedId=btoa(`${title}-${price}`);
-
-                    const newItem = {
-                        id: encodedId,
-                        title: title,
-                        price: prices,
-                        category:category,
-                        selectedValues:category ==="masca de calorifer" ? `lungime:${mascaCaloriferValues.lungime},inaltime:${mascaCaloriferValues.inaltime},adancime:${mascaCaloriferValues.adancime}` : selectedValues,
-                        image: img?.[0]?.attributes?.url || "",
-                        quantity: 1,
-                      };
-                
-            
-                const existingItem = cartItems.find(item => item.name === title && item.price===newItem.price);
-                  
-
-
-                  if (existingItem) {
-                    dispatch(setQuantity({ id: existingItem.id, quantity: existingItem.quantity + 1 }));
-                    } else {
                     dispatch(addItem(newItem));
                 }
-
-                
-                  if(originalPriceWithoutSettings && filteredSpecificPanouUserRelatedData.length>0){
-                      await updateProductDataOriginalSetting(filteredSpecificPanouUserRelatedData[0].id,filteredSpecificPanouUserRelatedData[0].attributes.quantity+1,originalPriceWithoutSettingsObj)
-                    }else if(filteredVopsit.length>0 && ifVopsit===true){
-                        await updateProductData(filteredVopsit[0].id, filteredVopsit[0].attributes.quantity + 1, newDatas);
-                    }else if(filteredNevopsit.length>0 && ifVopsit===false){
-                        await updateProductData(filteredNevopsit[0].id, filteredNevopsit[0].attributes.quantity + 1, newDatas);
-                    }else{
-                        await userRelatedData(Cookies.get("userId"), img[0].id, newDatas);
-                    }              
-                }
-
-            } catch (error) {
-                console.error('Error:', error);
-            }
     
-        };
+
+            if (useros) {
+
+                const data = await userData();
+                console.log(data);
+                const filteredSpecificPanouUserRelatedData = 
+                data?.data?.length > 0 
+                    ? data.data.filter(element => 
+                          String(element.attributes.title) === String(title) && 
+                          Number(element.attributes.price) === Number(prices)
+                      ) 
+                    : [];
+                
+                    
+                    const newDatas = {
+                        price: prices,
+                        optiuninormale: category === "masca de calorifer"
+                    ? `lungime:${mascaCaloriferValues.lungime},inaltime:${mascaCaloriferValues.inaltime},adancime:${mascaCaloriferValues.adancime},vopsit:${ifVopsit ? "da" : "nu" }`
+                    : `${selectedValues},vopsit:${ifVopsit ? "da" :"nu"}`,
+                    };
+
+
+                if(filteredSpecificPanouUserRelatedData.length>0){
+
+                    await updateProductData(filteredSpecificPanouUserRelatedData[0].id, filteredSpecificPanouUserRelatedData[0].attributes.quantity + 1, newDatas);
+
+                }else{
+                    await userRelatedData(Cookies.get("userId"), img[0].id, newDatas);
+                }
+            }
+
+        } catch (error) {
+            console.error("Error in handleUserData:", error);
+        }
+    };
+
+
 
     const ITEMS_PER_PAGE = 12;
 
@@ -307,11 +222,11 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
 
     const handleNevopsit = () => {
         
-        setIfVopsitMascaCalorifer(false);
+        setIfVopsit(false);
     };
 
     const handleVopsit = () => {
-        setIfVopsitMascaCalorifer(true);
+        setIfVopsit(true);
         
     };
 

@@ -13,7 +13,7 @@ interface DropDownCustomizatProps {
 }
 
 const DropDownCustomizat: React.FC<DropDownCustomizatProps> = ({ onChange, render, actualPrice, price, vopsit }) => {
-    const [selectedValue, setSelectedValue] = useState("option1");
+    const [selectedValue, setSelectedValue] = useState("48/50");
     const [personalizare, setPersonalizare] = useState(false);
     const [textareaValue, setTextareaValue] = useState(
         "Adauga un mesaj de personalizare si te vom contacta noi si apasa butonul adauga"
@@ -29,10 +29,10 @@ const DropDownCustomizat: React.FC<DropDownCustomizatProps> = ({ onChange, rende
         let newPrice = actualPrice;
 
         switch (selectedValue) {
-            case "option2":
+            case "48/100":
                 newPrice *= 2;
                 break;
-            case "option3":
+            case "48/150":
                 newPrice *= 3;
                 break;
             default:
@@ -99,9 +99,9 @@ const DropDownCustomizat: React.FC<DropDownCustomizatProps> = ({ onChange, rende
                             label="Select an option"
                             onChange={handleChange}
                         >
-                            <MenuItem value="option1">48/50</MenuItem>
-                            <MenuItem value="option2">48/100</MenuItem>
-                            <MenuItem value="option3">48/150</MenuItem>
+                            <MenuItem value="48/50">48/50</MenuItem>
+                            <MenuItem value="48/100">48/100</MenuItem>
+                            <MenuItem value="48/150">48/150</MenuItem>
                         </Select>
                     </FormControl>
                 </div>

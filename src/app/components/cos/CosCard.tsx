@@ -1,41 +1,40 @@
 import "./CosCard.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setQuantity, removeItem, addItem } from "../../../redux/cart";
 import Image from "next/image";
 import Cookies from "js-cookie";
-import { deleteProductData, deleteProductDataFNonRegisteredUser } from "../asyncOperations/fetchData";
+import { deleteProductData } from "../asyncOperations/fetchData";
+import { RootState } from "../../../redux/store";
 
 const CosCard = ({ id, image, title, price, quantity }) => {
   const dispatch = useDispatch();
+  const cartItems = useSelector((state: RootState) => state.cart);
   
-  const encodedId=btoa(`${title}-${price}`)
 
-  
   const handleCounterChange = (e) => {
     const value = parseInt(e.target.value.trim());
     if (!isNaN(value) && value >= 0) {
-      dispatch(setQuantity({ id:encodedId, quantity: value }));
+      dispatch(setQuantity({ id:id, quantity: value }));
     }
   };
 
   const handleIncrement = () => {
-    dispatch(setQuantity({ id:encodedId, quantity: quantity + 1 }));
+    dispatch(setQuantity({ id:id, quantity: quantity + 1 }));
   };
 
   const handleDecrement = () => {
     if (quantity > 1) {
-      dispatch(setQuantity({ id:encodedId, quantity: quantity - 1 }));
+      dispatch(setQuantity({ id:id, quantity: quantity - 1 }));
     }
   };
 
   const deleteItem = async () => {
     if (Cookies.get("user")) {
       await deleteProductData(id);
-    } else {
-      await deleteProductDataFNonRegisteredUser(id);
     }
-    dispatch(removeItem(encodedId));
-    console.log(id,title);
+
+    dispatch(removeItem(id));
+    
   };
 
   return (

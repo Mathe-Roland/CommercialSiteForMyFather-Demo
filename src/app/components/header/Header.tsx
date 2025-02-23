@@ -12,6 +12,9 @@ import { store, persistor } from "../../../redux/store";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { PersistGate } from "redux-persist/integration/react";
+import { useDispatch } from "react-redux";
+import { userData } from "../asyncOperations/fetchData";
+import { addItem,clearCart } from "../../../redux/cart";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -19,20 +22,42 @@ const Header = () => {
 
   const cartItems = useSelector((state: RootState) => state.cart);
   const isInCart = cartItems.totalQuantity > 0;
-
+  const dispatch=useDispatch();
+  
   useEffect(() => {
-    Cookies.set("url", window.location.href, {
-      secure: true,
-      sameSite: "Strict",
-      expires: 1,
-      path: "/",
-    });
 
     const userCookie = Cookies.get("user");
     if (userCookie) {
       setIsLoggedIn(true);
     }
+
+
   }, []);
+
+  useEffect(() => {
+    const populateCart = async () => {
+      const registeredUser = await userData();
+
+      if (registeredUser.data.length > 0) {
+        const storeData = registeredUser.data.map((e) => ({
+          id: e.id,
+          title: e.attributes.title,
+          price: e.attributes.price,
+          selectedValues: e.attributes.optiunNormale,
+          image: e.attributes.image.data.attributes.url,
+          quantity: e.attributes.quantity,
+        }));
+
+        dispatch(clearCart());
+        
+        storeData.forEach((e) => dispatch(addItem(e)));
+      }
+      
+
+    };
+
+    populateCart();
+  }, [Cookies.get("user")]);
 
   const handleShow = () => {
     setShow(!show);

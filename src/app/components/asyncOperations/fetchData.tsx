@@ -27,66 +27,6 @@ interface dataForUsers{
   address?:string,
 }
 
-export const postNonRegisteredUserComanda = async (imageId :string, data:dataForUsers, quantity:number) => {
-  const description = Cookies.get("description");
-  const title = Cookies.get("title");
-
-  const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforate-non-registered-users?populate=*`;
-
-  const headers = {
-    "Content-type": "application/json; charset=UTF-8",
-  };
-
-  try {
-    const response = await axios.post(
-      url,
-      {
-        data: {
-          UniqueIdentifier: data.UniqueIdentifier,
-          description: description,
-          image: imageId,
-          title: title,
-          price: data.price,
-          optiuniNormale: data.optiuninormale,
-          quantity: quantity,
-          vopsit:data.vopsit
-        },
-      },
-      { headers: headers }
-    );
-  } catch (error) {
-    console.error("Error posting data:", error.message || error.response || error);
-  }
-};
-
-
-export const updateNonRegisteredUserData = async (productId :string,quantity:number,data:dataForUsers) => {
-
-  const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforate-non-registered-users/${productId}`;
-
-
-  const headers = {
-    "Content-type": "application/json; charset=UTF-8",
-  };
-  
-  axios
-    .put(
-      url,
-      {
-        data: {
-          price:data.price,
-          optiuniNormale:data.optiuninormale,
-          quantity:quantity,
-          vopsit:data.vopsit
-        },
-      },
-      { headers: headers }
-    )
-    .then((response) => {
-    })
-    .catch((error) => {
-    });
-};
 
 
 export const plasareComandaNonRegisteredUser = async (data:dataForUsers) => {
@@ -507,63 +447,6 @@ export const userData = async () => {
   };
 
   
-  export const updateProductDataOriginalSetting = async (productId:string,quantity:number,data:dataForUsers) => {
-    const token = Cookies.get("token");
-  
-  
-
-    const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouritraforates/${productId}`;
-  
-
-    const headers = {
-      "Content-type": "application/json; charset=UTF-8",
-      "Authorization": `Bearer ${token}`,
-    };
-    
-    axios
-      .put(
-        url,
-        {
-          data: {
-            price:data.price,
-            quantity:quantity
-          },
-        },
-        { headers: headers }
-      )
-      .then((response) => {
-      })
-      .catch((error) => {
-      });
-  };
-  
-export const updateProductDataNonRegisteredUserOriginalSetting = async (productId :string,quantity:number,data:dataForUsers) => {
-
-  const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforate-non-registered-users/${productId}`;
-
-
-    const headers = {
-      "Content-type": "application/json; charset=UTF-8",
-    };
-  
-    axios
-      .put(
-       url,
-        {
-          data: {
-            price:data.price,
-            quantity:quantity,
-        },
-      },
-      { headers: headers }
-    )
-    .then((response) => {
-    })
-    .catch((error) => {
-    });
-};
-
-
   export const updateProductData = async (productId:string,quantity:number,data:dataForUsers) => {
     const token = Cookies.get("token");
   
@@ -679,53 +562,6 @@ export const updateProductDataNonRegisteredUserOriginalSetting = async (productI
       });
   };
   
-  export const deleteProductDataFNonRegisteredUser = async (productId:string) => {
-  
-  
-    const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforate-non-registered-users/${productId}`;
-  
-
-    const headers = {
-      "Content-type": "application/json; charset=UTF-8",
-    };
-    
-    axios
-      .delete(
-        url,
-        { headers: headers }
-      )
-      .then((response) => {
-      })
-      .catch((error) => {
-      });
-  };
-
-
-  export const deleteNonRegisteredUserProduct = async (productId:string) => {
-    
-
-    const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforate-non-registered-users/${productId}`;
-  
-
-    const headers = {
-      "Content-type": "application/json; charset=UTF-8",
-    };
-    
-    axios
-      .delete(
-        url,
-        { headers: headers }
-      )
-      .then((response) => {
-      })
-      .catch((error) => {
-      });
-  };
-
-
-
-
-
 
   export const postareComenzi = async (userData:dataForUsers) => {
     const token = Cookies.get("token");  
