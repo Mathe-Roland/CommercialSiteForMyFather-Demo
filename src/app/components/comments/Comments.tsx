@@ -1,7 +1,8 @@
 import "./Comments.css";
 import { useState,useEffect } from "react";
 import CommentModal from "../coment-Modal/CommentModal";
-import { fetchPanouriCommentsPerPanouId,fetchPanouriData } from "../asyncOperations/fetchData";
+import { fetchPanouriCommentsPerPanouId } from "../asyncOperations/fetch-by-id/fetchBYId";
+import { fetchPanouriData } from "../asyncOperations/fetch/fetchAllFields";
 import Cookies from 'js-cookie';
 
 
