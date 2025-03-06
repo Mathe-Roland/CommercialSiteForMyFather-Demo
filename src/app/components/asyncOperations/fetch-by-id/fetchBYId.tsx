@@ -33,10 +33,22 @@ export const fetchCategory = async (category:string) => {
   };
 
 
-  type fetchArticleIdParameter=string|Array<string>
+  
+type fetchArticleIdParameter=string|Array<string>
+
+export const fetchArticleId = async (id:fetchArticleIdParameter) => {
+  try {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/articles?populate=*&filters[id]=${id}`);
+ 
+    return response.data.data;
+  } catch (error) {
+    throw error;
+  }
+}
 
 
-export const userRelatedComments = async (queryparam:string,panouId:fetchArticleIdParameter, message:string) => {
+
+export const userRelatedComments = async (queryparam:string,panouId:number, message:string) => {
     const userId = Cookies.get("userId");
     const user = Cookies.get("user");
 

@@ -3,12 +3,9 @@
 import "./IndividualArticles.css";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import {
-  userRelatedComments,
-  fetchArticleId,
-  fetchArticlesData,
-  fetchPanouriArticlePerArticleId,
-} from "../../components/asyncOperations/fetchData";
+import { userRelatedComments } from "../../components/asyncOperations/populate-db";
+import { fetchArticlesData } from "../../components/asyncOperations/fetch/fetchAllFields";
+import { fetchPanouriArticlePerArticleId,fetchArticleId } from "../../components/asyncOperations/fetch-by-id/fetchBYId";
 import Comments from "../../components/comments/Comments";
 import AddCommentModal from "../../components/coment-Modal/AddCommentModal";
 import Cookies from "js-cookie";
