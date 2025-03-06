@@ -8,6 +8,7 @@ import { imageFiles } from '../../components/asyncOperations/fetch/fetchAllField
 import "./Setari.css";
 import Cookies from 'js-cookie';
 import Image from 'next/image';
+import { Cookie } from '@mui/icons-material';
 
 const Setari = () => {
     const [pictures, setPicture] = useState({
@@ -93,7 +94,7 @@ const Setari = () => {
         <div className='setari-container'>
             <div className='setari-welcome'>
                 <h2 className='headers'>Bine ați venit </h2>
-                <h3 className='headers'>{formData.surname} <span>{formData.name}</span></h3>
+                <h3 className='headers'>{Cookies.get("user")} </h3>
             </div>
 
             <div className='setari-changer'>

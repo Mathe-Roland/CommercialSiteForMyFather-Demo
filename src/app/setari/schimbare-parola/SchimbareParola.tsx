@@ -4,8 +4,10 @@ import React, { useState, useEffect } from 'react';
 import "./SchimbareParola.css";
 import { TextField, Button, Grid, Typography, Container } from '@mui/material';
 import Link from "next/link";
-import { changePasswordAuthUser,completeUserData, imageFiles } from '../../components/asyncOperations/fetchData';
+import { changePasswordAuthUser } from '../../components/asyncOperations/user-requests/requests';
+import { imageFiles } from '../../components/asyncOperations/fetch/fetchAllFields';
 import Image from 'next/image';
+import Cookies from 'js-cookie';
 
 const SchimbareParola = () => {
     const [pictures, setPictures] = useState<{
@@ -20,32 +22,13 @@ const SchimbareParola = () => {
     const [textMessage, setTextMessage] = useState("");
 
     const [formData, setFormData] = useState({
-        id: "",
-        name: "",
-        surname: "",
         oldPassword: "",
         newPassword: "",
         confirmNewPassword: "",
     });
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await completeUserData();
-                setFormData({
-                    id: data?.id || "",
-                    name: data?.name || "",
-                    surname: data?.surname || "",
-                    oldPassword: formData.oldPassword || "",
-                    newPassword: formData.newPassword || "",
-                    confirmNewPassword: formData.confirmNewPassword || "",
-                  });
-                  
-            } catch (error) {
-                console.error("Error fetching user data:", error);
-            }
-        };
-
+       
         const fetchImageData = async () => {
             try {
                 const data = await imageFiles();
@@ -67,7 +50,6 @@ const SchimbareParola = () => {
         };
 
         getData();
-        fetchData();
     }, []);
 
     const handleChange = (field) => (event) => {
@@ -92,7 +74,7 @@ const SchimbareParola = () => {
         <div className="schimbareParola-container">
             <div className="setari-welcome">
                 <h2 className="headers">Bine ați venit</h2>
-                <h3 className="headers">{formData.surname} <span>{formData.name}</span></h3>
+                <h3 className="headers">{Cookies.get("user")}</h3>
             </div>
 
             <div className="setari-changer">

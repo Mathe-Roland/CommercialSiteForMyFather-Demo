@@ -1,6 +1,6 @@
 import "./DespreNoi.css";
 import ImageGallery from "../components/imageGallery/ImageGallery";
-import { fetchDataDespreNoiPage } from "../components/asyncOperations/fetchData";
+import { fetchDataDespreNoiPage } from "../components/asyncOperations/fetch/fetchAllFields";
 import { Metadata } from 'next';
 
 

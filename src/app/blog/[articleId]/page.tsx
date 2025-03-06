@@ -1,4 +1,4 @@
-import { fetchArticlesData} from "../../components/asyncOperations/fetchData";
+import { fetchArticlesData } from "../../components/asyncOperations/fetch/fetchAllFields";
 import IndividualArticlesClient from "./IndividualArticlesClient";
 import { Metadata } from 'next';
 
