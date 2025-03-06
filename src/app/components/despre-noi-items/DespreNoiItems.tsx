@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useState,useEffect } from "react";
-import { fetchCategory } from "../asyncOperations/fetchData"; 
+import { fetchCategory } from "../asyncOperations/fetch-by-id/fetchBYId"; 
 import CustomizedAccordions from "../accordion/Accordion";
 import ProdusCard from "../card-produse/ProdusCard";
 import "./DespreNoiItems.css";

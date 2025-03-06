@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Button, Grid, Typography, Container } from '@mui/material';
 import axios from 'axios';
 import Link from 'next/link';
-import {imageFiles } from '../../components/asyncOperations/fetchData';
+import { imageFiles } from '../../components/asyncOperations/fetch/fetchAllFields';
 import "./Setari.css";
 import Cookies from 'js-cookie';
 import Image from 'next/image';

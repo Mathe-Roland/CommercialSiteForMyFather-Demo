@@ -3,7 +3,7 @@
 import OrderCard from "../components/orderCard/OrderCard";
 import "./ComenziPlasate.css";
 import { useEffect,useState } from "react";
-import { comenziPlasateUserData } from "../components/asyncOperations/fetchData";
+import { comenziPlasateUserData } from "../components/asyncOperations/fetch-by-id/fetchBYId";
 
 const ComenziPlasate=()=>{
 

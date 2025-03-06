@@ -2,7 +2,7 @@
 
 import "./Articles.css";
 import ArticleCard from "../components/articlesCard/ArticeCard";
-import { fetchArticle } from "../components/asyncOperations/fetchData";
+import { fetchArticle } from "../components/asyncOperations/fetch/fetchAllFields";
 import { useEffect, useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
