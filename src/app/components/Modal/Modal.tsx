@@ -8,9 +8,13 @@ import Button from '@mui/material/Button';
 import { TextField } from '@mui/material';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-import { registerUser, userIds } from '../asyncOperations/fetchData';
+import { registerUser } from '../asyncOperations/user-requests/requests';
+import { userMe } from '../asyncOperations/user-requests/requests';
 import './Modal.css';
 import Image from 'next/image';
+import { useSelector, useDispatch } from 'react-redux';
+import { setLoginLogOut } from '../../../redux/cart';
+import { RootState } from '../../../redux/store';
 
 const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void }) => {
   const [open, setOpen] = useState(false);
@@ -21,31 +25,9 @@ const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void }) => {
     password: '',
   });
   
-  const [isInCart, setIsInCart] = useState(false);
+    const isInCart = useSelector((state: RootState) => state.cart.items.length > 0);
 
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const cartStatus = localStorage.getItem("isInCart");
-      setIsInCart(cartStatus === "true");
-    };
-  
-    handleStorageChange();
-  
-    const handleCustomStorageChange = (event) => {
-      if (event.detail?.key === "isInCart") {
-        handleStorageChange();
-      }
-    };
-  
-    window.addEventListener("storage", handleStorageChange);
-    window.addEventListener("localStorageUpdate", handleCustomStorageChange);
-  
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-      window.removeEventListener("localStorageUpdate", handleCustomStorageChange);
-    };
-  }, []);
-  
+    const dispatch = useDispatch();
 
   const handleOpen = () => {
     setOpen(true);
@@ -59,6 +41,8 @@ const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void }) => {
   const handleLogIn = async () => {
     const usernameEmptyText = 'The username field is empty';
     const passwordEmptyText = 'The password field is empty';
+
+    dispatch(setLoginLogOut(false));
 
     if (name.length === 0 && password.length === 0) {
       setFormValidation({ name: usernameEmptyText, password: passwordEmptyText });
@@ -91,7 +75,7 @@ const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void }) => {
         path: '/',
       });
 
-      const userId = await userIds();
+      const userId = await userMe();
       Cookies.set('userId', userId, {
         secure: true,
         sameSite: 'Strict',

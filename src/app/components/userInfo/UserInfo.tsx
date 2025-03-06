@@ -5,7 +5,10 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Cookies from 'js-cookie';
 import Image from "next/image";
-
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+import {setLoginLogOut} from '../../../redux/cart';
+import { useDispatch } from 'react-redux';
 
 const UserInfo = ({ setLogin }) => {
         const [pictures, setPicture] = useState({
@@ -16,31 +19,10 @@ const UserInfo = ({ setLogin }) => {
         });
     
         const [showUserInfo, setShowUserInfo] = useState(false);
-        const [isInCart,setIsInCart] = useState(false);
 
-       useEffect(() => {
-          const handleStorageChange = () => {
-            const cartStatus = localStorage.getItem("isInCart");
-            setIsInCart(cartStatus === "true");
-          };
-        
-          handleStorageChange();
-        
-          const handleCustomStorageChange = (event) => {
-            if (event.detail?.key === "isInCart") {
-              handleStorageChange();
-            }
-          };
-        
-          window.addEventListener("storage", handleStorageChange);
-          window.addEventListener("localStorageUpdate", handleCustomStorageChange);
-        
-          return () => {
-            window.removeEventListener("storage", handleStorageChange);
-            window.removeEventListener("localStorageUpdate", handleCustomStorageChange);
-          };
-        }, []);
-        
+        const isInCart = useSelector((state: RootState) => state.cart.items.length > 0);
+        const dispatch = useDispatch();
+
         useEffect(() => {           
                 setPicture({
                     setariPicture: "/settings-icon.png",
@@ -64,6 +46,9 @@ const UserInfo = ({ setLogin }) => {
             }
     
             deleteAllCookies();
+
+            dispatch(setLoginLogOut(true));
+
             setLogin(false);
         };
     

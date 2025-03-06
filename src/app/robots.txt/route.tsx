@@ -9,8 +9,7 @@ const getDomain = () => {
 export async function GET() {
   const domain = getDomain();
 
-  const robotsTxt = `
-User-agent: *
+  const robotsTxt = `User-agent: *
 Disallow: /setari/informati-de-baza
 Disallow: /garantia
 Disallow: /cos
@@ -24,8 +23,7 @@ Disallow: /confidentialitate
 
 Allow: /
 
-Sitemap: ${domain}/api/sitemap.xml
-`;
+Sitemap: ${domain}/api/sitemap.xml`;
 
   return new NextResponse(robotsTxt, {
     headers: {

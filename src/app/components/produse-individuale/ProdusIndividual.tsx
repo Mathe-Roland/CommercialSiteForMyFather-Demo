@@ -3,7 +3,12 @@
 import React, { useEffect, useState } from 'react';
 import "./ProdusIndividual.css";
 import Button from '@mui/material/Button';
-import {fetchPanouriData, fetchPanouriCommentsPerPanouId, updateProductData, userData, userRelatedComments, userIds, imageFiles, userRelatedData } from "../asyncOperations/fetchData";
+import {fetchPanouriData} from '../asyncOperations/fetch/fetchAllFields';
+import { userRelatedData } from '../asyncOperations/populate-db';
+import { fetchPanouriCommentsPerPanouId } from '../asyncOperations/fetch-by-id/fetchBYId';
+import { updateProductData } from '../asyncOperations/fetch-by-id/fetchBYId';
+import { userData } from '../asyncOperations/fetch-by-id/fetchBYId';
+import { userRelatedComments } from '../asyncOperations/populate-db';
 import Comments from "../comments/Comments";
 import AddCommentModal from "../coment-Modal/AddCommentModal";
 import DropdownMui from "../dropdown-marimi/DropdownMarimi";

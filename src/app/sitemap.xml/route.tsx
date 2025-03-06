@@ -7,7 +7,7 @@ const staticPages = [
   '/despre-noi', '/harti',
   '/panouri-decorative', '/pandative',
   '/tablouri-decorative', '/tablouri-gravate',
-  '/setari/informati-de-baza',
+  '/setari/informati-de-baza',"/cos",
   '/blog'
 ];
 

@@ -1,6 +1,6 @@
 import ProdusCC from "./ProdusCC";
 import { Metadata } from "next";
-import { fetchPanouriData } from "../../components/asyncOperations/fetchData";
+import { fetchPanouriData } from "../../components/asyncOperations/fetch/fetchAllFields";
 
 export async function generateMetadata({ params }: { params: { [key: string]: string } }): Promise<Metadata> {
   const panouriData = await fetchPanouriData();

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setQuantity, removeItem, addItem } from "../../../redux/cart";
 import Image from "next/image";
 import Cookies from "js-cookie";
-import { deleteProductData } from "../asyncOperations/fetchData";
+import { deleteProductData } from "../asyncOperations/fetch-by-id/fetchBYId";
 import { RootState } from "../../../redux/store";
 
 const CosCard = ({ id, image, title, price, quantity }) => {

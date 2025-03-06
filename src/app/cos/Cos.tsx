@@ -3,7 +3,6 @@
 import CosCard from "../components/cos/CosCard";
 import "./Cos.css";
 import { useState, useEffect } from "react";
-import { postareComenziNonRegisteredUser , nonRegisteredUserData, userData, postareComenzi, completeUserData, deleteProductData, updateProductQuantity,deleteNonRegisteredUserProduct } from "../components/asyncOperations/fetchData";
 import Button from '@mui/material/Button';
 import Cookies from "js-cookie";
 import { loadStripe } from '@stripe/stripe-js';
@@ -13,6 +12,8 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistor, RootState, store } from "../../redux/store";
 import { clearCart } from "../../redux/cart";
 import { useSelector,useDispatch } from "react-redux";
+import { postareComenziNonRegisteredUser,postareComenzi } from "../components/asyncOperations/postare-comenzi/comenzi";
+
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
@@ -70,6 +71,7 @@ const Cos = () => {
   };
 
 
+
   const handleSubmitNonRegisteredUser= async ()=>{
 
     const userExist= Cookies.get("user") || 0;
@@ -87,12 +89,23 @@ const Cos = () => {
       surname:formData.surname,
       address:formData.address,
       email:formData.email,
-      postalCode:parseInt(formData.postalCode),
+      postalCode:formData.postalCode,
       country:formData.country,
       total:grandTotal,
       description: description,
       payment:payment,
+      date:new Date()
+
+
     }
+
+      await fetch("/api/order", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ orderName: "New order" }),
+        });
 
     if(userExist){
 
@@ -100,18 +113,18 @@ const Cos = () => {
       await dispatch(clearCart());
       setTimeout(() => {
         window.location.href = "/payment-success";
-      }, 100);
+      }, 200);
 
     }else{
 
     await postareComenziNonRegisteredUser(dataForNonRegisteredUser);
-    await dispatch(clearCart());
+    // await dispatch(clearCart());
 
-    setTimeout(() => {
+    // setTimeout(() => {
 
-      window.location.href = "/payment-success";
+    //   window.location.href = "/payment-success";
 
-    }, 100);
+    // }, 200);
 
     }
 }
@@ -139,12 +152,27 @@ const handleComanda = async () => {
 
       const { url } = await res.json();
 
-      await dispatch(clearCart());
 
-      setTimeout(() => {
-          window.location.href = url;
-      }, 100);
-      
+     
+
+      if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(errorData.message || "Something went wrong with the checkout session.");
+        }
+
+        await fetch("/api/order", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ orderName: "New order" }),
+      });
+
+        setTimeout(() => {
+            window.location.href = url;
+        }, 100);
+        
+
   } catch (error) {
       console.error("Checkout error:", error);
   }

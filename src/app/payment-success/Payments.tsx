@@ -2,38 +2,26 @@
 
 import React, { useEffect } from 'react';
 import Cookies from 'js-cookie';
-import { userData, nonRegisteredUserData, deleteNonRegisteredUserProduct } from '../components/asyncOperations/fetchData';
+import { userData,deleteProductData } from '../components/asyncOperations/fetch-by-id/fetchBYId';
 import "./Payments.css";
 
 const deleteCosDatas = async () => {
   try {
-    const panouForSpecificUser = await nonRegisteredUserData();
     const registeredUserData = await userData();
-    const UUIDS = Cookies.get("userUUID");
-
-    const panouForNonRegisteredUser = panouForSpecificUser.data.filter(
-      (e) => e.attributes.UniqueIdentifier === UUIDS
-    );
-
-    if (panouForNonRegisteredUser.length > 0) {
-      await Promise.all(
-        panouForNonRegisteredUser.map(async (element) => {
-          await deleteNonRegisteredUserProduct(element.id);
-        })
-      );
-    }
-
+    
     if (registeredUserData.length > 0) {
       await Promise.all(
         registeredUserData.map(async (element) => {
-          await deleteNonRegisteredUserProduct(element.id);
+          await deleteProductData(element.id);
         })
       );
     }
+    
   } catch (error) {
     console.error('Error during data for deletion:', error);
   }
 };
+
 
 const PaymentSuccess = () => {
   useEffect(() => {
@@ -41,11 +29,7 @@ const PaymentSuccess = () => {
       await deleteCosDatas();
     };
 
-    localStorage.removeItem("isInCart");
-
-    window.dispatchEvent(
-      new CustomEvent("localStorageUpdate", { detail: { key: "isInCart" } })
-    );
+    
 
     fetchData();
   }, []);

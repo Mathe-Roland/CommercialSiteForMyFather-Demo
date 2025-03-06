@@ -2,7 +2,7 @@
 
 import Produs from "../../components/produse-individuale/ProdusIndividual";
 import { useEffect, useState } from "react";
-import { fetchId } from "../../components/asyncOperations/fetchData";
+import { fetchId } from "../../components/asyncOperations/fetch-by-id/fetchBYId";
 import "./Produse.css";
 import  {store,persistor}  from "../../../redux/store";
 import { Provider } from "react-redux";

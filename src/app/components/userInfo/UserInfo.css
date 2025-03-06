@@ -68,7 +68,7 @@
 .cart-position{
     position: absolute;
     top:0;
-    left: 0;
+    left: 30px;
 }
 
 @media screen  and (min-width:750px){

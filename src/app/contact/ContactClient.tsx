@@ -2,7 +2,7 @@
 import "./Contact.css";
 import React, { useState } from 'react';
 import { TextField, MenuItem, Button, Container, Grid } from '@mui/material';
-import { postareContact, postareContactNonRegisteredUser } from "../components/asyncOperations/fetchData";
+import { postareContact,postareContactNonRegisteredUser } from "../components/asyncOperations/contact/postContact";
 import Cookies from "js-cookie";
 
 
@@ -12,7 +12,7 @@ const ContactUsForm = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        phone: '',
+        phone: "",
         company: '',
         category: '',
         message: ''
@@ -29,7 +29,12 @@ const ContactUsForm = () => {
         e.preventDefault();
         const user=Cookies.get("user") || 0;
 
-        user ? await postareContact(formData) : await postareContactNonRegisteredUser(formData);
+        const formDataWithCHangedPhoneNumber={
+            ...formData,
+            phone:parseInt(formData.phone)
+        }
+
+        user ? await postareContact(formDataWithCHangedPhoneNumber) : await postareContactNonRegisteredUser(formDataWithCHangedPhoneNumber);
 
         alert('Form submitted.');        
     };

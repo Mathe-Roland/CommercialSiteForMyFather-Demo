@@ -4,6 +4,7 @@ const initialState = {
   items: [],
   totalQuantity: 0,
   totalPrice: 0,
+  loginLogOut: false,
 };
 
 const calculateTotal = (items) => {
@@ -46,6 +47,10 @@ const cartSlice = createSlice({
       }
     },
 
+    setLoginLogOut: (state, action) => {
+      state.loginLogOut = action.payload;
+    },
+
     clearCart: (state) => {
       state.items = [];
       state.totalQuantity = 0;
@@ -54,5 +59,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, setQuantity, clearCart } = cartSlice.actions;
+export const { addItem, removeItem, setLoginLogOut,setQuantity, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;
