@@ -3,12 +3,10 @@
 import "./IndividualArticles.css";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import {
-  userRelatedComments,
-  fetchArticleId,
-  fetchArticlesData,
-  fetchPanouriArticlePerArticleId,
-} from "../asyncOperations/fetchData";
+import { fetchArticleId,fetchPanouriArticlePerArticleId } from "../asyncOperations/fetch-by-id/fetchBYId";
+import { fetchArticlesData } from "../asyncOperations/fetch/fetchAllFields";
+import { userRelatedComments } from "../asyncOperations/populate-db";
+
 import Comments from "../comments/Comments";
 import AddCommentModal from "../coment-Modal/AddCommentModal";
 import Image from "next/image";
