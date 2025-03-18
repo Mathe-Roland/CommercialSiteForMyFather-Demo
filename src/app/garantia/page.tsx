@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 
 
 export const metadata:Metadata = {
-    title: 'Garanția | MOSTRIK DREAMLAND',
+    title: 'Garanția',
     description: `La MOSTRIK DREAMLAND, 
     suntem dedicați să oferim produse de înaltă calitate, susținute de o garanție solidă. Descoperă politica noastră de garanție, 
     termenele de acoperire și pașii necesari pentru a beneficia de aceasta.`,

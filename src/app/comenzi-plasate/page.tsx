@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 
 
 export const metadata:Metadata = {
-    title: `Cos de cumpărături | MOSTRIK DREAMLAND`,
+    title: `Cos de cumpărături`,
     description: `Gestionează și finalizează comanda în coșul tău de cumpărături la MOSTRIK DREAMLAND.
      Revizuiește produsele alese, verifică detaliile și descoperă cât de simplu este să finalizezi achizițiile.
       Produse personalizate din MDF și lemn, perfecte pentru tine.`,

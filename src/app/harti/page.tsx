@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 
 
 export const metadata:Metadata = {
-    title: 'Harti | MOSTRIK DREAMLAND',
+    title: 'Harti',
     description: `La MOSTRIK DREAMLAND, oferim hărți realizate cu precizie CNC, ideale pentru a aduce o notă personalizată în orice spațiu. 
     Fie că îți dorești o hartă a lumii, a unei țări sau a unei regiuni, produsele noastre combină arta și ingineria pentru un rezultat impresionant. 
     Cu o atenție deosebită la detalii, hărțile noastre sunt perfecte pentru decorul locuinței sau pentru un cadou deosebit.

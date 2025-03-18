@@ -2,7 +2,7 @@ import Setari from "./InformatiDeBaza";
 
 
 export const metadata={
-    title:`Setari pentru utilizatorul specific | MOSTRIK DREAMLAND`,
+    title:`Setari pentru utilizatorul specific`,
     description:`Accesează pagina de setări pentru a personaliza preferințele contului tău, 
     a ajusta setările de securitate și confidențialitate, și a gestiona notificările. 
     Modifică informațiile de profil, alege opțiuni de limbă și accesibilitate, și conectează aplicația cu alte servicii pentru o experiență complet personalizată.

@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 
 
 export const metadata:Metadata = {
-    title: 'Metode de plata | MOSTRIK DREAMLAND',
+    title: 'Metode de plata',
     description: `La MOSTRIK DREAMLAND
 , îți punem la dispoziție multiple metode de plată sigure și rapide, adaptate nevoilor tale.
      Alege dintr-o varietate de opțiuni, inclusiv plăți online cu card bancar, transfer bancar, și alte metode populare.

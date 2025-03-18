@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 
 
 export const metadata:Metadata = {
-    title: 'Politica de cookiuri | MOSTRIK DREAMLAND',
+    title: 'Politica de cookiuri',
     description: `Politica de cookie-uri a MOSTRIK DREAMLAND îți oferă informații clare despre tipurile de cookie-uri utilizate, 
     scopurile acestora și cum contribuie la o experiență personalizată. 
     Află cum poți controla și gestiona setările cookie-urilor pentru confidențialitatea și preferințele tale`,
