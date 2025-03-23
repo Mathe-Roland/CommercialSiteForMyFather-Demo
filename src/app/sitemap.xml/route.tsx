@@ -1,8 +1,6 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
 
-const domains = ["decorcut.ro", "decorcut.com"];
-
 const fetchDynamicPages = async (domain) => {
   try {
     const [panouriTraforate, bloguri] = await Promise.all([
@@ -17,11 +15,10 @@ const fetchDynamicPages = async (domain) => {
         <loc>https://www.${domain}/produse/${item.id}?title=${encodeURIComponent(
           item.attributes.title
         )}&description=${encodeURIComponent(item.attributes.description)}</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
+        <lastmod>${new Date(item.attributes.updatedAt).toISOString()}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
-      </url>
-    `
+      </url>`
       )
       .join("");
 
@@ -32,11 +29,10 @@ const fetchDynamicPages = async (domain) => {
         <loc>https://www.${domain}/blog/${item.id}?title=${encodeURIComponent(
           item.attributes.title
         )}&description=${encodeURIComponent(item.attributes.shortDescription)}</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
+        <lastmod>${new Date(item.attributes.updatedAt).toISOString()}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
-      </url>
-    `
+      </url>`
       )
       .join("");
 
@@ -49,39 +45,34 @@ const fetchDynamicPages = async (domain) => {
 
 export async function GET() {
   try {
-    const dynamicPages = await Promise.all(domains.map(fetchDynamicPages));
+    const domain = "decorcut.ro";
+    const dynamicPages = await fetchDynamicPages(domain);
 
     const staticPages = [
-      "/", "/cadouri-personalizate", "/despre-noi", "/harti",
-      "/panouri-decorative", "/pandative", "/tablouri-decorative",
-      "/tablouri-gravate", "/cos", "/blog"
+      "cadouri-personalizate", "despre-noi", "harti",
+      "panouri-decorative", "pandative", "tablouri-decorative",
+      "tablouri-gravate", "cos", "blog"
     ];
 
-    const staticPageUrls = domains
-      .map((domain) =>
-        staticPages
-          .map(
-            (page) => `
+    const staticPageUrls = staticPages
+      .map(
+        (page) => `
       <url>
-        <loc>https://www.${domain}${page}</loc>
+        <loc>https://www.${domain}/${page}</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
-      </url>
-    `
-          )
-          .join("")
+      </url>`
       )
       .join("");
 
-    const allPages = dynamicPages.join("") + staticPageUrls;
-
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-        ${allPages}
+        ${dynamicPages}
+        ${staticPageUrls}
       </urlset>`;
 
-    return new Response(sitemap, {
+    return new NextResponse(sitemap, {
       headers: { "Content-Type": "application/xml" },
     });
   } catch (error) {
