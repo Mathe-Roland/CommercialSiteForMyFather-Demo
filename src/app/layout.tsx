@@ -8,7 +8,7 @@ import HeaderWithProvider from './components/header/Header';
 
 
 export const metadata = {
-    title: 'Panouri decorative',
+    title: 'Panouri Decorative și Măști de Calorifer din Lemn | Eleganță și Durabilitate',
     description: `Descoperiți o gamă largă de produse traforate din lemn si mdf, 
             fiecare piesă fiind realizată cu atenție la detalii și o pasiune pentru design. 
             De la panouri decorative care adaugă un aer sofisticat oricărei încăperi, 
