@@ -18,27 +18,36 @@ const ProdusCC = () => {
     if (typeof window !== "undefined") {
       setUrl(window.location.href);
     }
+
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!url) return;
 
+  useEffect(() => {
+    if (!url) return; // Wait until the URL is set
+    
+    console.log("url", url);
+
+    const fetchData = async () => {
       try {
         let titleMatch = url.match(/title=([^&]+)/);
-        let title = titleMatch[1].split("-").join(" ");
-        title = title[0].toUpperCase() + title.slice(1);
-
-        const data = await fetchId(title);
-        setCardList(data);
+        if (titleMatch) {
+          let title = titleMatch[1].split("-").join(" ");
+          console.log("title", title);
+          
+          const data = await fetchId(title);
+          console.log("data", data);
+          setCardList(data);
+        } else {
+          console.error("Title not found in URL");
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
+  
     fetchData();
   }, [url]);
-
+  
 
   if (!cardList) {
     return <div className="loading-container">Loading...</div>;
@@ -51,10 +60,10 @@ const ProdusCC = () => {
           <Produs
             id={cardList[0]?.id}
             img={cardList[0]?.attributes?.image?.data}
-            title={cardList[0]?.attributes?.title || "Default Title"}
-            description={cardList[0]?.attributes?.description || "Default Description"}
+            title={cardList[0]?.attributes?.title}
+            description={cardList[0]?.attributes?.description}
             price={cardList[0]?.attributes?.price}
-            category={cardList[0].attributes.category}
+            category={cardList[0]?.attributes.category}
             />
         </PersistGate>
         </Provider>

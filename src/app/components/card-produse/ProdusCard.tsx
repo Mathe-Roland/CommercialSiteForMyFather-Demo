@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 import { useMediaQuery } from '@mui/material';
 import Image from 'next/image';
-
+import {formatForURL} from '../functions';
 interface ProdusCardProps {
   description: string;
   title: string;
@@ -58,7 +58,7 @@ const ProdusCard = ({ description, title, image, disponibil, price, id }: Produs
     <Card className='produscard-container' onClick={handleData}>
       <Link
         className="ignore"
-        href={`/produse/${id}?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`}
+        href={`/produse/${id}?title=${formatForURL(title)}`}
       >
         <CardActionArea>
           {isHighPriorityImage && isMobile ? (

@@ -12,13 +12,10 @@ export async function generateMetadata({ params }: { params: { [key: string]: st
   const title = filteredPanouriData[0]?.attributes?.title
     ? filteredPanouriData[0].attributes.title
     : "Normal Title";
-  const description = filteredPanouriData[0]?.attributes.description
-    ? filteredPanouriData.description
-    : "Default Description";
+ 
 
   return {
     title,
-    description,
   };
 }
 

@@ -1,5 +1,8 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
+import {formatForURL} from "../components/functions";
+
+const domains = ["decorcut.ro"];
 
 const fetchDynamicPages = async (domain) => {
   try {
@@ -12,13 +15,14 @@ const fetchDynamicPages = async (domain) => {
       .map(
         (item) => `
       <url>
-        <loc>https://www.${domain}/produse/${item.id}?title=${encodeURIComponent(
+        <loc>https://www.${domain}/produse/${item.id}?title=${formatForURL(
           item.attributes.title
-        )}&description=${encodeURIComponent(item.attributes.description)}</loc>
-        <lastmod>${new Date(item.attributes.updatedAt).toISOString()}</lastmod>
+        )}</loc>
+        <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
-      </url>`
+      </url>
+    `
       )
       .join("");
 
@@ -26,13 +30,14 @@ const fetchDynamicPages = async (domain) => {
       .map(
         (item) => `
       <url>
-        <loc>https://www.${domain}/blog/${item.id}?title=${encodeURIComponent(
+        <loc>https://www.${domain}/blog/${item.id}?title=${formatForURL(
           item.attributes.title
-        )}&description=${encodeURIComponent(item.attributes.shortDescription)}</loc>
-        <lastmod>${new Date(item.attributes.updatedAt).toISOString()}</lastmod>
+        )}</loc>
+        <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
-      </url>`
+      </url>
+    `
       )
       .join("");
 
@@ -45,34 +50,38 @@ const fetchDynamicPages = async (domain) => {
 
 export async function GET() {
   try {
-    const domain = "decorcut.ro";
-    const dynamicPages = await fetchDynamicPages(domain);
+    const dynamicPages = await fetchDynamicPages(domains[0]);
 
     const staticPages = [
-      "cadouri-personalizate", "despre-noi", "harti",
-      "panouri-decorative", "pandative", "tablouri-decorative",
-      "tablouri-gravate", "cos", "blog"
+      "/", "/cadouri-personalizate", "/despre-noi", "/harti",
+      "/panouri-decorative", "/pandative", "/tablouri-decorative",
+      "/tablouri-gravate", "/cos", "/blog"
     ];
 
     const staticPageUrls = staticPages
-      .map(
-        (page) => `
+          .map(
+            (page) => `
       <url>
-        <loc>https://www.${domain}/${page}</loc>
+        <loc>https://www.${domains[0]}${page}</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
-      </url>`
-      )
+      </url>
+    `
+          )
       .join("");
+
+    const allPages = dynamicPages + staticPageUrls;
+
+    console.log("All pages:", allPages);
+    console.log("dynamicPage",dynamicPages);
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-        ${dynamicPages}
-        ${staticPageUrls}
+        ${allPages}
       </urlset>`;
 
-    return new NextResponse(sitemap, {
+    return new Response(sitemap, {
       headers: { "Content-Type": "application/xml" },
     });
   } catch (error) {

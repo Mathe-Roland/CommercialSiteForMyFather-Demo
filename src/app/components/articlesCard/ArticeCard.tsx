@@ -30,7 +30,7 @@ const ArticleCard = ({ title, date, shortDescription, id }:ArticleProps) => {
           <Typography variant="body2"  className='article-description'>
                   {shortDescription}
           </Typography>
-        <Link href={`/blog/${id}?title=${title}&description=${shortDescription}`} className="read-more">Citeste mai mult</Link>
+        <Link href={`/blog/${id}?title=${title}`} className="read-more">Citeste mai mult</Link>
         </CardContent>
       </CardActionArea>
     </Card>
