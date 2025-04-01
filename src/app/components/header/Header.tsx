@@ -44,10 +44,10 @@ const Header = () => {
       if (registeredUser?.data?.length > 0) {
         const storeData = registeredUser.data.map((e) => ({
           id: e.id,
-          title: e.attributes.title,
-          price: e.attributes.price,
-          selectedValues: e.attributes.optiunNormale,
-          image: e.attributes.image.data.attributes.url,
+          title: e?.attributes?.title,
+          price: e?.attributes?.price,
+          selectedValues: e?.attributes?.optiunNormale,
+          image: e?.attributes?.image?.data?.attributes?.url,
           quantity: e.attributes.quantity,
         }));
 
