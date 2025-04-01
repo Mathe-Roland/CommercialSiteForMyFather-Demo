@@ -24,38 +24,11 @@ const ProdusCard = ({ description, title, image, disponibil, price, id }: Produs
 
   const isMobile = useMediaQuery('(max-width:768px)');
 
-  const handleData = () => {
-    Cookies.set("description", description, {
-      secure: true,
-      sameSite: 'Strict',
-      expires: 1,
-      path: '/',
-    });
-    Cookies.set("title", title, {
-      secure: true,
-      sameSite: 'Strict',
-      expires: 1,
-      path: '/',
-    });
-    Cookies.set("image", image, {
-      secure: true,
-      sameSite: 'Strict',
-      expires: 1,
-      path: '/',
-    });
-    Cookies.set("price", price.toString(), {
-      secure: true,
-      sameSite: 'Strict',
-      expires: 1,
-      path: '/',
-    });
-  };
-
   const isHighPriorityImage = 
     image === "https://res.cloudinary.com/ddrkdrrre/image/upload/v1732733779/Raft_suport_wifi_din_mdf_alb_1_kepavif_6fe4bc39a0.avif";
 
   return (
-    <Card className='produscard-container' onClick={handleData}>
+    <Card className='produscard-container'>
       <Link
         className="ignore"
         href={`/produse/${id}?title=${formatForURL(title)}`}
@@ -105,13 +78,11 @@ const ProdusCard = ({ description, title, image, disponibil, price, id }: Produs
               {disponibil}
             </Typography>
           </CardContent>
-          <Button
-            variant="contained"
-            color="primary"
+          <div role="button"
             className="produs-button"
             >
             Vezi Detalii
-          </Button>
+          </div>
         </CardActionArea>
       </Link>
     </Card>

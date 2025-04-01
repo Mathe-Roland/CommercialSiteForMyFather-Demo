@@ -1,7 +1,6 @@
 .produscard-container {
   max-width: 34.0625rem; 
   margin: auto;
-  padding: 1rem;
 }
 
 .title-produs{
@@ -43,10 +42,18 @@
 }
 
 .produs-button {
+  display: flex;
+  justify-content: center;
   background-color: green;
   text-decoration: none;
-  margin: auto;
-  display: block;
+  color: white;
+  margin: 0 auto 20px auto;
+  font-size: 1.2rem;
+  max-height: 4.5rem;
+  max-width: 6.5rem;
+  padding: 0.5rem;
+  justify-content: center;
+  transition: ease-in 0.2s;
 }
 
 .produs-button:hover {

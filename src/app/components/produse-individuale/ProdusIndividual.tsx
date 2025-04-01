@@ -201,7 +201,12 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                     await updateProductData(filteredSpecificPanouUserRelatedData[0].id, filteredSpecificPanouUserRelatedData[0].attributes.quantity + 1, newDatas);
 
                 }else{
-                    await userRelatedData(Cookies.get("userId"), img[0].id, newDatas);
+                    
+                    const data={
+                        description:description,
+                        title:title,
+                    }
+                    await userRelatedData(Cookies.get("userId"),data,img[0].id, newDatas);
                 }
             }
 

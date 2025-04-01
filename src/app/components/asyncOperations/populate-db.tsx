@@ -39,11 +39,13 @@ type fetchArticleIdParameter=string|Array<string>
         });
 };
 
+interface titleAndDescription {
+    description: string;
+    title: string;
+}
 
-export const userRelatedData = async (userId: string, imageId: string, data: dataForUsers) => {
+export const userRelatedData = async (userId: string,props:titleAndDescription,imageId: string, data: dataForUsers) => {
     const token = Cookies.get("token");
-    const description = Cookies.get("description");
-    const title = Cookies.get("title");
 
     const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouritraforates?populate=*`;
 
@@ -58,9 +60,9 @@ export const userRelatedData = async (userId: string, imageId: string, data: dat
             {
                 data: {
                     users_permissions_user: userId,
-                    description: description,
+                    description: props.description,
                     image: imageId,
-                    title: title,
+                    title: props.title,
                     price: data.price,
                     optiuniNormale: data.optiuninormale,
                     quantity: 1,
