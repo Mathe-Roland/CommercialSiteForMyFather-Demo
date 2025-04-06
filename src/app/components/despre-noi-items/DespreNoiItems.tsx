@@ -43,9 +43,6 @@ const DespreNoiItems=()=>{
                     <div className="headerplusdescription">
                     <h1 className="header">{header}</h1>
 
-
-
-
                     </div>
 
                 </div>
@@ -55,11 +52,11 @@ const DespreNoiItems=()=>{
                         <ProdusCard
                             key={e?.id}
                             id={e?.id}
-                            description={e?.attributes?.description}
-                            title={e?.attributes?.title}
-                            image={e?.attributes?.image?.data[0]?.attributes?.url}
+                            description={e.attributes.description ? e?.attributes?.description : "" }
+                            title={e.attributes.title ? e?.attributes?.title : "Placeholder title"}
+                            image={e.attributes.image.data ? e?.attributes?.image?.data[0]?.attributes?.url : ""}
                             disponibil={"Este disponibil"}
-                            price={e?.attributes?.price}
+                            price={e.attributes.price ? e?.attributes?.price : "An error occured,there is no price momentarily"}
                         />)
                     ))
                     :null}
