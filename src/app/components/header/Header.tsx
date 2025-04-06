@@ -14,12 +14,11 @@ import { RootState } from "../../../redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { useDispatch } from "react-redux";
 import { userData } from "../asyncOperations/fetch-by-id/fetchBYId";
-import { addItem, clearCart,setLoginLogOut } from "../../../redux/cart";
+import { addItem, clearCart,setLoginLogOut,removeItem } from "../../../redux/cart";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [show, setShow] = useState(false);
-  const [originalCart, setOriginalCart] = useState([]);
 
   const cartItems = useSelector((state: RootState) => state.cart);
   const isInCart = cartItems.totalQuantity > 0;
@@ -51,12 +50,24 @@ const Header = () => {
           quantity: e.attributes.quantity,
         }));
 
-
-        console.log("Login/Logout state:", cartItems.loginLogOut);
-
+        
+        cartItems.items.forEach((e) => {
+          
+          storeData.forEach((item)=>{
+            if(e.title===item.title){
+              dispatch(removeItem(e.id));
+              
+            }
+          }
+        ); 
+        
+      })
+      
+      
         storeData.forEach((e) => dispatch(addItem(e)));
         
       }
+
     };
 
     populateCart();

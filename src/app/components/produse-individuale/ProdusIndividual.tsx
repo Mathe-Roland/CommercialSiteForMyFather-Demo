@@ -118,12 +118,13 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                     }
                 }
             } catch (error) {
-
+                
             }
         };
-
-    fetchDataAndFilter();
-
+        
+        fetchDataAndFilter();
+        
+        console.log("imagw",img);
     }, [title]);
     
 
@@ -206,6 +207,9 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                         description:description,
                         title:title,
                     }
+
+                    
+
                     await userRelatedData(Cookies.get("userId"),data,img[0].id, newDatas);
                 }
             }

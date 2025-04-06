@@ -118,13 +118,13 @@ const Cos = () => {
     }else{
 
     await postareComenziNonRegisteredUser(dataForNonRegisteredUser);
-    // await dispatch(clearCart());
+    await dispatch(clearCart());
 
-    // setTimeout(() => {
+    setTimeout(() => {
 
-    //   window.location.href = "/payment-success";
+      window.location.href = "/payment-success";
 
-    // }, 200);
+    }, 200);
 
     }
 }
