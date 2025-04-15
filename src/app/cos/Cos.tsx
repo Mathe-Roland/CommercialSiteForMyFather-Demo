@@ -160,14 +160,6 @@ const handleComanda = async () => {
           throw new Error(errorData.message || "Something went wrong with the checkout session.");
         }
 
-        await fetch("/api/order", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ orderName: "New order" }),
-      });
-
         setTimeout(() => {
             window.location.href = url;
         }, 100);

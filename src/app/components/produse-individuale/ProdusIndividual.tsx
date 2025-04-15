@@ -21,7 +21,6 @@ import VopsitRadio from '../DynamicRadioButtons/VopsitRadio/VopsitRadio';
 import { useDispatch,useSelector } from 'react-redux';
 import   {addItem,removeItem,setQuantity,clearCart} from "../../../redux/cart"
 import { RootState } from '../../../redux/store';
-import { v4 as uuidv4 } from 'uuid';
 
 
 interface ProdusProps{
@@ -147,7 +146,7 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
     
             const useros = Cookies.get("user") || null;
     
-            const encodedId = btoa(`${title}-${prices}`);
+            const encodedId = category?.toLowerCase()==="masca de calorifer" ? btoa(`${title}-${prices}-${mascaCaloriferValues.lungime}-${mascaCaloriferValues.inaltime}-${mascaCaloriferValues.adancime} `) : btoa(`${title}-${prices}`);
     
             const newItem = {
                 id: encodedId,
@@ -158,12 +157,11 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                     ? `lungime:${mascaCaloriferValues.lungime},inaltime:${mascaCaloriferValues.inaltime},adancime:${mascaCaloriferValues.adancime}`
                     : selectedValues,
                 image: img?.[0]?.attributes?.url || "",
+                vopsit:ifVopsit,
                 quantity: 1,
             };
     
-            const existingItem = cartItems.find(
-                (item) => item.title === title && item.price === prices
-);
+            const existingItem = cartItems.find((item) => item.id === encodedId);
 
             
             if (existingItem) {

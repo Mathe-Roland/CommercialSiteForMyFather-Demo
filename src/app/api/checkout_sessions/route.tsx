@@ -12,6 +12,7 @@ export async function POST(request) {
                 currency: "ron",
                 product_data: {
                     name: e.title,
+                    description:`Marimi:${e.selectedValues}-Vopsit:${e.vopsit}`,
                 },
                 unit_amount: e?.price * 100,
             },
