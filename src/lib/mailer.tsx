@@ -1,25 +1,50 @@
 import nodemailer from 'nodemailer';
+import { google } from 'googleapis';
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail', 
-  auth: {
-    user: process.env.EMAIL_USER, 
-    pass: process.env.EMAIL_PASS, 
-  },
-});
+const OAuth2 = google.auth.OAuth2;
 
-export const sendEmail = async (subject, to) => {
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to,
-    subject,
-    text: `A new order has been placed: ${subject}`,
-  };
+const {
+  CLIENT_ID,
+  CLIENT_SECRET,
+  REFRESH_TOKEN,
+  EMAIL_FROM,
+} = process.env;
 
+const oauth2Client = new OAuth2(
+  CLIENT_ID,
+  CLIENT_SECRET,
+  'https://developers.google.com/oauthplayground'
+);
+
+oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+
+export const sendEmail = async (to, subject, text) => {
   try {
-    await transporter.sendMail(mailOptions);
+    const { token } = await oauth2Client.getAccessToken();
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        type: 'OAuth2',
+        user: EMAIL_FROM,
+        clientId: CLIENT_ID,
+        clientSecret: CLIENT_SECRET,
+        refreshToken: REFRESH_TOKEN,
+        accessToken: token,
+      },
+    });
+
+    const mailOptions = {
+      from: `Jeider <${EMAIL_FROM}>`,
+      to,
+      subject,
+      text,
+    };
+
+    const result = await transporter.sendMail(mailOptions);
+    return result;
   } catch (error) {
-    console.error('Error sending email:', error);
-    throw new Error('Failed to send email');
+    console.error('Failed to send email:', error);
+    throw error;
   }
 };

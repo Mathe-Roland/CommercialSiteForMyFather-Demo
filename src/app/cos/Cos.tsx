@@ -72,7 +72,7 @@ const Cos = () => {
 
 
 
-  const handleSubmitNonRegisteredUser= async ()=>{
+  const handleSubmitFormComanda= async ()=>{
 
     const userExist= Cookies.get("user") || 0;
 
@@ -99,13 +99,25 @@ const Cos = () => {
 
     }
 
-      await fetch("/api/order", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ orderName: "New order" }),
-        });
+      
+        fetch('/api/send-mail', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            subject: 'New Order!',
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success) {
+              alert('Email trimis cu succes!');
+            } else {
+              alert('Eroare: ' + data.error);
+            }
+          });
+        
 
     if(userExist){
 
@@ -227,7 +239,7 @@ const handleComanda = async () => {
         handleClose={handleClose}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        handleSubmitNonRegisteredUser={handleSubmitNonRegisteredUser}
+        handleSubmitFormComanda={handleSubmitFormComanda}
         formData={formData}
         />
      

@@ -6,7 +6,7 @@ type CosModalProps = {
   handleClose: () => void;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmitNonRegisteredUser: () => void;
+  handleSubmitFormComanda: () => void;
   formData: {
     email: string;
     name: string;
@@ -23,7 +23,7 @@ const CosModal = ({
   handleClose,
   handleSubmit,
   handleChange,
-  handleSubmitNonRegisteredUser,
+  handleSubmitFormComanda,
   formData,
 }: CosModalProps) => {
   return (
@@ -113,7 +113,7 @@ const CosModal = ({
             </Grid>
             <Grid item xs={12}>
               <Button
-                onClick={handleSubmitNonRegisteredUser}
+                onClick={handleSubmitFormComanda}
                 type="submit"
                 fullWidth
                 variant="contained"
