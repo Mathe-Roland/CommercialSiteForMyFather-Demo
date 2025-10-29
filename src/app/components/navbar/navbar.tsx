@@ -5,6 +5,7 @@ import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import Link from 'next/link';
 import './navbar.css';
 
+
 export const navbarData = {
   items: ["Acasa", "Magazin", "Blog", "Despre Noi", "Contact"],
 };
@@ -49,6 +50,7 @@ const Navbar = () => {
   const generateUrl = (name) => {
     return name ? `/${name.toLowerCase().split(' ').join('-')}` : '/';
   };
+
 
   return (
     <header className='navbar'>

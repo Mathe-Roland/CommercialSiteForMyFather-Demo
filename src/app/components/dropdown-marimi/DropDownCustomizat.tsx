@@ -1,117 +1,183 @@
-import React, { useState } from "react";
-import { FormControl, InputLabel, Select, MenuItem, TextField } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  TextField,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormLabel,
+} from "@mui/material";
 import "./DropdownMarimi.css";
 import DynamicRadioButtons from "../DynamicRadioButtons/RadioButtonGroup";
-import VopsitRadio from "../DynamicRadioButtons/VopsitRadio/VopsitRadio";
 
 interface DropDownCustomizatProps {
-    price: (value: number) => void;
-    vopsit: (value: boolean) => void;
-    actualPrice: number;
-    render: (value: boolean) => void;
-    onChange: (value: string) => void;
+  price: (value: number) => void;
+  actualPrice: number; // base 60, for example
+  render: (value: boolean) => void;
+  onChange: (value: string) => void;
 }
 
-const DropDownCustomizat: React.FC<DropDownCustomizatProps> = ({ onChange, render, actualPrice, price, vopsit }) => {
-    const [selectedValue, setSelectedValue] = useState("48/50");
-    const [personalizare, setPersonalizare] = useState(false);
-    const [textareaValue, setTextareaValue] = useState(
-        "Adauga un mesaj de personalizare si te vom contacta noi si apasa butonul adauga"
-    );
-    const [vopsea, setVopsea] = useState(false);
+const listOfMarimi = ["48/50", "48/100", "48/150"];
 
-    const radioOptions = [
-        { label: "Optiuni", value: "Optiuni" },
-        { label: "Personalizare", value: "Personalizare" },
-    ];
+const DropDownCustomizat = ({
+  onChange,
+  render,
+  actualPrice,
+  price,
+}: DropDownCustomizatProps) => {
+  const [selectedValue, setSelectedValue] = useState("48/50");
+  const [personalizare, setPersonalizare] = useState(false);
+  const [textareaValue, setTextareaValue] = useState(
+    "Adauga un mesaj de personalizare si te vom contacta noi si apasa butonul adauga"
+  );
+  const [value, setValue] = useState("Nevopsit");
 
-    const handlePrice = (selectedValue: string, isVopsit: boolean): void => {
-        let newPrice = actualPrice;
+  // Radio options for "Personalizare" vs "Optiuni"
+  const radioOptions = [
+    { label: "Optiuni", value: "Optiuni" },
+    { label: "Personalizare", value: "Personalizare" },
+  ];
 
-        switch (selectedValue) {
-            case "48/100":
-                newPrice *= 2;
-                break;
-            case "48/150":
-                newPrice *= 3;
-                break;
-            default:
-                newPrice *= 1;
-        }
-
-        if (isVopsit) {
+  /**
+   * 💰 Unified price calculation logic:
+   * - Always starts from the given base actualPrice (the true default, e.g. 60)
+   * - Adjusts for marime (size multiplier)
+   * - Adjusts for Vopsit (paint multiplier)
+   */
+  useEffect(() => {
+    // Start fresh from the base (this one is safe to use directly)
+    let newPrice = actualPrice;
+    
+    if (value === "Vopsit") {
+      setValue("Vopsit");
+    } else {
+      setValue("Nevopsit")
+    }
+    // Apply marime multiplier
+    switch (selectedValue) {
+      case "48/100":
+        if(value==="Vopsit"){
+            newPrice *= 2;
             newPrice *= 1.3;
+        }else{
+        newPrice *= 2;
+
         }
+        break;
+      case "48/150":
+        if(value==="Vopsit"){
+            newPrice *= 3;
+            newPrice *= 1.3;
+        }else{
+            newPrice *= 3;
 
-        price(newPrice);
-    };
+        }
+        break;
+      default:
+        if(value==="Vopsit"){
+            newPrice *= 1.3;
+        }else{
+            newPrice *= 1;
+            
+        }
+    }
 
-    const handleVopsitToggle = (isVopsit: boolean) => {
-        setVopsea(isVopsit);
-        vopsit(isVopsit);
-        handlePrice(selectedValue, isVopsit);
-    };
+    // Apply Vopsit/Nevopsit multiplier
 
-    const handleChange = (event: { target: { value: string } }) => {
-        const newValue = event.target.value;
-        setSelectedValue(newValue);
-        onChange(newValue);
-        handlePrice(newValue, vopsea);
-    };
+    // Update parent
+    console.log("Updated price:", newPrice);
+    console.log("Base actual price:", actualPrice);
+    console.log("Selected size:", selectedValue);
+    price(newPrice);
+  }, [selectedValue, value, actualPrice]); // recalc when size, finish, or base price changes
 
-    const handlePersonalizareChange = (value: string) => {
-        setPersonalizare(value === "Personalizare");
-        render(value === "Personalizare");
-    };
+  // Handle marime dropdown
+  const handleChange = (event) => {
+    const newValue = event.target.value
+    setSelectedValue(newValue);
+    onChange(newValue);
+  };
 
-    return (
+  // Handle personalizare / optiuni radio
+  const handlePersonalizareChange = (value: string) => {
+    const isPersonalizare = value === "Personalizare";
+    setPersonalizare(isPersonalizare);
+    render(isPersonalizare);
+  };
+
+  // Handle vopsit toggle
+  const handleForVopsitToggle = (event) => {
+    setValue(event.target.value);
+  };
+
+  return (
+    <div className="dropdownMarimi">
+      {/* Personalizare vs Optiuni */}
+      <div className="personalizareSIOptiuniNormaleContainer">
+        <DynamicRadioButtons
+          formName="Personalizare"
+          radioList={radioOptions}
+          event={handlePersonalizareChange}
+          isEvent={true}
+        />
+      </div>
+
+      {/* Personalizare Textarea */}
+      {personalizare ? (
+        <TextField
+          id="outlined-textarea"
+          label="Mesaj personalizare"
+          placeholder="Text de personalizare"
+          multiline
+          value={textareaValue}
+          onChange={(e) => {
+            setTextareaValue(e.target.value);
+            onChange(e.target.value);
+          }}
+        />
+      ) : (
+        /* Dropdown for sizes */
         <div className="dropdownMarimi">
-            <div className="personalizareSIOptiuniNormaleContainer">
-                <DynamicRadioButtons
-                    formName="Personalizare"
-                    radioList={radioOptions}
-                    event={handlePersonalizareChange}
-                    isEvent={true}
-                />
-            </div>
-
-            {personalizare ? (
-                <TextField
-                    id="outlined-textarea"
-                    label="Multiline Placeholder"
-                    placeholder="Text de personalizare"
-                    multiline
-                    value={textareaValue}
-                    onChange={(e) => {
-                        setTextareaValue(e.target.value);
-                        onChange(e.target.value);
-                    }}
-                />
-            ) : (
-                <div className="dropdownMarimi">
-                    <p>Marime:</p>
-                    <FormControl fullWidth style={{ minWidth: "150px", maxWidth: "25%" }}>
-                        <InputLabel id="demo-simple-select-label">Select an option</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={selectedValue}
-                            label="Select an option"
-                            onChange={handleChange}
-                        >
-                            <MenuItem value="48/50">48/50</MenuItem>
-                            <MenuItem value="48/100">48/100</MenuItem>
-                            <MenuItem value="48/150">48/150</MenuItem>
-                        </Select>
-                    </FormControl>
-                </div>
-            )}
-
-            <div className="personalizareSIOptiuniNormaleContainer">
-                <VopsitRadio handleNevopsit={() => handleVopsitToggle(false)} handleVopsit={() => handleVopsitToggle(true)} />
-            </div>
+          <p>Marime:</p>
+          <FormControl fullWidth style={{ minWidth: "150px", maxWidth: "25%" }}>
+            <InputLabel id="demo-simple-select-label">Selectează o opțiune</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={selectedValue}
+              label="Selectează o opțiune"
+              onChange={handleChange}
+            >
+              {listOfMarimi.map((marime) => (
+                <MenuItem key={marime} value={marime}>
+                  {marime}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </div>
-    );
+      )}
+
+      {/* Vopsit / Nevopsit Section */}
+      <div className="personalizareSIOptiuniNormaleContainer">
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Selectează tipul de finisaj</FormLabel>
+          <RadioGroup
+            row
+            value={value}
+            onChange={handleForVopsitToggle}
+            name="radio-buttons-group"
+          >
+            <FormControlLabel value="Vopsit" control={<Radio />} label="Vopsit" />
+            <FormControlLabel value="Nevopsit" control={<Radio />} label="Nevopsit" />
+          </RadioGroup>
+        </FormControl>
+      </div>
+    </div>
+  );
 };
 
 export default DropDownCustomizat;

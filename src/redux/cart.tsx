@@ -4,11 +4,17 @@ const initialState = {
   items: [],
   totalQuantity: 0,
   totalPrice: 0,
+  transportCost: 0,
   loginLogOut: false,
 };
 
 const calculateTotal = (items) => {
   return items.reduce((total, item) => total + item.price * item.quantity, 0);
+};
+
+const calculateTransport = (totalPrice) => {
+  if (totalPrice === 0) return 0;        
+  return totalPrice > 1000 ? 0 : 35;
 };
 
 const cartSlice = createSlice({
@@ -27,6 +33,7 @@ const cartSlice = createSlice({
 
       state.totalQuantity = state.items.reduce((sum, item) => sum + item.quantity, 0);
       state.totalPrice = calculateTotal(state.items);
+      state.transportCost = calculateTransport(state.totalPrice);
     },
 
     removeItem: (state, action) => {
@@ -34,6 +41,7 @@ const cartSlice = createSlice({
       state.items = state.items.filter((item) => item.id !== itemId);
       state.totalQuantity = state.items.reduce((sum, item) => sum + item.quantity, 0);
       state.totalPrice = calculateTotal(state.items);
+      state.transportCost = calculateTransport(state.totalPrice);
     },
 
     setQuantity: (state, action) => {
@@ -44,20 +52,22 @@ const cartSlice = createSlice({
         existingItem.quantity = quantity;
         state.totalQuantity = state.items.reduce((sum, item) => sum + item.quantity, 0);
         state.totalPrice = calculateTotal(state.items);
+        state.transportCost = calculateTransport(state.totalPrice);
       }
-    },
-
-    setLoginLogOut: (state, action) => {
-      state.loginLogOut = action.payload;
     },
 
     clearCart: (state) => {
       state.items = [];
       state.totalQuantity = 0;
       state.totalPrice = 0;
+      state.transportCost = 0;
+    },
+
+    setLoginLogOut: (state, action) => {
+      state.loginLogOut = action.payload;
     },
   },
 });
 
-export const { addItem, removeItem, setLoginLogOut,setQuantity, clearCart } = cartSlice.actions;
+export const { addItem, removeItem, setQuantity, clearCart, setLoginLogOut } = cartSlice.actions;
 export default cartSlice.reducer;

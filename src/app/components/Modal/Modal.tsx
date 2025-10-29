@@ -15,8 +15,9 @@ import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
 import { setLoginLogOut } from '../../../redux/cart';
 import { RootState } from '../../../redux/store';
+import GoogleLoginButton from '../google-login/GoogleLoginButton';
 
-const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void }) => {
+const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void}) => {
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -160,24 +161,24 @@ const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void }) => {
           >
             Conectarea
           </Typography>
-          <TextField
-            label="name"
-            fullWidth
-            variant="outlined"
-            margin="normal"
-            value={name}
-            onChange={nameChange}
-          />
-          <TextField
-            label="password"
-            fullWidth
-            variant="outlined"
-            margin="normal"
-            type="password"
-            value={password}
-            onChange={passwordChange}
-          />
-          <div>
+          <div className='modal-textfields-container'>
+            <TextField
+              label="name"
+              fullWidth
+              variant="outlined"
+              value={name}
+              onChange={nameChange}
+            />
+            <TextField
+              label="password"
+              fullWidth
+              variant="outlined"
+              type="password"
+              value={password}
+              onChange={passwordChange}
+            />
+            <div>
+
             <Button className='modal-button' onClick={handleLogIn}>
               Conectare
             </Button>
@@ -186,8 +187,12 @@ const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void }) => {
                 Înregistrare
               </Button>
             </Link>
+
+
+            </div>
+
+            <Button onClick={handleClose}>Close Modal</Button>
           </div>
-          <Button onClick={handleClose}>Close Modal</Button>
         </Box>
       </Modal>
     </div>

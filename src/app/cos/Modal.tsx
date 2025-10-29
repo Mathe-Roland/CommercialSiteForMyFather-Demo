@@ -15,6 +15,7 @@ type CosModalProps = {
     postalCode: string;
     city: string;
     address: string;
+    phoneNumber: string;
   };
 };
 
@@ -107,6 +108,16 @@ const CosModal = ({
                 label="Adresa"
                 name="address"
                 value={formData.address}
+                onChange={handleChange}
+                required
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label="Phone number"
+                name="phoneNumber"
+                value={formData.phoneNumber}
                 onChange={handleChange}
                 required
               />

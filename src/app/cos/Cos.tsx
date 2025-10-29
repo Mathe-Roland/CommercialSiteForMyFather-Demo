@@ -7,9 +7,7 @@ import Button from '@mui/material/Button';
 import Cookies from "js-cookie";
 import { loadStripe } from '@stripe/stripe-js';
 import CosModal from "./Modal";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { persistor, RootState, store } from "../../redux/store";
+import { RootState } from "../../redux/store";
 import { clearCart } from "../../redux/cart";
 import { useSelector,useDispatch } from "react-redux";
 import { postareComenziNonRegisteredUser,postareComenzi } from "../components/asyncOperations/postare-comenzi/comenzi";
@@ -31,8 +29,11 @@ const Cos = () => {
     postalCode: '',
     city: '',
     address: '',
+    phoneNumber: '',
     err: '',
   });
+
+  const [TransportMessage,setTransportMessage]=useState("");
 
   const cartItems = useSelector((state: RootState) => state.cart);
   const dispatch=useDispatch();
@@ -42,7 +43,15 @@ const Cos = () => {
 
     if(cartItems){
       setCardList({data:cartItems.items});
-      setGrandTotal(cartItems.totalPrice);
+      if(cartItems.totalPrice>=1000){
+        setGrandTotal(cartItems.totalPrice);
+        setTransportMessage("Transport Gratuit");
+      }else{
+        let total = cartItems.totalPrice + cartItems.transportCost;
+        setGrandTotal(total);
+        setTransportMessage("Transport 35 lei");
+
+      }
     }
 
     }, [cartItems]);
@@ -91,6 +100,7 @@ const Cos = () => {
       email:formData.email,
       postalCode:formData.postalCode,
       country:formData.country,
+      phoneNumber:formData.phoneNumber,
       total:grandTotal,
       description: description,
       payment:payment,
@@ -154,7 +164,9 @@ const handleComanda = async () => {
           headers: {
               "Content-Type": "application/json",
           },
-          body: JSON.stringify({ cart: cardList }),
+          body: JSON.stringify({ cart: cardList,
+            transportCost: cartItems.transportCost
+           }),
       });
 
       if (!res.ok) {
@@ -222,6 +234,7 @@ const handleComanda = async () => {
                 Ramburs la curier
               </label>
             </div>
+            <p className="cos-comanda">{TransportMessage}</p>
             <p className="cos-comanda">Total comanda: {grandTotal}</p>
             <Button
               onClick={handleComanda}
@@ -251,16 +264,4 @@ const handleComanda = async () => {
 
 
 
-const CosWithProvider=()=>{
-
-
-  return(
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Cos/>
-      </PersistGate>
-    </Provider>
-  )
-}
-
-export default CosWithProvider;
+export default Cos;

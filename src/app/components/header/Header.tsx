@@ -7,11 +7,8 @@ import { useState, useEffect } from "react";
 import UserInfo from "../userInfo/UserInfo";
 import Cookies from 'js-cookie';
 import Image from "next/image";
-import { Provider } from "react-redux";
-import { store, persistor } from "../../../redux/store";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
-import { PersistGate } from "redux-persist/integration/react";
 import { useDispatch } from "react-redux";
 import { userData } from "../asyncOperations/fetch-by-id/fetchBYId";
 import { addItem, clearCart,setLoginLogOut,removeItem } from "../../../redux/cart";
@@ -19,18 +16,21 @@ import { addItem, clearCart,setLoginLogOut,removeItem } from "../../../redux/car
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [show, setShow] = useState(false);
-
   const cartItems = useSelector((state: RootState) => state.cart);
   const isInCart = cartItems.totalQuantity > 0;
   const dispatch = useDispatch();
 
+  const token = useSelector((state: RootState) => state.auth.value.Token);
+
+
   useEffect(() => {
-    const userCookie = Cookies.get("user");
-    if (userCookie) {
+    if (token) {
       setIsLoggedIn(true);
       dispatch(setLoginLogOut(false));
+    } else {
+      setIsLoggedIn(false);
     }
-  }, []);
+  }, [token])
 
   
   useEffect(() => {
@@ -48,6 +48,7 @@ const Header = () => {
           selectedValues: e?.attributes?.optiunNormale,
           image: e?.attributes?.image?.data?.attributes?.url,
           quantity: e.attributes.quantity,
+
         }));
 
         
@@ -160,14 +161,6 @@ const Header = () => {
   );
 };
 
-const HeaderWithProvider = () => {
-  return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Header />
-      </PersistGate>
-    </Provider>
-  );
-};
-
-export default HeaderWithProvider;
+      
+ 
+export default Header;

@@ -25,6 +25,7 @@ const VopsitRadio=({handleNevopsit,handleVopsit})=>{
     event={vopsit}
     isEvent={true}
     />
+
 )
 }
 

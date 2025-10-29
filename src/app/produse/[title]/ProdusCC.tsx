@@ -4,9 +4,7 @@ import Produs from "../../components/produse-individuale/ProdusIndividual";
 import { useEffect, useState } from "react";
 import { fetchId } from "../../components/asyncOperations/fetch-by-id/fetchBYId";
 import "./Produse.css";
-import  {store,persistor}  from "../../../redux/store";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
+
 
 
 
@@ -55,8 +53,6 @@ const ProdusCC = () => {
 
   return (
     <div suppressHydrationWarning>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
           <Produs
             id={cardList[0]?.id}
             img={cardList[0]?.attributes?.image?.data}
@@ -65,8 +61,6 @@ const ProdusCC = () => {
             price={cardList[0]?.attributes?.price}
             category={cardList[0]?.attributes.category}
             />
-        </PersistGate>
-        </Provider>
     </div>
   );
 };

@@ -50,10 +50,17 @@
 .modal-title {
   border-bottom: 2px solid lightgray;
   padding-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 .modal-button {
   font-size: 12px;
+}
+
+.modal-textfields-container{
+  display: flex;
+  flex-direction: column;
+  gap:8px;
 }
 
 
@@ -76,6 +83,7 @@
   .desktop{
     display: none;
   }
+
 
   @media screen and (min-width: 750px) {
 

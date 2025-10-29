@@ -8,6 +8,7 @@ interface DataForUsers {
     postalCode: string;
     total: number;
     email: string;
+    phoneNumber:string;
     surname: string;
     city: string;
     name: string;
@@ -39,6 +40,7 @@ export const postareComenziNonRegisteredUser = async (userData: DataForUsers) =>
             total: userData.total,
             description: userData.description,
             payments: userData.payment,
+            phone: userData.phoneNumber,
             address: userData.address,
             date: userData.date,
             status: "pending",
@@ -79,6 +81,7 @@ export const postareComenzi = async (userData: DataForUsers) => {
                     total: userData.total,
                     description: userData.description,
                     payments: userData.payment,
+                    phone: userData.phoneNumber,
                     date: userData.date,
                     status: "pending",
                 },

@@ -327,6 +327,10 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                                 price={(value) => updateDropdownValue('adancime', value)}
                                 pretIncrementat={10} 
                             />
+                            
+
+
+
                             <VopsitRadio handleNevopsit={handleNevopsit} handleVopsit={handleVopsit}/>
                         </div>
                         )
@@ -334,14 +338,16 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                                 originalPriceWithoutSettings ? 
                                 null
                                 :
-                                (
-                                <DropDownCustomizat 
-                                    price={setPrices} 
-                                    vopsit={setIfVopsit}
-                                    actualPrice={price} 
-                                    render={setRenderPesonalizare}    
-                                    onChange={setSelectedValues}
-                                />)
+                                (<div>
+
+                                    <DropDownCustomizat 
+                                        price={setPrices} 
+                                        actualPrice={price} 
+                                        render={setRenderPesonalizare}    
+                                        onChange={setSelectedValues}
+                                    />
+                                </div>
+                            )
                             }
 
                     </div>

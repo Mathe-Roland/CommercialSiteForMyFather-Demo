@@ -41,9 +41,13 @@ const UserInfo = ({ setLogin }) => {
         const handleLoggout = (e) => {
             e.preventDefault();
             function deleteAllCookies() {
-                const allCookies = Cookies.get();
-                Object.keys(allCookies).forEach(cookieName => Cookies.remove(cookieName));
-            }
+              const allCookies = Cookies.get();
+              Object.keys(allCookies).forEach(cookieName => {
+              if (cookieName !== "showModal" && cookieName !== "consent") {
+                 Cookies.remove(cookieName);
+              } 
+         });
+        }
     
             deleteAllCookies();
 
