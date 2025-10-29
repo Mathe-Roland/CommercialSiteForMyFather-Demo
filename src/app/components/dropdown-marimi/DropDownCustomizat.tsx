@@ -35,20 +35,13 @@ const DropDownCustomizat = ({
   );
   const [value, setValue] = useState("Nevopsit");
 
-  // Radio options for "Personalizare" vs "Optiuni"
   const radioOptions = [
     { label: "Optiuni", value: "Optiuni" },
     { label: "Personalizare", value: "Personalizare" },
   ];
 
-  /**
-   * 💰 Unified price calculation logic:
-   * - Always starts from the given base actualPrice (the true default, e.g. 60)
-   * - Adjusts for marime (size multiplier)
-   * - Adjusts for Vopsit (paint multiplier)
-   */
+ 
   useEffect(() => {
-    // Start fresh from the base (this one is safe to use directly)
     let newPrice = actualPrice;
     
     if (value === "Vopsit") {
@@ -85,16 +78,11 @@ const DropDownCustomizat = ({
         }
     }
 
-    // Apply Vopsit/Nevopsit multiplier
+    const finalPrice = Math.round(newPrice * 100) / 100;
 
-    // Update parent
-    console.log("Updated price:", newPrice);
-    console.log("Base actual price:", actualPrice);
-    console.log("Selected size:", selectedValue);
-    price(newPrice);
-  }, [selectedValue, value, actualPrice]); // recalc when size, finish, or base price changes
+    price(finalPrice);
+  }, [selectedValue, value, actualPrice]);
 
-  // Handle marime dropdown
   const handleChange = (event) => {
     const newValue = event.target.value
     setSelectedValue(newValue);
