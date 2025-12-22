@@ -49,7 +49,7 @@ const DropDownCustomizat = ({
     } else {
       setValue("Nevopsit")
     }
-    // Apply marime multiplier
+
     switch (selectedValue) {
       case "48/100":
         if(value==="Vopsit"){
@@ -127,7 +127,7 @@ const DropDownCustomizat = ({
           }}
         />
       ) : (
-        /* Dropdown for sizes */
+
         <div className="dropdownMarimi">
           <p>Marime:</p>
           <FormControl fullWidth style={{ minWidth: "150px", maxWidth: "25%" }}>
@@ -149,7 +149,6 @@ const DropDownCustomizat = ({
         </div>
       )}
 
-      {/* Vopsit / Nevopsit Section */}
       <div className="personalizareSIOptiuniNormaleContainer">
         <FormControl component="fieldset">
           <FormLabel component="legend">Selectează tipul de finisaj</FormLabel>

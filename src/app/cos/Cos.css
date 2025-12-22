@@ -21,14 +21,14 @@
     flex-direction: column;
 }
 
-.custom-button {
+.cos-trimite-comanda-background .custom-button {
     background-color: black;
     margin-top: auto;
     margin-bottom: 100px;
     transition: background-color 0.3s ease;
   }
   
-  .custom-button:hover {
+.cos-trimite-comanda-background .custom-button:hover {
     background-color: red;
   }
   

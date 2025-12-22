@@ -21,9 +21,8 @@ const ProdusCC = () => {
 
 
   useEffect(() => {
-    if (!url) return; // Wait until the URL is set
+    if (!url) return;
     
-    console.log("url", url);
 
     const fetchData = async () => {
       try {
