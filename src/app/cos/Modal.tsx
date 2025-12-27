@@ -4,8 +4,8 @@ import "./Modal.css";
 type CosModalProps = {
   openModal: boolean;
   handleClose: () => void;
-  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: (event) => void;
+  handleChange: (event) => void;
   handleSubmitFormComanda: () => void;
   formData: {
     email: string;

@@ -1,6 +1,5 @@
-import Cos from "./Cos";
 import { Metadata } from 'next';
-
+import CosClient from './CosClient';
 
 export const metadata:Metadata = {
   title: "Cos cumpărături",
@@ -11,7 +10,7 @@ const CosPage = () => {
  
  
 
-  return (<Cos/>);
+  return (<CosClient/>);
 }
 
 export default CosPage;
