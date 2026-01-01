@@ -10,13 +10,7 @@ type CosUIProps={
     handleSubmit:(event)=>void;
     handleChange:(event)=>void;
     handleSubmitFormComanda:()=>void;
-    cardList:{data:Array<{
-        id:number,
-        title:string,
-        image:string,
-        price:number,
-        quantity:number
-    }>};
+    cardList:any;
     transportMessage:string;
     grandTotal:number;
     plataCuCard:()=>void;
@@ -63,7 +57,7 @@ const CosUI = ({cardList,
             <div className="cos-cantitate">Cantitate</div>
             <div className="cos-pret">Pret</div>
           </div>
-          {cardList.data.map((element) => {
+          {cardList.map((element) => {
             return (
               <CosCard
                 key={element.id}

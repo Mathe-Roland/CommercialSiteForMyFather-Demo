@@ -2,13 +2,15 @@ import { NextResponse } from "next/server";
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
+
+
 export async function POST(request) {
   const response = await request.json();
   const host = request.headers.get("host");
 
   const { cart, transportCost } = response;
 
-  const line_items = cart.data.map((e) => ({
+  const line_items = cart.map((e) => ({
     price_data: {
       currency: "ron",
       product_data: {
