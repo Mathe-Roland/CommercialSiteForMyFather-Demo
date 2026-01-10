@@ -11,7 +11,7 @@ export const navbarData = {
 };
 
 const magazinList={
-  items:["Harti","Masca de calorifer","Pandative","Panouri decorative","Tablouri decorative","Tablouri gravate",]
+  items:["Harti","Masca de calorifer","Pandative","Panouri decorative","Tablouri gravate","Cadouri personalizate"]
 }
 
 const Navbar = () => {
@@ -58,7 +58,7 @@ const Navbar = () => {
         <div className='navbar-centered'>
           <div className='navbar-contents'>
             {!isMobile
-              ? navbarData.items.map((element, index) => (
+              ? navbarData.items.map((element) => (
                   <div
                     key={element}
                     onMouseEnter={() => handleMouseEnter(navbarData.items.indexOf(element))}
@@ -95,7 +95,7 @@ const Navbar = () => {
                       onChange={handleChange}
                     >
                       {magazinList.items.map((item) => (
-                      <Link href={generateUrl(item)} passHref>
+                      <Link href={`/magazin/${generateUrl(item)}`} passHref>
                         <MenuItem value={item} key={item}>
                             {item}
                         </MenuItem>
