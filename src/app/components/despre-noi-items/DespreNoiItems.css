@@ -6,9 +6,13 @@
     flex-direction: column;
 }
 
-.accordionplushd{
-    display: flex;
+
+.accordionplushd {
+  display: flex;
+  width: 100%;
+  gap: 24px;
 }
+
 
 
 .accordion-container{
@@ -31,6 +35,11 @@
 
 }
 
+
+.description-container{
+    display: none;
+}
+
 .cardList-container{
     display: grid;
     grid-template-columns: 1fr;
@@ -41,15 +50,35 @@
 
 
 @media screen and (min-width:600px) {
+
+    .description-text{
+        font-size: 1.1rem;
+        font-family: 'Times New Roman', Times, serif;
+        font-style: italic;
+        font-weight: 300;
+        line-height: 1.6rem;
+    }
+
+    .headerplusdescription{
+        width: 70%;
+    }
     
     .accordion-container{
         display: block;
+        width: 30%;
+    }
+
+    .description-container{
+        display: block;
+        margin:1.25rem 1.25rem;
     }
 
     .cardList-container{
         grid-template-columns: repeat(2,1fr);
         gap: 1.25rem;
     }
+
+
 }
 
 
@@ -60,5 +89,9 @@
         gap: 1.25rem;
     }
 
+      .accordion-container{
+        display: block;
+        width: 25%;
+    }
 
 }

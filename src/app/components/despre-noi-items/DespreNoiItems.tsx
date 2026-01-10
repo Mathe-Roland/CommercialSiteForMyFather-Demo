@@ -1,71 +1,84 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useState,useEffect } from "react";
-import { fetchCategory } from "../asyncOperations/fetch-by-id/fetchBYId"; 
+import { useState, useEffect } from "react";
+import { fetchCategory } from "../asyncOperations/fetch-by-id/fetchBYId";
+import { fetchCategoryDescriptions } from "../asyncOperations/fetch/fetchAllFields";
 import CustomizedAccordions from "../accordion/Accordion";
 import ProdusCard from "../card-produse/ProdusCard";
 import "./DespreNoiItems.css";
 
+const DespreNoiItems = () => {
+  const pathname = usePathname() || "";
+  const segments = pathname.split("/").filter(Boolean);
 
-const DespreNoiItems=()=>{
+  const categorySlug = segments[1] || "magazin";
 
-    const params=usePathname();
-    let newParam=params.split("-");
-    let header=`${newParam[0][1].toUpperCase()}${newParam.join(" ").slice(2)}`;
-    const [cardList,setCardList]=useState([]);
+  const header =
+  categorySlug.charAt(0).toUpperCase() +
+  categorySlug.slice(1).replaceAll("-", " ");
 
-    useEffect(()=>{
 
-        const param=async ()=>{
-            let category=header.toLowerCase();
+  const [cardList, setCardList] = useState([]);
+  const [categoryDescriptions, setCategoryDescriptions] = useState("");
 
-            const data=await fetchCategory(category);
-            
-            setCardList(data);
+  useEffect(() => {
+    const loadData = async () => {
+      const category = header.toLowerCase();
 
-        }
+      const data = await fetchCategory(category);
+      const descriptionsData = await fetchCategoryDescriptions();
 
-        param();
+      const matchedDescription = descriptionsData.find(
+        desc => desc.attributes.category.toLowerCase() === category
+      );
 
-    },[])
+      setCategoryDescriptions(
+        matchedDescription?.attributes?.description || ""
+      );
 
-    return (
-        <div className="despre-noi-items-box">
-                <div className="accordionplushd">
+      setCardList(data || []);
+    };
 
-                    <div className="accordion-container">
+    loadData();
+  }, [categorySlug]);
 
-                    <CustomizedAccordions/>
-
-                    </div>
-                    
-                    <div className="headerplusdescription">
-                    <h1 className="header">{header}</h1>
-
-                    </div>
-
-                </div>
-                <div className="cardList-container">
-                    {cardList.length>0?
-                    (cardList.map(e=>(
-                        <ProdusCard
-                            key={e?.id}
-                            id={e?.id}
-                            description={e.attributes.description ? e?.attributes?.description : "" }
-                            title={e.attributes.title ? e?.attributes?.title : "Placeholder title"}
-                            image={e.attributes.image.data ? e?.attributes?.image?.data[0]?.attributes?.url : ""}
-                            disponibil={"Este disponibil"}
-                            price={e.attributes.price ? e?.attributes?.price : "An error occured,there is no price momentarily"}
-                        />)
-                    ))
-                    :null}
-                </div>
-
+  return (
+    <div className="despre-noi-items-box">
+      <div className="accordionplushd">
+        <div className="accordion-container">
+          <CustomizedAccordions />
         </div>
 
-    )
+        <div className="headerplusdescription">
+          <h1 className="header">{header}</h1>
 
-}
+          <div className="description-container">
+            {categoryDescriptions ? (
+              <p className="description-text">{categoryDescriptions}</p>
+            ) : (
+              <p>Descriere pentru categoria {header} nu este disponibilă momentan.</p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="cardList-container">
+        {cardList.length > 0 &&
+          cardList.map(e => (
+            <ProdusCard
+              key={e.id}
+              id={e.id}
+              title={e.attributes?.title || "Placeholder title"}
+              description={e.attributes?.description || ""}
+              image={e.attributes?.image?.data?.[0]?.attributes?.url || ""}
+              disponibil="Este disponibil"
+              price={e.attributes?.price || "Preț indisponibil"}
+            />
+          ))}
+      </div>
+    </div>
+  );
+};
 
 export default DespreNoiItems;

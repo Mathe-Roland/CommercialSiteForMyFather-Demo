@@ -33,7 +33,7 @@ export default function CustomizedAccordions() {
             expanded={expanded === panel}
             onChange={handleChange(panel)}
           >
-            <Link href={`/${Object.keys(e)[0]}`}>
+            <Link href={`/magazin/${Object.keys(e)[0]}`}>
               <MuiAccordionSummary
                 aria-controls={`${panel}-content`}
                 id={`${panel}-header`}
