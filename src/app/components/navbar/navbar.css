@@ -1,117 +1,16 @@
-
-
 .formControl{
-
     width: 80%;
     margin :2rem auto;
 }
 
+.navbar{
+    position: relative;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    background-color: #2e8b57;
+}
+
 .navbar-contents p{
     margin:0;
-}
-
-.t-n-r{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-style: italic;
-}
-
-.height-auto{
-    height: auto;
-}
-.heightvh{
-    height: 60vh;
-}
-
-.width25{
-    width:25%;
-}
-
-.nav{
-    background-color: blueviolet;
-    
-}
-.text-align-c{
-    text-align: center;
-}
-
-.width100{
-    width: 100%;
-}
-
-.row{
-    display: flex;
-    flex-direction: row;
-}
-
-.column{
-    display: flex;
-    flex-direction: column;
-}
-
-.j-c-c{
-    justify-content: center;
-}
-
-.j-c-b{
-    justify-content: space-between;
-}
-
-.border-radius-10{
-    border-radius: 10em;
-}
-
-.search-icon{
-    background-image: url("https://openclipart.org/image/150rem/svg_to_png/213239/Search-icon.png");
-    background-position: right center;
-    background-repeat: no-repeat;
-    background-size: 16px;
-    opacity: 50%;
-}
-.align-items-c{
-    align-items: center;
-}
-.width80{
-    width: 80%;
-}
-.width100{
-    width: 100%;
-}
-
-.margin-top{
-    margin-top: 2em;
-}
-
-.image-container {
-    position: relative;
-}
-
-.image-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 8px;
-    font-weight: bold;
-    font-size: 19.2px;
-}
-
-
-
-.hidden{
-
-     display:none;
-}
-
-.z-index{
-    z-index: 2;
-}
-
-.absolute{
-    position: absolute;
-}
-
-.relative{
-    position: relative;
 }
 
   a{
@@ -121,53 +20,12 @@
     text-decoration: underline;
   }
 
-.children{
-    color:blueviolet;
-    background-color: black;
-
-}
-
-.vh{
-
-    height: 50vh;
-}
-
-.background{
-    background-color: blueviolet;
-}
-
-
-
-#whatever{
-    flex-wrap: wrap;
-
-}
 
 .navbar-text{
     font-size: 1.5rem;
     margin: 0;
     font-weight: 500;
     color: #fff;
-}
-
-.width100 {
-    width: 100%;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    height: 100%;
-  }
-
-  .navbarData{
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
-    margin: 0 auto;
-  }
-
-.navbar-title-and-searchbar{
-    display: flex;
-    justify-content: center;
 }
 
 
@@ -194,8 +52,8 @@
 
 @media screen  and (min-width:690px){
 
-    .navbar{
-        position: sticky;
+    .navbar.pinned {
+        position: fixed;
         top:0;
         width: 100%;
         z-index: 800;
@@ -203,7 +61,6 @@
         flex-direction: column;
         justify-content: center;
         margin-bottom: 1.25rem;
-        background-color: #2e8b57;
     }
     
 
@@ -215,4 +72,4 @@
         display: none;
     }
 
-    }
+}

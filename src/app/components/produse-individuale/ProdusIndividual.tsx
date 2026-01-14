@@ -21,7 +21,7 @@ import VopsitRadio from '../DynamicRadioButtons/VopsitRadio/VopsitRadio';
 import { useDispatch,useSelector } from 'react-redux';
 import   {addItem,removeItem,setQuantity,clearCart} from "../../../redux/cart"
 import { RootState } from '../../../redux/store';
-
+import {radioOptions,listOfMarimi,listOfCategoryExceptions,listOfMarimi2} from "../dropdown-marimi/radioOptions";
 
 interface ProdusProps{
     id:number;
@@ -335,19 +335,40 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                         </div>
                         )
                             :
-                                originalPriceWithoutSettings ? 
-                                null
+                                listOfCategoryExceptions.includes(category?.toLowerCase())
+                                ? 
+                                (<div>
+
+                                    <DropDownCustomizat 
+                                        price={setPrices} 
+                                        actualPrice={price}
+                                        render={setRenderPesonalizare}
+                                        onPersonalizareChange={setSelectedValues}
+                                        radioOptions={radioOptions} 
+                                        listOfMarimi={listOfMarimi2}
+                                        pricingType="SIZES"
+                                    />
+
+                                </div>
+                                )
                                 :
+                                    originalPriceWithoutSettings ? 
+                                    null
+                                    :
                                 (<div>
 
                                     <DropDownCustomizat 
                                         price={setPrices} 
                                         actualPrice={price} 
                                         render={setRenderPesonalizare}    
-                                        onChange={setSelectedValues}
-                                    />
-                                </div>
+                                        onPersonalizareChange={setSelectedValues}
+                                        radioOptions={radioOptions}
+                                        listOfMarimi={listOfMarimi}
+                                        pricingType="DIMENSIONS"
+                                        />
+                                        </div>
                             )
+                            
                             }
 
                     </div>

@@ -6,7 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
-interface RadioButtonGroupProps {
+interface DynamicRadioButtonsProps {
   radioList: { label: string, value: string }[];
   formName: string;
   event: (value: any) => void;
@@ -18,8 +18,8 @@ export default function DynamicRadioButtons({
   formName,
   event,
   isEvent
-}: RadioButtonGroupProps) {
-  const [selectedValue, setSelectedValue] = useState(radioList[0].value);
+}: DynamicRadioButtonsProps) {
+  const [selectedValue, setSelectedValue] = useState(radioList[0].value || '');
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);

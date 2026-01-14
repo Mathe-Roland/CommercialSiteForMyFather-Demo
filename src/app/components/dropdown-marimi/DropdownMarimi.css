@@ -1,4 +1,3 @@
-
 .dropdownMarimi{
     display: flex;
     flex-direction: column;
@@ -21,7 +20,7 @@
 }
 
 
-@media screen  and (min-width:37.5rem){
+@media screen  and (min-width:600px){
 
     .personalizareSIOptiuniNormaleContainer{
         display: flex;

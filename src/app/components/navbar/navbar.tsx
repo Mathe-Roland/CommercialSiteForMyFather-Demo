@@ -19,6 +19,24 @@ const Navbar = () => {
   const [showAcasa, setShowAcasa] = useState(false);
   const [isMobile, setIsMobile] = useState(false); 
 
+  const [isPinned, setIsPinned] = useState(false);
+
+  useEffect(() => {
+    const sentinel = document.getElementById("navbar-sentinel");
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+      setIsPinned(!entry.isIntersecting);
+    },
+    { threshold: 0 }
+  );
+
+  if (sentinel) observer.observe(sentinel);
+
+  return () => observer.disconnect();
+}, []);
+
+
   useEffect(() => {
     const updateView = () => {
       setIsMobile(window.innerWidth < 680);
@@ -33,15 +51,6 @@ const Navbar = () => {
     };
   }, []);
 
-  const handleMouseEnter = (index) => {
-    if (index === 1) {
-      setShowAcasa(true);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    setShowAcasa(false);
-  };
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
@@ -53,16 +62,14 @@ const Navbar = () => {
 
 
   return (
-    <header className='navbar'>
-      <nav>
+    <header id='navbar-sentinel'>
+      <nav className={`navbar ${isPinned ? "pinned" : ""}`}>
         <div className='navbar-centered'>
           <div className='navbar-contents'>
             {!isMobile
               ? navbarData.items.map((element) => (
                   <div
                     key={element}
-                    onMouseEnter={() => handleMouseEnter(navbarData.items.indexOf(element))}
-                    onMouseLeave={handleMouseLeave}
                   >
                     <Link href={element==="Acasa"? "/" : generateUrl(element)}>
                       <p className='navbar-text'>{element}</p>
