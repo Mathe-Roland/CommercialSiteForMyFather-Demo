@@ -237,7 +237,7 @@ export const updateProductQuantity = async (productId:string,quantity:number) =>
 
 
     
-export const fetchId = async (title:string) => {
+export const fetchTitle = async (title:string) => {
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates?populate=*&filters[title][$eq]=${title}`);
    
@@ -247,4 +247,12 @@ export const fetchId = async (title:string) => {
     }
   };
 
-  
+
+export const fetchPanouById = async (id:string) => {
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates/${id}?populate=*`); 
+      return response.data.data;
+    } catch (error) {
+      throw error;
+    } 
+  };

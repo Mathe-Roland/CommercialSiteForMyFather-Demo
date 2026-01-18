@@ -1,17 +1,15 @@
 import { Metadata } from "next";
-import { fetchPanouriData } from "../../components/asyncOperations/fetch/fetchAllFields";
 import Produs from "../../components/produse-individuale/ProdusIndividual";
-import { fetchId } from "../../components/asyncOperations/fetch-by-id/fetchBYId";
+import { fetchPanouById } from "../../components/asyncOperations/fetch-by-id/fetchBYId";
 import "./Produse.css";
 
 export async function generateMetadata({ params }: { params: { [key: string]: string } }): Promise<Metadata> {
-  const panouriData = await fetchPanouriData();
-
-  const filteredPanouriData = panouriData?.filter(element => element.id === parseInt(params.title));
+  
+  const panouriData = await fetchPanouById(params.title);
 
   
-  const title = filteredPanouriData[0]?.attributes?.title
-    ? filteredPanouriData[0].attributes.title
+  const title = panouriData?.attributes?.title
+    ? panouriData.attributes.title
     : "Normal Title";
  
 
@@ -20,19 +18,19 @@ export async function generateMetadata({ params }: { params: { [key: string]: st
   };
 }
 
-const Produse = async ({searchParams}) => {
-    const titleParam = searchParams?.title;
+const Produse = async ({params}) => {
+    const titleParam = params.title;
+
 
   if (!titleParam) {
       return <div className="loading-container">Title missing</div>;
     }
   
-    const title = titleParam.split("-").join(" ");
   
     let cardList;
   
     try {
-      cardList = await fetchId(title);
+      cardList = await fetchPanouById(titleParam);
     } catch (error) {
       console.error("Error fetching data:", error);
       return <div className="loading-container">Error loading product</div>;
@@ -47,7 +45,6 @@ const Produse = async ({searchParams}) => {
       return <div className="loading-container">Product not found</div>;
     }
   
-    const product = cardList[0];
   
 
 
@@ -56,12 +53,12 @@ const Produse = async ({searchParams}) => {
   return (
     <div>
       <Produs
-        id={product.id}
-        img={product.attributes?.image?.data}
-        title={product.attributes?.title}
-        description={product.attributes?.description}
-        price={product.attributes?.price}
-        category={product.attributes?.category}
+        id={cardList.id}
+        img={cardList.attributes?.image?.data}
+        title={cardList.attributes?.title}
+        description={cardList.attributes?.description}
+        price={cardList.attributes?.price}
+        category={cardList.attributes?.category}
       />
     </div>
   );
