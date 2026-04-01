@@ -1,9 +1,7 @@
 "use client";
 
 import "./ProdusCard.css";
-import Button from '@mui/material/Button';
 import Link from "next/link";
-import Cookies from 'js-cookie';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -31,7 +29,7 @@ const ProdusCard = ({ description, title, image, disponibil, price, id }: Produs
     <Card className='produscard-container'>
       <Link
         className="ignore"
-        href={`/produse/${id}?title=${formatForURL(title)}`}
+        href={`/produse/${id}-${formatForURL(title)}`}
       >
         <CardActionArea>
           {isHighPriorityImage && isMobile ? (
@@ -44,6 +42,7 @@ const ProdusCard = ({ description, title, image, disponibil, price, id }: Produs
               priority 
               placeholder="blur"
               blurDataURL="/logosDecorcut.png"
+              unoptimized
             />
           ) : (
             <Image
@@ -52,6 +51,7 @@ const ProdusCard = ({ description, title, image, disponibil, price, id }: Produs
               alt={title}
               height="180"
               width="180"
+              unoptimized
             />
           )}
           <CardContent>

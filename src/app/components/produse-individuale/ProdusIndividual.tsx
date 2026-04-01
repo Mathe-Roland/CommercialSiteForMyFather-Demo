@@ -3,11 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import "./ProdusIndividual.css";
 import Button from '@mui/material/Button';
-import {fetchPanouriData} from '../asyncOperations/fetch/fetchAllFields';
-import { userRelatedData } from '../asyncOperations/populate-db';
+import {fetchPanouriData,imageFilesNonAuthUser} from '../asyncOperations/fetch/fetchAllFields';
 import { fetchPanouriCommentsPerPanouId } from '../asyncOperations/fetch-by-id/fetchBYId';
-import { updateProductData } from '../asyncOperations/fetch-by-id/fetchBYId';
-import { userData } from '../asyncOperations/fetch-by-id/fetchBYId';
 import { userRelatedComments } from '../asyncOperations/populate-db';
 import Comments from "../comments/Comments";
 import AddCommentModal from "../coment-Modal/AddCommentModal";
@@ -17,11 +14,11 @@ import Image from 'next/image';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import DropDownCustomizat from '../dropdown-marimi/DropDownCustomizat';
-import VopsitRadio from '../DynamicRadioButtons/VopsitRadio/VopsitRadio';
 import { useDispatch,useSelector } from 'react-redux';
 import   {addItem,removeItem,setQuantity,clearCart} from "../../../redux/cart"
 import { RootState } from '../../../redux/store';
 import {radioOptions,listOfMarimi,listOfCategoryExceptions,listOfMarimi2} from "../dropdown-marimi/radioOptions";
+import VopsitRadio from '../DynamicRadioButtons/VopsitRadio/VopsitRadio';
 
 interface ProdusProps{
     id:number;
@@ -92,12 +89,8 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
     const updateDropdownValue = (key, value) => {
         setDropdownValues(prev => ({ ...prev, [key]: value }));
     };
-
-    useEffect(() => {
-        console.log("Updated Cart Items:", cartItems);
-    }, [cartItems]);
     
-
+    
     useEffect(() => {
         const fetchDataAndFilter = async () => {
             try {
@@ -146,10 +139,24 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
     
             const useros = Cookies.get("user") || null;
     
-            const encodedId = category?.toLowerCase()==="masca de calorifer" ? btoa(`${title}-${prices}-${mascaCaloriferValues.lungime}-${mascaCaloriferValues.inaltime}-${mascaCaloriferValues.adancime} `) : btoa(`${title}-${prices}`);
+            const encodedId = category?.toLowerCase()==="masca de calorifer" ? btoa(`${id}--${mascaCaloriferValues.lungime}-${mascaCaloriferValues.inaltime}-${mascaCaloriferValues.adancime}-${ifVopsit} `) : btoa(`${id}-${selectedValues}-${ifVopsit}`);
     
+            console.log(ifVopsit, "ifvopsit value in handleUserData");   
+
+            console.log("selectedValues", selectedValues);
+
+
+            const images=await imageFilesNonAuthUser();
+
+            console.log("images from handleUserData",images);
+
+            const imageId = images.find(image => image.url === img?.[0]?.attributes?.url)?.id || null;
+
+            console.log("imageId found:", imageId);
+
             const newItem = {
                 id: encodedId,
+                productID: id,
                 title: title,
                 price: prices,
                 category: category,
@@ -159,58 +166,24 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                 image: img?.[0]?.attributes?.url || "",
                 vopsit:ifVopsit,
                 quantity: 1,
+                imageId:imageId
             };
     
-            const existingItem = cartItems.find((item) => item.id === encodedId);
+
+            
+            const existingItem = cartItems.find(item => item.id === newItem.id);
 
             
             if (existingItem) {
                 dispatch(
                 setQuantity({ id: existingItem.id, quantity: existingItem.quantity + 1 })
-);
-
-                } else {
+            );
+            console.log("Existing item found. Incremented quantity:", cartItems);
+        } else {
+                    console.log("New item to add:", newItem);
                     dispatch(addItem(newItem));
                 }
     
-
-            if (useros) {
-
-                const data = await userData();
-                console.log(data);
-                const filteredSpecificPanouUserRelatedData = 
-                data?.data?.length > 0 
-                    ? data.data.filter(element => 
-                          String(element.attributes.title) === String(title) && 
-                          Number(element.attributes.price) === Number(prices)
-                      ) 
-                    : [];
-                
-                    
-                    const newDatas = {
-                        price: prices,
-                        optiuninormale: category === "masca de calorifer"
-                    ? `lungime:${mascaCaloriferValues.lungime},inaltime:${mascaCaloriferValues.inaltime},adancime:${mascaCaloriferValues.adancime},vopsit:${ifVopsit ? "da" : "nu" }`
-                    : `${selectedValues},vopsit:${ifVopsit ? "da" :"nu"}`,
-                    };
-
-
-                if(filteredSpecificPanouUserRelatedData.length>0){
-
-                    await updateProductData(filteredSpecificPanouUserRelatedData[0].id, filteredSpecificPanouUserRelatedData[0].attributes.quantity + 1, newDatas);
-
-                }else{
-                    
-                    const data={
-                        description:description,
-                        title:title,
-                    }
-
-                    
-
-                    await userRelatedData(Cookies.get("userId"),data,img[0].id, newDatas);
-                }
-            }
 
         } catch (error) {
             console.error("Error in handleUserData:", error);
@@ -329,9 +302,8 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                             />
                             
 
+                            <VopsitRadio handleNevopsit={handleNevopsit} handleVopsit={handleVopsit} />
 
-
-                            <VopsitRadio handleNevopsit={handleNevopsit} handleVopsit={handleVopsit}/>
                         </div>
                         )
                             :
@@ -348,6 +320,7 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                                         listOfMarimi={listOfMarimi2}
                                         pricingType="SIZES"
                                     />
+
 
                                 </div>
                                 )
@@ -366,6 +339,7 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                                         listOfMarimi={listOfMarimi}
                                         pricingType="DIMENSIONS"
                                         />
+
                                         </div>
                             )
                             

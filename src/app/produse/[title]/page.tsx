@@ -2,24 +2,78 @@ import { Metadata } from "next";
 import Produs from "../../components/produse-individuale/ProdusIndividual";
 import { fetchPanouById } from "../../components/asyncOperations/fetch-by-id/fetchBYId";
 import "./Produse.css";
+import { formatForURL } from "../../components/functions";
 
-export async function generateMetadata({ params }: { params: { [key: string]: string } }): Promise<Metadata> {
-  
-  const panouriData = await fetchPanouById(params.title);
 
-  
-  const title = panouriData?.attributes?.title
-    ? panouriData.attributes.title
-    : "Normal Title";
+export const revalidate = 86400;
+
+
+export async function generateStaticParams() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates?pagination[pageSize]=1000`
+  );
+
+  const data = await res.json();
+
+  return data.data.map((item: any) => ({
+    title: `${item.id}-${formatForURL(item.attributes.title)}`, 
+  }));
+}
+
+
+
+export async function generateMetadata({ params }): Promise<Metadata> {
  
 
+  const id = params.title.split("-")[0];
+
+  const product = await fetchPanouById(id);
+
+
+  if (!product) {
+    return { title: "Produs indisponibil | DecorCut" };
+  }
+
+
+  const canonicalUrl = `https://www.decorcut.ro/produse/${params.title}`;
+
+
   return {
-    title,
+    title: `${product.attributes.title} | DecorCut`,
+    description: product.attributes.description?.slice(0, 160),
+
+    alternates: {
+      canonical: canonicalUrl,
+    },
+
+
+    openGraph: {
+      type: "website",
+      url: canonicalUrl,
+      title: product.attributes.title,
+      description: product.attributes.description?.slice(0, 160),
+      images: [
+      {
+      url: `${product?.attributes?.image?.data[0]?.attributes?.url || "https://www.decorcut.ro/logosDecorcut.png"}`,
+      width: 1200,
+      height: 630,
+      },
+      ]
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: product.attributes.title,
+      description: product.attributes.description?.slice(0, 160),
+      images: [product?.attributes?.image?.data[0]?.attributes?.url || "https://www.decorcut.ro/logosDecorcut.png"],
+    },
   };
 }
 
+
+
 const Produse = async ({params}) => {
-    const titleParam = params.title;
+    const titleParam = params.title.split("-")[0];
 
 
   if (!titleParam) {
@@ -29,29 +83,23 @@ const Produse = async ({params}) => {
   
     let cardList;
   
+
+    
     try {
       cardList = await fetchPanouById(titleParam);
     } catch (error) {
       console.error("Error fetching data:", error);
       return <div className="loading-container">Error loading product</div>;
     }
-  
+
+
     if (!cardList || cardList.length === 0) {
-  
-  
-  
-  
-  
       return <div className="loading-container">Product not found</div>;
     }
-  
-  
 
-
-
-
+    
   return (
-    <div>
+    <>
       <Produs
         id={cardList.id}
         img={cardList.attributes?.image?.data}
@@ -60,7 +108,7 @@ const Produse = async ({params}) => {
         price={cardList.attributes?.price}
         category={cardList.attributes?.category}
       />
-    </div>
+    </>
   );
 };
 

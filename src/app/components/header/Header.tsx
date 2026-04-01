@@ -9,77 +9,13 @@ import Cookies from 'js-cookie';
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
-import { useDispatch } from "react-redux";
-import { userData } from "../asyncOperations/fetch-by-id/fetchBYId";
-import { addItem, clearCart,setLoginLogOut,removeItem } from "../../../redux/cart";
 
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [show, setShow] = useState(false);
   const cartItems = useSelector((state: RootState) => state.cart);
   const isInCart = cartItems.totalQuantity > 0;
-  const dispatch = useDispatch();
 
-  const token = useSelector((state: RootState) => state.auth.value.Token);
-
-
-  useEffect(() => {
-    if (token) {
-      setIsLoggedIn(true);
-      dispatch(setLoginLogOut(false));
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, [token])
-
-  
-  useEffect(() => {
-
-    dispatch(setLoginLogOut(false));
-
-    const populateCart = async () => {
-      const registeredUser = await userData();
-
-      if (registeredUser?.data?.length > 0) {
-        const storeData = registeredUser.data.map((e) => ({
-          id: e.id,
-          title: e?.attributes?.title,
-          price: e?.attributes?.price,
-          selectedValues: e?.attributes?.optiunNormale,
-          image: e?.attributes?.image?.data?.attributes?.url,
-          quantity: e.attributes.quantity,
-
-        }));
-
-        
-        cartItems.items.forEach((e) => {
-          
-          storeData.forEach((item)=>{
-            if(e.title===item.title){
-              dispatch(removeItem(e.id));
-              
-            }
-          }
-        ); 
-        
-      })
-      
-      
-        storeData.forEach((e) => dispatch(addItem(e)));
-        
-      }
-
-    };
-
-    populateCart();
-
-    if(cartItems.loginLogOut){
-      dispatch(clearCart());
-    }
-
-  }, [Cookies.get("user")]);
-
-
+  const loginOrLoggout = useSelector((state: RootState) => state.cart.loginLogOut);
 
   const handleShow = () => {
     setShow(!show);
@@ -118,10 +54,10 @@ const Header = () => {
               />
               {show ? (
                 <div className="navbar-dropdown">
-                  {isLoggedIn ? (
-                    <UserInfo setLogin={setIsLoggedIn} />
+                  {loginOrLoggout ? (
+                    <UserInfo />
                   ) : (
-                    <LoginModal setLogin={setIsLoggedIn} />
+                    <LoginModal />
                   )}
                 </div>
               ) : null}
@@ -130,10 +66,10 @@ const Header = () => {
 
           <div className="phoneviewHideDesktopContent">
             <div className="row j-c-c align-items-c">
-              {isLoggedIn ? (
-                <UserInfo setLogin={setIsLoggedIn} />
+              {loginOrLoggout ? (
+                <UserInfo  />
               ) : (
-                <LoginModal setLogin={setIsLoggedIn} />
+                <LoginModal/>
               )}
               <p className="header-destopview-phone">0770 803 858</p>
               <Link href={"/cos"} className="cos-de-cumparaturi">

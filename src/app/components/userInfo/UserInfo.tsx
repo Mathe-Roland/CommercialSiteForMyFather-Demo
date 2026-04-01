@@ -7,10 +7,11 @@ import Cookies from 'js-cookie';
 import Image from "next/image";
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import {setLoginLogOut} from '../../../redux/cart';
+import {clearCart, setHasSyncedCart, setLoginLogOut} from '../../../redux/cart';
 import { useDispatch } from 'react-redux';
+import { syncCartToDB } from "../functions";
 
-const UserInfo = ({ setLogin }) => {
+const UserInfo = () => {
         const [pictures, setPicture] = useState({
             setariPicture: null,
             comenziPlasate: null,
@@ -21,6 +22,12 @@ const UserInfo = ({ setLogin }) => {
         const [showUserInfo, setShowUserInfo] = useState(false);
 
         const isInCart = useSelector((state: RootState) => state.cart.items.length > 0);
+        const cartItems = useSelector((state: RootState) => state.cart.items);
+
+        const hasSyncedCart = useSelector(
+              (state: RootState) => state.cart.hasSyncedCart);
+        
+
         const dispatch = useDispatch();
 
         useEffect(() => {           
@@ -38,23 +45,49 @@ const UserInfo = ({ setLogin }) => {
             setShowUserInfo(!showUserInfo);
         };
     
-        const handleLoggout = (e) => {
-            e.preventDefault();
+        const handleLogout = async (e) => {
+          e.preventDefault();
+
+        try {
+            console.log("cartiems used on loggout test ok",cartItems);
+              const token = Cookies.get("token");
+            if (token && hasSyncedCart) {
+                    await syncCartToDB(
+                        cartItems.map(item => ({
+                        productID: item.productID,
+                        title: item.title,
+                        quantity: item.quantity,
+                        price: item.price,
+                        optiuniNormale: item.selectedValues,
+                        image: item.imageId,
+                        vopsit: item.vopsit || false,
+                      })),
+                      token
+                    );
+                  }
+
+
+
             function deleteAllCookies() {
               const allCookies = Cookies.get();
               Object.keys(allCookies).forEach(cookieName => {
-              if (cookieName !== "showModal" && cookieName !== "consent") {
-                 Cookies.remove(cookieName);
-              } 
-         });
-        }
-    
+                if (cookieName !== "showModal" && cookieName !== "consent") {
+                  Cookies.remove(cookieName);
+                }
+              });
+            }
+            
+            dispatch(setHasSyncedCart(false));
+            dispatch(clearCart());
             deleteAllCookies();
+            dispatch(setLoginLogOut(false));
 
-            dispatch(setLoginLogOut(true));
 
-            setLogin(false);
-        };
+    } catch (err) {
+      console.error("Logout sync failed:", err);
+    }
+};
+
     
         const onLeave = () => {
             setShowUserInfo(false);
@@ -117,7 +150,7 @@ const UserInfo = ({ setLogin }) => {
   loginItemsFPhone.map((item, index) => (
     <div key={index}>
       {item.text === "Sign Out" ? (
-        <div onClick={handleLoggout} className="sign-out-item">
+        <div onClick={handleLogout} className="sign-out-item">
           <div className="mobile-flexbox">
             <div className="userInfo-pictures">
               <Image
@@ -199,7 +232,7 @@ const UserInfo = ({ setLogin }) => {
                         {loginItems.map((item, index) => (
                             <div key={index}>
                                 {item.text === "Sign Out" ? (
-                                    <div onClick={handleLoggout} className="sign-out-item">
+                                    <div onClick={handleLogout} className="sign-out-item">
                                         <div className="setari-felxbox">
                                             <div className="userInfo-pictures">
                                                 <Image
@@ -244,3 +277,4 @@ const UserInfo = ({ setLogin }) => {
     };    
 
 export default UserInfo;
+

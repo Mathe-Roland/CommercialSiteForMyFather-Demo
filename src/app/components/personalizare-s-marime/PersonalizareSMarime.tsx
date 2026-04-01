@@ -1,5 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
-import DynamicRadioButtons from "../DynamicRadioButtons/RadioButtonGroup";
+import DynamicRadioButtons from "../DynamicRadioButtons/DynamicRadioButtons";
 import { useState } from "react";
 
 type PersonalizareSMarimeProps={

@@ -228,7 +228,7 @@ export const updateProductQuantity = async (productId:string,quantity:number) =>
           "Content-type": "application/json; charset=UTF-8",
           "Authorization": `Bearer ${token}`,
         };
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/comenzis?populate=*&filters[customerName][id][$eq]=${userId}`, { headers: headers });
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/comenzis?populate=*&filters[users_permissions_user][id][$eq]=${userId}`, { headers: headers });
         return response.data;
       } catch (error) {
         return null;

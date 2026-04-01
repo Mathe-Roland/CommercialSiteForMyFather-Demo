@@ -29,10 +29,14 @@ const DespreNoiItems = () => {
       const data = await fetchCategory(category);
       const descriptionsData = await fetchCategoryDescriptions();
 
-      const matchedDescription = descriptionsData.find(
-        desc => desc.attributes.category.toLowerCase() === category
-      );
+      console.log("descriptionsData:", descriptionsData);
 
+
+      const matchedDescription = (descriptionsData || []).find(
+        desc => desc.attributes?.category?.toLowerCase() === category
+            );
+
+      console.log("matchedDescription:", matchedDescription);
       setCategoryDescriptions(
         matchedDescription?.attributes?.description || ""
       );

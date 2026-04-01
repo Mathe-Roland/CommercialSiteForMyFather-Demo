@@ -5,6 +5,7 @@ const initialState = {
   totalQuantity: 0,
   totalPrice: 0,
   transportCost: 0,
+  hasSyncedCart: false,
   loginLogOut: false,
 };
 
@@ -21,20 +22,30 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem: (state, action) => {
-      const newItem = action.payload;
-      const existingItem = state.items.find((item) => item.id === newItem.id);
+  addItem: (state, action) => {
+        const newItem = action.payload;
 
-      if (existingItem) {
-        existingItem.quantity += newItem.quantity;
-      } else {
-        state.items.push({ ...newItem, quantity: newItem.quantity || 1 });
-      }
+        const existing = state.items.find(i => i.id === newItem.id);
 
-      state.totalQuantity = state.items.reduce((sum, item) => sum + item.quantity, 0);
-      state.totalPrice = calculateTotal(state.items);
-      state.transportCost = calculateTransport(state.totalPrice);
-    },
+        if (existing) {
+          if(state.hasSyncedCart){
+            existing.quantity = Math.max(existing.quantity, newItem.quantity || 1);
+          }else{
+            existing.quantity += newItem.quantity || 1;
+          }
+        } else {
+          state.items.push({
+            ...newItem,
+            quantity: newItem.quantity || 1
+          });
+        }
+
+        state.totalQuantity = state.items.reduce((sum, i) => sum + i.quantity, 0);
+        state.totalPrice = calculateTotal(state.items);
+        state.transportCost = calculateTransport(state.totalPrice);
+},
+
+
 
     removeItem: (state, action) => {
       const itemId = action.payload;
@@ -55,6 +66,11 @@ const cartSlice = createSlice({
         state.transportCost = calculateTransport(state.totalPrice);
       }
     },
+    
+    setHasSyncedCart: (state, action) => {
+        state.hasSyncedCart = action.payload;
+      },
+
 
     clearCart: (state) => {
       state.items = [];
@@ -69,5 +85,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, setQuantity, clearCart, setLoginLogOut } = cartSlice.actions;
+export const { addItem, removeItem, setQuantity, clearCart, setLoginLogOut, setHasSyncedCart } = cartSlice.actions;
 export default cartSlice.reducer;

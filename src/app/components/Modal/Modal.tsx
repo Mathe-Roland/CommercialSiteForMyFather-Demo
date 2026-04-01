@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -13,11 +13,16 @@ import { userMe } from '../asyncOperations/user-requests/requests';
 import './Modal.css';
 import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
-import { setLoginLogOut } from '../../../redux/cart';
+import { addItem, clearCart, setHasSyncedCart, setLoginLogOut } from '../../../redux/cart';
 import { RootState } from '../../../redux/store';
 import GoogleLoginButton from '../google-login/GoogleLoginButton';
+import { userData } from "../asyncOperations/fetch-by-id/fetchBYId";
+import { syncCartToDB } from '../functions';
 
-const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void}) => {
+
+
+
+const LoginModal = () => {
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -25,9 +30,13 @@ const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void}) => {
     name: '',
     password: '',
   });
-  
-    const isInCart = useSelector((state: RootState) => state.cart.items.length > 0);
+  const hasSyncedCart = useSelector(
+      (state: RootState) => state.cart.hasSyncedCart);
 
+  const isInCart = useSelector((state: RootState) => state.cart.items.length > 0);
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+
+  
     const dispatch = useDispatch();
 
   const handleOpen = () => {
@@ -61,6 +70,9 @@ const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void}) => {
     }
 
     try {
+
+
+
       const response = await registerUser(name, password);
       Cookies.set('token', response.data.jwt, {
         secure: true,
@@ -84,11 +96,64 @@ const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void}) => {
         path: '/',
       });
 
-      setLogin(true);
+      dispatch(setLoginLogOut(true));
+
+
+      const token = Cookies.get("token");
+
+      
+    if (isInCart && !hasSyncedCart) {
+      await syncCartToDB(
+        cartItems.map(item => ({
+                 productID: item.productID,
+                 title: item.title,
+                 quantity: item.quantity,
+                 price: item.price,
+                 optiuniNormale: item.selectedValues,
+                 image: item.imageId,
+                 vopsit: item.vopsit || false, 
+                })),
+                token
+              );
+            }
+            
+            dispatch(setHasSyncedCart(true));
+            const registeredUserCartData = await userData();
+
+            console.log("hasSyncedCart value after login:", hasSyncedCart);
+
+        if (registeredUserCartData?.data?.length > 0) {
+           const storeData = registeredUserCartData.data.map(e => ({
+              id: btoa(`${e.attributes.productID}-${e.attributes.optiuniNormale}`),
+              productID: e.attributes.productID,
+              title: e.attributes.title,
+              price: e.attributes.price,
+              selectedValues: e.attributes.optiuniNormale,
+              quantity: e.attributes.quantity,
+              image: e.attributes.image?.data?.attributes?.url,
+              imageId: e.attributes.image?.data?.id || null,
+              vopsit: e.attributes.vopsit || false,
+                }));
+
+      
+
+            dispatch(clearCart());
+
+            storeData.forEach((e) => dispatch(addItem(e)));
+
+            console.log("Cart data from DB merged with local cart:", cartItems);
+          }
+        
+  
+        
     } catch (error) {
       console.error(error);
     }
   };
+
+
+  
+
 
   const passwordChange = (e) => {
     setPassword(e.target.value);
@@ -113,7 +178,7 @@ const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void}) => {
   const loginIcon = "/loginicon.png";
 
   return (
-    <div>
+    <>
       <div className='modal-items-container'>
 
       <Button
@@ -195,7 +260,7 @@ const LoginModal = ({ setLogin }: { setLogin: (value: boolean) => void}) => {
           </div>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 };
 

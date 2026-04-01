@@ -10,9 +10,22 @@ export async function submitOrder({
   const userExist = Cookies.get("user");
   let description = "";
 
-  cartItems.forEach((item) => {
-    description += `${item.title} x ${item.quantity}\n`;
-  });
+  cartItems.forEach((item, index) => {
+      description += `${index + 1}. ${item.title}\n`;
+      description += `   Cantitate: ${item.quantity}\n`;
+
+      if (item.selectedValues) {
+        description += `   Optiuni: ${item.selectedValues}\n`;
+      }
+
+      if (typeof item.vopsit === "boolean") {
+        description += `   Vopsit: ${item.vopsit ? "Da" : "Nu"}\n`;
+      }
+
+      description += `   Pret unitar: ${item.price} RON\n`;
+      description += "\n";
+    });
+
 
   const payload = {
     ...formData,

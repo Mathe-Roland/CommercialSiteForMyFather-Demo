@@ -1,4 +1,4 @@
-import DynamicRadioButtons from "../RadioButtonGroup";
+import DynamicRadioButtons from "../DynamicRadioButtons";
 
 const radioOptions = [
     { label: 'Nevopsit', value: 'Nevopsit' },

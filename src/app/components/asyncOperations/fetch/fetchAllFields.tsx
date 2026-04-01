@@ -1,24 +1,32 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
+
 export const fetchPanouriData = async () => {
-    try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates?populate=*`);
-        return response.data.data;
-    } catch (error) {
-        console.error('Error fetching Panouri data:', error);
-    }
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates?pagination[limit]=1000&populate=*`
+    );
+
+    return response.data.data || [];
+  } catch (error) {
+    console.error("Error fetching Panouri data:", error);
+    return [];
+  }
 };
 
 export const fetchArticlesData = async () => {
-    try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/articles?populate=*`);
-        return response.data.data;
-    } catch (error) {
-        console.error('Error fetching Articles data:', error);
-    }
-};
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/articles?pagination[limit]=1000&populate=*`
+    );
 
+    return response.data.data || [];
+  } catch (error) {
+    console.error("Error fetching Articles data:", error);
+    return [];
+  }
+};
 
 
 export const fetchCategoryDescriptions = async () => {
@@ -105,6 +113,20 @@ export const imageFiles=async ()=>{
     const headers = {
     "Content-type": "application/json; charset=UTF-8",
     "Authorization": `Bearer ${token}`,
+    };
+    
+    const response=await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/upload/files`, { headers: headers });
+
+    return response.data;
+   
+}
+
+
+export const imageFilesNonAuthUser=async ()=>{
+
+
+    const headers = {
+    "Content-type": "application/json; charset=UTF-8",
     };
     
     const response=await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/upload/files`, { headers: headers });

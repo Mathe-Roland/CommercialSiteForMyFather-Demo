@@ -15,6 +15,7 @@ import Pagination from "@mui/material/Pagination";
 
 const IndividualArticlesClient = () => {
   const { articleId } = useParams();
+
   const [articleData, setArticleData] = useState([]);
   const [descriptionBrokenInThree, setDescriptionBrokenInThree] = useState([]);
   const [articleIds, setArticleIds] = useState("");
@@ -24,6 +25,11 @@ const IndividualArticlesClient = () => {
   const [username, setUserName] = useState("");
   const [loading, setLoading] = useState(true);
   const commentsPerPage = 12;
+  const normalizedId = Array.isArray(articleId)
+    ? articleId[0]
+    : articleId;
+  
+  const realId = normalizedId?.split("-")[0];
 
   useEffect(() => {
     const fetchDataAndFilter = async () => {
@@ -31,7 +37,7 @@ const IndividualArticlesClient = () => {
         const userData = await fetchArticlesData();
         if (userData && userData.length > 0) {
           const specificPanou = userData.find(
-            (item) => item.id === Number(articleId)
+            (item) => item.id === Number(realId)
           );
           if (specificPanou) {
             setArticleIds(specificPanou.id);
@@ -53,10 +59,29 @@ const IndividualArticlesClient = () => {
 
     const fetchArticleData = async () => {
       try {
-        const data = await fetchArticleId(articleId);
+        console.log("Fetching article data for ID:", articleId);
+
+        const id = Array.isArray(articleId)
+            ? articleId[0].split("-")[0]
+            : articleId?.split("-")[0];
+        const data = await fetchArticleId(id);
         if (data && data.length > 0) {
-          setDescriptionBrokenInThree(data[0].attributes.description.split("\n\n"));
           setArticleData(data);
+          const description = data[0]?.attributes?.description|| "";
+
+          const length = description.length;
+          const partSize = Math.ceil(length / 3);
+
+          const parts = [
+            description.slice(0, partSize),
+            description.slice(partSize, partSize * 2),
+            description.slice(partSize * 2),
+          ];
+
+
+          setDescriptionBrokenInThree(parts);
+
+
         }
       } catch (error) {
         console.error("Error fetching article data:", error);
@@ -76,7 +101,7 @@ const IndividualArticlesClient = () => {
   const handleCommentList = async (newComment) => {
     try {
       const url = "api::article.article";
-      await userRelatedComments(url, articleId, newComment.message);
+      await userRelatedComments(url, realId, newComment.message);
 
       const comments = await fetchPanouriArticlePerArticleId(articleIds);
       if (comments?.data) {

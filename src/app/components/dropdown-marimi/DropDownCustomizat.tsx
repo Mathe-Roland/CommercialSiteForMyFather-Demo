@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {
-  FormControl,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormLabel,
-} from "@mui/material";
+import VopsitRadio from "../DynamicRadioButtons/VopsitRadio/VopsitRadio";
 import "./DropdownMarimi.css";
 import PersonalizareSMarime from "../personalizare-s-marime/PersonalizareSMarime";
+import { convertLegacyProps } from "antd/es/button";
 
 interface DropDownCustomizatProps {
   price: (value: number) => void;
@@ -29,14 +24,14 @@ const DropDownCustomizat = ({
   radioOptions,
   pricingType,
 }: DropDownCustomizatProps) => {
-  const [selectedValue, setSelectedValue] = useState(listOfMarimi[0]);
+  const [selectedValue, setSelectedValue] = useState("");
   const [personalizare, setPersonalizare] = useState(false);
-  const [value, setValue] = useState("Nevopsit");
+  const [value, setValue] = useState(false);
 
 
 useEffect(() => {
   let newPrice = actualPrice;
-  const isVopsit = value === "Vopsit";
+  const isVopsit = value === true;
 
   if (pricingType === "DIMENSIONS") {
     const index = listOfMarimi.indexOf(selectedValue);
@@ -64,13 +59,14 @@ useEffect(() => {
 }, [selectedValue, value, actualPrice, pricingType, listOfMarimi]);
 
 
-  useEffect(() => {
-    if (!listOfMarimi.includes(selectedValue)) {
-          setSelectedValue(listOfMarimi[0]);
-      }
-  }, [listOfMarimi]);
+useEffect(() => {
+  if (listOfMarimi.length > 0) {
+    const defaultValue = listOfMarimi[0];
 
-
+    setSelectedValue(defaultValue);
+    onPersonalizareChange(defaultValue);
+  }
+}, [listOfMarimi]);
 
 
 
@@ -80,11 +76,16 @@ useEffect(() => {
     render(isPersonalizare);
   };
 
-  const handleForVopsitToggle = (event) => {
-    setValue(event.target.value);
-  };
+   const handleNevopsit = () => {
+        setValue(false);
+    };
 
+    const handleVopsit = () => {
+        setValue(true);
+        
+    };
 
+  
   const handleChange = (event) => {
             const newValue = event.target.value;
             setSelectedValue(newValue);
@@ -104,20 +105,8 @@ useEffect(() => {
         handleChange={handleChange}
       />  
 
-      <div className="personalizareSIOptiuniNormaleContainer">
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Selectează tipul de finisaj</FormLabel>
-          <RadioGroup
-            row
-            value={value}
-            onChange={handleForVopsitToggle}
-            name="radio-buttons-group"
-          >
-            <FormControlLabel value="Vopsit" control={<Radio />} label="Vopsit" />
-            <FormControlLabel value="Nevopsit" control={<Radio />} label="Nevopsit" />
-          </RadioGroup>
-        </FormControl>
-      </div>
+      <VopsitRadio handleNevopsit={handleNevopsit} handleVopsit={handleVopsit} />
+
     </div>
   );
 };

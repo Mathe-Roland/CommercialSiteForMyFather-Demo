@@ -6,6 +6,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
+import { formatForURL } from '../functions';
+
 
 interface ArticleProps{
   title:string,
@@ -30,7 +32,7 @@ const ArticleCard = ({ title, date, shortDescription, id }:ArticleProps) => {
           <Typography variant="body2"  className='article-description'>
                   {shortDescription}
           </Typography>
-        <Link href={`/blog/${id}?title=${title}`} className="read-more">Citeste mai mult</Link>
+        <Link href={`/blog/${id}-${formatForURL(title)}`} className="read-more">Citeste mai mult</Link>
         </CardContent>
       </CardActionArea>
     </Card>

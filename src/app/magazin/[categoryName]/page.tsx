@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: { [key: string]: st
 
     const filteredCategory = categoriesData?.filter(element => element.attributes.category === slug);
 
-  
+    
   const title = filteredCategory[0]?.attributes?.category
     ? filteredCategory[0].attributes.category
     : "Categories";

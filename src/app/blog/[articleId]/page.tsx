@@ -1,18 +1,45 @@
-import { fetchArticlesData } from "../../components/asyncOperations/fetch/fetchAllFields";
+import { fetchArticleId } from "../../components/asyncOperations/fetch-by-id/fetchBYId";
 import IndividualArticlesClient from "./IndividualArticlesClient";
-import { Metadata } from 'next';
+import { Metadata } from "next";
+import { formatForURL } from "../../components/functions";
 
-export async function generateMetadata({ params }: { params: { [key: string]: string } }): Promise<Metadata> {
-  const panouriData = await fetchArticlesData();
+export const revalidate = 86400; // ISR
 
-  const filteredPanouriData = panouriData?.filter(element => element.id === parseInt(params.title));
+// ---------- STATIC PARAMS ----------
+export async function generateStaticParams() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/articles?pagination[limit]=1000&populate=*`
+  );
 
-  const title = filteredPanouriData[0]?.attributes?.title
-    ? filteredPanouriData[0].attributes.title
-    : "Normal Title";
-  const description = filteredPanouriData[0]?.attributes.description
-    ? filteredPanouriData.description
-    : "Default Description";
+  const data = await res.json();
+
+  return data.data.map((item: any) => ({
+    articleId: `${item.id}-${formatForURL(item.attributes.title)}`,
+  }));
+}
+
+// ---------- METADATA ----------
+export async function generateMetadata({
+  params,
+}: {
+  params: { articleId: string };
+}): Promise<Metadata> {
+  const id = params.articleId.split("-")[0];
+  console.log("Generating metadata for article ID:", id);
+  const article = await fetchArticleId(id);
+
+  if (!article) {
+    return {
+      title: "Article not found | DecorCut",
+    };
+  }
+  console.log("Article data for metadata:", article);
+  const title = article[0]?.attributes?.title || "DecorCut Blog Article";
+
+  const description =
+    article[0]?.attributes?.shortDescription ||
+    article[0]?.attributes?.shortDescription ||
+    "DecorCut blog article";
 
   return {
     title,
@@ -20,11 +47,7 @@ export async function generateMetadata({ params }: { params: { [key: string]: st
   };
 }
 
-const IndividualArticles = () => {
-
-
-    return (<IndividualArticlesClient/>);
+// ---------- PAGE ----------
+export default function IndividualArticles() {
+  return <IndividualArticlesClient />;
 }
-
-export default IndividualArticles;
-

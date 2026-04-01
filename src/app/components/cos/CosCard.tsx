@@ -29,10 +29,7 @@ const CosCard = ({ id, image, title, price, quantity }) => {
   };
 
   const deleteItem = async () => {
-    if (Cookies.get("user")) {
-      await deleteProductData(id);
-    }
-
+   
     dispatch(removeItem(id));
     
   };
