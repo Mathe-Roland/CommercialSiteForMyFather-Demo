@@ -39,7 +39,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 
 
   return {
-    title: `${product.attributes.title} | DecorCut`,
+    title: `${product.attributes.title}`,
     description: product.attributes.description?.slice(0, 160),
 
     alternates: {

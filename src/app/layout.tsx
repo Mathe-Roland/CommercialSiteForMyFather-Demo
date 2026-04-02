@@ -9,11 +9,8 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { ReduxProvider } from '../redux/Provider';
 
 export const metadata = {
-  title: 'panouri decorative mdf traforate',
-  description: `Descoperiți o gamă largă de produse traforate din mdf, 
-    fiecare piesă fiind realizată cu atenție la detalii și o pasiune pentru design. 
-    De la panouri decorative care adaugă un aer sofisticat oricărei încăperi, 
-    la masti de calorifer, fiecare produs reflectă măiestria artizanală și durabilitatea lemnului de cea mai înaltă calitate.`,
+  title: 'Panou mdf',
+  description: `Panouri MDF decorative personalizate pentru interior. Design modern, finisaje de calitate și dimensiuni la comandă. Transformă-ți casa cu Decorcut.`,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
