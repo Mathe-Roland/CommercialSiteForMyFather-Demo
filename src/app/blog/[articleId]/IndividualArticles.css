@@ -17,6 +17,49 @@ h1, p {
     width: 50%;
 }
 
+.article-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.article-date {
+    font-size: 1.25rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.article-paragraph {
+    font-size: 2rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+
+.article-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+}
+
+
+.article-list {
+    font-size: 2rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+}
+
+
+.ordered-item{
+    margin-top:35px;
+    margin-bottom:15px;
+}
+
+.ordered-item h3{
+    font-size:28px;
+    font-weight:700;
+}
 
 .comment-box {
     background-color: #fff; 

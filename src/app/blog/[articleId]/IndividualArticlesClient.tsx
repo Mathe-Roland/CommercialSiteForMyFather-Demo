@@ -12,10 +12,13 @@ import Cookies from "js-cookie";
 import Image from "next/image";
 import Stack from "@mui/material/Stack";
 import Pagination from "@mui/material/Pagination";
+import { parseArticle } from "../../components/functions";
+
+
+
 
 const IndividualArticlesClient = () => {
   const { articleId } = useParams();
-
   const [articleData, setArticleData] = useState([]);
   const [descriptionBrokenInThree, setDescriptionBrokenInThree] = useState([]);
   const [articleIds, setArticleIds] = useState("");
@@ -30,6 +33,8 @@ const IndividualArticlesClient = () => {
     : articleId;
   
   const realId = normalizedId?.split("-")[0];
+
+
 
   useEffect(() => {
     const fetchDataAndFilter = async () => {
@@ -59,6 +64,7 @@ const IndividualArticlesClient = () => {
 
     const fetchArticleData = async () => {
       try {
+
         console.log("Fetching article data for ID:", articleId);
 
         const id = Array.isArray(articleId)
@@ -66,20 +72,31 @@ const IndividualArticlesClient = () => {
             : articleId?.split("-")[0];
         const data = await fetchArticleId(id);
         if (data && data.length > 0) {
+          
           setArticleData(data);
-          const description = data[0]?.attributes?.description|| "";
-
-          const length = description.length;
-          const partSize = Math.ceil(length / 3);
-
-          const parts = [
-            description.slice(0, partSize),
-            description.slice(partSize, partSize * 2),
-            description.slice(partSize * 2),
-          ];
+          
+          const description = data[0]?.attributes?.description || "";
 
 
-          setDescriptionBrokenInThree(parts);
+
+          const parsed = parseArticle(description);
+
+          setDescriptionBrokenInThree(parsed);
+
+
+          // const length = description.length;
+          // const partSize = Math.ceil(length / 3);
+
+          // const parts = [
+          //   description.slice(0, partSize),
+          //   description.slice(partSize, partSize * 2),
+          //   description.slice(partSize * 2),
+          // ];
+
+        console.log(JSON.stringify(description));
+        // console.log(description);
+
+
 
 
         }
@@ -92,7 +109,7 @@ const IndividualArticlesClient = () => {
     fetchDataAndFilter();
   }, [articleId]);
 
-  useEffect(() => {
+    useEffect(() => {
     const commentLength = originalComments.length;
     const pages = Math.ceil(commentLength / commentsPerPage);
     setNumberOfPages(pages);
@@ -124,51 +141,61 @@ const IndividualArticlesClient = () => {
     return <div className="articles-loading-screen">Loading...</div>;
   }
 
+
   return (
+
+
     <div className="IndividualArticles-container" suppressHydrationWarning>
-      <h1>{articleData[0]?.attributes?.title}</h1>
-      <p>{articleData[0]?.attributes?.date}</p>
-      <p>{descriptionBrokenInThree[0]}</p>
-      <div className="images-container">
-        <Image
-          className="image"
-          src={
-            articleData[0]?.attributes?.image?.data[0]?.attributes?.url ||
-            "/logosDecorcut.png"
+      <h1 className="article-title">{articleData[0]?.attributes?.title}</h1>
+      <p className="article-date">{articleData[0]?.attributes?.date}</p>
+
+
+      {descriptionBrokenInThree.map((block, index) => {
+          switch (block.type) {
+            case "paragraph":
+              return <p className="article-paragraph" key={index}>{block.content}</p>;
+
+            case "heading":
+              return <h2 className="article-heading" key={index}>{block.content}</h2>;
+
+            case "image":
+              return (
+                <div className="images-container" key={index}>
+                  <Image
+                    src={
+                      articleData[0]?.attributes?.image?.data[block.index]
+                        ?.attributes?.url || "/logosDecorcut.png"
+                    }
+                    width={450}
+                    height={320}
+                    alt={`Image ${block.index + 1}`}
+                  />
+                </div>
+              );
+
+            case "list":
+              return (
+                <ul className="article-list" key={index}>
+                  {block.items.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              );
+
+              case "ordered-item":
+                return (
+                  <div className="ordered-item" key={index}>
+                    <h3>
+                      {block.number}. {block.title}
+                    </h3>
+                  </div>
+                );
+
+            default:
+              return null;
           }
-          width={250}
-          height={250}
-          alt="Article Image 1"
-        />
-      </div>
-      <p>{descriptionBrokenInThree[1]}</p>
-      <div className="images-container">
-        <Image
-          className="image"
-          src={
-            articleData[0]?.attributes?.image?.data[1]?.attributes?.url ||
-            "/logosDecorcut.png"
-          }
-          width={250}
-          height={250}
-          alt="Article Image 2"
-        />
-      </div>
-      <p>{descriptionBrokenInThree[2]}</p>
-      <div className="images-container">
-        <Image
-          className="image"
-          src={
-            articleData[0]?.attributes?.image?.data[2]?.attributes?.url ||
-            "/logosDecorcut.png"
-          }
-          width={250}
-          height={250}
-          alt="Article Image 3"
-        />
-      </div>
-      <p>{descriptionBrokenInThree[3]}</p>
-      <div className="comment-header">
+        })}
+           <div className="comment-header">
         <h3>Comments</h3>
         <AddCommentModal addComment={handleCommentList} />
       </div>
