@@ -16,19 +16,21 @@ export default async function sitemap() {
     ),
   ]);
 
+
+  
   const products = await productsRes.json();
   const blogs = await blogsRes.json();
 
   const productUrls = products.data.map((item) => ({
     url: `${domain}/produse/${item.id}-${formatForURL(item.attributes.title)}`,
-    lastModified: new Date(),
+    lastModified: new Date(item.attributes.updatedAt),
     changeFrequency: "daily",
     priority: 0.8,
   }));
 
   const blogUrls = blogs.data.map((item) => ({
     url: `${domain}/blog/${item.id}-${formatForURL(item.attributes.title)}`,
-    lastModified: new Date(),
+    lastModified: new Date(item.attributes.updatedAt),
     changeFrequency: "weekly",
     priority: 0.6,
   }));

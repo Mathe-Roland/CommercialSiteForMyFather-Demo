@@ -3,6 +3,7 @@ import Produs from "../../components/produse-individuale/ProdusIndividual";
 import { fetchPanouById } from "../../components/asyncOperations/fetch-by-id/fetchBYId";
 import "./Produse.css";
 import { formatForURL } from "../../components/functions";
+import { permanentRedirect } from "next/navigation";
 
 
 export const revalidate = 60;
@@ -24,15 +25,22 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }): Promise<Metadata> {
  
+      const id = params.title.split("-")[0];
 
-  const id = params.title.split("-")[0];
+      const product = await fetchPanouById(id);
 
-  const product = await fetchPanouById(id);
+        if (!product) {
+            return {
+                title: "Not found"
+            };
+        }
 
+    const expectedSlug =
+        `${product.id}-${formatForURL(product.attributes.title)}`;
 
-  if (!product) {
-    return { title: "Produs indisponibil | DecorCut" };
-  }
+    if (params.title !== expectedSlug) {
+        permanentRedirect(`/produse/${expectedSlug}`);
+    }
 
 
   const canonicalUrl = `https://www.decorcut.ro/produse/${params.title}`;
