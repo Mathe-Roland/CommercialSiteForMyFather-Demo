@@ -1,5 +1,3 @@
-"use client";
-
 import "./ProdusCard.css";
 import Link from "next/link";
 import Card from '@mui/material/Card';
