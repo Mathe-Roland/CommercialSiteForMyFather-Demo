@@ -4,7 +4,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
-import { useMediaQuery } from '@mui/material';
 import Image from 'next/image';
 import {formatForURL} from '../functions';
 
@@ -36,7 +35,6 @@ const ProdusCard = ({ description, title, image, disponibil, price, id ,priority
               height="180"
               width="180"
               priority={priority}
-              unoptimized
             />
 
           <CardContent>
