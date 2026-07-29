@@ -1,48 +1,22 @@
-"use client";
 
-import React, { useState, useEffect } from 'react';
 import "./Product.css";
 import ProdusCard from '../card-produse/ProdusCard';
 import { fetchPanouriData } from '../asyncOperations/fetch/fetchAllFields';
 import { promotii } from '../asyncOperations/populate-db';
 
-const Products = () => {
-  const [cardList, setCardList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [promotileMele,setPromotileMele]=useState([]);
+const Products = async () => {
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchPanouriData();
-        const dateleMele= await promotii();
+  const cardList = await fetchPanouriData();
+  const promotileMele = await promotii();
+  const promotiilePagina=promotileMele?.data;
 
-
-        setPromotileMele(dateleMele.data);
-        setCardList(data);
-      } catch (error) {
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-    
-  }, []);
-
-  if (loading) {
-    return (
-      <div className='loader-container'>
-      </div>
-    );
-  }
 
 
   return (
     <div className='normal-headers' suppressHydrationWarning>
       <div className='margin0Auto'>
-        {cardList.length > 0 ? cardList.map((data) => (
+        {cardList.length > 0 ? cardList.map((data,index) => (
           <ProdusCard
             key={data.id}
             image={data?.attributes?.image?.data?.[0]?.attributes?.url}
@@ -50,6 +24,8 @@ const Products = () => {
             disponibil={"Produs Disponibil"}
             description={data.attributes?.description}
             price={data.attributes?.price}
+            priority={index === 0}
+
             id={data.id}
           />
         )) : null}
@@ -62,8 +38,8 @@ const Products = () => {
         <div className='margin0Auto'>
 
         {
-        promotileMele.length>0
-        ? promotileMele.map(e=>
+        promotiilePagina?.length > 0
+        ? promotiilePagina.map(e=>
         (  <ProdusCard
            key={e.id}
            image={e.attributes?.promotionImage?.data?.attributes?.url}

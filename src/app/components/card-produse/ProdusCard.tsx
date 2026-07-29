@@ -9,6 +9,7 @@ import CardActionArea from '@mui/material/CardActionArea';
 import { useMediaQuery } from '@mui/material';
 import Image from 'next/image';
 import {formatForURL} from '../functions';
+
 interface ProdusCardProps {
   description: string;
   title: string;
@@ -16,14 +17,12 @@ interface ProdusCardProps {
   disponibil: string;
   price: number;
   id: number;
+  priority?: boolean;
 }
 
-const ProdusCard = ({ description, title, image, disponibil, price, id }: ProdusCardProps) => {
+const ProdusCard = ({ description, title, image, disponibil, price, id ,priority}: ProdusCardProps) => {
 
-  const isMobile = useMediaQuery('(max-width:768px)');
 
-  const isHighPriorityImage = 
-    image === "https://res.cloudinary.com/ddrkdrrre/image/upload/v1732733779/Raft_suport_wifi_din_mdf_alb_1_kepavif_6fe4bc39a0.avif";
 
   return (
     <Card className='produscard-container'>
@@ -32,28 +31,16 @@ const ProdusCard = ({ description, title, image, disponibil, price, id }: Produs
         href={`/produse/${id}-${formatForURL(title)}`}
       >
         <CardActionArea>
-          {isHighPriorityImage && isMobile ? (
-            <Image
-              className='produs-image'
-              src={image}
-              alt={title}
-              width={180}
-              height={180}
-              priority 
-              placeholder="blur"
-              blurDataURL="/logosDecorcut.png"
-              unoptimized
-            />
-          ) : (
             <Image
               className="produs-image"
               src={image || "/logosDecorcut.png"}
               alt={title}
               height="180"
               width="180"
+              priority={priority}
               unoptimized
             />
-          )}
+
           <CardContent>
             <Typography 
               gutterBottom 
