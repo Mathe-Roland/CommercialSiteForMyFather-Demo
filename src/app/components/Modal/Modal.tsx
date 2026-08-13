@@ -1,266 +1,279 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import { TextField } from '@mui/material';
-import Link from 'next/link';
-import Cookies from 'js-cookie';
-import { registerUser } from '../asyncOperations/user-requests/requests';
-import { userMe } from '../asyncOperations/user-requests/requests';
-import './Modal.css';
-import Image from 'next/image';
-import { useSelector, useDispatch } from 'react-redux';
-import { addItem, clearCart, setHasSyncedCart, setLoginLogOut } from '../../../redux/cart';
-import { RootState } from '../../../redux/store';
-import GoogleLoginButton from '../google-login/GoogleLoginButton';
-import { userData } from "../asyncOperations/fetch-by-id/fetchBYId";
-import { syncCartToDB } from '../functions';
+import React, { useState } from "react";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import { TextField } from "@mui/material";
+import Link from "next/link";
+import Cookies from "js-cookie";
+import "./Modal.css";
 
-
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../../redux/store";
+import {
+  addItem,
+  clearCart,
+  setHasSyncedCart,
+  setLoginLogOut,
+} from "../../../redux/cart";
 
 
-const LoginModal = () => {
-  const [open, setOpen] = useState(false);
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+import dynamic from "next/dynamic";
+
+
+interface GoogleLoginWrapperProps {
+  onSuccess: () => void;
+}
+
+const GoogleLoginWrapper = dynamic<GoogleLoginWrapperProps>(
+  () => import("../GoogleLoginWrapper"),
+  {
+    ssr: false,
+    loading: () => null,
+  }
+);
+
+interface LoginModalProps {
+  onClose: () => void;
+}
+
+const LoginModal = ({ onClose }: LoginModalProps) => {
+  const dispatch = useDispatch();
+
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+
   const [formIsValid, setFormValidation] = useState({
-    name: '',
-    password: '',
+    name: "",
+    password: "",
   });
-  const hasSyncedCart = useSelector(
-      (state: RootState) => state.cart.hasSyncedCart);
 
-  const isInCart = useSelector((state: RootState) => state.cart.items.length > 0);
+  const hasSyncedCart = useSelector(
+    (state: RootState) => state.cart.hasSyncedCart
+  );
+
+  const isInCart = useSelector(
+    (state: RootState) => state.cart.items.length > 0
+  );
+
   const cartItems = useSelector((state: RootState) => state.cart.items);
 
-  
-    const dispatch = useDispatch();
-
-  const handleOpen = () => {
-    setOpen(true);
-    setFormValidation({ name: '', password: '' });
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const handleLogIn = async () => {
-    const usernameEmptyText = 'The username field is empty';
-    const passwordEmptyText = 'The password field is empty';
+
+    const { registerUser, userMe } = await import(
+        "../asyncOperations/user-requests/requests"
+        );
+
+      const { userData } = await import(
+        "../asyncOperations/fetch-by-id/fetchBYId"
+      );
+
+      const { syncCartToDB } = await import(
+        "../functions"
+      );
+
+    const usernameEmptyText = "The username field is empty";
+    const passwordEmptyText = "The password field is empty";
 
     dispatch(setLoginLogOut(false));
 
     if (name.length === 0 && password.length === 0) {
-      setFormValidation({ name: usernameEmptyText, password: passwordEmptyText });
+      setFormValidation({
+        name: usernameEmptyText,
+        password: passwordEmptyText,
+      });
       return;
     }
 
     if (name.length === 0) {
-      setFormValidation({ ...formIsValid, name: usernameEmptyText });
+      setFormValidation({
+        ...formIsValid,
+        name: usernameEmptyText,
+      });
       return;
     }
 
     if (password.length === 0) {
-      setFormValidation({ ...formIsValid, password: passwordEmptyText });
+      setFormValidation({
+        ...formIsValid,
+        password: passwordEmptyText,
+      });
       return;
     }
 
     try {
-
-
-
       const response = await registerUser(name, password);
-      Cookies.set('token', response.data.jwt, {
+
+      Cookies.set("token", response.data.jwt, {
         secure: true,
-        sameSite: 'Strict',
+        sameSite: "Strict",
         expires: 1,
-        path: '/',
+        path: "/",
       });
 
-      Cookies.set('user', name, {
+      Cookies.set("user", name, {
         secure: true,
-        sameSite: 'Strict',
+        sameSite: "Strict",
         expires: 1,
-        path: '/',
+        path: "/",
       });
 
       const userId = await userMe();
-      Cookies.set('userId', userId, {
+
+      Cookies.set("userId", userId, {
         secure: true,
-        sameSite: 'Strict',
+        sameSite: "Strict",
         expires: 1,
-        path: '/',
+        path: "/",
       });
 
       dispatch(setLoginLogOut(true));
 
-
       const token = Cookies.get("token");
 
-      
-    if (isInCart && !hasSyncedCart) {
-      await syncCartToDB(
-        cartItems.map(item => ({
-                 productID: item.productID,
-                 title: item.title,
-                 quantity: item.quantity,
-                 price: item.price,
-                 optiuniNormale: item.selectedValues,
-                 image: item.imageId,
-                 vopsit: item.vopsit || false, 
-                })),
-                token
-              );
-            }
-            
-            dispatch(setHasSyncedCart(true));
-            const registeredUserCartData = await userData();
+      if (isInCart && !hasSyncedCart) {
+        await syncCartToDB(
+          cartItems.map((item) => ({
+            productID: item.productID,
+            title: item.title,
+            quantity: item.quantity,
+            price: item.price,
+            optiuniNormale: item.selectedValues,
+            image: item.imageId,
+            vopsit: item.vopsit || false,
+          })),
+          token
+        );
+      }
 
-            console.log("hasSyncedCart value after login:", hasSyncedCart);
+      dispatch(setHasSyncedCart(true));
 
-        if (registeredUserCartData?.data?.length > 0) {
-           const storeData = registeredUserCartData.data.map(e => ({
-              id: btoa(`${e.attributes.productID}-${e.attributes.optiuniNormale}`),
-              productID: e.attributes.productID,
-              title: e.attributes.title,
-              price: e.attributes.price,
-              selectedValues: e.attributes.optiuniNormale,
-              quantity: e.attributes.quantity,
-              image: e.attributes.image?.data?.attributes?.url,
-              imageId: e.attributes.image?.data?.id || null,
-              vopsit: e.attributes.vopsit || false,
-                }));
+      const registeredUserCartData = await userData();
 
-      
+      if (registeredUserCartData?.data?.length > 0) {
+        const storeData = registeredUserCartData.data.map((e) => ({
+          id: btoa(
+            `${e.attributes.productID}-${e.attributes.optiuniNormale}`
+          ),
+          productID: e.attributes.productID,
+          title: e.attributes.title,
+          price: e.attributes.price,
+          selectedValues: e.attributes.optiuniNormale,
+          quantity: e.attributes.quantity,
+          image: e.attributes.image?.data?.attributes?.url,
+          imageId: e.attributes.image?.data?.id || null,
+          vopsit: e.attributes.vopsit || false,
+        }));
 
-            dispatch(clearCart());
+        dispatch(clearCart());
 
-            storeData.forEach((e) => dispatch(addItem(e)));
+        storeData.forEach((item) => dispatch(addItem(item)));
+      }
 
-            console.log("Cart data from DB merged with local cart:", cartItems);
-          }
-        
-  
-        
+      onClose();
     } catch (error) {
       console.error(error);
     }
   };
 
-
-  
-
-
-  const passwordChange = (e) => {
+  const passwordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
 
-    if (e.target.value === '') {
-      setFormValidation({ ...formIsValid, password: 'The password field is empty' });
+    if (e.target.value === "") {
+      setFormValidation({
+        ...formIsValid,
+        password: "The password field is empty",
+      });
     } else {
-      setFormValidation({ ...formIsValid, password: '' });
+      setFormValidation({
+        ...formIsValid,
+        password: "",
+      });
     }
   };
 
-  const nameChange = (e) => {
+  const nameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
 
-    if (e.target.value === '') {
-      setFormValidation({ ...formIsValid, name: 'The username field is empty' });
+    if (e.target.value === "") {
+      setFormValidation({
+        ...formIsValid,
+        name: "The username field is empty",
+      });
     } else {
-      setFormValidation({ ...formIsValid, name: '' });
+      setFormValidation({
+        ...formIsValid,
+        name: "",
+      });
     }
   };
 
-  const loginIcon = "/loginicon.png";
-
   return (
-    <>
-      <div className='modal-items-container'>
-
-      <Button
-       onClick={handleOpen}
-       className='modal-button'>
-        <div className="desktop">
-          <Image src={loginIcon} width={40} height={40} alt="loginIcon" />
-        </div>
-        <div className='mobile'>
-          <p>Login</p>
-        </div>
-      </Button>
-          {!Cookies.get("user") ? (
-            <Link className='modal-cos-link'
-             href={"/cos"}>
-              Cos
-              {isInCart && (
-                <Image
-                  className="modal-exclamation-mark"
-                  src="/exclamation-mark.png"
-                  alt="exclamation mark"
-                  width={20}
-                  height={20}
-                />
-              )}
-            </Link>
-          ) : null}
-
-       </div>
-
-      <Modal
-        className="modal-z-index"
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-title"
-      >
-        <Box
-          className="modal-box"
+    <Modal
+      className="modal-z-index"
+      open={true}
+      onClose={onClose}
+      aria-labelledby="modal-title"
+    >
+      <Box className="modal-box">
+        <Typography
+          id="modal-title"
+          variant="h6"
+          component="h2"
+          className="modal-title"
         >
-          <Typography
-            id="modal-title"
-            variant="h6"
-            component="h2"
-            className='modal-title'
-          >
-            Conectarea
-          </Typography>
-          <div className='modal-textfields-container'>
-            <TextField
-              label="name"
-              fullWidth
-              variant="outlined"
-              value={name}
-              onChange={nameChange}
-            />
-            <TextField
-              label="password"
-              fullWidth
-              variant="outlined"
-              type="password"
-              value={password}
-              onChange={passwordChange}
-            />
-            <div>
+          Conectarea
+        </Typography>
 
-            <Button className='modal-button' onClick={handleLogIn}>
+        <div className="modal-textfields-container">
+          <TextField
+            label="name"
+            fullWidth
+            variant="outlined"
+            value={name}
+            onChange={nameChange}
+          />
+
+          <TextField
+            label="password"
+            fullWidth
+            variant="outlined"
+            type="password"
+            value={password}
+            onChange={passwordChange}
+          />
+
+          <div>
+            <Button
+              className="modal-button"
+              onClick={handleLogIn}
+            >
               Conectare
             </Button>
-            <Link className="modal-link" href="/Sign-In">
-              <Button className='modal-button' onClick={handleClose}>
+
+            <Link
+              className="modal-link"
+              href="/Sign-In"
+            >
+              <Button
+                className="modal-button"
+                onClick={onClose}
+              >
                 Înregistrare
               </Button>
             </Link>
-
-
-            </div>
-
-            <Button onClick={handleClose}>Close Modal</Button>
           </div>
-        </Box>
-      </Modal>
-    </>
+
+            <GoogleLoginWrapper onSuccess={onClose} />
+
+          <Button onClick={onClose}>
+            Close Modal
+          </Button>
+        </div>
+      </Box>
+    </Modal>
   );
 };
 

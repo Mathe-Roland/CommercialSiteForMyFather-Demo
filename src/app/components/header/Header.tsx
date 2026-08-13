@@ -1,14 +1,13 @@
 'use client';
 
 import "./Header.css";
-import LoginModal from "../Modal/Modal";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import UserInfo from "../userInfo/UserInfo";
-import Cookies from 'js-cookie';
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
+import LoginButton from "../LoginButton";
 
 const Header = () => {
   const [show, setShow] = useState(false);
@@ -57,7 +56,7 @@ const Header = () => {
                   {loginOrLoggout ? (
                     <UserInfo />
                   ) : (
-                    <LoginModal />
+                    <LoginButton/>
                   )}
                 </div>
               ) : null}
@@ -69,7 +68,7 @@ const Header = () => {
               {loginOrLoggout ? (
                 <UserInfo  />
               ) : (
-                <LoginModal/>
+                <LoginButton/>
               )}
               <p className="header-destopview-phone">0770 803 858</p>
               <Link href={"/cos"} className="cos-de-cumparaturi">

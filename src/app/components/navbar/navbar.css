@@ -3,15 +3,18 @@
     margin :2rem auto;
 }
 
+
 .navbar{
     position: relative;
     transition: box-shadow 0.2s ease, transform 0.2s ease;
-    background-color: #2e8b57;
 }
+
+
 
 .navbar-contents p{
     margin:0;
 }
+
 
   a{
     text-decoration: none;
@@ -19,6 +22,7 @@
   a:hover{
     text-decoration: underline;
   }
+
 
 
 .navbar-text{
@@ -30,13 +34,13 @@
 
 
 .navbar-contents{
-
     display: flex;
     width: 80%;
     justify-content: space-between;
     position: relative;
     
 }
+
 
 .navbar-centered{
     display: flex;
@@ -45,12 +49,24 @@
 
 
 .navbar-contents{
-
     display: none;
+}
+
+.mobile-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: white;
+  font-size: 16px;
 }
 
 
 @media screen  and (min-width:690px){
+
+    .navbar{
+        background-color: #2e8b57;
+    }
 
     .navbar.pinned {
         position: fixed;
@@ -65,9 +81,9 @@
     
 
     .navbar-contents{
-
         display: flex;
     }
+
     .formControl{
         display: none;
     }

@@ -5,8 +5,8 @@ import Navbar from './components/navbar/navbar';
 import Header from './components/header/Header';
 import CookiesConsentModal from './components/cookies/CookieConsentModals';
 import ConsentScripts from './components/consent-scripts/ConsentScripts';
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import { ReduxProvider } from '../redux/Provider';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 export const metadata = {
   title: 'Panou mdf',
@@ -17,7 +17,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ro">
       <body>
-        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_S_CLIENT_ID!}>
+          <GoogleOAuthProvider
+            clientId={process.env.NEXT_PUBLIC_GOOGLE_S_CLIENT_ID!}
+          >
+
           <ReduxProvider>
             <ConsentScripts />
             <Header />
@@ -26,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer />
             <CookiesConsentModal />
           </ReduxProvider>
-        </GoogleOAuthProvider>
+          </GoogleOAuthProvider>
       </body>
     </html>
   );

@@ -33,6 +33,8 @@ const Setari = () => {
         setFormData({ ...formData, [field]: event.target.value });
     };
 
+    console.log("pictures for setari",pictures);
+
     useEffect(() => {
        
         const fetchImageData = async () => {
@@ -54,10 +56,16 @@ const Setari = () => {
                 schimbParolaPicture: schimbParolaPicture?.url || "",
                 facturaPicture: facturaPicture?.url || "",
             });
+
+            console.log("fetched pictures", pictures);
+            console.log("fetched schimbare parola picture", schimbParolaPicture);
+            console.log("fetched factura picture", facturaPicture);
         };
 
         getData();
     }, []);
+
+
 
     const updateUser = async () => {
         const jwt = Cookies.get("token");

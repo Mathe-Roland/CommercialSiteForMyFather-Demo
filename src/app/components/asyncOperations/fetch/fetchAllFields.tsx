@@ -15,6 +15,7 @@ export const fetchPanouriData = async () => {
   }
 };
 
+
 export const fetchArticlesData = async () => {
   try {
     const response = await axios.get(
@@ -68,7 +69,6 @@ export const fetchArticle = async () => {
   
   export const userRelatedCommentsGet = async () => {
     const token = Cookies.get("token");
-    const userId=Cookies.get("userId");
 
     const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/comments`;
   
@@ -109,7 +109,9 @@ export const fetchArticle = async () => {
 export const imageFiles=async ()=>{
 
 
-    const token = Cookies.get("token");
+  const token = Cookies.get("token");
+
+
     const headers = {
     "Content-type": "application/json; charset=UTF-8",
     "Authorization": `Bearer ${token}`,

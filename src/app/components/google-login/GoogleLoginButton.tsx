@@ -4,8 +4,15 @@ import { GoogleLogin } from '@react-oauth/google'
 import Cookies from 'js-cookie'
 import { useDispatch } from 'react-redux';
 import { setToken } from '../../../redux/auth-slice';
+import { setLoginLogOut } from '../../../redux/cart';
 
-export default function GoogleLoginButton() {
+
+interface Props {
+    onSuccess?: () => void;
+}
+
+export default function GoogleLoginButton({ onSuccess }: Props) {
+
   const dispatch = useDispatch();
   const handleLoginSuccess = async (credentialResponse) => {
     const idToken = credentialResponse.credential
@@ -13,7 +20,7 @@ export default function GoogleLoginButton() {
     console.log(idToken);
 
     // Send ID token to your Strapi backend
-    const res = await fetch('http://localhost:1337/api/connect/google', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/connect/google`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ idToken }),
@@ -29,11 +36,20 @@ export default function GoogleLoginButton() {
               expires: 1,
               path: '/',
             });
+            
       const jwt = Cookies.get("token");
+
       
       dispatch(setToken(jwt));
+      
+      console.log("Calling onSuccess...");
+      onSuccess?.();
+      console.log("Finished onSuccess.");
 
+      dispatch(setLoginLogOut(true));
+      
       console.log("Logged in as", data.user);
+
     } else {
       console.error('Login failed:', data)
     }

@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import Link from 'next/link';
 import './navbar.css';
+import { useRouter } from "next/navigation";
 
 
 export const navbarData = {
@@ -16,10 +16,13 @@ const magazinList={
 
 const Navbar = () => {
   const [selectedOption, setSelectedOption] = useState('');
-  const [showAcasa, setShowAcasa] = useState(false);
   const [isMobile, setIsMobile] = useState(false); 
 
   const [isPinned, setIsPinned] = useState(false);
+
+
+  const router = useRouter();
+
 
   useEffect(() => {
     const sentinel = document.getElementById("navbar-sentinel");
@@ -52,13 +55,10 @@ const Navbar = () => {
   }, []);
 
 
-  const handleChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
-
   const generateUrl = (name) => {
     return name ? `/${name.toLowerCase().split(' ').join('-')}` : '/';
   };
+
 
 
   return (
@@ -79,50 +79,45 @@ const Navbar = () => {
               : null}
           </div>
         </div>
-
         <div className="formControl">
-          <FormControl fullWidth>
-            <InputLabel id="main-select-label">Select Option</InputLabel>
-          <Select
-            labelId="main-select-label"
-            id="main-select"
-            value={selectedOption}
-            onChange={handleChange}
-          >
-          {isMobile &&
-            navbarData.items.map((e) => {
-              if (e === "Magazin") {
-                return (
-                  <FormControl fullWidth key="magazin">
-                    <InputLabel id="magazin-select-label">Magazin</InputLabel>
-                    <Select
-                      labelId="magazin-select-label"
-                      id="magazin-select"
-                      value={selectedOption}
-                      onChange={handleChange}
-                    >
-                      {magazinList.items.map((item) => (
-                      <Link href={`/magazin/${generateUrl(item)}`} passHref>
-                        <MenuItem value={item} key={item}>
-                            {item}
-                        </MenuItem>
-                      </Link>
-                      ))}
-                    </Select>
-                  </FormControl>
-                );
-              } else {
-                return (
-                  <Link href={e === "Acasa" ? "/" : generateUrl(e)} passHref>
-                    <MenuItem value={e} key={e}>
-                      {e}
-                    </MenuItem>
-                  </Link>
-                );
-              }
-            })}
-             </Select>
-          </FormControl>
+          {isMobile && (
+            <select
+              className="mobile-select"
+              value={selectedOption}
+              onChange={(e) => {
+                const value = e.target.value;
+                setSelectedOption(value);
+
+                if (value) {
+                  router.push(value);
+                }
+              }}
+            >
+              <option value="">Selectează...</option>
+
+              {navbarData.items
+                .filter((item) => item !== "Magazin")
+                .map((item) => (
+                  <option
+                    key={item}
+                    value={item === "Acasa" ? "/" : generateUrl(item)}
+                  >
+                    {item}
+                  </option>
+                ))}
+
+              <optgroup label="Magazin">
+                {magazinList.items.map((item) => (
+                  <option
+                    key={item}
+                    value={`/magazin${generateUrl(item)}`}
+                  >
+                    {item}
+                  </option>
+                ))}
+              </optgroup>
+            </select>
+          )}
         </div>
 
       </nav>
