@@ -38,6 +38,7 @@ const CosClient= () => {
   await startCheckout(cartItems.items, cartItems.transportCost);
 };
 
+
 const handleSubmitFormComanda = async () => {
   await submitOrder({
     formData,
@@ -50,8 +51,6 @@ const handleSubmitFormComanda = async () => {
   window.location.href = "/payment-success";
 };
 
-
-    
 
 
   return (

@@ -16,7 +16,6 @@ const ComenziPlasate=()=>{
 
             return (<div className="comenzi-loading"></div>)
         }
-        console.log("data for comenziPlasate:", data.data);
         setComenziPlasate(data.data)
     }
     getData();
@@ -24,7 +23,6 @@ const ComenziPlasate=()=>{
     
 },[])
 
-    console.log("comenziPlasate:", comenziPlasate);
 
 
     return (<div className="comenzi-plasate-container" suppressHydrationWarning>

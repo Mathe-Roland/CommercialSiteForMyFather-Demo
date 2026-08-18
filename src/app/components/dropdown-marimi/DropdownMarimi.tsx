@@ -54,7 +54,6 @@ const DropdownMui = ({passSelectedValues,listStart,listEndPoint,listIncrement,sp
                 price(dynamicPrice);
             }
         }
-        console.log(selectedValue);
     }, [selectedValue]);
     
     return (

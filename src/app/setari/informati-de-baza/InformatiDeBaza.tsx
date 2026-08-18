@@ -33,7 +33,6 @@ const Setari = () => {
         setFormData({ ...formData, [field]: event.target.value });
     };
 
-    console.log("pictures for setari",pictures);
 
     useEffect(() => {
        
@@ -43,6 +42,8 @@ const Setari = () => {
                 return data;
             } catch (error) {
 
+
+                console.error("Error fetching image data:", error);
                 return [];
             }
         };
@@ -57,9 +58,6 @@ const Setari = () => {
                 facturaPicture: facturaPicture?.url || "",
             });
 
-            console.log("fetched pictures", pictures);
-            console.log("fetched schimbare parola picture", schimbParolaPicture);
-            console.log("fetched factura picture", facturaPicture);
         };
 
         getData();

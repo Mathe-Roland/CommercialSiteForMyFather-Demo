@@ -116,7 +116,6 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
         
         fetchDataAndFilter();
         
-        console.log("imagw",img);
     }, [title]);
     
 
@@ -141,18 +140,13 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
     
             const encodedId = category?.toLowerCase()==="masca de calorifer" ? btoa(`${id}--${mascaCaloriferValues.lungime}-${mascaCaloriferValues.inaltime}-${mascaCaloriferValues.adancime}-${ifVopsit} `) : btoa(`${id}-${selectedValues}-${ifVopsit}`);
     
-            console.log(ifVopsit, "ifvopsit value in handleUserData");   
-
-            console.log("selectedValues", selectedValues);
 
 
             const images=await imageFilesNonAuthUser();
 
-            console.log("images from handleUserData",images);
 
             const imageId = images.find(image => image.url === img?.[0]?.attributes?.url)?.id || null;
 
-            console.log("imageId found:", imageId);
 
             const newItem = {
                 id: encodedId,
@@ -178,9 +172,7 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                 dispatch(
                 setQuantity({ id: existingItem.id, quantity: existingItem.quantity + 1 })
             );
-            console.log("Existing item found. Incremented quantity:", cartItems);
         } else {
-                    console.log("New item to add:", newItem);
                     dispatch(addItem(newItem));
                 }
     

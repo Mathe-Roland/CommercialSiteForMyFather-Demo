@@ -9,7 +9,6 @@ import { TextField } from "@mui/material";
 import Link from "next/link";
 import Cookies from "js-cookie";
 import "./Modal.css";
-
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../redux/store";
 import {
@@ -62,7 +61,7 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
 
   const handleLogIn = async () => {
 
-    const { registerUser, userMe } = await import(
+    const { loginUser, userMe } = await import(
         "../asyncOperations/user-requests/requests"
         );
 
@@ -104,7 +103,7 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
     }
 
     try {
-      const response = await registerUser(name, password);
+      const response = await loginUser(name, password);
 
       Cookies.set("token", response.data.jwt, {
         secure: true,
@@ -130,6 +129,7 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
       });
 
       dispatch(setLoginLogOut(true));
+
 
       const token = Cookies.get("token");
 

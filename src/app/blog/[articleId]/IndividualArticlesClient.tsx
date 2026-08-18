@@ -65,7 +65,6 @@ const IndividualArticlesClient = () => {
     const fetchArticleData = async () => {
       try {
 
-        console.log("Fetching article data for ID:", articleId);
 
         const id = Array.isArray(articleId)
             ? articleId[0].split("-")[0]

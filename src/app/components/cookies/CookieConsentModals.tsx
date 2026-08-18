@@ -10,7 +10,6 @@ const CookiesConsentModal = () => {
 
  useEffect(() => {
   const cookieExists = Cookies.get("showModal");
-  console.log("Cookie showModal exists:", cookieExists);
   if (!cookieExists) {
     setOpen(true);
     Cookies.set("showModal", "true", {

@@ -14,6 +14,7 @@ const SignIn = () => {
     postalCode: '',
     city: '',
     address: '',
+    phoneNumber: '',
     password: '',
     confirmPassword: '',
     err: '',
@@ -49,7 +50,16 @@ const SignIn = () => {
         name: formData.name,
         surname: formData.surname,
         address: formData.address,
-      });
+        phoneNumber: formData.phoneNumber,
+
+      },
+      {
+      headers: {
+        "X-Site": "decorcut",
+        },
+      }
+    );
+
       setFormData({ ...formData, err: '' }); 
     } catch (error) {
       const errorMessage = error.response?.data?.error.message;
@@ -143,6 +153,15 @@ const SignIn = () => {
               variant="outlined"
               value={formData.address}
               onChange={handleChange('address')}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Phone Number"
+              variant="outlined"
+              value={formData.phoneNumber}
+              onChange={handleChange('phoneNumber')}
             />
           </Grid>
           <Grid item xs={6}>

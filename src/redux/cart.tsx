@@ -82,6 +82,7 @@ const cartSlice = createSlice({
     setLoginLogOut: (state, action) => {
       state.loginLogOut = action.payload;
     },
+
   },
 });
 

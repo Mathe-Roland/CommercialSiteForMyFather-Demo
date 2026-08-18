@@ -49,7 +49,6 @@ const UserInfo = () => {
           e.preventDefault();
 
         try {
-            console.log("cartiems used on loggout test ok",cartItems);
               const token = Cookies.get("token");
             if (token && hasSyncedCart) {
                     await syncCartToDB(

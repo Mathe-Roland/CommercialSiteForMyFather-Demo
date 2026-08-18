@@ -1,19 +1,31 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-//endpoints related to users
 
-export const registerUser = async (username: string, password: string) => {
+export const loginUser = async (username: string, password: string) => {
     try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/auth/local`, {
-            identifier: username,
-            password: password,
-        });
+        const response = await axios.post(
+            `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/auth/local`,
+            {
+                identifier: username,
+                password: password,
+            },
+            {
+                headers: {
+                    "X-Site": "decorcut",
+                },
+            }
+        );
+
 
         return response;
     } catch (err) {
+        console.error("Login failed:", err);
+        throw err;
     }
 };
+
+
 
 export const changePasswordAuthUser = async (currentPassword:string,newPassword:string) => {
   
@@ -41,7 +53,7 @@ export const changePasswordAuthUser = async (currentPassword:string,newPassword:
       }
     };
   
-    export const userMe=async ()=>{
+  export const userMe=async ()=>{
 
 
         const token = Cookies.get("token");
@@ -55,3 +67,30 @@ export const changePasswordAuthUser = async (currentPassword:string,newPassword:
         return response.data.id;
        
     };
+
+
+export const userMeFIelds = async () => {
+    const token = Cookies.get("token");
+
+
+    if (!token) {
+        return null;
+    }
+
+    try {
+        const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/users/me`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+
+
+        return response.data;
+    } catch (error) {
+        console.error("USER ME ERROR:", error);
+        throw error;
+    }
+};
