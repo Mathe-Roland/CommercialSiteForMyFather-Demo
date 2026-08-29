@@ -1,6 +1,7 @@
 import { fetchArticleId } from "../../components/asyncOperations/fetch-by-id/fetchBYId";
 import IndividualArticlesClient from "./IndividualArticlesClient";
 import { Metadata } from "next";
+import { permanentRedirect } from "next/navigation";
 import { formatForURL } from "../../components/functions";
 
 export const revalidate = 86400;
@@ -22,13 +23,15 @@ export async function generateMetadata({
 }: {
   params: { articleId: string };
 }): Promise<Metadata> {
+
   const id = params.articleId.split("-")[0];
 
   const article = await fetchArticleId(id);
 
-  const canonicalUrl = `https://www.decorcut.ro/blog/${params.articleId}`;
-
   if (!article || article.length === 0) {
+    const canonicalUrl =
+      `https://www.decorcut.ro/blog/${params.articleId}`;
+
     return {
       title: "Article not found | DecorCut",
       alternates: {
@@ -44,6 +47,17 @@ export async function generateMetadata({
     article[0]?.attributes?.shortDescription ||
     "DecorCut blog article";
 
+  const expectedSlug =
+    `${article[0].id}-${formatForURL(article[0].attributes.title)}`;
+
+  // Redirect old/incorrect article URLs to the canonical URL
+  if (params.articleId !== expectedSlug) {
+    permanentRedirect(`/blog/${expectedSlug}`);
+  }
+
+  const canonicalUrl =
+    `https://www.decorcut.ro/blog/${expectedSlug}`;
+
   return {
     title,
     description,
@@ -56,4 +70,3 @@ export async function generateMetadata({
 export default function IndividualArticles() {
   return <IndividualArticlesClient />;
 }
-
