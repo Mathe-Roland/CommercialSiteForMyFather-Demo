@@ -30,12 +30,12 @@ export async function generateMetadata({ params }: { params: { [key: string]: st
 
 
 
-const Category=()=>{
+const Category=({ params }: { params: { categoryName: string } })=>{
 
 
 
     return (
-        <DespreNoiItems/>
+        <DespreNoiItems params={params} />
     )
 }
 

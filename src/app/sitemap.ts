@@ -1,5 +1,3 @@
-// app/sitemap.ts
-
 import { formatForURL } from "./components/functions";
 
 export const revalidate = 86400;
@@ -16,22 +14,25 @@ export default async function sitemap() {
     ),
   ]);
 
-
-  
   const products = await productsRes.json();
   const blogs = await blogsRes.json();
 
-  const productUrls = products.data.map((item) => ({
+  console.log("PRODUCT COUNT:", products.data.length);
+  console.log("PRODUCT IDS:", products.data.map((item: any) => item.id));
+
+  console.log("BLOG COUNT:", blogs.data.length);
+
+  const productUrls = products.data.map((item: any) => ({
     url: `${domain}/produse/${item.id}-${formatForURL(item.attributes.title)}`,
     lastModified: new Date(item.attributes.updatedAt),
-    changeFrequency: "daily",
+    changeFrequency: "daily" as const,
     priority: 0.8,
   }));
 
-  const blogUrls = blogs.data.map((item) => ({
+  const blogUrls = blogs.data.map((item: any) => ({
     url: `${domain}/blog/${item.id}-${formatForURL(item.attributes.title)}`,
     lastModified: new Date(item.attributes.updatedAt),
-    changeFrequency: "weekly",
+    changeFrequency: "weekly" as const,
     priority: 0.6,
   }));
 
@@ -48,9 +49,13 @@ export default async function sitemap() {
   ].map((path) => ({
     url: `${domain}${path}`,
     lastModified: new Date(),
-    changeFrequency: "weekly",
+    changeFrequency: "weekly" as const,
     priority: 0.7,
   }));
+
+  console.log("TOTAL SITEMAP URLS:", 
+    staticUrls.length + productUrls.length + blogUrls.length
+  );
 
   return [...staticUrls, ...productUrls, ...blogUrls];
 }

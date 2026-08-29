@@ -16,7 +16,7 @@ const Magazin=()=>{
     
     
     return (
-        <DespreNoiItems/>
+        <DespreNoiItems params={{ categoryName: "Magazin" }} />
     )
 
 }

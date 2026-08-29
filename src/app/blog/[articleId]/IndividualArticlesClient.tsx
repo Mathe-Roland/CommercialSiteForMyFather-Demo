@@ -92,10 +92,6 @@ const IndividualArticlesClient = () => {
           //   description.slice(partSize * 2),
           // ];
 
-        console.log(JSON.stringify(description));
-        // console.log(description);
-
-
 
 
         }
