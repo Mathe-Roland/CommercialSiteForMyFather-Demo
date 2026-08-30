@@ -1,9 +1,13 @@
-export const formatForURL = (str) => {
+export const formatForURL = (str: string) => {
   return str
-    .trim() // Eliminăm spațiile de la început și sfârșit
-    .replace(/\s+/g, "-") // Înlocuim toate spațiile cu "-"
-    .replace(/[^a-zA-Z0-9-]/g, "").toLowerCase(); // Permitem atât litere mari cât și mici, cifre și "-"
+    .trim()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .toLowerCase();
 };
+
 
 
 export const syncCartToDB = async (items, token) => {
