@@ -13,7 +13,7 @@
   min-height: 100vh;
 }
 
-@media screen  and (min-width:37.5rem){
+@media screen  and (min-width:600px){
 
   .margin0Auto {
     display: grid;
@@ -24,7 +24,8 @@
 }
 
 
-@media screen and (min-width:47.5rem) {
+@media screen and (min-width:760px) {
+  
   .margin0Auto {
     display: grid;
     grid-template-columns: repeat(3,1fr);
@@ -44,7 +45,7 @@
 }
 
 
-@media screen and (min-width:62.5rem) {
+@media screen and (min-width:1000px) {
 
   .margin0Auto {
     display: grid;

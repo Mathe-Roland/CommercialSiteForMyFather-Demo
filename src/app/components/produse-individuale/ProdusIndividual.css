@@ -67,8 +67,6 @@
     align-items: center;
 }
 
-
-
 .produs-individual-pret{
     display: flex;
     color :red;
@@ -130,10 +128,21 @@
     background-color: red;
   }
   
+  
+  @media screen and (min-width:650px) {
+      
+      .linking-back-to-category{
+          text-decoration: none;
+          color: black;
+          font-size: 1.125rem;
+      }
 
-@media screen and (min-width:650px) {
-    
-    
+      .linking-back-to-category:hover {
+          text-decoration: none;
+          color:rgba(0, 102, 255, 0.384);
+          transition: ease-in 0.7s;
+      }
+     
     .produs-upper-text{
         display: flex;
 
@@ -144,7 +153,7 @@
         justify-content: flex-end;
         color :red;
         font-size: 3.125rem;
-}
+    }
     
     .produs-individual-images{
         display: flex;

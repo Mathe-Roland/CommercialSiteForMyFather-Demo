@@ -13,7 +13,8 @@ import Image from "next/image";
 import Stack from "@mui/material/Stack";
 import Pagination from "@mui/material/Pagination";
 import { parseArticle } from "../../components/functions";
-
+import Link from "next/link";
+import RecommendedProducts from "../../components/recommended-products/RecomendedProducts";
 
 
 
@@ -70,6 +71,10 @@ const IndividualArticlesClient = () => {
             ? articleId[0].split("-")[0]
             : articleId?.split("-")[0];
         const data = await fetchArticleId(id);
+
+        console.log("ARTICLE DATA:", data);
+
+
         if (data && data.length > 0) {
           
           setArticleData(data);
@@ -190,7 +195,12 @@ const IndividualArticlesClient = () => {
               return null;
           }
         })}
-           <div className="comment-header">
+        
+
+      <RecommendedProducts category={articleData[0]?.attributes?.category?.data?.attributes?.category} />
+
+
+      <div className="comment-header">
         <h3>Comments</h3>
         <AddCommentModal addComment={handleCommentList} />
       </div>

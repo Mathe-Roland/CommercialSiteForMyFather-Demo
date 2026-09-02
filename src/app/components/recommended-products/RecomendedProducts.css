@@ -1,0 +1,48 @@
+.recommended-products-container{
+    padding:1rem;
+}
+
+
+
+.recommended-products-list{
+    margin:1rem 0;
+}
+
+
+
+.linking-back-to-category{
+    text-decoration: none;
+    color: black;
+    font-size: 1.125rem;
+  
+}
+
+
+.linking-back-to-category:hover {
+        text-decoration: none;
+        color:rgba(0, 102, 255, 0.384);
+        transition: ease-in 0.7s;
+    }
+
+
+@media (min-width:600px){
+
+    .recommended-products-list{
+        display:grid;
+        grid-template-columns: repeat(2,1fr);
+        gap:1.2rem;
+    }
+
+}
+
+
+@media (min-width:900px){
+
+    .recommended-products-list{
+        display:grid;
+        grid-template-columns: repeat(3,1fr);
+        gap:1rem;
+    }
+
+
+}

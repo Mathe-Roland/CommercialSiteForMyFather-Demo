@@ -138,3 +138,27 @@ export const imageFilesNonAuthUser=async ()=>{
    
 }
 
+export const fetchCategory = async (category: string) => {
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates?populate=*&filters[category][$eq]=${category}`
+    );
+
+    return response.data.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchRecommendedProducts = async (category: string) => {
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates?populate=*&filters[category][$eq]=${category}&pagination[limit]=3`
+    );
+
+    return response.data.data;
+  } catch (error) {
+    console.error("Error fetching recommended products:", error);
+    throw error;
+  }
+};

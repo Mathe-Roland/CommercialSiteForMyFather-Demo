@@ -19,6 +19,7 @@ import   {addItem,removeItem,setQuantity,clearCart} from "../../../redux/cart"
 import { RootState } from '../../../redux/store';
 import {radioOptions,listOfMarimi,listOfCategoryExceptions,listOfMarimi2} from "../dropdown-marimi/radioOptions";
 import VopsitRadio from '../DynamicRadioButtons/VopsitRadio/VopsitRadio';
+import RecommendedProducts from '../recommended-products/RecomendedProducts';
 
 interface ProdusProps{
     id:number;
@@ -362,10 +363,15 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                         panouId={panouId}
                         username={element?.author?.name}
                         comments={element.content}
+           
                     />
                 ))}
                 
             </div>
+                
+                <RecommendedProducts category={category} />
+                 
+                
                  <Stack spacing={2}>
                     <Pagination
                         count={Math.ceil(originalComments.length / ITEMS_PER_PAGE)}
@@ -374,6 +380,7 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                         color="primary"
                     />
                 </Stack>
+
         </div>
     );
 };
