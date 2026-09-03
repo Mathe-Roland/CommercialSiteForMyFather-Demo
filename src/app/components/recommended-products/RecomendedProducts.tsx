@@ -65,4 +65,5 @@ const RecommendedProducts = ({ category }) => {
   );
 };
 
+
 export default RecommendedProducts;

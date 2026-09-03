@@ -143,10 +143,10 @@
           transition: ease-in 0.7s;
       }
      
-    .produs-upper-text{
-        display: flex;
+        .produs-upper-text{
+            display: flex;
 
-    }
+        }
 
     .produs-individual-pret{
         display: flex;
@@ -161,13 +161,14 @@
         gap: 0.625rem;
     }
 
-    
+
     .produs-images-choice{
         display: flex;
         flex-direction: column;
         gap: 0.625rem;
         overflow: hidden;
       }
+
 }
 
 @media screen and (min-width:1600px) {

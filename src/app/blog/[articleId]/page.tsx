@@ -1,8 +1,10 @@
 import { fetchArticleId } from "../../components/asyncOperations/fetch-by-id/fetchBYId";
 import IndividualArticlesClient from "./IndividualArticlesClient";
 import { Metadata } from "next";
-import { permanentRedirect } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { formatForURL } from "../../components/functions";
+
+
 
 export const revalidate = 86400;
 
@@ -17,6 +19,9 @@ export async function generateStaticParams() {
     articleId: `${item.id}-${formatForURL(item.attributes.title)}`,
   }));
 }
+
+
+
 
 export async function generateMetadata({
   params,
@@ -66,7 +71,18 @@ export async function generateMetadata({
     },
   };
 }
+export default async function IndividualArticles({
+  params,
+}: {
+  params: { articleId: string };
+}) {
+  const id = params.articleId.split("-")[0];
 
-export default function IndividualArticles() {
+  const article = await fetchArticleId(id);
+
+  if (!article || article.length === 0) {
+    notFound();
+  }
+
   return <IndividualArticlesClient />;
 }

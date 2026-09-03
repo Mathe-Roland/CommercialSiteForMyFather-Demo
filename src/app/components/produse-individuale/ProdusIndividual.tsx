@@ -351,6 +351,9 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                     </Button>
                 </div>
             </div>
+            
+            <RecommendedProducts category={category} />
+
             <div className="comment-header">
                 <h3>Commentarii</h3>
                 <AddCommentModal addComment={handleCommentList} />
@@ -368,10 +371,6 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                 ))}
                 
             </div>
-                
-                <RecommendedProducts category={category} />
-                 
-                
                  <Stack spacing={2}>
                     <Pagination
                         count={Math.ceil(originalComments.length / ITEMS_PER_PAGE)}
