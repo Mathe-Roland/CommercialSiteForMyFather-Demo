@@ -7,6 +7,8 @@ import { formatForURL } from "../../components/functions";
 
 
 export const revalidate = 86400;
+export const dynamicParams = false;
+
 
 export async function generateStaticParams() {
   const res = await fetch(
