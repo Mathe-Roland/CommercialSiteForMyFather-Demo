@@ -1,11 +1,14 @@
 import ArticlesClient from "./ArticlesClient";
-import { Metadata } from 'next';
+import { Metadata } from "next";
 
 
-export const metadata:Metadata = {
-    title: `Inovații și Sfaturi CNC | Proiecte, Tehnici și Idei`,
-    description: `Descoperă lumea prelucrării CNC! Află sfaturi de la experți, 
-    proiecte creative, informații despre tăierea cu laser și cele mai noi tendințe din industrie.`
+export const metadata: Metadata = {
+  title: "Blog | DecorCut",
+  description:
+    "Descoperă articole și informații despre panouri traforate, MDF și decorațiuni interioare.",
+  alternates: {
+    canonical: "https://www.decorcut.ro/blog",
+  },
 };
 
 
