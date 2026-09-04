@@ -33,7 +33,10 @@ export const fetchArticlesData = async () => {
 export const fetchCategoryDescriptions = async () => {
     try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/categories?populate=*`);
+
         return response.data.data;
+
+        
     } catch (error) {
         console.error('Error fetching Articles data:', error);
     }

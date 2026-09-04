@@ -8,7 +8,10 @@ export const metadata:Metadata = {
     De la decorațiuni unice pentru casă până la cadouri speciale, magazinul nostru îți oferă articole de calitate create pentru a aduce 
     frumusețe și originalitate în viața ta. Explorează colecțiile noastre și transformă-ți ideile
     în realitate cu ajutorul designurilor noastre inovatoare.`,
-  };
+    alternates: {
+        canonical: 'https://www.decorcut.ro/magazin',
+      },
+  }
 
 
 const Magazin=()=>{

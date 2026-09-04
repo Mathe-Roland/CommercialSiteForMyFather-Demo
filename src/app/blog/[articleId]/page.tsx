@@ -25,6 +25,7 @@ export async function generateStaticParams() {
 
 
 
+
 export async function generateMetadata({
   params,
 }: {
@@ -73,6 +74,8 @@ export async function generateMetadata({
     },
   };
 }
+
+
 export default async function IndividualArticles({
   params,
 }: {
