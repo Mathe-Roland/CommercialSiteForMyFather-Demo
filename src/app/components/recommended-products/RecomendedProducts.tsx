@@ -49,7 +49,7 @@ const RecommendedProducts = ({ category }) => {
         {products.map((product) => (
           <ProdusCard
             key={product.id}
-            image={product?.attributes?.image?.data?.[0]?.attributes?.url}
+            thumbnail={product?.attributes?.image?.data?.[0]?.attributes?.url}
             title={product.attributes?.title}
             description={product.attributes?.description}
             price={product.attributes?.price}

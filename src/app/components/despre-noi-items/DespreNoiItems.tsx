@@ -4,6 +4,7 @@ import CustomizedAccordions from "../accordion/Accordion";
 import ProdusCard from "../card-produse/ProdusCard";
 import "./DespreNoiItems.css";
 
+
 const DespreNoiItems = async ({ params }) => {
 
   const slug = params.categoryName;
@@ -68,7 +69,7 @@ const DespreNoiItems = async ({ params }) => {
               id={e.id}
               title={e.attributes?.title || "Placeholder title"}
               description={e.attributes?.description || ""}
-              image={e.attributes?.image?.data?.[0]?.attributes?.url || ""}
+              thumbnail={e.attributes?.image?.data?.[0]?.attributes?.url || ""}
               disponibil="Este disponibil"
               price={e.attributes?.price || "Preț indisponibil"}
             />
