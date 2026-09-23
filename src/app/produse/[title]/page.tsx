@@ -3,8 +3,7 @@ import Produs from "../../components/produse-individuale/ProdusIndividual";
 import { fetchPanouById } from "../../components/asyncOperations/fetch-by-id/fetchBYId";
 import "./Produse.css";
 import { formatForURL } from "../../components/functions";
-import { permanentRedirect } from "next/navigation";
-
+import { notFound, permanentRedirect } from "next/navigation";
 
 export const revalidate = 60;
 
@@ -22,29 +21,31 @@ export async function generateStaticParams() {
 }
 
 
-
 export async function generateMetadata({ params }): Promise<Metadata> {
+  const id = params.title.split("-")[0];
+
+  // ID must be numeric
+  if (!/^\d+$/.test(id)) {
+    notFound();
+  }
+
+  const product = await fetchPanouById(id);
+
+  if (!product) {
+    notFound();
+  }
+
+  const expectedSlug =
+    `${product.id}-${formatForURL(product.attributes.title)}`;
+
+  if (params.title !== expectedSlug) {
+    permanentRedirect(`/produse/${expectedSlug}`);
+  }
+
+  const canonicalUrl =
+    `https://www.decorcut.ro/produse/${expectedSlug}`;
+
  
-      const id = params.title.split("-")[0];
-
-      const product = await fetchPanouById(id);
-
-        if (!product) {
-            return {
-                title: "Not found"
-            };
-        }
-
-    const expectedSlug =
-        `${product.id}-${formatForURL(product.attributes.title)}`;
-
-    if (params.title !== expectedSlug) {
-        permanentRedirect(`/produse/${expectedSlug}`);
-    }
-
-
-  const canonicalUrl = `https://www.decorcut.ro/produse/${expectedSlug}`;
-
 
   return {
     title: `${product.attributes.title}`,
