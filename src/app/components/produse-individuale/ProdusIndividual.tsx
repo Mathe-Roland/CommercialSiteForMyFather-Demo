@@ -20,6 +20,8 @@ import { RootState } from '../../../redux/store';
 import {radioOptions,listOfMarimi,listOfCategoryExceptions,listOfMarimi2} from "../dropdown-marimi/radioOptions";
 import VopsitRadio from '../DynamicRadioButtons/VopsitRadio/VopsitRadio';
 import RecommendedProducts from '../recommended-products/RecomendedProducts';
+import { getCloudinaryImageUrl } from '../functions';
+
 
 interface ProdusProps{
     id:number;
@@ -230,10 +232,10 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
             ) : null}
                     </div>
                 <Image
-                    width={400}
-                    height={400}
+                    width={600}
+                    height={600}
                     className='produs-individual-displayed-image'
-                    src={img?.length >0 && pictureChange === "" ? img?.[0]?.attributes?.url:pictureChange || "/logosDecorcut.png"}
+                    src={img?.length >0 && pictureChange === "" ? getCloudinaryImageUrl(img?.[0]?.attributes?.url, 1200, 1200):getCloudinaryImageUrl(pictureChange, 1200, 1200) || "/logosDecorcut.png"}
                     alt={"current selected image from carrousel"}
                     />            
                 </div>

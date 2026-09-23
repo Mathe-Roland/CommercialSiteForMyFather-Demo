@@ -7,17 +7,22 @@ import CardActionArea from '@mui/material/CardActionArea';
 import Image from 'next/image';
 import {formatForURL} from '../functions';
 
+
+
 interface ProdusCardProps {
   description: string;
   title: string;
-  image: string;
+  thumbnail: string;
   disponibil: string;
   price: number;
   id: number;
   priority?: boolean;
 }
 
-const ProdusCard = ({ description, title, image, disponibil, price, id ,priority}: ProdusCardProps) => {
+
+
+
+const ProdusCard = ({ description, title, thumbnail, disponibil, price, id ,priority}: ProdusCardProps) => {
 
 
 
@@ -30,7 +35,7 @@ const ProdusCard = ({ description, title, image, disponibil, price, id ,priority
         <CardActionArea>
             <Image
               className="produs-image"
-              src={image || "/logosDecorcut.png"}
+              src={thumbnail || "/logosDecorcut.png"}
               alt={title}
               height="180"
               width="180"

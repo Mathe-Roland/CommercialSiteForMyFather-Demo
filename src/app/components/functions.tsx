@@ -23,6 +23,20 @@ export const syncCartToDB = async (items, token) => {
 
 };
 
+export const getCloudinaryImageUrl = (
+  url: string,
+  width: number,
+  height: number
+): string => {
+  if (!url) {
+    return "";
+  }
+
+  return url.replace(
+    "/upload/",
+    `/upload/w_${width},h_${height},c_fill,q_auto,f_auto/`
+  );
+};
 
 type ArticleBlock =
   | { type: "paragraph"; content: string }
@@ -151,3 +165,4 @@ type ArticleBlock =
 
   return blocks;
 }
+
