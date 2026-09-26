@@ -16,7 +16,6 @@ const RecommendedProducts = ({ category }) => {
       try {
         const data = await fetchRecommendedProducts(category);
 
-        console.log("Recommended products data:", data);
 
         setProducts(data);
       } catch (error) {

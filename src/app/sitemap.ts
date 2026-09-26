@@ -37,7 +37,7 @@ export default async function sitemap() {
   }));
 
   const categoryUrls = categories.data.map((item: any) => ({
-    url: `${domain}/magazin/${formatForURL(item.attributes.category)}`,
+    url: item.attributes?.category==="magazin" ? `${domain}/magazin` : `${domain}/magazin/${formatForURL(item.attributes.category)}`,
     lastModified: new Date(item.attributes.updatedAt),
     changeFrequency: "weekly" as const,
     priority: 0.7,

@@ -9,6 +9,7 @@ const DespreNoiItems = async ({ params }) => {
 
   const slug = params.categoryName;
 
+
   const category = slug
     .split("-")
     .join(" ")
