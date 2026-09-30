@@ -7,11 +7,31 @@ import CookiesConsentModal from './components/cookies/CookieConsentModals';
 import ConsentScripts from './components/consent-scripts/ConsentScripts';
 import { ReduxProvider } from '../redux/Provider';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import type { Metadata } from 'next';
 
-export const metadata = {
-  title: 'Panou mdf',
-  description: `Panouri MDF decorative personalizate pentru interior. Design modern, finisaje de calitate și dimensiuni la comandă. Transformă-ți casa cu Decorcut.`,
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://www.decorcut.ro'),
+
+  title: {
+    default: 'Produse decorative pentru interior | Decorcut',
+    template: '%s | Decorcut',
+  },
+
+  description:
+    'Descoperă produse decorative pentru amenajarea interioarelor, de la panouri MDF și măști de calorifer până la alte soluții decorative. Design modern și finisaje de calitate.',
+
+  openGraph: {
+    type: 'website',
+    locale: 'ro_RO',
+    siteName: 'Decorcut',
+    title: 'Produse decorative pentru interior | Decorcut',
+    description:
+      'Descoperă produse decorative pentru amenajarea interioarelor, de la panouri MDF și măști de calorifer până la alte soluții decorative.',
+    url: '/',
+  },
 };
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

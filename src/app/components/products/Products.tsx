@@ -16,6 +16,8 @@ const Products = async () => {
 
   return (
     <div className='normal-headers' suppressHydrationWarning>
+      <h1 className='page-title'>Produse decorative pentru interior</h1>
+      
       <div className='margin0Auto'>
         {cardList.length > 0 ? cardList.map((data,index) => (
           <ProdusCard
@@ -36,7 +38,7 @@ const Products = async () => {
       </div>
       <div className='products-container'>
               
-      <p>Promotii  actuale</p>
+      <h2>Promotii  actuale</h2>
 
         <hr className='black'></hr>
         <div className='margin0Auto'>
