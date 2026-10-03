@@ -3,9 +3,9 @@ import { Metadata } from "next";
 
 
 export const metadata: Metadata = {
-  title: "Blog | DecorCut",
+  title: "Blog",
   description:
-    "Descoperă articole și informații despre panouri traforate, MDF și decorațiuni interioare.",
+    "Descoperă articole despre panouri MDF, panouri traforate, măști de calorifer și idei pentru amenajarea unui interior modern și elegant.",
   alternates: {
     canonical: "https://www.decorcut.ro/blog",
   },

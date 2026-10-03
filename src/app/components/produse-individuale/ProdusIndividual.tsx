@@ -235,14 +235,14 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                     width={600}
                     height={600}
                     className='produs-individual-displayed-image'
-                    src={img?.length >0 && pictureChange === "" ? getCloudinaryImageUrl(img?.[0]?.attributes?.url, 1200, 1200):getCloudinaryImageUrl(pictureChange, 1200, 1200) || "/logosDecorcut.png"}
+                    src={img?.length >0 && pictureChange === "" ? getCloudinaryImageUrl(img?.[0]?.attributes?.url,600, 600):getCloudinaryImageUrl(pictureChange, 1200, 1200) || "/logosDecorcut.png"}
                     alt={"current selected image from carrousel"}
                     />            
                 </div>
                 <div className="produs-individual-text-container">
                     <div className="produs-upper-text">
                         <div className="produs-individual-header">
-                            <h2>{title}</h2>
+                            <h1>{title}</h1>
                         </div>
                         <div className="produs-individual-header">
                            <p className="produs-individual-pret">

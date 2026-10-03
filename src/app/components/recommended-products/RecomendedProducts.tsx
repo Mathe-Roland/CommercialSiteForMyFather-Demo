@@ -32,7 +32,7 @@ const RecommendedProducts = ({ category }) => {
 
   return (
     <div className="recommended-products-container">
-      <h3>Produse recomandate</h3>
+      <h2>Produse recomandate</h2>
 
       <hr />
 
