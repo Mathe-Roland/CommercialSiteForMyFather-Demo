@@ -6,9 +6,7 @@ import { Metadata } from 'next';
 
 export const metadata:Metadata={
      title : "Despre noi",
-     description : `Descoperă povestea noastră și valorile care ne ghidează! Suntem o echipă dedicată, pasionată de 
-    crea produse personalizate pentru utilizatori, cu ani de experiență în oferirea de produse personalizate din mdf si lemn. Află mai multe despre misiunea noastră,
-     angajamentul față de clienți și de ce suntem alegerea potrivită pentru tine. Vino să ne cunoști!`
+     description : `Descoperă povestea Decorcut și pasiunea noastră pentru produse decorative MDF personalizate, realizate cu atenție la detalii și calitate.`
 }
 
 const DespreNoi = async () => {

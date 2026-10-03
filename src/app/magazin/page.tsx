@@ -4,10 +4,7 @@ import { Metadata } from 'next';
 
 export const metadata:Metadata = {
     title: 'Magazin',
-    description: `Bine ai venit la MOSTRIK DREAMLAND! Descoperă o gamă variată de produse personalizate, realizate cu precizie și pasiune. 
-    De la decorațiuni unice pentru casă până la cadouri speciale, magazinul nostru îți oferă articole de calitate create pentru a aduce 
-    frumusețe și originalitate în viața ta. Explorează colecțiile noastre și transformă-ți ideile
-    în realitate cu ajutorul designurilor noastre inovatoare.`,
+    description: `Descoperă produsele decorative Decorcut: panouri MDF, măști de calorifer și soluții elegante pentru amenajarea interioarelor.`,
     alternates: {
         canonical: 'https://www.decorcut.ro/magazin',
       },
