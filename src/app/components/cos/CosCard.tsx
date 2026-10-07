@@ -37,7 +37,14 @@ const CosCard = ({ id, image, title, price, quantity }) => {
   return (
     <div className="coscard-container">
       <div className="coscard-image">
-        <Image alt="produs-buyed" width={120} height={120} className="cos-image" src={image || ""} />
+        <Image
+          alt={title}
+          width={120}
+          height={120}
+          sizes="120px"
+          className="cos-image"
+          src={image || "/logosDecorcut.png"}
+        />
       </div>
       <div className="coscard-title">
         <h3>{title}</h3>

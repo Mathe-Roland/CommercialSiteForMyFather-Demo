@@ -1,20 +1,23 @@
-import { useEffect, useState } from "react";
+
+
 
 export function useCartTotals(cartItems) {
-  const [grandTotal, setGrandTotal] = useState(0);
-  const [transportMessage, setTransportMessage] = useState("");
+  if (!cartItems) {
+    return {
+      grandTotal: 0,
+      transportMessage: "",
+    };
+  }
 
-  useEffect(() => {
-    if (!cartItems) return;
+  if (cartItems.totalPrice >= 1000) {
+    return {
+      grandTotal: cartItems.totalPrice,
+      transportMessage: "Transport Gratuit",
+    };
+  }
 
-    if (cartItems.totalPrice >= 1000) {
-      setGrandTotal(cartItems.totalPrice);
-      setTransportMessage("Transport Gratuit");
-    } else {
-      setGrandTotal(cartItems.totalPrice + cartItems.transportCost);
-      setTransportMessage("Transport 35 lei");
-    }
-  }, [cartItems]);
-
-  return { grandTotal, transportMessage };
+  return {
+    grandTotal: cartItems.totalPrice + cartItems.transportCost,
+    transportMessage: "Transport 35 lei",
+  };
 }

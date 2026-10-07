@@ -144,12 +144,7 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
             const encodedId = category?.toLowerCase()==="masca de calorifer" ? btoa(`${id}--${mascaCaloriferValues.lungime}-${mascaCaloriferValues.inaltime}-${mascaCaloriferValues.adancime}-${ifVopsit} `) : btoa(`${id}-${selectedValues}-${ifVopsit}`);
     
 
-
-            const images=await imageFilesNonAuthUser();
-
-
-            const imageId = images.find(image => image.url === img?.[0]?.attributes?.url)?.id || null;
-
+            const imageId = img?.[0]?.id || null;
 
             const newItem = {
                 id: encodedId,
@@ -165,20 +160,28 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                 quantity: 1,
                 imageId:imageId
             };
-    
 
             
-            const existingItem = cartItems.find(item => item.id === newItem.id);
-
-            
-            if (existingItem) {
-                dispatch(
-                setQuantity({ id: existingItem.id, quantity: existingItem.quantity + 1 })
+            const existingItem = cartItems.find(
+                item => item.id === newItem.id
             );
-        } else {
-                    dispatch(addItem(newItem));
-                }
-    
+
+            if (existingItem) {
+
+
+                dispatch(
+                    setQuantity({
+                        id: existingItem.id,
+                        quantity: existingItem.quantity + 1
+                    })
+                );
+
+
+            } else {
+                
+                dispatch(addItem(newItem));
+            }
+
 
         } catch (error) {
             console.error("Error in handleUserData:", error);
