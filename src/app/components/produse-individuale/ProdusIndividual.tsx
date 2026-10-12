@@ -139,8 +139,6 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                 setAdaugaInCosShow(false);
             }, 1000);
     
-            const useros = Cookies.get("user") || null;
-    
             const encodedId = category?.toLowerCase()==="masca de calorifer" ? btoa(`${id}--${mascaCaloriferValues.lungime}-${mascaCaloriferValues.inaltime}-${mascaCaloriferValues.adancime}-${ifVopsit} `) : btoa(`${id}-${selectedValues}-${ifVopsit}`);
     
 
@@ -168,7 +166,6 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
 
             if (existingItem) {
 
-
                 dispatch(
                     setQuantity({
                         id: existingItem.id,
@@ -178,7 +175,7 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
 
 
             } else {
-                
+
                 dispatch(addItem(newItem));
             }
 
