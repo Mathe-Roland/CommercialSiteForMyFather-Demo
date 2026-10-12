@@ -45,7 +45,11 @@ export async function generateMetadata({ params }): Promise<Metadata> {
   const canonicalUrl =
     `https://www.decorcut.ro/produse/${expectedSlug}`;
 
- 
+
+    const productImage =
+  product?.attributes?.image?.data?.[0]?.attributes?.url ||
+  "https://www.decorcut.ro/logosDecorcut.png";
+
 
   return {
     title: `${product.attributes.title}`,
@@ -63,7 +67,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
       description: product.attributes.metaDescription || product.attributes.description?.slice(0, 160),
       images: [
       {
-      url: `${product?.attributes?.image?.data[0]?.attributes?.url || "https://www.decorcut.ro/logosDecorcut.png"}`,
+      url: `${productImage}`,
       width: 1200,
       height: 630,
       },
@@ -74,7 +78,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
       card: "summary_large_image",
       title: product.attributes.title,
       description: product.attributes.metaDescription || product.attributes.description?.slice(0, 160),
-      images: [product?.attributes?.image?.data[0]?.attributes?.url || "https://www.decorcut.ro/logosDecorcut.png"],
+      images: [productImage],
     },
   };
 }
