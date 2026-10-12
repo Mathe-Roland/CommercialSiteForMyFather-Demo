@@ -2,17 +2,16 @@
 
 const cspReportOnly = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https:",
-  "style-src 'self' 'unsafe-inline' https:",
-  "img-src 'self' data: blob: https:",
-  "font-src 'self' data: https:",
-  "connect-src 'self' https: wss:",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://js.stripe.com",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "img-src 'self' data: blob: https://res.cloudinary.com https://www.google-analytics.com https://www.googletagmanager.com",
+  "font-src 'self' data: https://fonts.gstatic.com",
+  "connect-src 'self' https://*.google-analytics.com https://analytics.google.com https://*.googletagmanager.com https://api.stripe.com https://*.stripe.com",
   "object-src 'none'",
   "base-uri 'self'",
-  "form-action 'self' https:",
+  "form-action 'self' https://checkout.stripe.com https://*.stripe.com",
   "frame-ancestors 'self'",
 ].join("; ");
-
 
 
 
