@@ -19,13 +19,14 @@ import {
 } from "../../../redux/cart";
 
 
-import dynamic from "next/dynamic";
+//import dynamic from "next/dynamic";
 
+/*
 
 interface GoogleLoginWrapperProps {
   onSuccess: () => void;
 }
-
+  
 const GoogleLoginWrapper = dynamic<GoogleLoginWrapperProps>(
   () => import("../GoogleLoginWrapper"),
   {
@@ -33,6 +34,8 @@ const GoogleLoginWrapper = dynamic<GoogleLoginWrapperProps>(
     loading: () => null,
   }
 );
+
+*/
 
 interface LoginModalProps {
   onClose: () => void;
@@ -246,12 +249,12 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
           />
 
           <div>
-            <Button
+           <Button
               className="modal-button"
               onClick={handleLogIn}
             >
               Conectare
-            </Button>
+           </Button>
 
             <Link
               className="modal-link"
@@ -266,7 +269,10 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
             </Link>
           </div>
 
-            <GoogleLoginWrapper onSuccess={onClose} />
+        {
+          /*<GoogleLoginWrapper onSuccess={onClose} /> */
+
+        }
 
           <Button onClick={onClose}>
             Close Modal
@@ -278,3 +284,6 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
 };
 
 export default LoginModal;
+
+
+

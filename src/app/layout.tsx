@@ -6,7 +6,7 @@ import Header from './components/header/Header';
 import CookiesConsentModal from './components/cookies/CookieConsentModals';
 import ConsentScripts from './components/consent-scripts/ConsentScripts';
 import { ReduxProvider } from '../redux/Provider';
-import { GoogleOAuthProvider } from '@react-oauth/google';
+//import { GoogleOAuthProvider } from '@react-oauth/google';
 import type { Metadata } from 'next';
 
 
@@ -37,10 +37,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ro">
       <body>
+        {/*
           <GoogleOAuthProvider
-            clientId={process.env.NEXT_PUBLIC_GOOGLE_S_CLIENT_ID!}
+            clientId={process.env.NEXT_PUBLIC_GOOGLE_S_CLIENT_ID}
           >
-
+          </GoogleOAuthProvider>
+          */
+        }
           <ReduxProvider>
             <ConsentScripts />
             <Header />
@@ -49,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer />
             <CookiesConsentModal />
           </ReduxProvider>
-          </GoogleOAuthProvider>
+
       </body>
     </html>
   );
