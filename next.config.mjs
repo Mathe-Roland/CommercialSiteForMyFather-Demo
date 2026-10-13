@@ -1,5 +1,4 @@
-
-const cspReportOnly = [
+const csp = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://js.stripe.com https://accounts.google.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com",
@@ -13,8 +12,11 @@ const cspReportOnly = [
   "frame-ancestors 'self'",
 ].join("; ");
 
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  poweredByHeader: false,
+
   async headers() {
     return [
       {
@@ -29,8 +31,8 @@ const nextConfig = {
             value: "same-origin-allow-popups",
           },
           {
-            key: 'Content-Security-Policy',
-            value: cspReportOnly,
+            key: "Content-Security-Policy",
+            value: csp,
           },
         ],
       },
