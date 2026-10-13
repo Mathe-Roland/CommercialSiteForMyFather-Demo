@@ -29,7 +29,7 @@ const nextConfig = {
             value: "same-origin-allow-popups",
           },
           {
-            key: "Content-Security-Policy-Report-Only",
+            key: 'Content-Security-Policy',
             value: cspReportOnly,
           },
         ],
