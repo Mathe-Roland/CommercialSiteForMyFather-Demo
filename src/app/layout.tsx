@@ -9,7 +9,6 @@ import { ReduxProvider } from '../redux/Provider';
 //import { GoogleOAuthProvider } from '@react-oauth/google';
 import type { Metadata } from 'next';
 
-
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.decorcut.ro'),
 
@@ -33,7 +32,11 @@ export const metadata: Metadata = {
 };
 
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+
+
+ const RootLayout = ({ children }: { children: React.ReactNode }) => {
+
+
   return (
     <html lang="ro">
       <body>
@@ -45,7 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           */
         }
           <ReduxProvider>
-            <ConsentScripts />
+            <ConsentScripts/>
             <Header />
             <Navbar />
             <main>{children}</main>
@@ -57,3 +60,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+
+export default RootLayout;

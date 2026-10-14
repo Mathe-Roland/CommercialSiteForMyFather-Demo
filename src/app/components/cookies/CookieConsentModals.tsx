@@ -30,6 +30,7 @@ const CookiesConsentModal = () => {
       path: "/",
     });
     setOpen(false);
+
   };
 
   return (

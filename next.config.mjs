@@ -1,43 +1,25 @@
+
+/** @type {import('next').NextConfig} */
+
+
+
 const csp = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://js.stripe.com https://accounts.google.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com",
   "img-src 'self' data: blob: https://res.cloudinary.com https://www.google-analytics.com https://www.googletagmanager.com",
-  "font-src 'self' data: https://fonts.gstatic.com",
+  "font-src 'self' data: https://fonts.gstatic.com",  
   "connect-src 'self' https://backend-6rct.onrender.com https://*.google-analytics.com https://analytics.google.com https://*.googletagmanager.com https://api.stripe.com https://*.stripe.com https://accounts.google.com",
-  "frame-src 'self' https://accounts.google.com",
+  "frame-src 'self' https://accounts.google.com https://js.stripe.com https://checkout.stripe.com https://*.stripe.com",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self' https://checkout.stripe.com https://*.stripe.com",
   "frame-ancestors 'self'",
-].join("; ");
-
+].join('; ');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   poweredByHeader: false,
-
-  async headers() {
-    return [
-      {
-        source: "/:path*",
-        headers: [
-          {
-            key: "Referrer-Policy",
-            value: "strict-origin-when-cross-origin",
-          },
-          {
-            key: "Cross-Origin-Opener-Policy",
-            value: "same-origin-allow-popups",
-          },
-          {
-            key: "Content-Security-Policy",
-            value: csp,
-          },
-        ],
-      },
-    ];
-  },
 
   images: {
     remotePatterns: [
@@ -48,6 +30,32 @@ const nextConfig = {
         pathname: "/ddrkdrrre/**",
       },
     ],
+  },
+
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: csp,
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin-allow-popups",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+        ],
+      },
+    ];
   },
 };
 
