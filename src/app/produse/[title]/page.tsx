@@ -9,6 +9,7 @@ export const revalidate = 60;
 
 
 export async function generateStaticParams() {
+  
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates?pagination[pageSize]=1000`
   );
@@ -89,25 +90,15 @@ const Produse = async ({params}) => {
     const titleParam = params.title.split("-")[0];
 
 
-  if (!titleParam) {
-      return <div className="loading-container">Title missing</div>;
-    }
-  
-  
-    let cardList;
+    if (!titleParam) {
+        return <div className="loading-container">Title missing</div>;
+      }
   
 
-    
-    try {
-      cardList = await fetchPanouById(titleParam);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      return <div className="loading-container">Error loading product</div>;
-    }
+    const cardList = await fetchPanouById(titleParam);
 
-
-    if (!cardList || cardList.length === 0) {
-      return <div className="loading-container">Product not found</div>;
+    if (!cardList) {
+      notFound();
     }
 
     

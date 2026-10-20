@@ -247,12 +247,18 @@ export const fetchTitle = async (title:string) => {
     }
   };
 
+export const fetchPanouById = async (id: string) => {
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates/${id}?populate=*`
+    );
 
-export const fetchPanouById = async (id:string) => {
-    try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/panouri-traforates/${id}?populate=*`); 
-      return response.data.data;
-    } catch (error) {
-      throw error;
-    } 
-  };
+    return response.data.data ?? null;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return null;
+    }
+
+    throw error;
+  }
+};

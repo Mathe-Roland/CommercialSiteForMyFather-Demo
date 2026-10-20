@@ -1,18 +1,17 @@
-import type { Metadata } from 'next';
+
+import type { Metadata } from "next";
 import Products from "./components/products/Products";
 
-
+export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: 'Produse decorative pentru interior | Panouri MDF și măști de calorifer',
+  title: "Produse decorative pentru interior | Panouri MDF și măști de calorifer",
   description:
-    'Descoperă panouri MDF, măști de calorifer și alte produse decorative pentru amenajarea interioarelor. Modele moderne și soluții decorative de la Decorcut.',
+    "Descoperă panouri MDF, măști de calorifer și alte produse decorative pentru amenajarea interioarelor. Modele moderne și soluții decorative de la Decorcut.",
   alternates: {
-    canonical: '/',
+    canonical: "/",
   },
 };
-
-
 
 export default function Home() {
   return <Products />;
