@@ -254,7 +254,7 @@ const Produs = ({ id,img, description, title,price,category}:ProdusProps) => {
                         {description}
                     </div>
                     <div>
-                        {category?.toLowerCase()==="masca de calorifer" ? 
+                        {category?.toLowerCase()==="masca de calorifer" && originalPriceWithoutSettings===false ? 
                         (<div>
                            <DropdownMui 
                                 listStart={80}
