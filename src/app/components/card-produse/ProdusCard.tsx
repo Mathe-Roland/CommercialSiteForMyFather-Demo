@@ -43,10 +43,10 @@ const ProdusCard = ({ description, title, thumbnail, disponibil, price, id ,prio
             />
 
           <CardContent>
-            <Typography 
-              gutterBottom 
-              variant="h5" 
-              component="div"
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="h2"
               className="title-produs"
             >
               {title}
@@ -66,10 +66,8 @@ const ProdusCard = ({ description, title, thumbnail, disponibil, price, id ,prio
               {disponibil}
             </Typography>
           </CardContent>
-          <div role="button"
-            className="produs-button"
-            >
-            Vezi Detalii
+          <div className="produs-button">
+              Vezi Detalii
           </div>
         </CardActionArea>
       </Link>

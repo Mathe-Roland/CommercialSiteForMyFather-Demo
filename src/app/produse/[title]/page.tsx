@@ -47,6 +47,11 @@ export async function generateMetadata({ params }): Promise<Metadata> {
     `https://www.decorcut.ro/produse/${expectedSlug}`;
 
 
+    const metaDescription =
+  product.attributes.metaDescription?.trim() ||
+  `Descoperă ${product.attributes.title} de la Decorcut. Explorează detaliile produsului și opțiunile de personalizare.`;
+
+
     const productImage =
   product?.attributes?.image?.data?.[0]?.attributes?.url ||
   "https://www.decorcut.ro/logosDecorcut.png";
@@ -54,7 +59,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 
   return {
     title: `${product.attributes.title}`,
-    description: product.attributes.metaDescription || product.attributes.description?.slice(0, 160),
+    description: metaDescription,
 
     alternates: {
       canonical: canonicalUrl,
@@ -65,7 +70,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
       type: "website",
       url: canonicalUrl,
       title: product.attributes.title,
-      description: product.attributes.metaDescription || product.attributes.description?.slice(0, 160),
+      description: metaDescription,
       images: [
       {
       url: `${productImage}`,
@@ -78,7 +83,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: product.attributes.title,
-      description: product.attributes.metaDescription || product.attributes.description?.slice(0, 160),
+      description: metaDescription,
       images: [productImage],
     },
   };

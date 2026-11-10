@@ -6,18 +6,17 @@ import "./DespreNoiItems.css";
 
 
 const DespreNoiItems = async ({ params }) => {
-
   const slug = params.categoryName;
-
 
   const category = slug
     .split("-")
     .join(" ")
     .toLowerCase();
 
-  const products = await fetchCategory(category);
-
-  const descriptionsData = await fetchCategoryDescriptions();
+  const [products, descriptionsData] = await Promise.all([
+    fetchCategory(category),
+    fetchCategoryDescriptions()
+  ]);
 
   const matchedDescription = descriptionsData?.find(
     desc =>
@@ -25,8 +24,9 @@ const DespreNoiItems = async ({ params }) => {
   );
 
   const header =
-    slug.charAt(0).toUpperCase() +
-    slug.slice(1).replaceAll("-", " ");
+    slug === "masca-de-calorifer"
+      ? "Mască de calorifer MDF"
+      : slug.replaceAll("-", " ");
 
   return (
     <div className="despre-noi-items-box">
@@ -45,13 +45,9 @@ const DespreNoiItems = async ({ params }) => {
 
           <div className="description-container">
 
-            {matchedDescription?.attributes?.description ? (
+            {matchedDescription?.attributes?.description && (
               <p className="description-text">
                 {matchedDescription.attributes.description}
-              </p>
-            ) : (
-              <p>
-                Descriere pentru categoria {header} nu este disponibilă momentan.
               </p>
             )}
 
@@ -63,19 +59,19 @@ const DespreNoiItems = async ({ params }) => {
 
       <div className="cardList-container">
 
-        {products?.length > 0 &&
-          products.map(e => (
-            <ProdusCard
-              key={e.id}
-              id={e.id}
-              title={e.attributes?.title || "Placeholder title"}
-              description={e.attributes?.description || ""}
-              thumbnail={e.attributes?.image?.data?.[0]?.attributes?.url || ""}
-              disponibil="Este disponibil"
-              price={e.attributes?.price || "Preț indisponibil"}
-            />
-          ))
-        }
+        {products?.map(e => (
+          <ProdusCard
+            key={e.id}
+            id={e.id}
+            title={e.attributes?.title || "Produs decorativ"}
+            description={e.attributes?.description || ""}
+            thumbnail={
+              e.attributes?.image?.data?.[0]?.attributes?.url || ""
+            }
+            disponibil="Este disponibil"
+            price={e.attributes?.price || "Preț indisponibil"}
+          />
+        ))}
 
       </div>
 

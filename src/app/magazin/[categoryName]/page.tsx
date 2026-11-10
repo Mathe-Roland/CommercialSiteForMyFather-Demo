@@ -1,6 +1,7 @@
 import DespreNoiItems from "../../components/despre-noi-items/DespreNoiItems";
 import { fetchCategoryDescriptions } from "../../components/asyncOperations/fetch/fetchAllFields";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
 
 export const revalidate = 86400;
@@ -43,11 +44,13 @@ const categories = [
   "cadouri-personalizate",
 ];
 
+
+
 export async function generateMetadata({
   params,
 }: {
   params: { categoryName: string };
-}) {
+}): Promise<Metadata> {
   const { categoryName } = params;
 
   if (!categories.includes(categoryName)) {
@@ -56,29 +59,55 @@ export async function generateMetadata({
 
   const categoriesData = await fetchCategoryDescriptions();
 
-  const slug = params.categoryName.split("-").join(" ").toLowerCase();
+  const slug = categoryName.split("-").join(" ").toLowerCase();
 
-  const filteredCategory = categoriesData?.filter(
-    (element) => element.attributes.category === slug
-  );
+  const category = categoriesData?.find(
+    (element) =>
+      element.attributes.category?.toLowerCase() === slug
+  )?.attributes;
 
-  const title = filteredCategory[0]?.attributes?.category
-    ? filteredCategory[0].attributes.category
-    : "Categories";
+  const isRadiatorCover = categoryName === "masca-de-calorifer";
+
+  const title = isRadiatorCover
+    ? "Mască de calorifer MDF la comandă | Decorcut"
+    : `${category?.category || "Produse decorative"} | Decorcut`;
 
   const description =
-    filteredCategory[0]?.attributes?.metadescription
-      ? filteredCategory[0].attributes.metadescription
-      : "Explore our diverse range of categories, each offering unique products tailored to your needs. From home decor to personalized gifts, find everything you need to enhance your lifestyle.";
+    category?.metadescription ||
+    (isRadiatorCover
+      ? "Descoperă măști de calorifer din MDF cu modele decorative pentru amenajarea locuinței. Alege modelul potrivit pentru interiorul tău."
+      : "Descoperă produsele decorative și personalizate de la Decorcut.");
+
+  const url = `https://www.decorcut.ro/magazin/${categoryName}`;
 
   return {
-    title,
+    title: {
+      absolute: title,
+    },
     description,
+
     alternates: {
-      canonical: `https://www.decorcut.ro/magazin/${params.categoryName}`,
+      canonical: url,
+    },
+
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: "Decorcut",
+      locale: "ro_RO",
+      type: "website",
+    },
+
+    twitter: {
+      card: "summary",
+      title,
+      description,
     },
   };
 }
+
+
 
 const Category = ({
   params,
